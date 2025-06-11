@@ -28,7 +28,7 @@ function generateShadowUtilities(cssContent) {
         `}`
       );
     })
-    .join("\n\n");
+    .join("\n");
 
   return result;
 }

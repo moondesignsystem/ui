@@ -9,7 +9,7 @@ dotenv.config();
  * @returns {Promise<Object>}
  * @throws {Error}
  */
-const fetchFigmaData = async (fileId = process.env.FIGMA_FILE) => {
+const fetchFigmaData = async (fileId) => {
   try {
     const localVariablesDataResponse = await fetch(
       `https://api.figma.com/v1/files/${fileId}/variables/local`,
