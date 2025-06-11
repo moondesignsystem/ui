@@ -1,0 +1,17 @@
+@use "variables";
+
+.moon-dropdown {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  max-height: var(--dropdown-max-height);
+  width: 100%;
+  max-width: var(--dropdown-max-width);
+  padding: var(--dropdown-padding);
+  border-radius: var(--dropdown-radius);
+  color: var(--semantic-text-primary);
+  background-color: var(--dropdown-background);
+  box-shadow:
+    inset 0 0 0 var(--dropdown-stroke) var(--dropdown-border),
+    variables.$shadow-300;
+}

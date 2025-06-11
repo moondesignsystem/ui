@@ -1,0 +1,104 @@
+@use "sass:map";
+@use "variables";
+
+$sizes: (
+  2xs: (
+    height: var(--scale-2xs-height),
+    width: calc(var(--scale-2xs-width) * 2)
+  ),
+  xs: (
+    height: var(--scale-xs-height),
+    width: calc(var(--scale-xs-width) * 2)
+  ),
+  sm: (
+    height: var(--scale-sm-height),
+    width: calc(var(--scale-sm-width) * 2)
+  )
+);
+
+.moon-switch {
+  height: map.get($sizes, "sm", "height");
+  width: map.get($sizes, "sm", "width");
+  cursor: pointer;
+  appearance: none;
+  border-radius: var(--dimension-rounded-full);
+  border-width: var(--dimension-space-1);
+  border-color: var(--switch-unselected-border);
+  background-color: currentcolor;
+  color: var(--switch-unselected-icon);
+  transition:
+    color 150ms ease-in-out,
+    box-shadow 150ms ease-in-out,
+    border-color 150ms ease-in-out;
+  box-shadow:
+    calc(map.get($sizes, "sm", "height") * -1) 0 0 var(--dimension-space-1) var(--switch-unselected-background) inset,
+    0 0 0 var(--dimension-space-1) var(--switch-unselected-background) inset,
+    0 0;
+
+  &:checked {
+    background-image: none;
+    color: var(--switch-selected-icon);
+    border-color: var(--switch-selected-background);
+    box-shadow:
+      map.get($sizes, "sm", "height") 0 0 var(--dimension-space-1) var(--switch-selected-background) inset,
+      0 0 0 var(--dimension-space-1) var(--switch-selected-background) inset,
+      0 0;
+  }
+
+  &:disabled {
+    opacity: var(--effect-opacity-60);
+    cursor: not-allowed;
+  }
+
+  @each $size, $prop in $sizes {
+    @if $size != "sm" {
+      &.moon-switch-#{$size} {
+        height: map.get($prop, "height");
+        width: map.get($prop, "width");
+        box-shadow:
+          calc(map.get($prop, "height") * -1) 0 0 var(--dimension-space-1) var(--switch-unselected-background) inset,
+          0 0 0 var(--dimension-space-1) var(--switch-unselected-background) inset,
+          0 0;
+
+        &:checked {
+          box-shadow:
+            map.get($prop, "height") 0 0 var(--dimension-space-1) var(--switch-selected-background) inset,
+            0 0 0 var(--dimension-space-1) var(--switch-selected-background) inset,
+            0 0;
+        }
+      }
+    }
+  }
+
+  &:dir(rtl) {
+    box-shadow:
+      map.get($sizes, "sm", "height") 0 0 var(--dimension-space-1) var(--switch-unselected-background) inset,
+      0 0 0 var(--dimension-space-1) var(--switch-unselected-background) inset,
+      0 0;
+
+    &:checked {
+      box-shadow:
+        calc(map.get($sizes, "sm", "height") * -1) 0 0 var(--dimension-space-1) var(--switch-selected-background) inset,
+        0 0 0 var(--dimension-space-1) var(--switch-selected-background) inset,
+        0 0;
+    }
+
+    @each $size, $prop in $sizes {
+      @if $size != "sm" {
+        &.moon-switch-#{$size} {
+          box-shadow:
+            map.get($prop, "height") 0 0 var(--dimension-space-1) var(--switch-unselected-background) inset,
+            0 0 0 var(--dimension-space-1) var(--switch-unselected-background) inset,
+            0 0;
+
+          &:checked {
+            box-shadow:
+              calc(map.get($prop, "height") * -1) 0 0 var(--dimension-space-1) var(--switch-selected-background) inset,
+              0 0 0 var(--dimension-space-1) var(--switch-selected-background) inset,
+              0 0;
+          }
+        }
+      }
+    }
+  }
+}

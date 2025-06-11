@@ -1,0 +1,78 @@
+@use "sass:map";
+
+$sizes: (
+  2xs: (
+    size: var(--scale-2xs-height)
+  ),
+  xs: (
+    size: var(--scale-xs-height)
+  ),
+  sm: (
+    size: var(--scale-sm-height)
+  ),
+  md: (
+    size: var(--scale-md-height)
+  ),
+  lg: (
+    size: var(--scale-lg-height)
+  ),
+  xl: (
+    size: var(--scale-xl-height)
+  ),
+  2xl: (
+    size: var(--scale-2xl-height)
+  )
+);
+
+.moon-circular-progress {
+  --value: attr(data-value type(<number>), 0);
+  --size: #{map.get($sizes, "md", "size")};
+  --thickness: var(--dimension-border-2);
+  --circularprogress: calc(var(--value) * 1%);
+
+  position: relative;
+  display: inline-grid;
+  height: var(--size);
+  width: var(--size);
+  place-content: center;
+  border-radius: var(--dimension-rounded-full);
+  background-color: transparent;
+  vertical-align: middle;
+  box-sizing: content-box;
+  transition: --circularprogress 0.3s linear;
+  box-shadow: inset 0 0 0 var(--dimension-space-2) var(--circular-progress-track);
+  color: var(--circular-progress-progress);
+
+  &::before {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--dimension-rounded-full);
+    content: "";
+    background:
+      radial-gradient(farthest-side, currentcolor 98%, #0000) top/var(--thickness) var(--thickness) no-repeat,
+      conic-gradient(currentcolor var(--circularprogress), #0000 0);
+    mask: radial-gradient(
+      farthest-side,
+      #0000 calc(100% - var(--thickness)),
+      #000 calc(100% + 0.5px - var(--thickness))
+    );
+  }
+
+  &::after {
+    position: absolute;
+    border-radius: var(--dimension-rounded-full);
+    background-color: currentcolor;
+    transition: transform 0.3s linear;
+    content: "";
+    inset: calc(50% - var(--thickness) / 2);
+    transform: rotate(calc(var(--value) * 3.6deg - 90deg)) translate(calc(var(--size) / 2 - 50%));
+  }
+
+  @each $size, $prop in $sizes {
+    @if $size != "md" {
+      &.moon-circular-progress-#{$size} {
+        --size: #{map.get($prop, "size")};
+      }
+    }
+  }
+}

@@ -1,0 +1,64 @@
+$text-body-100: var(--text-body-100-font-weight) var(--text-body-100-font-size) / var(--text-body-100-line-height)
+  var(--text-body-100-font-family);
+$text-body-200: var(--text-body-200-font-weight) var(--text-body-200-font-size) / var(--text-body-200-line-height)
+  var(--text-body-200-font-family);
+$text-body-300: var(--text-body-300-font-weight) var(--text-body-300-font-size) / var(--text-body-300-line-height)
+  var(--text-body-300-font-family);
+$text-body-400: var(--text-body-400-font-weight) var(--text-body-400-font-size) / var(--text-body-400-line-height)
+  var(--text-body-400-font-family);
+$text-body-500: var(--text-body-500-font-weight) var(--text-body-500-font-size) / var(--text-body-500-line-height)
+  var(--text-body-500-font-family);
+$text-heading-100: var(--text-heading-100-font-weight) var(--text-heading-100-font-size) /
+  var(--text-heading-100-line-height) var(--text-heading-100-font-family);
+$text-heading-200: var(--text-heading-200-font-weight) var(--text-heading-200-font-size) /
+  var(--text-heading-200-line-height) var(--text-heading-200-font-family);
+$text-heading-300: var(--text-heading-300-font-weight) var(--text-heading-300-font-size) /
+  var(--text-heading-300-line-height) var(--text-heading-300-font-family);
+$text-heading-400: var(--text-heading-400-font-weight) var(--text-heading-400-font-size) /
+  var(--text-heading-400-line-height) var(--text-heading-400-font-family);
+$text-heading-500: var(--text-heading-500-font-weight) var(--text-heading-500-font-size) /
+  var(--text-heading-500-line-height) var(--text-heading-500-font-family);
+$scale-2xs-text: var(--scale-2xs-text-weight) var(--scale-2xs-text-size) / var(--scale-2xs-text-height)
+  var(--scale-2xs-text-font);
+$scale-xs-text: var(--scale-xs-text-weight) var(--scale-xs-text-size) / var(--scale-xs-text-height)
+  var(--scale-xs-text-font);
+$scale-sm-text: var(--scale-sm-text-weight) var(--scale-sm-text-size) / var(--scale-sm-text-height)
+  var(--scale-sm-text-font);
+$scale-md-text: var(--scale-md-text-weight) var(--scale-md-text-size) / var(--scale-md-text-height)
+  var(--scale-md-text-font);
+$scale-lg-text: var(--scale-lg-text-weight) var(--scale-lg-text-size) / var(--scale-lg-text-height)
+  var(--scale-lg-text-font);
+$scale-xl-text: var(--scale-xl-text-weight) var(--scale-xl-text-size) / var(--scale-xl-text-height)
+  var(--scale-xl-text-font);
+$scale-2xl-text: var(--scale-2xl-text-weight) var(--scale-2xl-text-size) / var(--scale-2xl-text-height)
+  var(--scale-2xl-text-font);
+$shadow-100:
+  var(--effect-shadow-100-layer-1-x) var(--effect-shadow-100-layer-1-y) var(--effect-shadow-100-layer-1-blur)
+    var(--effect-shadow-100-layer-1-spread) var(--effect-shadow-100-layer-1-color),
+  var(--effect-shadow-100-layer-2-x) var(--effect-shadow-100-layer-2-y) var(--effect-shadow-100-layer-2-blur)
+    var(--effect-shadow-100-layer-2-spread) var(--effect-shadow-100-layer-2-color);
+$shadow-200:
+  var(--effect-shadow-200-layer-1-x) var(--effect-shadow-200-layer-1-y) var(--effect-shadow-200-layer-1-blur)
+    var(--effect-shadow-200-layer-1-spread) var(--effect-shadow-200-layer-1-color),
+  var(--effect-shadow-200-layer-2-x) var(--effect-shadow-200-layer-2-y) var(--effect-shadow-200-layer-2-blur)
+    var(--effect-shadow-200-layer-2-spread) var(--effect-shadow-200-layer-2-color);
+$shadow-300:
+  var(--effect-shadow-300-layer-1-x) var(--effect-shadow-300-layer-1-y) var(--effect-shadow-300-layer-1-blur)
+    var(--effect-shadow-300-layer-1-spread) var(--effect-shadow-300-layer-1-color),
+  var(--effect-shadow-300-layer-2-x) var(--effect-shadow-300-layer-2-y) var(--effect-shadow-300-layer-2-blur)
+    var(--effect-shadow-300-layer-2-spread) var(--effect-shadow-300-layer-2-color);
+$shadow-400:
+  var(--effect-shadow-400-layer-1-x) var(--effect-shadow-400-layer-1-y) var(--effect-shadow-400-layer-1-blur)
+    var(--effect-shadow-400-layer-1-spread) var(--effect-shadow-400-layer-1-color),
+  var(--effect-shadow-400-layer-2-x) var(--effect-shadow-400-layer-2-y) var(--effect-shadow-400-layer-2-blur)
+    var(--effect-shadow-400-layer-2-spread) var(--effect-shadow-400-layer-2-color);
+$shadow-500:
+  var(--effect-shadow-500-layer-1-x) var(--effect-shadow-500-layer-1-y) var(--effect-shadow-500-layer-1-blur)
+    var(--effect-shadow-500-layer-1-spread) var(--effect-shadow-500-layer-1-color),
+  var(--effect-shadow-500-layer-2-x) var(--effect-shadow-500-layer-2-y) var(--effect-shadow-500-layer-2-blur)
+    var(--effect-shadow-500-layer-2-spread) var(--effect-shadow-500-layer-2-color);
+$shadow-600:
+  var(--effect-shadow-600-layer-1-x) var(--effect-shadow-600-layer-1-y) var(--effect-shadow-600-layer-1-blur)
+    var(--effect-shadow-600-layer-1-spread) var(--effect-shadow-600-layer-1-color),
+  var(--effect-shadow-600-layer-2-x) var(--effect-shadow-600-layer-2-y) var(--effect-shadow-600-layer-2-blur)
+    var(--effect-shadow-600-layer-2-spread) var(--effect-shadow-600-layer-2-color);

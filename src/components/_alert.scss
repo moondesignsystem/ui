@@ -1,0 +1,127 @@
+@use "sass:map";
+@use "variables";
+@use "button";
+@use "iconButton";
+
+@mixin common {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: var(--scale-lg-gap);
+}
+
+$modes: (
+  "negative": (
+    color: var(--alert-negative-text),
+    background-color: var(--alert-negative-background),
+    box-shadow: inset 0 0 0 var(--alert-negative-stroke) var(--alert-negative-border),
+    icon-color: var(--alert-negative-icon)
+  ),
+  "neutral": (
+    color: var(--alert-neutral-text),
+    background-color: var(--alert-neutral-background),
+    box-shadow: inset 0 0 0 var(--alert-neutral-stroke) var(--alert-neutral-border),
+    icon-color: var(--alert-neutral-icon)
+  ),
+  "caution": (
+    color: var(--alert-caution-text),
+    background-color: var(--alert-caution-background),
+    box-shadow: inset 0 0 0 var(--alert-caution-stroke) var(--alert-caution-border),
+    icon-color: var(--alert-caution-icon)
+  ),
+  "info": (
+    color: var(--alert-info-text),
+    background-color: var(--alert-info-background),
+    box-shadow: inset 0 0 0 var(--alert-info-stroke) var(--alert-info-border),
+    icon-color: var(--alert-info-icon)
+  )
+);
+
+.moon-alert {
+  @include common;
+
+  text-align: start;
+  min-height: var(--scale-lg-height);
+  padding: var(--scale-lg-padding);
+  border-radius: var(--scale-lg-radius);
+  font: variables.$text-body-300;
+  color: map.get($modes, "neutral", "color");
+  background-color: map.get($modes, "neutral", "background-color");
+  box-shadow: map.get($modes, "neutral", "box-shadow");
+
+  &:has(.moon-alert-title-wrapper) {
+    flex-direction: column;
+  }
+
+  :where(.moon-alert-title-wrapper) {
+    @include common;
+
+    font-weight: var(--text-font-weight-medium);
+  }
+
+  :where(svg) {
+    color: map.get($modes, "neutral", "icon-color");
+    width: var(--scale-lg-icon-size);
+    height: var(--scale-lg-icon-size);
+  }
+
+  :where(.moon-alert-title) {
+    flex-grow: 1;
+    font-weight: var(--text-font-weight-medium);
+  }
+
+  :where(.moon-alert-content) {
+    width: 100%;
+    text-align: start;
+  }
+
+  :where(.moon-alert-action) {
+    @extend .moon-button;
+    @extend .moon-button-sm;
+    @extend .moon-button-ghost;
+
+    color: map.get($modes, "neutral", "color");
+
+    :where(svg) {
+      color: map.get($modes, "neutral", "icon-color");
+    }
+  }
+
+  :where(.moon-alert-dismiss) {
+    @extend .moon-icon-button;
+    @extend .moon-icon-button-sm;
+    @extend .moon-icon-button-ghost;
+
+    :where(svg) {
+      color: map.get($modes, "neutral", "icon-color");
+    }
+  }
+
+  @each $mode, $prop in $modes {
+    @if $mode != "neutral" {
+      &.moon-alert-#{$mode} {
+        color: map.get($prop, "color");
+        background-color: map.get($prop, "background-color");
+        box-shadow: map.get($prop, "box-shadow");
+
+        :where(svg) {
+          color: map.get($prop, "icon-color");
+        }
+
+        :where(.moon-alert-action) {
+          color: map.get($prop, "color");
+
+          :where(svg) {
+            color: map.get($prop, "icon-color");
+          }
+        }
+
+        :where(.moon-alert-dismiss) {
+          :where(svg) {
+            color: map.get($prop, "icon-color");
+          }
+        }
+      }
+    }
+  }
+}

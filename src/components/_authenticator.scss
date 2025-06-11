@@ -1,0 +1,106 @@
+@use "sass:map";
+@use "variables";
+
+$sizes: (
+  sm: (
+    gap: var(--scale-sm-gap),
+    width: var(--scale-sm-width),
+    height: var(--scale-sm-height),
+    radius: var(--utility-authenticator-radius-sm),
+    font: variables.$scale-sm-text
+  ),
+  md: (
+    gap: var(--scale-md-gap),
+    width: var(--scale-md-width),
+    height: var(--scale-md-height),
+    radius: var(--utility-authenticator-radius-md),
+    font: variables.$scale-md-text
+  ),
+  lg: (
+    gap: var(--scale-lg-gap),
+    width: var(--scale-lg-width),
+    height: var(--scale-lg-height),
+    radius: var(--utility-authenticator-radius-lg),
+    font: variables.$scale-lg-text
+  ),
+  xl: (
+    gap: var(--scale-xl-gap),
+    width: var(--scale-xl-width),
+    height: var(--scale-xl-height),
+    radius: var(--utility-authenticator-radius-xl),
+    font: variables.$scale-xl-text
+  )
+);
+
+.moon-authenticator {
+  display: inline-flex;
+  gap: map.get($sizes, "md", "gap");
+
+  :where(input) {
+    display: flex;
+    width: 100%;
+    max-width: map.get($sizes, "md", "width");
+    height: map.get($sizes, "md", "height");
+    outline: none;
+    border-color: transparent;
+    align-items: center;
+    box-shadow: inset 0 0 0 var(--authenticator-stroke-default) var(--authenticator-border);
+    color: var(--semantic-text-primary);
+    background-color: var(--authenticator-background);
+    border-radius: map.get($sizes, "md", "radius");
+    text-align: center;
+    font: map.get($sizes, "md", "font");
+    transition:
+      box-shadow 150ms ease-in-out,
+      opacity 150ms ease-in-out,
+      background-color 150ms ease-in-out;
+
+    &::placeholder {
+      color: var(--semantic-text-secondary);
+    }
+
+    &:read-only,
+    &:disabled {
+      cursor: not-allowed;
+    }
+
+    &:disabled {
+      opacity: var(--effect-opacity-disabled);
+    }
+
+    &:not(:read-only, :disabled):hover {
+      box-shadow: inset 0 0 0 var(--dimension-space-2) var(--authenticator-border);
+      background-color: var(--semantic-background-hover);
+    }
+
+    &:not(:read-only, :disabled):focus {
+      box-shadow: inset 0 0 0 var(--dimension-space-2) var(--semantic-border-active);
+    }
+  }
+
+  &.moon-authenticator-error {
+    :where(input) {
+      box-shadow: inset 0 0 0 var(--dimension-space-2) var(--semantic-border-negative);
+
+      &:hover,
+      &:focus {
+        box-shadow: inset 0 0 0 var(--dimension-space-2) var(--semantic-border-negative);
+      }
+    }
+  }
+
+  @each $size, $prop in $sizes {
+    @if $size != "md" {
+      &.moon-authenticator-#{$size} {
+        gap: map.get($prop, "gap");
+
+        :where(input) {
+          max-width: map.get($prop, "width");
+          height: map.get($prop, "height");
+          border-radius: map.get($prop, "radius");
+          font: map.get($prop, "font");
+        }
+      }
+    }
+  }
+}
