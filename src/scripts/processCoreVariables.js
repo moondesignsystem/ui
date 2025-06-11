@@ -1,23 +1,26 @@
 import fetchFigmaData from "./fetchFigmaData.js";
 import processPublishedVariables from "./processPublishedVariables.js";
 import formatAndAddCSSVariable from "./formatAndAddCSSVariable.js";
+import getConfig from "./getConfig.js";
 
 // STEP 2. Process Figma core variables
 
 /**
  * @async
- * @returns {Promise<{componentVariables: string[]}>}
+ * @param {string} [fileId] - Optional Figma file ID override
+ * @returns {Promise<{coreVariables: string[], themes: string[], colorCollectionName: string}>}
  * @throws {Error}
  */
-const processCoreVariables = async () => {
+const processCoreVariables = async (fileId = null) => {
   try {
-    // Create a new object with keys that exist in both localVariableCollections and publishedVariableCollections
+    const config = getConfig();
+    const figmaFileId = fileId || config.core;
     const {
       localVariableCollections,
       publishedVariableCollections,
       localVariables,
       publishedVariables,
-    } = await fetchFigmaData();
+    } = await fetchFigmaData(figmaFileId);
     const { variableCollections, themes, colorCollectionName } =
       processPublishedVariables(
         localVariableCollections,

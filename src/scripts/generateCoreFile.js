@@ -1,22 +1,32 @@
 import fs from "fs";
 import removeThemePrefixesFromVariables from "./utils/removeThemePrefixesFromVariables.js";
+import replaceVariablesByPattern from "./utils/replaceVariablesByPattern.js";
+import generateTypographyUtilities from "./utils/generateTypographyUtilities.js";
+import generateShadowUtilities from "./utils/generateShadowUtilities.js";
+import getPackageVersion from "./utils/getPackageVersion.js";
 import processCoreVariables from "./processCoreVariables.js";
 import processComponentVariables from "./processComponentVariables.js";
+import getConfig from "./getConfig.js";
 
 // STEP 1. Generate base CSS file
 
 /**
  * @async
+ * @param {Object} [configOverride] - Optional config override object
  * @returns {Promise<void>}
  * @throws {Error}
  */
-const generateCSSFile = async () => {
+const generateCoreFile = async (configOverride = null) => {
   try {
+    const config = configOverride || getConfig();
     const { coreVariables, themes, colorCollectionName } =
-      await processCoreVariables();
+      await processCoreVariables(config.core);
     const { componentVariables } = await processComponentVariables();
     const cssVariables = [...coreVariables, ...componentVariables];
-    const outputPath = "base.css";
+    if (!fs.existsSync(config.output)) {
+      fs.mkdirSync(config.output, { recursive: true });
+    }
+    const outputCoreFile = `${config.output}/${config.project}-core.css`;
     // If fewer than 2 themes, put all variables in :root
     if (themes.length < 2) {
       const allVariables = cssVariables
@@ -24,8 +34,9 @@ const generateCSSFile = async () => {
           removeThemePrefixesFromVariables(v, themes, colorCollectionName)
         )
         .sort();
-      const cssContent = ":root {\n" + allVariables.join("\n") + "\n}\n";
-      fs.writeFileSync(outputPath, cssContent);
+      const cssContent =
+        "@theme inline {\n" + allVariables.join("\n") + "\n}\n";
+      fs.writeFileSync(outputCoreFile, cssContent);
       return;
     }
     // Otherwise, separate root and theme variables
@@ -39,7 +50,7 @@ const generateCSSFile = async () => {
         removeThemePrefixesFromVariables(v, themes, colorCollectionName)
       )
       .sort();
-    let cssContent = ":root {\n" + rootVariables.join("\n") + "\n}\n";
+    let cssContent = "@theme inline {\n" + rootVariables.join("\n") + "\n}\n";
     const colorVariables = cssVariables.filter((v) =>
       colorVariablePattern.test(v)
     );
@@ -61,12 +72,20 @@ const generateCSSFile = async () => {
           );
         })
         .sort();
-      cssContent += `.${theme} {\n${themeVariables.join("\n")}\n}\n`;
+      cssContent += `@custom-variant ${theme} (&:where(.${theme}, .${theme} *));\n`;
+      cssContent += `@variant ${theme} {\n`;
+      cssContent += `@theme inline {\n${themeVariables.join("\n")}\n}\n}\n`;
     });
-    fs.writeFileSync(outputPath, cssContent);
+    cssContent = replaceVariablesByPattern(cssContent);
+    cssContent += generateTypographyUtilities(cssContent);
+    cssContent += generateShadowUtilities(cssContent);
+    const version = getPackageVersion();
+    const versionComment = `/* Moon UI v${version} */\n`;
+    const cssWithVersionComment = versionComment + cssContent;
+    fs.writeFileSync(outputCoreFile, cssWithVersionComment);
   } catch (error) {
-    console.error("Error in generateCSSFile script:", error);
+    console.error("Error in generateCoreFile script:", error);
   }
 };
 
-export default generateCSSFile;
+export default generateCoreFile;
