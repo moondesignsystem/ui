@@ -18,8 +18,6 @@
   },
   "homepage": "https://github.com/coingaming/moon-ui#readme",
   "dependencies": {
-    "@tailwindcss/cli": "^4.0.6",
-    "dotenv": "^16.4.7",
-    "tailwindcss": "^4.0.6"
+    "dotenv": "^16.4.7"
   }
 }

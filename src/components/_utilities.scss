@@ -1,0 +1,43 @@
+@use "variables";
+
+.moon-form-hint {
+  font: variables.$text-body-200;
+  color: var(--semantic-text-secondary);
+}
+
+.moon-form-group-error {
+  :where(.moon-form-hint) {
+    color: var(--semantic-text-negative);
+  }
+
+  :where(input, textarea, select) {
+    box-shadow: inset 0 0 0 var(--dimension-space-2) var(--semantic-border-negative);
+
+    &:hover,
+    &:focus {
+      box-shadow: inset 0 0 0 var(--dimension-space-2) var(--semantic-border-negative);
+    }
+  }
+}
+
+.moon-form-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: var(--dimension-space-8);
+  opacity: var(--effect-opacity-100);
+
+  :where(label) {
+    font: variables.$text-body-300;
+    color: var(--semantic-text-primary);
+  }
+
+  :where(.required) {
+    color: var(--semantic-text-negative);
+  }
+
+  &:has(:disabled) label,
+  &:has(:disabled) .moon-form-hint {
+    opacity: var(--effect-opacity-disabled);
+  }
+}

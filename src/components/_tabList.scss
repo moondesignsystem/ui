@@ -1,0 +1,75 @@
+@use "variables";
+
+.moon-tab-list {
+  display: flex;
+
+  .moon-tab {
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    height: var(--scale-md-height);
+    min-width: var(--scale-md-width);
+    cursor: pointer;
+    user-select: none;
+    appearance: none;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--tab-list-tab-unselected-text);
+    background-color: var(--tab-list-tab-unselected-background);
+    padding: 0 var(--scale-md-padding);
+    gap: var(--scale-md-gap);
+    border-top-left-radius: var(--scale-md-radius);
+    border-top-right-radius: var(--scale-md-radius);
+    border-bottom: var(--tab-list-tab-unselected-stroke) solid var(--tab-list-tab-unselected-border);
+    font: variables.$text-body-300;
+    font-weight: var(--text-font-weight-medium);
+
+    :where(svg) {
+      width: var(--scale-md-icon-size);
+      height: var(--scale-md-icon-size);
+      color: var(--tab-list-tab-unselected-icon);
+    }
+
+    &.moon-tab-active {
+      background-color: var(--tab-list-tab-selected-background);
+      color: var(--tab-list-tab-selected-text);
+      border-bottom: var(--tab-list-tab-selected-stroke) solid var(--tab-list-tab-selected-border);
+
+      :where(svg) {
+        color: var(--tab-list-tab-selected-icon);
+      }
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      display: block;
+      inset: 0;
+      transition: background-color 150ms ease-in-out;
+      pointer-events: none;
+      background-color: var(--semantic-background-transparent);
+    }
+
+    &:hover::after {
+      background-color: var(--semantic-background-hover);
+    }
+  }
+
+  &.moon-tab-list-sm {
+    .moon-tab {
+      height: var(--scale-sm-height);
+      min-width: var(--scale-sm-height);
+      padding: 0 var(--scale-sm-padding);
+      gap: var(--scale-sm-gap);
+      border-top-left-radius: var(--scale-sm-radius);
+      border-top-right-radius: var(--scale-sm-radius);
+
+      :where(svg) {
+        width: var(--scale-sm-icon-size);
+        height: var(--scale-sm-icon-size);
+      }
+    }
+  }
+}

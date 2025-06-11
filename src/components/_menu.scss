@@ -1,0 +1,62 @@
+@use "sass:map";
+@use "list";
+
+$sizes: (
+  sm: (
+    padding: var(--scale-sm-padding),
+    radius: var(--scale-sm-radius)
+  ),
+  md: (
+    padding: var(--scale-md-padding),
+    radius: var(--scale-md-radius)
+  ),
+  lg: (
+    padding: var(--scale-lg-padding),
+    radius: var(--scale-lg-radius)
+  ),
+  xl: (
+    padding: var(--scale-xl-padding),
+    radius: var(--scale-xl-radius)
+  ),
+  2xl: (
+    padding: var(--scale-2xl-padding),
+    radius: var(--scale-2xl-radius)
+  )
+);
+
+.moon-menu {
+  @extend .moon-list;
+
+  & > * {
+    padding: 0 map.get($sizes, "md", "padding");
+    border-radius: map.get($sizes, "md", "radius");
+    background-color: var(--semantic-background-transparent);
+    cursor: pointer;
+    transition: background-color 150ms ease-in-out;
+
+    &:hover {
+      background-color: var(--semantic-background-hover);
+    }
+
+    &:not(:last-child)::after {
+      display: none;
+    }
+  }
+
+  @each $size, $prop in list.$sizes {
+    @if $size != "md" {
+      &.moon-menu-#{$size} {
+        @include list.list-sizes($size, $prop);
+      }
+    }
+  }
+
+  @each $size, $prop in $sizes {
+    @if $size != "md" {
+      &.moon-menu-#{$size} > * {
+        padding: map.get($prop, "padding");
+        border-radius: map.get($prop, "radius");
+      }
+    }
+  }
+}

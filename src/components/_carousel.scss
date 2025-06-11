@@ -1,0 +1,59 @@
+@use "iconButton";
+
+.moon-carousel {
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: var(--carousel-gap);
+  align-items: center;
+
+  :where(.moon-carousel-reel) {
+    width: 100%;
+    overflow-x: scroll;
+    display: inline-flex;
+    flex-direction: row;
+    gap: var(--carousel-gap);
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    :where(.moon-carousel-item) {
+      display: flex;
+      flex: none;
+      scroll-snap-align: center;
+    }
+  }
+
+  :where(.moon-carousel-control) {
+    @extend .moon-icon-button;
+    @extend .moon-icon-button-soft;
+    @extend .moon-icon-button-lg;
+
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    &:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+
+    &:first-of-type {
+      inset-inline-start: var(--dimension-space-8);
+    }
+
+    &:last-of-type {
+      inset-inline-end: var(--dimension-space-8);
+    }
+
+    &:dir(rtl) {
+      :where(svg) {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}

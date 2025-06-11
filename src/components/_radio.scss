@@ -1,0 +1,79 @@
+@use "variables";
+
+.moon-radio {
+  appearance: none;
+  border-color: transparent;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--radio-size-container);
+  height: var(--radio-size-container);
+  box-shadow: inset 0 0 0 var(--radio-unselected-stroke) var(--radio-unselected-border);
+  background-color: var(--radio-unselected-background);
+  border-radius: var(--dimension-rounded-full);
+  transition:
+    opacity 150ms ease-in-out,
+    background-color 150ms ease-in-out,
+    box-shadow 150ms ease-in-out;
+  cursor: pointer;
+
+  &::after {
+    content: "";
+    position: absolute;
+    display: block;
+    inset: 0;
+    transition: background-color 150ms ease-in-out;
+    pointer-events: none;
+    border-radius: var(--dimension-rounded-full);
+    background-color: var(--semantic-background-transparent);
+  }
+
+  &::before {
+    content: "";
+    display: block;
+    width: var(--dimension-space-0);
+    height: var(--dimension-space-0);
+    border-radius: var(--dimension-rounded-full);
+    background-color: var(--radio-selected-icon);
+    transition:
+      width 150ms ease-in-out,
+      height 150ms ease-in-out;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: var(--effect-opacity-disabled);
+  }
+
+  &:checked {
+    background-color: var(--radio-selected-background);
+    box-shadow: none;
+  }
+
+  &:checked::before {
+    width: var(--radio-size-icon);
+    height: var(--radio-size-icon);
+  }
+
+  &:hover::after {
+    background-color: var(--semantic-background-hover);
+  }
+}
+
+.moon-radio-wrapper {
+  display: flex;
+  gap: var(--dimension-space-8);
+  align-items: center;
+
+  :where(label) {
+    font: variables.$text-body-300;
+    color: var(--semantic-text-primary);
+    cursor: pointer;
+  }
+
+  &:has(:disabled) :where(label) {
+    cursor: not-allowed;
+    opacity: var(--effect-opacity-disabled);
+  }
+}

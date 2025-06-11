@@ -1,0 +1,53 @@
+@use "variables";
+
+.moon-linear-progress {
+  appearance: none;
+  display: block;
+  border-radius: var(--scale-2xs-radius);
+  background-color: var(--linear-progress-track);
+  width: 100%;
+  height: var(--scale-2xs-height);
+  position: relative;
+  overflow: hidden;
+
+  &::-webkit-progress-bar {
+    background-color: var(--linear-progress-track);
+  }
+
+  &::-webkit-progress-value,
+  &::-moz-progress-bar {
+    border-radius: var(--scale-2xs-radius);
+    background-color: var(--linear-progress-progress);
+  }
+
+  &.moon-linear-progress-3xs {
+    border-radius: var(--scale-3xs-radius);
+    height: var(--scale-3xs-height);
+
+    &::-webkit-progress-value,
+    &::-moz-progress-bar {
+      border-radius: var(--scale-3xs-radius);
+    }
+  }
+}
+
+.moon-linear-progress-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--scale-2xs-gap);
+
+  :where(label) {
+    font: variables.$text-body-300;
+    color: var(--semantic-text-primary);
+    font-weight: var(--text-font-weight-medium);
+    text-align: center;
+  }
+
+  &:has(.moon-linear-progress-3xs) {
+    gap: var(--scale-3xs-gap);
+
+    :where(label) {
+      font: variables.$text-body-200;
+    }
+  }
+}

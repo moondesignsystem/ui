@@ -1,0 +1,107 @@
+@use "sass:map";
+@use "variables";
+
+$sizes: (
+  xs: (
+    height: var(--scale-xs-height),
+    width: var(--scale-xs-width),
+    radius: var(--utility-avatar-radius-xs),
+    font: variables.$scale-xs-text,
+    icon-size: var(--scale-xs-icon-size)
+  ),
+  sm: (
+    height: var(--scale-sm-height),
+    width: var(--scale-sm-width),
+    radius: var(--utility-avatar-radius-sm),
+    font: variables.$scale-sm-text,
+    icon-size: var(--scale-sm-icon-size)
+  ),
+  md: (
+    height: var(--scale-md-height),
+    width: var(--scale-md-width),
+    radius: var(--utility-avatar-radius-md),
+    font: variables.$scale-md-text,
+    icon-size: var(--scale-md-icon-size)
+  ),
+  lg: (
+    height: var(--scale-lg-height),
+    width: var(--scale-lg-width),
+    radius: var(--utility-avatar-radius-lg),
+    font: variables.$scale-lg-text,
+    icon-size: var(--scale-lg-icon-size)
+  ),
+  xl: (
+    height: var(--scale-xl-height),
+    width: var(--scale-xl-width),
+    radius: var(--utility-avatar-radius-xl),
+    font: variables.$scale-xl-text,
+    icon-size: var(--scale-xl-icon-size)
+  ),
+  2xl: (
+    height: var(--scale-2xl-height),
+    width: var(--scale-2xl-width),
+    radius: var(--utility-avatar-radius-2xl),
+    font: variables.$scale-2xl-text,
+    icon-size: var(--scale-2xl-icon-size)
+  )
+);
+
+.moon-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background-color: var(--avatar-soft-background);
+  border-width: var(--avatar-soft-stroke);
+  border-color: var(--semantic-border-secondary);
+  color: var(--avatar-soft-text);
+  font: map.get($sizes, "md", "font");
+  width: map.get($sizes, "md", "width");
+  height: map.get($sizes, "md", "height");
+  border-radius: map.get($sizes, "md", "radius");
+
+  :where(p, span) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  :where(svg) {
+    color: var(--avatar-soft-icon);
+    width: map.get($sizes, "md", "icon-size");
+    height: map.get($sizes, "md", "icon-size");
+  }
+
+  &:not(:has(svg, img)) {
+    padding: map.get($sizes, "md", "padding");
+  }
+
+  @each $size, $prop in $sizes {
+    @if $size != "md" {
+      &.moon-avatar-#{$size} {
+        font: map.get($prop, "font");
+        width: map.get($prop, "width");
+        height: map.get($prop, "height");
+        border-radius: map.get($prop, "radius");
+
+        :where(svg) {
+          width: map.get($prop, "icon-size");
+          height: map.get($prop, "icon-size");
+        }
+
+        &:not(:has(svg, img)) {
+          padding: map.get($prop, "padding");
+        }
+      }
+    }
+  }
+
+  &.moon-avatar-outline {
+    background-color: var(--avatar-outline-background);
+    border-width: var(--avatar-outline-stroke);
+    color: var(--avatar-outline-text);
+  }
+}
