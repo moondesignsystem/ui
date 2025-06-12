@@ -1,8 +1,13 @@
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
 import * as sass from "sass";
 import getConfig from "./getConfig.js";
 import getPackageVersion from "./utils/getPackageVersion.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const packageRoot = path.resolve(__dirname, "../..");
 
 /**
  * Compiles SCSS files from src/components into a single CSS file
@@ -18,13 +23,11 @@ const generateComponentsFile = async (configOverride = null) => {
       fs.mkdirSync(config.output, { recursive: true });
     }
     const outputComponentsFile = `${config.output}/${config.project}-components.css`;
-    const mainScssPath = path.resolve(
-      process.cwd(),
-      "src/components/main.scss"
-    );
+    const mainScssPath = path.resolve(packageRoot, "src/components/main.scss");
     const result = sass.compile(mainScssPath, {
       style: "compressed",
       sourceMap: true,
+      loadPaths: [path.resolve(packageRoot, "src/components")],
     });
     const version = getPackageVersion();
     const versionComment = `/* Moon UI v${version} */\n`;
