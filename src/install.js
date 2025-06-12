@@ -3,7 +3,6 @@
 import generateConfigFile from "./scripts/generateConfigFile.js";
 import generateCoreFile from "./scripts/generateCoreFile.js";
 import getConfig from "./scripts/getConfig.js";
-import generateThemeFile from "./scripts/generateThemeFile.js";
 import generateComponentsFile from "./scripts/generateComponentsFile.js";
 
 /**
@@ -18,20 +17,21 @@ const install = async () => {
   try {
     generateConfigFile();
     const config = getConfig();
-    console.log(`Generating ${config.projectName}-core.css file...`);
-    await generateCoreFile();
+    const addComponents = process.argv.includes("--add-components");
+    await generateCoreFile(
+      config.coreFileId,
+      config.projectName,
+      addComponents
+    );
     const themes = config.themes || {};
     const themeKeys = Object.keys(themes);
     if (themeKeys.length > 0) {
       for (const themeName of themeKeys) {
-        const themeId = themes[themeName];
-        console.log(`Generating ${themeName}-core.css file...`);
-        await generateThemeFile(themeId, themeName);
+        const themeFileId = themes[themeName];
+        await generateCoreFile(themeFileId, themeName, addComponents);
       }
     }
-    const addComponents = process.argv.includes("--add-components");
     if (addComponents) {
-      console.log(`Generating ${config.projectName}-components.css file...`);
       await generateComponentsFile();
     }
     console.log("Installation complete!");

@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 1.0.6
+
+### Patch Changes
+
+- feat: improve core generation script
+
 ## 1.0.5
 
 ### Patch Changes

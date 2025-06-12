@@ -12,21 +12,26 @@ import getConfig from "./getConfig.js";
 
 /**
  * @async
- * @param {Object} [configOverride] - Optional config override object
+ * @param {Object} - Optional config override object
  * @returns {Promise<void>}
  * @throws {Error}
  */
-const generateCoreFile = async (configOverride = null) => {
+const generateCoreFile = async (coreFileId, projectName, addComponents) => {
   try {
-    const config = configOverride || getConfig();
+    console.log(`Generating ${projectName}-core.css file...`);
+    const config = getConfig();
+    const outputFolder = config.outputFolder;
     const { coreVariables, themes, colorCollectionName } =
-      await processCoreVariables(config.coreFileId);
-    const { componentVariables } = await processComponentVariables();
-    const cssVariables = [...coreVariables, ...componentVariables];
-    if (!fs.existsSync(config.outputFolder)) {
-      fs.mkdirSync(config.outputFolder, { recursive: true });
+      await processCoreVariables(coreFileId);
+    let cssVariables = [...coreVariables];
+    if (addComponents) {
+      const { componentVariables } = await processComponentVariables();
+      cssVariables = [...coreVariables, ...componentVariables];
     }
-    const outputCoreFile = `${config.outputFolder}/${config.projectName}-core.css`;
+    if (!fs.existsSync(outputFolder)) {
+      fs.mkdirSync(outputFolder, { recursive: true });
+    }
+    const outputCoreFile = `${outputFolder}/${projectName}-core.css`;
     // If fewer than 2 themes, put all variables in :root
     if (themes.length < 2) {
       const allVariables = cssVariables

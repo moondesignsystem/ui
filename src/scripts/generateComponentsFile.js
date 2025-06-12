@@ -12,13 +12,14 @@ const packageRoot = path.resolve(__dirname, "../..");
 /**
  * Compiles SCSS files from src/components into a single CSS file
  * @async
- * @param {Object} [configOverride] - Optional config override object
+ * @param {Object} - Optional config override object
  * @returns {Promise<void>}
  * @throws {Error}
  */
-const generateComponentsFile = async (configOverride = null) => {
+const generateComponentsFile = async () => {
   try {
-    const config = configOverride || getConfig();
+    const config = getConfig();
+    console.log(`Generating ${config.projectName}-components.css file...`);
     if (!fs.existsSync(config.outputFolder)) {
       fs.mkdirSync(config.outputFolder, { recursive: true });
     }
