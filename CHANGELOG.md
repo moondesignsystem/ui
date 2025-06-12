@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 1.0.7
+
+### Patch Changes
+
+- feat: add customPrefix
+
 ## 1.0.6
 
 ### Patch Changes

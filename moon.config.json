@@ -2,6 +2,7 @@
   "projectName": "moon",
   "coreFileId": "BZiHkvF7pXFHrFH8P0cG2T",
   "componentsFileId": "S3q1SkVngbwHuwpxHKCsgtJj",
-  "themes": {},
-  "outputFolder": "dist"
+  "outputFolder": "dist",
+  "customPrefix": false,
+  "themes": {}
 }
