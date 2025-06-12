@@ -19,7 +19,7 @@ const processComponentVariables = async () => {
       publishedVariableCollections,
       localVariables,
       publishedVariables,
-    } = await fetchFigmaData(config.components);
+    } = await fetchFigmaData(config.componentsFileId);
     const { variableCollections } = processPublishedVariables(
       localVariableCollections,
       publishedVariableCollections,

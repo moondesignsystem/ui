@@ -20,13 +20,13 @@ const generateCoreFile = async (configOverride = null) => {
   try {
     const config = configOverride || getConfig();
     const { coreVariables, themes, colorCollectionName } =
-      await processCoreVariables(config.core);
+      await processCoreVariables(config.coreFileId);
     const { componentVariables } = await processComponentVariables();
     const cssVariables = [...coreVariables, ...componentVariables];
-    if (!fs.existsSync(config.output)) {
-      fs.mkdirSync(config.output, { recursive: true });
+    if (!fs.existsSync(config.outputFolder)) {
+      fs.mkdirSync(config.outputFolder, { recursive: true });
     }
-    const outputCoreFile = `${config.output}/${config.project}-core.css`;
+    const outputCoreFile = `${config.outputFolder}/${config.projectName}-core.css`;
     // If fewer than 2 themes, put all variables in :root
     if (themes.length < 2) {
       const allVariables = cssVariables

@@ -19,10 +19,10 @@ const packageRoot = path.resolve(__dirname, "../..");
 const generateComponentsFile = async (configOverride = null) => {
   try {
     const config = configOverride || getConfig();
-    if (!fs.existsSync(config.output)) {
-      fs.mkdirSync(config.output, { recursive: true });
+    if (!fs.existsSync(config.outputFolder)) {
+      fs.mkdirSync(config.outputFolder, { recursive: true });
     }
-    const outputComponentsFile = `${config.output}/${config.project}-components.css`;
+    const outputComponentsFile = `${config.outputFolder}/${config.projectName}-components.css`;
     const mainScssPath = path.resolve(packageRoot, "src/components/main.scss");
     const result = sass.compile(mainScssPath, {
       style: "compressed",
