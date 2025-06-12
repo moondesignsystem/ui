@@ -4,6 +4,7 @@ import { fileURLToPath } from "url";
 import * as sass from "sass";
 import getConfig from "./getConfig.js";
 import getPackageVersion from "./utils/getPackageVersion.js";
+import replaceClassPrefix from "./utils/replaceClassPrefix.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -32,7 +33,8 @@ const generateComponentsFile = async () => {
     });
     const version = getPackageVersion();
     const versionComment = `/* Moon UI v${version} */\n`;
-    const cssWithVersionComment = versionComment + result.css;
+    const cssWithPrefixReplaced = replaceClassPrefix(result.css);
+    const cssWithVersionComment = versionComment + cssWithPrefixReplaced;
     fs.writeFileSync(outputComponentsFile, cssWithVersionComment);
   } catch (error) {
     console.error("Error in generateComponentsFile script:", error);

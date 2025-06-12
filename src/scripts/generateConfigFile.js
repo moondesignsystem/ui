@@ -17,6 +17,7 @@ const generateConfigFile = () => {
         ? process.argv[index + 1]
         : value;
     };
+    const customPrefix = process.argv.includes("--custom-prefix");
     projectName = getArgValue("--projectName", projectName);
     outputFolder = getArgValue("--outputFolder", outputFolder);
     coreFileId = getArgValue("--coreFileId", coreFileId);
@@ -25,8 +26,9 @@ const generateConfigFile = () => {
       projectName,
       coreFileId,
       componentsFileId,
-      themes: {},
       outputFolder,
+      customPrefix,
+      themes: {},
     };
     fs.writeFileSync(outputConfigFile, JSON.stringify(config, null, 2) + "\n");
   } catch (error) {
