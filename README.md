@@ -30,7 +30,13 @@ npx @heathmont/moon-ui --coreFileId CORE_FILE_ID --componentsFileId COMPONENTS_F
 
 ### Configuration
 
-The tool will create a `moon.config.json` file with default values if one doesn't exist already. You also can create or modify a `moon.config.json` file in your project root if needed:
+Add `FIGMA_TOKEN` variable to your `.env` file. Be sure you also included this file to `.gitignore`:
+
+```bash
+FIGMA_TOKEN=YOUR_FIGMA_PERSONAL_ACCESS_TOKEN
+```
+
+The tool will create a `moonconfig.json` file with default values if one doesn't exist already. You also can create or modify a `moonconfig.json` file in your project root if needed:
 
 ```json
 {
