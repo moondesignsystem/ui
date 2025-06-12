@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import generateConfigFile from "./scripts/generateConfigFile.js";
 import generateCoreFile from "./scripts/generateCoreFile.js";
 import getConfig from "./scripts/getConfig.js";
@@ -16,19 +18,20 @@ const install = async () => {
   try {
     generateConfigFile();
     const config = getConfig();
-    console.log(`Generating "${config.project}" core file...`);
+    console.log(`Generating ${config.project}-core.css file...`);
     await generateCoreFile();
     const themes = config.themes || {};
     const themeKeys = Object.keys(themes);
     if (themeKeys.length > 0) {
       for (const themeName of themeKeys) {
         const themeId = themes[themeName];
-        console.log(`Generating "${themeName}" core file...`);
+        console.log(`Generating ${themeName}-core.css file...`);
         await generateThemeFile(themeId, themeName);
       }
     }
     const withComponents = process.argv.includes("--with-components");
     if (withComponents) {
+      console.log(`Generating ${config.project}-components.css file...`);
       await generateComponentsFile();
     }
     console.log("Installation complete!");

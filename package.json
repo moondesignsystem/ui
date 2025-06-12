@@ -1,26 +1,35 @@
 {
-  "name": "moon-ui",
-  "version": "0.1.0",
-  "description": "",
-  "main": "src/index.js",
+  "name": "@heathmont/moon-ui",
+  "version": "1.0.4",
+  "description": "Moon UI library for generating core and components CSS files",
+  "main": "src/install.js",
   "type": "module",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "bin": {
+    "moon-ui": "src/install.js"
   },
+  "scripts": {
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "changeset publish"
+  },
+  "files": [
+    "src/**/*"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/coingaming/moon-ui.git"
   },
-  "author": "",
+  "author": "Yolo Group",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/coingaming/moon-ui/issues"
   },
   "homepage": "https://github.com/coingaming/moon-ui#readme",
   "dependencies": {
-    "dotenv": "^16.5.0"
+    "dotenv": "^16.5.0",
+    "sass": "^1.89.2"
   },
   "devDependencies": {
-    "sass": "^1.89.2"
+    "@changesets/cli": "^2.29.4"
   }
 }
