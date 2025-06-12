@@ -1,6 +1,6 @@
 # Moon UI
 
-A Moon UI library for generating core and component CSS files from Figma design tokens.
+A UI library for generating core and component CSS files from Figma design tokens.
 
 ## Usage
 
@@ -10,53 +10,57 @@ Run the tool directly using npx:
 
 ```bash
 # Basic usage - generates core CSS
-npx moon-ui
+npx @heathmont/moon-ui
 
-# Generate both core and component CSS
-npx moon-ui --with-components
+# Generate both core and components CSS
+npx @heathmont/moon-ui --add-components
 
 # Customize project name
-npx moon-ui --project custom-name
+npx @heathmont/moon-ui --projectName project-name
 
 # Specify output directory
-npx moon-ui --output build
+npx @heathmont/moon-ui --outputFolder output-folder
 
 # Use custom Figma file IDs
-npx moon-ui --core YOUR_CORE_FIGMA_ID --components YOUR_COMPONENTS_FIGMA_ID
+npx @heathmont/moon-ui --coreFileId CORE_FILE_ID --componentsFileId COMPONENTS_FILE_ID
 ```
 
 ### Configuration
 
-Create a `moon.config.json` file in your project root:
+The tool will create a `moon.config.json` file with default values if one doesn't exist already. You also can create or modify a `moon.config.json` file in your project root if needed:
 
 ```json
 {
-  "project": "PROJECT_NAME",
-  "core": "FIGMA_CORE_FILE_ID",
-  "components": "FIGMA_COMPONENTS_FILE_ID",
+  "projectName": "PROJECT_NAME",
+  "coreFileId": "CORE_FILE_ID",
+  "componentsFileId": "COMPONENTS_FILE_ID",
   "themes": {
-    "theme1": "FIGMA_THEME_1_CORE_FILE_ID",
-    "theme2": "FIGMA_THEME_2_CORE_FILE_ID"
+    "theme1": "THEME_1_CORE_FILE_ID",
+    "theme2": "THEME_2_CORE_FILE_ID"
   },
-  "output": "CSS_OUTPUT_FOLDER"
+  "outputFolder": "OUTPUT_FOLDER"
 }
 ```
 
-You can also generate a config file automatically using command-line arguments:
+If you don't have additional themes, leave "theme" an empty object:
 
-```bash
-npx moon-ui --init --project custom-name --output build
+```json
+{
+  "projectName": "PROJECT_NAME",
+  "coreFileId": "CORE_FILE_ID",
+  "componentsFileId": "COMPONENTS_FILE_ID",
+  "themes": {},
+  "outputFolder": "OUTPUT_FOLDER"
+}
 ```
-
-The tool will create a `moon.config.json` file with default values if one doesn't exist already.
 
 ## Output
 
-The following files will be generated in your output directory:
+The following files will be generated in your outputFolder directory:
 
-- `{project}-core.css` - The main CSS file with variables and utilities
+- `{projectName}-core.css` - The main CSS file with variables and utilities
+- `{projectName}-components.css` - Component classes (if `--add-components` is used)
 - `{theme}-core.css` - One file for each theme defined in your config
-- `{project}-components.css` - Component classes (if `--with-components` is used)
 
 ## License
 
@@ -69,3 +73,18 @@ Moon UI follows [Semantic Versioning](https://semver.org/). For the versions ava
 - **MAJOR** version for incompatible API changes
 - **MINOR** version for new functionality in a backward compatible manner
 - **PATCH** version for backward compatible bug fixes
+
+### Contributing
+
+This project uses [Changesets](https://github.com/changesets/changesets) for version management:
+
+```bash
+# Create a new changeset
+npm run changeset
+
+# Update versions based on changesets
+npm run version
+
+# Publish new version
+npm run release
+```

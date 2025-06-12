@@ -14,7 +14,7 @@ import getConfig from "./getConfig.js";
 const processCoreVariables = async (fileId = null) => {
   try {
     const config = getConfig();
-    const figmaFileId = fileId || config.core;
+    const figmaFileId = fileId || config.coreFileId;
     const {
       localVariableCollections,
       publishedVariableCollections,

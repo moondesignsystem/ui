@@ -1,6 +1,6 @@
 {
   "name": "@heathmont/moon-ui",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Moon UI library for generating core and components CSS files",
   "main": "src/install.js",
   "type": "module",

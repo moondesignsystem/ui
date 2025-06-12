@@ -18,7 +18,7 @@ const install = async () => {
   try {
     generateConfigFile();
     const config = getConfig();
-    console.log(`Generating ${config.project}-core.css file...`);
+    console.log(`Generating ${config.projectName}-core.css file...`);
     await generateCoreFile();
     const themes = config.themes || {};
     const themeKeys = Object.keys(themes);
@@ -29,9 +29,9 @@ const install = async () => {
         await generateThemeFile(themeId, themeName);
       }
     }
-    const withComponents = process.argv.includes("--with-components");
-    if (withComponents) {
-      console.log(`Generating ${config.project}-components.css file...`);
+    const addComponents = process.argv.includes("--add-components");
+    if (addComponents) {
+      console.log(`Generating ${config.projectName}-components.css file...`);
       await generateComponentsFile();
     }
     console.log("Installation complete!");
