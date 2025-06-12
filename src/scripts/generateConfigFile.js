@@ -2,11 +2,11 @@ import fs from "fs";
 
 const generateConfigFile = () => {
   try {
-    const outputConfigFile = "moon.config.json";
+    const outputConfigFile = "moonconfig.json";
     if (fs.existsSync(outputConfigFile)) {
       return;
     }
-    console.log(`Generating moon.config.json file...`);
+    console.log(`Generating moonconfig.json file...`);
     let projectName = "moon";
     let outputFolder = "dist";
     let coreFileId = "BZiHkvF7pXFHrFH8P0cG2T";

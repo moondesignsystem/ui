@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 1.1.0
+
+### Minor Changes
+
+- feat: update moonconfig.json file name
+
 ## 1.0.7
 
 ### Patch Changes
