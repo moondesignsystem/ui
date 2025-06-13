@@ -1,4 +1,4 @@
-/* Moon UI v1.1.1 */
+/* Moon UI v1.2.0 */
 @theme inline {
 --container-height-2xl: 720px;
 --container-height-2xs: 160px;
@@ -379,8 +379,8 @@
 --text-heading-500-font-weight: var(--font-weight-bold);
 --text-heading-500-line-height: var(--spacing-space-80);
 }
-@custom-variant light (&:where(.light, .light *));
-@variant light {
+@custom-variant light-theme (&:where(.light-theme, .light-theme *));
+@variant light-theme {
 @theme inline {
 --color-green-10: rgb(43 154 102);
 --color-green-11: rgb(33 131 88);
@@ -482,8 +482,8 @@
 --color-slate-shadow-500: rgb(28 32 36 / 0.16);
 }
 }
-@custom-variant dark (&:where(.dark, .dark *));
-@variant dark {
+@custom-variant dark-theme (&:where(.dark-theme, .dark-theme *));
+@variant dark-theme {
 @theme inline {
 --color-green-10: rgb(51 176 116);
 --color-green-11: rgb(61 214 140);
