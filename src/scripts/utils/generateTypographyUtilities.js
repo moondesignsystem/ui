@@ -18,10 +18,10 @@ function generateTypographyUtilities(cssContent) {
       const selector = `text-${name}-${size}`;
       return (
         `@utility ${selector} {\n` +
-        `  font-size: var(--text-${name}-${size}-font-size);\n` +
-        `  line-height: var(--text-${name}-${size}-line-height);\n` +
-        `  font-weight: var(--text-${name}-${size}-font-weight);\n` +
-        `  font-family: var(--text-${name}-${size}-font-family);\n` +
+        `font-size: var(--text-${name}-${size}-font-size);\n` +
+        `line-height: var(--text-${name}-${size}-line-height);\n` +
+        `font-weight: var(--text-${name}-${size}-font-weight);\n` +
+        `font-family: var(--text-${name}-${size}-font-family);\n` +
         `}`
       );
     })

@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 1.2.0
+
+### Minor Changes
+
+- feat: add general utilities to core css
+
 ## 1.1.1
 
 ### Patch Changes
