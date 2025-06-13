@@ -1,4 +1,4 @@
-/* Moon UI v1.1.0 */
+/* Moon UI v1.1.1 */
 @theme inline {
 --container-height-2xl: 720px;
 --container-height-2xs: 160px;
@@ -586,139 +586,152 @@
 }
 }
 @utility text-body-100 {
-  font-size: var(--text-body-100-font-size);
-  line-height: var(--text-body-100-line-height);
-  font-weight: var(--text-body-100-font-weight);
-  font-family: var(--text-body-100-font-family);
+font-size: var(--text-body-100-font-size);
+line-height: var(--text-body-100-line-height);
+font-weight: var(--text-body-100-font-weight);
+font-family: var(--text-body-100-font-family);
 }
 @utility text-body-200 {
-  font-size: var(--text-body-200-font-size);
-  line-height: var(--text-body-200-line-height);
-  font-weight: var(--text-body-200-font-weight);
-  font-family: var(--text-body-200-font-family);
+font-size: var(--text-body-200-font-size);
+line-height: var(--text-body-200-line-height);
+font-weight: var(--text-body-200-font-weight);
+font-family: var(--text-body-200-font-family);
 }
 @utility text-body-300 {
-  font-size: var(--text-body-300-font-size);
-  line-height: var(--text-body-300-line-height);
-  font-weight: var(--text-body-300-font-weight);
-  font-family: var(--text-body-300-font-family);
+font-size: var(--text-body-300-font-size);
+line-height: var(--text-body-300-line-height);
+font-weight: var(--text-body-300-font-weight);
+font-family: var(--text-body-300-font-family);
 }
 @utility text-body-400 {
-  font-size: var(--text-body-400-font-size);
-  line-height: var(--text-body-400-line-height);
-  font-weight: var(--text-body-400-font-weight);
-  font-family: var(--text-body-400-font-family);
+font-size: var(--text-body-400-font-size);
+line-height: var(--text-body-400-line-height);
+font-weight: var(--text-body-400-font-weight);
+font-family: var(--text-body-400-font-family);
 }
 @utility text-body-500 {
-  font-size: var(--text-body-500-font-size);
-  line-height: var(--text-body-500-line-height);
-  font-weight: var(--text-body-500-font-weight);
-  font-family: var(--text-body-500-font-family);
+font-size: var(--text-body-500-font-size);
+line-height: var(--text-body-500-line-height);
+font-weight: var(--text-body-500-font-weight);
+font-family: var(--text-body-500-font-family);
 }
 @utility text-heading-100 {
-  font-size: var(--text-heading-100-font-size);
-  line-height: var(--text-heading-100-line-height);
-  font-weight: var(--text-heading-100-font-weight);
-  font-family: var(--text-heading-100-font-family);
+font-size: var(--text-heading-100-font-size);
+line-height: var(--text-heading-100-line-height);
+font-weight: var(--text-heading-100-font-weight);
+font-family: var(--text-heading-100-font-family);
 }
 @utility text-heading-200 {
-  font-size: var(--text-heading-200-font-size);
-  line-height: var(--text-heading-200-line-height);
-  font-weight: var(--text-heading-200-font-weight);
-  font-family: var(--text-heading-200-font-family);
+font-size: var(--text-heading-200-font-size);
+line-height: var(--text-heading-200-line-height);
+font-weight: var(--text-heading-200-font-weight);
+font-family: var(--text-heading-200-font-family);
 }
 @utility text-heading-300 {
-  font-size: var(--text-heading-300-font-size);
-  line-height: var(--text-heading-300-line-height);
-  font-weight: var(--text-heading-300-font-weight);
-  font-family: var(--text-heading-300-font-family);
+font-size: var(--text-heading-300-font-size);
+line-height: var(--text-heading-300-line-height);
+font-weight: var(--text-heading-300-font-weight);
+font-family: var(--text-heading-300-font-family);
 }
 @utility text-heading-400 {
-  font-size: var(--text-heading-400-font-size);
-  line-height: var(--text-heading-400-line-height);
-  font-weight: var(--text-heading-400-font-weight);
-  font-family: var(--text-heading-400-font-family);
+font-size: var(--text-heading-400-font-size);
+line-height: var(--text-heading-400-line-height);
+font-weight: var(--text-heading-400-font-weight);
+font-family: var(--text-heading-400-font-family);
 }
 @utility text-heading-500 {
-  font-size: var(--text-heading-500-font-size);
-  line-height: var(--text-heading-500-line-height);
-  font-weight: var(--text-heading-500-font-weight);
-  font-family: var(--text-heading-500-font-family);
-}@utility shadow-100 {
-  box-shadow: 
-    var(--effect-shadow-100-layer-1-x) 
-    var(--effect-shadow-100-layer-1-y) 
-    var(--effect-shadow-100-layer-1-blur) 
-    var(--effect-shadow-100-layer-1-spread) 
-    var(--effect-shadow-100-layer-1-color),
-    var(--effect-shadow-100-layer-2-x) 
-    var(--effect-shadow-100-layer-2-y) 
-    var(--effect-shadow-100-layer-2-blur) 
-    var(--effect-shadow-100-layer-2-spread) 
-    var(--effect-shadow-100-layer-2-color);
+font-size: var(--text-heading-500-font-size);
+line-height: var(--text-heading-500-line-height);
+font-weight: var(--text-heading-500-font-weight);
+font-family: var(--text-heading-500-font-family);
+}
+@utility shadow-100 {
+box-shadow: 
+var(--effect-shadow-100-layer-1-x) 
+var(--effect-shadow-100-layer-1-y) 
+var(--effect-shadow-100-layer-1-blur) 
+var(--effect-shadow-100-layer-1-spread) 
+var(--effect-shadow-100-layer-1-color),
+var(--effect-shadow-100-layer-2-x) 
+var(--effect-shadow-100-layer-2-y) 
+var(--effect-shadow-100-layer-2-blur) 
+var(--effect-shadow-100-layer-2-spread) 
+var(--effect-shadow-100-layer-2-color);
 }
 @utility shadow-200 {
-  box-shadow: 
-    var(--effect-shadow-200-layer-1-x) 
-    var(--effect-shadow-200-layer-1-y) 
-    var(--effect-shadow-200-layer-1-blur) 
-    var(--effect-shadow-200-layer-1-spread) 
-    var(--effect-shadow-200-layer-1-color),
-    var(--effect-shadow-200-layer-2-x) 
-    var(--effect-shadow-200-layer-2-y) 
-    var(--effect-shadow-200-layer-2-blur) 
-    var(--effect-shadow-200-layer-2-spread) 
-    var(--effect-shadow-200-layer-2-color);
+box-shadow: 
+var(--effect-shadow-200-layer-1-x) 
+var(--effect-shadow-200-layer-1-y) 
+var(--effect-shadow-200-layer-1-blur) 
+var(--effect-shadow-200-layer-1-spread) 
+var(--effect-shadow-200-layer-1-color),
+var(--effect-shadow-200-layer-2-x) 
+var(--effect-shadow-200-layer-2-y) 
+var(--effect-shadow-200-layer-2-blur) 
+var(--effect-shadow-200-layer-2-spread) 
+var(--effect-shadow-200-layer-2-color);
 }
 @utility shadow-300 {
-  box-shadow: 
-    var(--effect-shadow-300-layer-1-x) 
-    var(--effect-shadow-300-layer-1-y) 
-    var(--effect-shadow-300-layer-1-blur) 
-    var(--effect-shadow-300-layer-1-spread) 
-    var(--effect-shadow-300-layer-1-color),
-    var(--effect-shadow-300-layer-2-x) 
-    var(--effect-shadow-300-layer-2-y) 
-    var(--effect-shadow-300-layer-2-blur) 
-    var(--effect-shadow-300-layer-2-spread) 
-    var(--effect-shadow-300-layer-2-color);
+box-shadow: 
+var(--effect-shadow-300-layer-1-x) 
+var(--effect-shadow-300-layer-1-y) 
+var(--effect-shadow-300-layer-1-blur) 
+var(--effect-shadow-300-layer-1-spread) 
+var(--effect-shadow-300-layer-1-color),
+var(--effect-shadow-300-layer-2-x) 
+var(--effect-shadow-300-layer-2-y) 
+var(--effect-shadow-300-layer-2-blur) 
+var(--effect-shadow-300-layer-2-spread) 
+var(--effect-shadow-300-layer-2-color);
 }
 @utility shadow-400 {
-  box-shadow: 
-    var(--effect-shadow-400-layer-1-x) 
-    var(--effect-shadow-400-layer-1-y) 
-    var(--effect-shadow-400-layer-1-blur) 
-    var(--effect-shadow-400-layer-1-spread) 
-    var(--effect-shadow-400-layer-1-color),
-    var(--effect-shadow-400-layer-2-x) 
-    var(--effect-shadow-400-layer-2-y) 
-    var(--effect-shadow-400-layer-2-blur) 
-    var(--effect-shadow-400-layer-2-spread) 
-    var(--effect-shadow-400-layer-2-color);
+box-shadow: 
+var(--effect-shadow-400-layer-1-x) 
+var(--effect-shadow-400-layer-1-y) 
+var(--effect-shadow-400-layer-1-blur) 
+var(--effect-shadow-400-layer-1-spread) 
+var(--effect-shadow-400-layer-1-color),
+var(--effect-shadow-400-layer-2-x) 
+var(--effect-shadow-400-layer-2-y) 
+var(--effect-shadow-400-layer-2-blur) 
+var(--effect-shadow-400-layer-2-spread) 
+var(--effect-shadow-400-layer-2-color);
 }
 @utility shadow-500 {
-  box-shadow: 
-    var(--effect-shadow-500-layer-1-x) 
-    var(--effect-shadow-500-layer-1-y) 
-    var(--effect-shadow-500-layer-1-blur) 
-    var(--effect-shadow-500-layer-1-spread) 
-    var(--effect-shadow-500-layer-1-color),
-    var(--effect-shadow-500-layer-2-x) 
-    var(--effect-shadow-500-layer-2-y) 
-    var(--effect-shadow-500-layer-2-blur) 
-    var(--effect-shadow-500-layer-2-spread) 
-    var(--effect-shadow-500-layer-2-color);
+box-shadow: 
+var(--effect-shadow-500-layer-1-x) 
+var(--effect-shadow-500-layer-1-y) 
+var(--effect-shadow-500-layer-1-blur) 
+var(--effect-shadow-500-layer-1-spread) 
+var(--effect-shadow-500-layer-1-color),
+var(--effect-shadow-500-layer-2-x) 
+var(--effect-shadow-500-layer-2-y) 
+var(--effect-shadow-500-layer-2-blur) 
+var(--effect-shadow-500-layer-2-spread) 
+var(--effect-shadow-500-layer-2-color);
 }
 @utility shadow-600 {
-  box-shadow: 
-    var(--effect-shadow-600-layer-1-x) 
-    var(--effect-shadow-600-layer-1-y) 
-    var(--effect-shadow-600-layer-1-blur) 
-    var(--effect-shadow-600-layer-1-spread) 
-    var(--effect-shadow-600-layer-1-color),
-    var(--effect-shadow-600-layer-2-x) 
-    var(--effect-shadow-600-layer-2-y) 
-    var(--effect-shadow-600-layer-2-blur) 
-    var(--effect-shadow-600-layer-2-spread) 
-    var(--effect-shadow-600-layer-2-color);
+box-shadow: 
+var(--effect-shadow-600-layer-1-x) 
+var(--effect-shadow-600-layer-1-y) 
+var(--effect-shadow-600-layer-1-blur) 
+var(--effect-shadow-600-layer-1-spread) 
+var(--effect-shadow-600-layer-1-color),
+var(--effect-shadow-600-layer-2-x) 
+var(--effect-shadow-600-layer-2-y) 
+var(--effect-shadow-600-layer-2-blur) 
+var(--effect-shadow-600-layer-2-spread) 
+var(--effect-shadow-600-layer-2-color);
+}
+@utility icon-* {
+color: --value(--semantic-icon-*);
+}
+@utility text-* {
+color: --value(--semantic-text-*);
+}
+@utility bg-* {
+color: --value(--semantic-background-*);
+}
+@utility opacity-* {
+color: --value(--effect-opacity-*);
 }

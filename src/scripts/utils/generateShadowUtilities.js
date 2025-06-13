@@ -14,17 +14,17 @@ function generateShadowUtilities(cssContent) {
       const selector = `shadow-${size}`;
       return (
         `@utility ${selector} {\n` +
-        `  box-shadow: \n` +
-        `    var(--effect-shadow-${size}-layer-1-x) \n` +
-        `    var(--effect-shadow-${size}-layer-1-y) \n` +
-        `    var(--effect-shadow-${size}-layer-1-blur) \n` +
-        `    var(--effect-shadow-${size}-layer-1-spread) \n` +
-        `    var(--effect-shadow-${size}-layer-1-color),\n` +
-        `    var(--effect-shadow-${size}-layer-2-x) \n` +
-        `    var(--effect-shadow-${size}-layer-2-y) \n` +
-        `    var(--effect-shadow-${size}-layer-2-blur) \n` +
-        `    var(--effect-shadow-${size}-layer-2-spread) \n` +
-        `    var(--effect-shadow-${size}-layer-2-color);\n` +
+        `box-shadow: \n` +
+        `var(--effect-shadow-${size}-layer-1-x) \n` +
+        `var(--effect-shadow-${size}-layer-1-y) \n` +
+        `var(--effect-shadow-${size}-layer-1-blur) \n` +
+        `var(--effect-shadow-${size}-layer-1-spread) \n` +
+        `var(--effect-shadow-${size}-layer-1-color),\n` +
+        `var(--effect-shadow-${size}-layer-2-x) \n` +
+        `var(--effect-shadow-${size}-layer-2-y) \n` +
+        `var(--effect-shadow-${size}-layer-2-blur) \n` +
+        `var(--effect-shadow-${size}-layer-2-spread) \n` +
+        `var(--effect-shadow-${size}-layer-2-color);\n` +
         `}`
       );
     })
