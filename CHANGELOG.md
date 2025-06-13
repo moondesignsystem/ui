@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 1.3.2
+
+### Patch Changes
+
+- fix: core theme generation
+
 ## 1.3.1
 
 ### Patch Changes
