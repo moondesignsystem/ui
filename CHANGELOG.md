@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 1.3.1
+
+### Patch Changes
+
+- fix: opacity and background utilities
+
 ## 1.3.0
 
 ### Minor Changes

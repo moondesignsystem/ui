@@ -7,10 +7,10 @@ function generateGenericUtilities() {
     `color: --value(--semantic-text-*);\n` +
     `}\n` +
     `@utility bg-* {\n` +
-    `color: --value(--semantic-background-*);\n` +
+    `background-color: --value(--semantic-background-*);\n` +
     `}\n` +
     `@utility opacity-* {\n` +
-    `color: --value(--effect-opacity-*);\n` +
+    `opacity: --value(--effect-opacity-*);\n` +
     `}\n`
   );
 }
