@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 1.3.0
+
+### Minor Changes
+
+- feat: change theme name logics
+
 ## 1.2.0
 
 ### Minor Changes

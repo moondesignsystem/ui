@@ -78,8 +78,8 @@ const generateCoreFile = async (coreFileId, projectName, addComponents) => {
           );
         })
         .sort();
-      cssContent += `@custom-variant ${theme} (&:where(.${theme}, .${theme} *));\n`;
-      cssContent += `@variant ${theme} {\n`;
+      cssContent += `@custom-variant ${theme}-theme (&:where(.${theme}-theme, .${theme}-theme *));\n`;
+      cssContent += `@variant ${theme}-theme {\n`;
       cssContent += `@theme inline {\n${themeVariables.join("\n")}\n}\n}\n`;
     });
     cssContent = replaceVariablesByPattern(cssContent);
