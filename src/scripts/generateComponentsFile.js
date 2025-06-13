@@ -34,7 +34,11 @@ const generateComponentsFile = async () => {
     const version = getPackageVersion();
     const versionComment = `/* Moon UI v${version} */\n`;
     const cssWithPrefixReplaced = replaceClassPrefix(result.css);
-    const cssWithVersionComment = versionComment + cssWithPrefixReplaced;
+    const cssWithVersionComment =
+      versionComment +
+      `@layer components {\n` +
+      cssWithPrefixReplaced +
+      `\n}\n`;
     fs.writeFileSync(outputComponentsFile, cssWithVersionComment);
   } catch (error) {
     console.error("Error in generateComponentsFile script:", error);

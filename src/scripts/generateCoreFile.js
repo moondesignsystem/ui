@@ -56,7 +56,7 @@ const generateCoreFile = async (coreFileId, projectName, addComponents) => {
         removeThemePrefixesFromVariables(v, themes, colorCollectionName)
       )
       .sort();
-    let cssContent = "@theme inline {\n" + rootVariables.join("\n") + "\n}\n";
+    let cssContent = "@theme {\n" + rootVariables.join("\n") + "\n}\n";
     const colorVariables = cssVariables.filter((v) =>
       colorVariablePattern.test(v)
     );
@@ -78,9 +78,8 @@ const generateCoreFile = async (coreFileId, projectName, addComponents) => {
           );
         })
         .sort();
-      cssContent += `@custom-variant ${theme}-theme (&:where(.${theme}-theme, .${theme}-theme *));\n`;
-      cssContent += `@variant ${theme}-theme {\n`;
-      cssContent += `@theme inline {\n${themeVariables.join("\n")}\n}\n}\n`;
+      cssContent += `@layer theme {\n`;
+      cssContent += `.${theme}-theme {\n${themeVariables.join("\n")}\n}\n}\n`;
     });
     cssContent = replaceVariablesByPattern(cssContent);
     cssContent += `${generateTypographyUtilities(cssContent)}\n`;
