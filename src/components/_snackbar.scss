@@ -50,7 +50,7 @@ $modes: (
   grid-auto-flow: column;
   justify-content: start;
   justify-items: start;
-  font-weight: var(--text-font-weight-medium);
+  font-weight: var(--font-weight-medium);
   box-shadow: variables.$shadow-500, map.get($modes, "neutral", "box-shadow");
 
   :where(.moon-snackbar-action) {

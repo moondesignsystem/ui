@@ -6,7 +6,7 @@ $sizes: (
     gap: var(--scale-sm-gap),
     radius: var(--scale-sm-radius),
     padding: var(--scale-sm-padding),
-    padding-end: var(--dimension-space-20),
+    padding-end: var(--spacing-space-20),
     min-height: var(--scale-sm-height),
     font: variables.$scale-sm-text
   ),
@@ -14,7 +14,7 @@ $sizes: (
     gap: var(--scale-md-gap),
     radius: var(--scale-md-radius),
     padding: var(--scale-md-padding),
-    padding-end: var(--dimension-space-28),
+    padding-end: var(--spacing-space-28),
     min-height: var(--scale-md-height),
     font: variables.$scale-md-text
   ),
@@ -22,7 +22,7 @@ $sizes: (
     gap: var(--scale-lg-gap),
     radius: var(--scale-lg-radius),
     padding: var(--scale-lg-padding),
-    padding-end: var(--dimension-space-28),
+    padding-end: var(--spacing-space-28),
     min-height: var(--scale-lg-height),
     font: variables.$scale-lg-text
   ),
@@ -30,7 +30,7 @@ $sizes: (
     gap: var(--scale-xl-gap),
     radius: var(--scale-xl-radius),
     padding: var(--scale-xl-padding),
-    padding-end: var(--dimension-space-32),
+    padding-end: var(--spacing-space-32),
     min-height: var(--scale-xl-height),
     font: variables.$scale-xl-text
   )
@@ -164,7 +164,7 @@ $sizes: (
       min-height: 0;
       cursor: unset;
       font: map.get($sizes, "md", "font");
-      font-weight: var(--text-font-weight-regular);
+      font-weight: var(--font-weight-regular);
       color: var(--accordion-content);
       transition:
         visibility 0.2s ease-out,
@@ -270,7 +270,7 @@ $sizes: (
 
           .moon-accordion-content {
             font: map.get($prop, "font");
-            font-weight: var(--text-font-weight-regular);
+            font-weight: var(--font-weight-regular);
           }
 
           .moon-accordion-open {

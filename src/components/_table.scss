@@ -33,7 +33,7 @@ $sizes: (
   color: var(--semantic-text-primary);
   background-color: var(--semantic-background-secondary);
   font: map.get($sizes, "md", "font");
-  font-weight: var(--text-font-weight-regular);
+  font-weight: var(--font-weight-regular);
   box-shadow: 0 0 0 var(--dimension-border-default) var(--semantic-border-secondary);
 
   :where(thead),
@@ -60,7 +60,7 @@ $sizes: (
   }
 
   :where(th) {
-    font-weight: var(--text-font-weight-medium);
+    font-weight: var(--font-weight-medium);
   }
 
   :where(th, td) {
