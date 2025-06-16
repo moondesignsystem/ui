@@ -67,7 +67,7 @@
 
 .moon-checkbox-wrapper {
   display: flex;
-  gap: var(--dimension-space-8);
+  gap: var(--spacing-space-8);
   align-items: center;
 
   :where(label) {

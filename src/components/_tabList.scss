@@ -24,7 +24,7 @@
     border-top-right-radius: var(--scale-md-radius);
     border-bottom: var(--tab-list-tab-unselected-stroke) solid var(--tab-list-tab-unselected-border);
     font: variables.$text-body-300;
-    font-weight: var(--text-font-weight-medium);
+    font-weight: var(--font-weight-medium);
 
     :where(svg) {
       width: var(--scale-md-icon-size);

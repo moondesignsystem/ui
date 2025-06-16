@@ -5,8 +5,8 @@
   display: inline-block;
   min-width: var(--badge-size-dot);
   min-height: var(--badge-size-dot);
-  padding: 0 var(--dimension-space-4);
-  border-radius: var(--dimension-rounded-full);
+  padding: 0 var(--spacing-space-4);
+  border-radius: var(--radius-full);
   background-color: var(--badge-background);
   color: var(--badge-text);
   box-shadow: inset 0 0 0 var(--badge-stroke) var(--badge-border);
@@ -18,7 +18,7 @@
 
   :where(.moon-badge) {
     position: absolute;
-    bottom: calc(100% - var(--dimension-space-2));
-    inset-inline-start: calc(100% - var(--dimension-space-2));
+    bottom: calc(100% - var(--spacing-space-2));
+    inset-inline-start: calc(100% - var(--spacing-space-2));
   }
 }

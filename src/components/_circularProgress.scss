@@ -35,18 +35,18 @@ $sizes: (
   height: var(--size);
   width: var(--size);
   place-content: center;
-  border-radius: var(--dimension-rounded-full);
+  border-radius: var(--radius-full);
   background-color: transparent;
   vertical-align: middle;
   box-sizing: content-box;
   transition: --circularprogress 0.3s linear;
-  box-shadow: inset 0 0 0 var(--dimension-space-2) var(--circular-progress-track);
+  box-shadow: inset 0 0 0 var(--spacing-space-2) var(--circular-progress-track);
   color: var(--circular-progress-progress);
 
   &::before {
     position: absolute;
     inset: 0;
-    border-radius: var(--dimension-rounded-full);
+    border-radius: var(--radius-full);
     content: "";
     background:
       radial-gradient(farthest-side, currentcolor 98%, #0000) top/var(--thickness) var(--thickness) no-repeat,
@@ -60,7 +60,7 @@ $sizes: (
 
   &::after {
     position: absolute;
-    border-radius: var(--dimension-rounded-full);
+    border-radius: var(--radius-full);
     background-color: currentcolor;
     transition: transform 0.3s linear;
     content: "";
