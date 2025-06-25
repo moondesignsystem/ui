@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 1.3.4
+
+### Patch Changes
+
+- feat: add warning if FIGMA_TOKEN is missing
+
 ## 1.3.3
 
 ### Patch Changes

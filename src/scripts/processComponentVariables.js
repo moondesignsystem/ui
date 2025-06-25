@@ -62,7 +62,7 @@ const processComponentVariables = async () => {
     }
     return { componentVariables };
   } catch (error) {
-    console.error("Error in processComponentVariables script:", error);
+    console.error("❌ Error in processComponentVariables script:", error);
   }
 };
 

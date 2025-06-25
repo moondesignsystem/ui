@@ -75,7 +75,7 @@ const formatAndAddCSSVariable = (
     }
     return cssVariables;
   } catch (error) {
-    console.error("Error in formatAndAddCSSVariable script:", error);
+    console.error("❌ Error in formatAndAddCSSVariable script:", error);
   }
 };
 

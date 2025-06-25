@@ -32,7 +32,7 @@ const generateConfigFile = () => {
     };
     fs.writeFileSync(outputConfigFile, JSON.stringify(config, null, 2) + "\n");
   } catch (error) {
-    console.error("Error in generateConfigFile script:", error);
+    console.error("❌ Error in generateConfigFile script:", error);
   }
 };
 

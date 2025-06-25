@@ -64,7 +64,7 @@ const processCoreVariables = async (fileId = null) => {
 
     return { coreVariables, themes, colorCollectionName };
   } catch (error) {
-    console.error("Error in processCoreVariables script:", error);
+    console.error("❌ Error in processCoreVariables script:", error);
   }
 };
 

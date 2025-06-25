@@ -10,7 +10,7 @@ const getConfig = () => {
     }
     throw new Error("moonconfig.json not found");
   } catch (error) {
-    console.error("Error in getConfig script:", error);
+    console.error("❌ Error in getConfig script:", error);
     return null;
   }
 };
