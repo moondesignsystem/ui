@@ -60,7 +60,7 @@ const processPublishedVariables = (
     }
     return { variableCollections, themes, colorCollectionName };
   } catch (error) {
-    console.error("Error in processPublishedVariables script:", error);
+    console.error("❌ Error in processPublishedVariables script:", error);
   }
 };
 

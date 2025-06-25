@@ -16,7 +16,7 @@ const getPackageVersion = () => {
     const packageData = JSON.parse(fs.readFileSync(packageJsonPath, "utf8"));
     return packageData.version || "0.0.0";
   } catch (error) {
-    console.error("Error in getPackageVersion script:", error);
+    console.error("❌ Error in getPackageVersion script:", error);
   }
 };
 

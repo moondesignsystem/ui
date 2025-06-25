@@ -90,7 +90,7 @@ const generateCoreFile = async (coreFileId, projectName, addComponents) => {
     const cssWithVersionComment = versionComment + cssContent;
     fs.writeFileSync(outputCoreFile, cssWithVersionComment);
   } catch (error) {
-    console.error("Error in generateCoreFile script:", error);
+    console.error("❌ Error in generateCoreFile script:", error);
   }
 };
 

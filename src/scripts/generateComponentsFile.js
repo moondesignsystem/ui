@@ -41,7 +41,7 @@ const generateComponentsFile = async () => {
       `\n}\n`;
     fs.writeFileSync(outputComponentsFile, cssWithVersionComment);
   } catch (error) {
-    console.error("Error in generateComponentsFile script:", error);
+    console.error("❌ Error in generateComponentsFile script:", error);
   }
 };
 

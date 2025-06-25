@@ -34,9 +34,9 @@ const install = async () => {
     if (addComponents) {
       await generateComponentsFile();
     }
-    console.log("Installation complete!");
+    console.log("✅ Installation complete!");
   } catch (error) {
-    console.error("Error in install script:", error);
+    console.error("❌ Error in install script:", error);
   }
 };
 

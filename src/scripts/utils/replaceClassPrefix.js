@@ -14,7 +14,7 @@ const replaceClassPrefix = (css) => {
     }
     return css.replace(/\.moon-/g, `.${config.projectName}-`);
   } catch (error) {
-    console.error("Error in replaceClassPrefix script:", error);
+    console.error("❌ Error in replaceClassPrefix script:", error);
   }
 };
 
