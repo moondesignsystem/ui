@@ -14,6 +14,10 @@ import generateComponentsFile from "./scripts/generateComponentsFile.js";
  */
 
 const install = async () => {
+  if (!process.env.FIGMA_TOKEN) {
+    console.error("❌ FIGMA_TOKEN is not defined in environment variables");
+    return null;
+  }
   try {
     generateConfigFile();
     const config = getConfig();

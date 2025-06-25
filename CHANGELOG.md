@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 1.3.5
+
+### Patch Changes
+
+- fix: put FIGMA_TOKEN check at the very first step
+
 ## 1.3.4
 
 ### Patch Changes
