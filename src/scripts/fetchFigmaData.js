@@ -10,10 +10,6 @@ dotenv.config();
  * @throws {Error}
  */
 const fetchFigmaData = async (fileId) => {
-  if (!process.env.FIGMA_TOKEN) {
-    console.error("❌ FIGMA_TOKEN is not defined in environment variables");
-    return null;
-  }
   try {
     const localVariablesDataResponse = await fetch(
       `https://api.figma.com/v1/files/${fileId}/variables/local`,
