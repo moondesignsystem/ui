@@ -40,8 +40,7 @@ const generateCoreFile = async (coreFileId, projectName, addComponents) => {
           removeThemePrefixesFromVariables(v, themes, colorCollectionName)
         )
         .sort();
-      const cssContent =
-        "@theme inline {\n" + allVariables.join("\n") + "\n}\n";
+      const cssContent = "@theme {\n" + allVariables.join("\n") + "\n}\n";
       fs.writeFileSync(outputCoreFile, cssContent);
       return;
     }
