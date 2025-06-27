@@ -56,31 +56,49 @@ const generateCoreFile = async (coreFileId, projectName, addComponents) => {
         removeThemePrefixesFromVariables(v, themes, colorCollectionName)
       )
       .sort();
-    let cssContent = "@theme {\n" + rootVariables.join("\n") + "\n}\n";
-    const colorVariables = cssVariables.filter((v) =>
-      colorVariablePattern.test(v)
+    let cssContent = "@theme inline {\n" + rootVariables.join("\n") + "\n}\n";
+    const themedVariablePattern = new RegExp(
+      `--(${colorCollectionName}|semantic)-[a-zA-Z0-9-]+`,
+      "i"
     );
+    const themedVariables = cssVariables.filter((v) =>
+      themedVariablePattern.test(v)
+    );
+    cssContent += `@layer theme {\n`;
     themes.forEach((theme) => {
-      const themePattern = new RegExp(`--${colorCollectionName}-${theme}`, "i");
-      const themeVariables = colorVariables
-        .filter((v) => themePattern.test(v))
+      const themePattern = new RegExp(
+        `--${colorCollectionName}-${theme}-`,
+        "i"
+      );
+      let themeVariables = themedVariables
+        .filter(
+          (v) =>
+            themePattern.test(v) || !v.startsWith(`--${colorCollectionName}-`)
+        )
         .map((variable) => {
-          const themePrefix = `--${colorCollectionName}-${theme}-`;
-          const replacementPrefix = `--${colorCollectionName}-`;
-          const renamedVariable = variable.replace(
-            themePrefix,
-            replacementPrefix
-          );
+          if (themePattern.test(variable)) {
+            const themePrefix = `--${colorCollectionName}-${theme}-`;
+            const replacementPrefix = `--${colorCollectionName}-`;
+            variable = variable.replace(themePrefix, replacementPrefix);
+          }
           return removeThemePrefixesFromVariables(
-            renamedVariable,
+            variable,
             themes,
             colorCollectionName
           );
         })
         .sort();
-      cssContent += `@layer theme {\n`;
-      cssContent += `.${theme}-theme {\n${themeVariables.join("\n")}\n}\n}\n`;
+      let themeContent = themeVariables.join("\n");
+      const themeValues = ["light", "dark"];
+      const themePatternForReplacement = themeValues.join("|");
+      const themeRegexForReplacement = new RegExp(
+        `--color-(${themePatternForReplacement})-`,
+        "g"
+      );
+      themeContent = themeContent.replace(themeRegexForReplacement, "--color-");
+      cssContent += `.${theme}-theme {\n${themeContent}\n}\n`;
     });
+    cssContent += `}\n`;
     cssContent = replaceVariablesByPattern(cssContent);
     cssContent += `${generateTypographyUtilities(cssContent)}\n`;
     cssContent += `${generateShadowUtilities(cssContent)}\n`;

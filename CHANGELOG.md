@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 1.4.0
+
+### Minor Changes
+
+- feat: improove semantic and conponent variables scoping
+
 ## 1.3.5
 
 ### Patch Changes
