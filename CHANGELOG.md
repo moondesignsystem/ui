@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 1.4.1
+
+### Patch Changes
+
+- fix: @theme with lest than 2 themes
+
 ## 1.4.0
 
 ### Minor Changes
