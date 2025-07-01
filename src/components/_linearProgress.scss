@@ -14,7 +14,11 @@
     background-color: var(--linear-progress-track);
   }
 
-  &::-webkit-progress-value,
+  &::-webkit-progress-value {
+    border-radius: var(--scale-2xs-radius);
+    background-color: var(--linear-progress-progress);
+  }
+
   &::-moz-progress-bar {
     border-radius: var(--scale-2xs-radius);
     background-color: var(--linear-progress-progress);
