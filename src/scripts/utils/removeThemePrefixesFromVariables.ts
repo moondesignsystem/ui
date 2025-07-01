@@ -1,14 +1,7 @@
-/**
- * @param {string} variable
- * @param {string[]} themes
- * @param {string} colorCollectionName
- * @returns {string}
- */
-
 const removeThemePrefixesFromVariables = (
-  variable,
-  themes,
-  colorCollectionName
+  variable: string,
+  themes: string[],
+  colorCollectionName: string
 ) => {
   let updatedVariable = variable;
   themes.forEach((theme) => {

@@ -1,5 +1,17 @@
 # @heathmont/moon-ui
 
+## 1.5.1
+
+### Patch Changes
+
+- fix: move css files to styles folder
+
+## 1.5.0
+
+### Minor Changes
+
+- feat: add typescript
+
 ## 1.4.1
 
 ### Patch Changes
