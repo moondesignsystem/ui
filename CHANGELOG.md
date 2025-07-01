@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 1.5.2
+
+### Patch Changes
+
+- fix: components generation
+
 ## 1.5.1
 
 ### Patch Changes
