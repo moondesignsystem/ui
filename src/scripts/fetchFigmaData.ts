@@ -2,20 +2,17 @@ import dotenv from "dotenv";
 dotenv.config();
 
 // STEP 3. Fetch Figma data
-
-/**
- * @async
- * @param {string} [fileId]
- * @returns {Promise<Object>}
- * @throws {Error}
- */
-const fetchFigmaData = async (fileId) => {
+const fetchFigmaData = async (fileId: string) => {
+  const figmaToken = process.env.FIGMA_TOKEN;
+  if (!figmaToken) {
+    throw new Error("FIGMA_TOKEN is not defined in environment variables.");
+  }
   try {
     const localVariablesDataResponse = await fetch(
       `https://api.figma.com/v1/files/${fileId}/variables/local`,
       {
         headers: {
-          "X-FIGMA-TOKEN": process.env.FIGMA_TOKEN,
+          "X-FIGMA-TOKEN": figmaToken,
         },
       }
     );
@@ -23,7 +20,7 @@ const fetchFigmaData = async (fileId) => {
       `https://api.figma.com/v1/files/${fileId}/variables/published`,
       {
         headers: {
-          "X-FIGMA-TOKEN": process.env.FIGMA_TOKEN,
+          "X-FIGMA-TOKEN": figmaToken,
         },
       }
     );
@@ -43,6 +40,7 @@ const fetchFigmaData = async (fileId) => {
     };
   } catch (error) {
     console.error("❌ Error in fetchFigmaData script:", error);
+    return;
   }
 };
 

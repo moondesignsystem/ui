@@ -4,29 +4,28 @@ import getFontFamily from "./getFontFamily.js";
 import getFontWeight from "./getFontWeight.js";
 import getOpacity from "./getOpacity.js";
 import getDimension from "./getDimension.js";
+import type { FigmaColor, FigmaResolvedType } from "../../types.js";
 
-/**
- * @param {string} type
- * @param {string} name
- * @param {(string|Object|number)} value
- * @returns {(string|number)}
- */
-
-const formatValue = (type, name, value) => {
+const formatValue = (
+  type: FigmaResolvedType,
+  name: string,
+  value: string | FigmaColor | number
+) => {
   if (type === "COLOR") {
-    const { r, g, b, a } = value;
+    const colorValue = value as FigmaColor;
+    const { r, g, b, a } = colorValue;
     const result = `rgb(${getColor(r)} ${getColor(g)} ${getColor(b)}${getAlpha(
       a
     )})`;
     return result;
   } else if (name.toLowerCase().includes("family")) {
-    return getFontFamily(value);
+    return getFontFamily(value as string);
   } else if (name.toLowerCase().includes("weight")) {
-    return getFontWeight(value, type);
+    return getFontWeight(value as string | number);
   } else if (name.toLowerCase().includes("opacity")) {
-    return getOpacity(value);
+    return getOpacity(value as number);
   } else if (type === "FLOAT") {
-    return getDimension(value);
+    return getDimension(value as number);
   } else {
     return value;
   }

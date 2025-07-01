@@ -1,6 +1,7 @@
-function generateShadowUtilities(cssContent) {
-  const shadowRegex = /--effect-shadow-(\d+)-/g;
-  const shadowSizes = new Set();
+const shadowRegex = /--effect-shadow-(\d+)-/g;
+
+const generateShadowUtilities = (cssContent: string) => {
+  const shadowSizes = new Set<string>();
   let match;
   while ((match = shadowRegex.exec(cssContent))) {
     const size = match[1];
@@ -29,8 +30,7 @@ function generateShadowUtilities(cssContent) {
       );
     })
     .join("\n");
-
   return result;
-}
+};
 
 export default generateShadowUtilities;

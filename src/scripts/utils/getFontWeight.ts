@@ -1,4 +1,4 @@
-const fontWeight = {
+const fontWeight: Record<string, number> = {
   thin: 100,
   extralight: 200,
   light: 300,
@@ -10,14 +10,8 @@ const fontWeight = {
   black: 900,
 };
 
-/**
- * @param {(string|number)} weight
- * @param {string} type
- * @returns {(string|number)}
- */
-
-const getFontWeight = (weight, type) => {
-  if (type === "FLOAT") {
+const getFontWeight = (weight: string | number) => {
+  if (typeof weight === "number") {
     return weight;
   }
   return fontWeight[weight.toLowerCase().replace(/[\/|\s]/g, "")];
