@@ -10,14 +10,11 @@ import processComponentVariables from "./processComponentVariables.js";
 import getConfig from "./getConfig.js";
 
 // STEP 1. Generate base CSS file
-
-/**
- * @async
- * @param {Object} - Optional config override object
- * @returns {Promise<void>}
- * @throws {Error}
- */
-const generateCoreFile = async (coreFileId, projectName, addComponents) => {
+const generateCoreFile = async (
+  coreFileId: string,
+  projectName: string,
+  addComponents: boolean
+) => {
   try {
     console.log(`Generating ${projectName}-core.css file...`);
     const config = getConfig();
@@ -108,6 +105,7 @@ const generateCoreFile = async (coreFileId, projectName, addComponents) => {
     fs.writeFileSync(outputCoreFile, cssWithVersionComment);
   } catch (error) {
     console.error("❌ Error in generateCoreFile script:", error);
+    return;
   }
 };
 

@@ -5,14 +5,6 @@ import generateCoreFile from "./scripts/generateCoreFile.js";
 import getConfig from "./scripts/getConfig.js";
 import generateComponentsFile from "./scripts/generateComponentsFile.js";
 
-/**
- * Generate core file with specific file ID and project name
- * @async
- * @param {string} fileId - Figma file ID to fetch variables from
- * @param {string} projectName - Name to use for output file
- * @returns {Promise<void>}
- */
-
 const install = async () => {
   if (!process.env.FIGMA_TOKEN) {
     console.error("❌ FIGMA_TOKEN is not defined in environment variables");
@@ -39,8 +31,10 @@ const install = async () => {
       await generateComponentsFile();
     }
     console.log("✅ Installation complete!");
+    return;
   } catch (error) {
     console.error("❌ Error in install script:", error);
+    return;
   }
 };
 

@@ -1,5 +1,6 @@
-function generateTypographyUtilities(cssContent) {
-  const fontSizeRegex = /--text-([a-zA-Z0-9]+)-(\d+)-font-size\s*:\s*[^;]+;/g;
+const fontSizeRegex = /--text-([a-zA-Z0-9]+)-(\d+)-font-size\s*:\s*[^;]+;/g;
+
+const generateTypographyUtilities = (cssContent: string) => {
   const groups = [];
   let match;
   while ((match = fontSizeRegex.exec(cssContent))) {
@@ -26,8 +27,7 @@ function generateTypographyUtilities(cssContent) {
       );
     })
     .join("\n");
-
   return result;
-}
+};
 
 export default generateTypographyUtilities;
