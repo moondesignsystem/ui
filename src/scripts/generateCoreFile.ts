@@ -5,6 +5,7 @@ import generateTypographyUtilities from "./utils/generateTypographyUtilities.js"
 import generateShadowUtilities from "./utils/generateShadowUtilities.js";
 import getPackageVersion from "./utils/getPackageVersion.js";
 import generateGenericUtilities from "./utils/generateGenericUtilities.js";
+import generateBorderUtilities from "./utils/generateBorderUtilities.js";
 import processCoreVariables from "./processCoreVariables.js";
 import processComponentVariables from "./processComponentVariables.js";
 import getConfig from "./getConfig.js";
@@ -98,7 +99,8 @@ const generateCoreFile = async (
     cssContent = replaceVariablesByPattern(cssContent);
     cssContent += `${generateTypographyUtilities(cssContent)}\n`;
     cssContent += `${generateShadowUtilities(cssContent)}\n`;
-    cssContent += generateGenericUtilities();
+    cssContent += `${generateBorderUtilities()}\n`;
+    cssContent += `${generateGenericUtilities()}\n`;
     const version = getPackageVersion();
     const versionComment = `/* Moon UI v${version} */\n`;
     const cssWithVersionComment = versionComment + cssContent;

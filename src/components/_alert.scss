@@ -23,11 +23,11 @@ $modes: (
     box-shadow: inset 0 0 0 var(--alert-neutral-stroke) var(--alert-neutral-border),
     icon-color: var(--alert-neutral-icon)
   ),
-  "caution": (
-    color: var(--alert-caution-text),
-    background-color: var(--alert-caution-background),
-    box-shadow: inset 0 0 0 var(--alert-caution-stroke) var(--alert-caution-border),
-    icon-color: var(--alert-caution-icon)
+  "positive": (
+    color: var(--alert-positive-text),
+    background-color: var(--alert-positive-background),
+    box-shadow: inset 0 0 0 var(--alert-positive-stroke) var(--alert-positive-border),
+    icon-color: var(--alert-positive-icon)
   ),
   "info": (
     color: var(--alert-info-text),

@@ -1,15 +1,15 @@
 const generateGenericUtilities = () =>
-  `@utility icon-* {\n` +
-  `color: --value(--semantic-icon-*);\n` +
-  `}\n` +
-  `@utility text-* {\n` +
-  `color: --value(--semantic-text-*);\n` +
-  `}\n` +
-  `@utility bg-* {\n` +
-  `background-color: --value(--semantic-background-*);\n` +
-  `}\n` +
-  `@utility opacity-* {\n` +
-  `opacity: --value(--effect-opacity-*);\n` +
-  `}\n`;
+  `@utility icon-* {
+color: --value(--semantic-icon-*);
+}
+@utility text-* {
+color: --value(--semantic-text-*);
+}
+@utility bg-* {
+background-color: --value(--semantic-background-*);
+}
+@utility opacity-* {
+opacity: --value(--effect-opacity-*);
+}`;
 
 export default generateGenericUtilities;
