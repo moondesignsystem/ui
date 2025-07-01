@@ -1,4 +1,5 @@
 import fs from "fs";
+import getArgValue from "./utils/getArgValue.js";
 
 const generateConfigFile = () => {
   try {
@@ -11,12 +12,6 @@ const generateConfigFile = () => {
     let outputFolder = "dist";
     let coreFileId = "BZiHkvF7pXFHrFH8P0cG2T";
     let componentsFileId = "S3q1SkVngbwHuwpxHKCsgtJj";
-    const getArgValue = (flag, value) => {
-      const index = process.argv.findIndex((arg) => arg === flag);
-      return index !== -1 && process.argv[index + 1]
-        ? process.argv[index + 1]
-        : value;
-    };
     const customPrefix = process.argv.includes("--custom-prefix");
     projectName = getArgValue("--projectName", projectName);
     outputFolder = getArgValue("--outputFolder", outputFolder);
@@ -33,6 +28,7 @@ const generateConfigFile = () => {
     fs.writeFileSync(outputConfigFile, JSON.stringify(config, null, 2) + "\n");
   } catch (error) {
     console.error("❌ Error in generateConfigFile script:", error);
+    return;
   }
 };
 

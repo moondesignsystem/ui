@@ -10,13 +10,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const packageRoot = path.resolve(__dirname, "../..");
 
-/**
- * Compiles SCSS files from src/components into a single CSS file
- * @async
- * @param {Object} - Optional config override object
- * @returns {Promise<void>}
- * @throws {Error}
- */
 const generateComponentsFile = async () => {
   try {
     const config = getConfig();
@@ -42,6 +35,7 @@ const generateComponentsFile = async () => {
     fs.writeFileSync(outputComponentsFile, cssWithVersionComment);
   } catch (error) {
     console.error("❌ Error in generateComponentsFile script:", error);
+    return;
   }
 };
 
