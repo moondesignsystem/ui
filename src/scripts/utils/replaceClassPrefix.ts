@@ -1,4 +1,4 @@
-import getConfig from "../getConfig.js";
+import getConfig from "./getConfig.js";
 
 const replaceClassPrefix = (cssContent: string) => {
   try {

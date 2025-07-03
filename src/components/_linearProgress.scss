@@ -1,12 +1,22 @@
+@use "sass:map";
 @use "variables";
+@use "variants";
+
+@function generate-size($size) {
+  @return ("height": var(--scale-#{$size}-height), "radius": var(--scale-#{$size}-radius));
+}
+$sizes: ();
+@each $size in variants.$linear-progress-sizes {
+  $sizes: map.set($sizes, $size, generate-size($size));
+}
 
 .moon-linear-progress {
   appearance: none;
   display: block;
-  border-radius: var(--scale-2xs-radius);
+  border-radius: map.get($sizes, "2xs", "radius");
   background-color: var(--linear-progress-track);
   width: 100%;
-  height: var(--scale-2xs-height);
+  height: map.get($sizes, "2xs", "height");
   position: relative;
   overflow: hidden;
 
@@ -15,22 +25,29 @@
   }
 
   &::-webkit-progress-value {
-    border-radius: var(--scale-2xs-radius);
+    border-radius: map.get($sizes, "2xs", "radius");
     background-color: var(--linear-progress-progress);
   }
 
   &::-moz-progress-bar {
-    border-radius: var(--scale-2xs-radius);
+    border-radius: map.get($sizes, "2xs", "radius");
     background-color: var(--linear-progress-progress);
   }
 
-  &.moon-linear-progress-3xs {
-    border-radius: var(--scale-3xs-radius);
-    height: var(--scale-3xs-height);
+  @each $size, $prop in $sizes {
+    @if ≈ != "2xs" {
+      &.moon-linear-progress-#{$size} {
+        border-radius: map.get($prop, "radius");
+        height: map.get($prop, "height");
 
-    &::-webkit-progress-value,
-    &::-moz-progress-bar {
-      border-radius: var(--scale-3xs-radius);
+        &::-webkit-progress-value {
+          border-radius: map.get($prop, "radius");
+        }
+
+        &::-moz-progress-bar {
+          border-radius: map.get($prop, "radius");
+        }
+      }
     }
   }
 }
@@ -45,13 +62,5 @@
     color: var(--semantic-text-primary);
     font-weight: var(--font-weight-medium);
     text-align: center;
-  }
-
-  &:has(.moon-linear-progress-3xs) {
-    gap: var(--scale-3xs-gap);
-
-    :where(label) {
-      font: variables.$text-body-200;
-    }
   }
 }

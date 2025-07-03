@@ -1,13 +1,35 @@
+@use "sass:map";
 @use "variables";
+@use "variants";
+
+@function generate-size($size) {
+  @return (
+    "track-radius": var(--utility-segmented-control-radius-track-#{$size}),
+    "track-padding": var(--segmented-control-track-#{$size}-padding),
+    "track-gap": var(--segmented-control-track-#{$size}-gap),
+    "height": var(--scale-#{$size}-height),
+    "width": var(--scale-#{$size}-width),
+    "padding": 0 var(--scale-#{$size}-padding),
+    "gap": var(--scale-#{$size}-gap),
+    "radius": var(--utility-segmented-control-radius-segment-#{$size}),
+    "font": var(--scale-#{$size}-text-weight) var(--scale-#{$size}-text-size) / var(--scale-#{$size}-text-height)
+      var(--scale-#{$size}-text-font),
+    "icon-size": var(--scale-#{$size}-icon-size)
+  );
+}
+$sizes: ();
+@each $size in variants.$segmented-control-sizes {
+  $sizes: map.set($sizes, $size, generate-size($size));
+}
 
 .moon-segmented-control {
   display: flex;
   width: 100%;
   justify-content: stretch;
-  border-radius: var(--utility-segmented-control-radius-track-md);
+  border-radius: map.get($sizes, "md", "track-radius");
   background-color: var(--segmented-control-track-background);
-  padding: var(--segmented-control-track-md-padding);
-  gap: var(--segmented-control-track-md-gap);
+  padding: map.get($sizes, "md", "track-padding");
+  gap: map.get($sizes, "md", "track-gap");
   box-shadow: inset 0 0 0 var(--segmented-control-track-stroke) var(--segmented-control-track-border);
 
   :where(.moon-segment) {
@@ -15,8 +37,8 @@
     width: 100%;
     overflow: hidden;
     display: inline-flex;
-    height: var(--scale-md-height);
-    min-width: var(--scale-md-width);
+    height: map.get($sizes, "md", "height");
+    min-width: map.get($sizes, "md", "width");
     cursor: pointer;
     user-select: none;
     appearance: none;
@@ -26,10 +48,10 @@
     text-align: center;
     color: var(--segmented-control-segment-unselected-text);
     background-color: var(--segmented-control-segment-unselected-background);
-    padding: 0 var(--scale-md-padding);
-    gap: var(--scale-md-gap);
-    border-radius: var(--utility-segmented-control-radius-segment-md);
-    font: variables.$scale-md-text;
+    padding: map.get($sizes, "md", "padding");
+    gap: map.get($sizes, "md", "gap");
+    border-radius: map.get($sizes, "md", "radius");
+    font: map.get($sizes, "md", "font");
     box-shadow: inset 0 0 0 var(--segmented-control-segment-unselected-stroke)
       var(--segmented-control-segment-unselected-border);
     transition:
@@ -38,8 +60,8 @@
       box-shadow 150ms ease-in-out;
 
     :where(svg) {
-      width: var(--scale-md-icon-size);
-      height: var(--scale-md-icon-size);
+      width: map.get($sizes, "md", "icon-size");
+      height: map.get($sizes, "md", "icon-size");
       color: var(--segmented-control-segment-unselected-icon);
       flex-shrink: 0;
     }
@@ -73,23 +95,26 @@
       background-color: var(--semantic-background-hover);
     }
   }
+  @each $size, $prop in $sizes {
+    @if $size != "md" {
+      &.moon-segmented-control-#{$size} {
+        border-radius: map.get($prop, "track-radius");
+        padding: map.get($prop, "track-padding");
+        gap: map.get($prop, "track-gap");
 
-  &.moon-segmented-control-sm {
-    border-radius: var(--utility-segmented-control-radius-track-sm);
-    padding: var(--segmented-control-track-sm-padding);
-    gap: var(--segmented-control-track-sm-gap);
+        :where(.moon-segment) {
+          height: map.get($prop, "height");
+          min-width: map.get($prop, "width");
+          padding: map.get($prop, "padding");
+          gap: map.get($prop, "gap");
+          border-radius: map.get($prop, "radius");
+          font: map.get($prop, "font");
 
-    :where(.moon-segment) {
-      height: var(--scale-sm-height);
-      min-width: var(--scale-sm-width);
-      padding: 0 var(--scale-sm-padding);
-      gap: var(--scale-sm-gap);
-      border-radius: var(--utility-segmented-control-radius-segment-sm);
-      font: variables.$scale-sm-text;
-
-      :where(svg) {
-        width: var(--scale-sm-icon-size);
-        height: var(--scale-sm-icon-size);
+          :where(svg) {
+            width: map.get($prop, "icon-size");
+            height: map.get($prop, "icon-size");
+          }
+        }
       }
     }
   }

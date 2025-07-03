@@ -1,28 +1,14 @@
 @use "sass:map";
 @use "list";
+@use "variants";
 
-$sizes: (
-  sm: (
-    padding: var(--scale-sm-padding),
-    radius: var(--scale-sm-radius)
-  ),
-  md: (
-    padding: var(--scale-md-padding),
-    radius: var(--scale-md-radius)
-  ),
-  lg: (
-    padding: var(--scale-lg-padding),
-    radius: var(--scale-lg-radius)
-  ),
-  xl: (
-    padding: var(--scale-xl-padding),
-    radius: var(--scale-xl-radius)
-  ),
-  2xl: (
-    padding: var(--scale-2xl-padding),
-    radius: var(--scale-2xl-radius)
-  )
-);
+@function generate-size($size) {
+  @return ("padding": var(--scale-#{$size}-padding), "radius": var(--scale-#{$size}-radius));
+}
+$sizes: ();
+@each $size in variants.$menu-sizes {
+  $sizes: map.set($sizes, $size, generate-size($size));
+}
 
 .moon-menu {
   @extend .moon-list;

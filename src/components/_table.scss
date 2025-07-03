@@ -1,28 +1,19 @@
 @use "sass:map";
 @use "variables";
+@use "variants";
 
-$sizes: (
-  sm: (
-    padding: var(--scale-sm-padding),
-    radius: var(--scale-sm-radius),
-    font: variables.$scale-sm-text
-  ),
-  md: (
-    padding: var(--scale-md-padding),
-    radius: var(--scale-md-radius),
-    font: variables.$scale-md-text
-  ),
-  lg: (
-    padding: var(--scale-lg-padding),
-    radius: var(--scale-lg-radius),
-    font: variables.$scale-lg-text
-  ),
-  xl: (
-    padding: var(--scale-xl-padding),
-    radius: var(--scale-xl-radius),
-    font: variables.$scale-xl-text
-  )
-);
+@function generate-size($size) {
+  @return (
+    "padding": var(--scale-#{$size}-padding),
+    "radius": var(--scale-#{$size}-radius),
+    "font": var(--scale-#{$size}-text-weight) var(--scale-#{$size}-text-size) / var(--scale-#{$size}-text-height)
+      var(--scale-#{$size}-text-font)
+  );
+}
+$sizes: ();
+@each $size in variants.$table-sizes {
+  $sizes: map.set($sizes, $size, generate-size($size));
+}
 
 .moon-table {
   position: relative;

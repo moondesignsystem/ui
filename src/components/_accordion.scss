@@ -1,40 +1,22 @@
 @use "sass:map";
 @use "variables";
+@use "variants";
 
-$sizes: (
-  sm: (
-    gap: var(--scale-sm-gap),
-    radius: var(--scale-sm-radius),
-    padding: var(--scale-sm-padding),
-    padding-end: var(--spacing-space-20),
-    min-height: var(--scale-sm-height),
-    font: variables.$scale-sm-text
-  ),
-  md: (
-    gap: var(--scale-md-gap),
-    radius: var(--scale-md-radius),
-    padding: var(--scale-md-padding),
-    padding-end: var(--spacing-space-28),
-    min-height: var(--scale-md-height),
-    font: variables.$scale-md-text
-  ),
-  lg: (
-    gap: var(--scale-lg-gap),
-    radius: var(--scale-lg-radius),
-    padding: var(--scale-lg-padding),
-    padding-end: var(--spacing-space-28),
-    min-height: var(--scale-lg-height),
-    font: variables.$scale-lg-text
-  ),
-  xl: (
-    gap: var(--scale-xl-gap),
-    radius: var(--scale-xl-radius),
-    padding: var(--scale-xl-padding),
-    padding-end: var(--spacing-space-32),
-    min-height: var(--scale-xl-height),
-    font: variables.$scale-xl-text
-  )
-);
+@function generate-size($size) {
+  @return (
+    "gap": var(--scale-#{$size}-gap),
+    "radius": var(--scale-#{$size}-radius),
+    "padding": var(--scale-#{$size}-padding),
+    "padding-end": calc(var(--spacing-space-20) * 2),
+    "height": var(--scale-#{$size}-height),
+    "font": var(--scale-#{$size}-text-weight) var(--scale-#{$size}-text-size) / var(--scale-#{$size}-text-height)
+      var(--scale-#{$size}-text-font)
+  );
+}
+$sizes: ();
+@each $size in variants.$accordion-sizes {
+  $sizes: map.set($sizes, $size, generate-size($size));
+}
 
 .moon-accordion {
   align-items: stretch;
@@ -71,7 +53,7 @@ $sizes: (
       width: 100%;
       padding: map.get($sizes, "md", "padding") 0;
       padding-inline-end: map.get($sizes, "md", "padding-end");
-      min-height: map.get($sizes, "md", "min-height");
+      min-height: map.get($sizes, "md", "height");
       transition: background-color 0.2s ease-out;
     }
 
@@ -252,7 +234,7 @@ $sizes: (
           & > input:is([type="checkbox"], [type="radio"]) {
             padding: map.get($prop, "padding") 0;
             padding-inline-end: map.get($prop, "padding-end");
-            min-height: map.get($prop, "min-height");
+            min-height: map.get($prop, "height");
           }
 
           &:is([open], :focus:not(.moon-accordion-close)) > :where(.moon-accordion-content),
@@ -264,7 +246,7 @@ $sizes: (
           .moon-accordion-title {
             padding: map.get($prop, "padding") 0;
             padding-inline-end: map.get($prop, "padding-end");
-            min-height: map.get($prop, "min-height");
+            min-height: map.get($prop, "height");
             font: map.get($prop, "font");
           }
 

@@ -1,43 +1,81 @@
+@use "sass:map";
 @use "variables";
+@use "variants";
+
+@function generate-variant($variant) {
+  @return (
+    "shadow": inset 0 0 0 var(--tag-#{$variant}-stroke) var(--tag-#{$variant}-border),
+    "background": var(--tag-#{$variant}-background),
+    "color": var(--tag-#{$variant}-text),
+    "icon-color": var(--tag-#{$variant}-icon)
+  );
+}
+$variants: ();
+@each $variant in variants.$tag-variants {
+  $variants: map.set($variants, $variant, generate-variant($variant));
+}
+@function generate-size($size) {
+  @return (
+    "height": var(--scale-#{$size}-height),
+    "padding": 0 var(--scale-#{$size}-padding),
+    "radius": var(--utility-tag-radius-#{$size}),
+    "gap": var(--scale-#{$size}-gap),
+    "font": var(--scale-#{$size}-text-weight) var(--scale-#{$size}-text-size) / var(--scale-#{$size}-text-height)
+      var(--scale-#{$size}-text-font),
+    "icon-size": var(--scale-#{$size}-icon-size)
+  );
+}
+$sizes: ();
+@each $size in variants.$tag-sizes {
+  $sizes: map.set($sizes, $size, generate-size($size));
+}
 
 .moon-tag {
   display: inline-flex;
   align-items: center;
-  height: var(--scale-xs-height);
-  padding: 0 var(--scale-xs-padding);
-  border-radius: var(--utility-tag-radius-xs);
-  gap: var(--scale-xs-gap);
-  font: variables.$scale-xs-text;
-  box-shadow: inset 0 0 0 var(--tag-outline-stroke) var(--tag-outline-border);
-  background-color: var(--tag-outline-background);
-  color: var(--tag-outline-text);
+  height: map.get($sizes, "xs", "height");
+  padding: map.get($sizes, "xs", "padding");
+  border-radius: map.get($sizes, "xs", "radius");
+  gap: map.get($sizes, "xs", "gap");
+  font: map.get($sizes, "xs", "font");
+  box-shadow: map.get($variants, "outline", "shadow");
+  background-color: map.get($variants, "outline", "background");
+  color: map.get($variants, "outline", "color");
 
   :where(svg) {
-    width: var(--scale-xs-icon-size);
-    height: var(--scale-xs-icon-size);
-    color: var(--tag-outline-icon);
+    width: map.get($sizes, "xs", "icon-size");
+    height: map.get($sizes, "xs", "icon-size");
+    color: map.get($variants, "outline", "icon-color");
   }
 
-  &.moon-tag-2xs {
-    height: var(--scale-2xs-height);
-    padding: 0 var(--scale-2xs-padding);
-    border-radius: var(--utility-tag-radius-2xs);
-    gap: var(--scale-2xs-gap);
-    font: variables.$scale-2xs-text;
+  @each $size, $prop in $sizes {
+    @if $size != "xs" {
+      &.moon-tag-#{$size} {
+        height: map.get($prop, "height");
+        padding: map.get($prop, "padding");
+        border-radius: map.get($prop, "radius");
+        gap: map.get($prop, "gap");
+        font: map.get($prop, "font");
 
-    :where(svg) {
-      width: var(--scale-2xs-icon-size);
-      height: var(--scale-2xs-icon-size);
+        :where(svg) {
+          width: map.get($prop, "icon-size");
+          height: map.get($prop, "icon-size");
+        }
+      }
     }
   }
 
-  &.moon-tag-fill {
-    box-shadow: inset 0 0 0 var(--tag-fill-stroke) var(--tag-fill-border);
-    background-color: var(--tag-fill-background);
-    color: var(--tag-fill-text);
+  @each $variant, $prop in $variants {
+    @if $variant != "outline" {
+      &.moon-tag-#{$variant} {
+        box-shadow: map.get($prop, "shadow");
+        background-color: map.get($prop, "background");
+        color: map.get($prop, "color");
 
-    :where(svg) {
-      color: var(--tag-fill-icon);
+        :where(svg) {
+          color: map.get($prop, "icon-color");
+        }
+      }
     }
   }
 }

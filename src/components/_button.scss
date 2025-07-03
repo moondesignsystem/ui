@@ -1,74 +1,35 @@
 @use "sass:map";
+@use "sass:string";
 @use "variables";
+@use "variants";
 
-$sizes: (
-  xs: (
-    height: var(--scale-xs-height),
-    padding: var(--scale-xs-padding),
-    gap: var(--scale-xs-gap),
-    radius: var(--utility-button-radius-xs),
-    font: variables.$scale-xs-text,
-    icon-size: var(--scale-xs-icon-size)
-  ),
-  sm: (
-    height: var(--scale-sm-height),
-    padding: var(--scale-sm-padding),
-    gap: var(--scale-sm-gap),
-    radius: var(--utility-button-radius-sm),
-    font: variables.$scale-sm-text,
-    icon-size: var(--scale-sm-icon-size)
-  ),
-  md: (
-    height: var(--scale-md-height),
-    padding: var(--scale-md-padding),
-    gap: var(--scale-md-gap),
-    radius: var(--utility-button-radius-md),
-    font: variables.$scale-md-text,
-    icon-size: var(--scale-md-icon-size)
-  ),
-  lg: (
-    height: var(--scale-lg-height),
-    padding: var(--scale-lg-padding),
-    gap: var(--scale-lg-gap),
-    radius: var(--utility-button-radius-lg),
-    font: variables.$scale-lg-text,
-    icon-size: var(--scale-lg-icon-size)
-  ),
-  xl: (
-    height: var(--scale-xl-height),
-    padding: var(--scale-xl-padding),
-    gap: var(--scale-xl-gap),
-    radius: var(--utility-button-radius-xl),
-    font: variables.$scale-xl-text,
-    icon-size: var(--scale-xl-icon-size)
-  )
-);
-$variants: (
-  fill: (
-    color: var(--button-fill-text),
-    background-color: var(--button-fill-background),
-    icon-color: var(--button-fill-icon),
-    box-shadow: inset 0 0 0 var(--button-fill-stroke) var(--button-fill-border)
-  ),
-  soft: (
-    color: var(--button-soft-text),
-    background-color: var(--button-soft-background),
-    icon-color: var(--button-soft-icon),
-    box-shadow: inset 0 0 0 var(--button-soft-stroke) var(--button-soft-border)
-  ),
-  outline: (
-    color: var(--button-outline-text),
-    background-color: var(--button-outline-background),
-    icon-color: var(--button-outline-icon),
-    box-shadow: inset 0 0 0 var(--button-outline-stroke) var(--button-outline-border)
-  ),
-  ghost: (
-    color: var(--button-ghost-text),
-    background-color: var(--button-ghost-background),
-    icon-color: var(--button-ghost-icon),
-    box-shadow: inset 0 0 0 var(--button-ghost-stroke) var(--button-ghost-border)
-  )
-);
+@function generate-variant($variant) {
+  @return (
+    "color": var(--button-#{$variant}-text),
+    "background": var(--button-#{$variant}-background),
+    "icon": var(--button-#{$variant}-icon),
+    "shadow": inset 0 0 0 var(--button-#{$variant}-stroke) var(--button-#{$variant}-border)
+  );
+}
+$variants: ();
+@each $variant in variants.$button-variants {
+  $variants: map.set($variants, $variant, generate-variant($variant));
+}
+@function generate-size($size) {
+  @return (
+    "height": var(--scale-#{$size}-height),
+    "padding": var(--scale-#{$size}-padding),
+    "gap": var(--scale-#{$size}-gap),
+    "radius": var(--utility-button-radius-#{$size}),
+    "font": var(--scale-#{$size}-text-weight) var(--scale-#{$size}-text-size) / var(--scale-#{$size}-text-height)
+      var(--scale-#{$size}-text-font),
+    "icon-size": var(--scale-#{$size}-icon-size)
+  );
+}
+$sizes: ();
+@each $size in variants.$button-sizes {
+  $sizes: map.set($sizes, $size, generate-size($size));
+}
 
 .moon-button {
   position: relative;
@@ -85,13 +46,13 @@ $variants: (
   min-width: map.get($sizes, "md", "height");
   padding: 0 map.get($sizes, "md", "padding");
   gap: map.get($sizes, "md", "gap");
-  background-color: map.get($variants, "fill", "background-color");
+  background-color: map.get($variants, "fill", "background");
   border-radius: map.get($sizes, "md", "radius");
   color: map.get($variants, "fill", "color");
   font: map.get($sizes, "md", "font");
 
   :where(svg) {
-    color: map.get($variants, "fill", "icon-color");
+    color: map.get($variants, "fill", "icon");
     width: map.get($sizes, "md", "icon-size");
     height: map.get($sizes, "md", "icon-size");
   }
@@ -142,11 +103,11 @@ $variants: (
     @if $variant != "fill" {
       &.moon-button-#{$variant} {
         color: map.get($prop, "color");
-        background-color: map.get($prop, "background-color");
-        box-shadow: map.get($prop, "box-shadow");
+        background-color: map.get($prop, "background");
+        box-shadow: map.get($prop, "shadow");
 
         :where(svg) {
-          color: map.get($prop, "icon-color");
+          color: map.get($prop, "icon");
         }
       }
     }

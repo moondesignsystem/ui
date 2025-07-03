@@ -1,20 +1,14 @@
 @use "sass:map";
 @use "variables";
+@use "variants";
 
-$sizes: (
-  2xs: (
-    height: var(--scale-2xs-height),
-    width: calc(var(--scale-2xs-width) * 2)
-  ),
-  xs: (
-    height: var(--scale-xs-height),
-    width: calc(var(--scale-xs-width) * 2)
-  ),
-  sm: (
-    height: var(--scale-sm-height),
-    width: calc(var(--scale-sm-width) * 2)
-  )
-);
+@function generate-size($size) {
+  @return ("height": var(--scale-#{$size}-height), "width": calc(var(--scale-#{$size}-width) * 2));
+}
+$sizes: ();
+@each $size in variants.$switch-sizes {
+  $sizes: map.set($sizes, $size, generate-size($size));
+}
 
 .moon-switch {
   height: map.get($sizes, "sm", "height");

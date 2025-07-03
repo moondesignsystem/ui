@@ -1,28 +1,13 @@
 @use "sass:map";
+@use "variants";
 
-$sizes: (
-  2xs: (
-    size: var(--scale-2xs-height)
-  ),
-  xs: (
-    size: var(--scale-xs-height)
-  ),
-  sm: (
-    size: var(--scale-sm-height)
-  ),
-  md: (
-    size: var(--scale-md-height)
-  ),
-  lg: (
-    size: var(--scale-lg-height)
-  ),
-  xl: (
-    size: var(--scale-xl-height)
-  ),
-  2xl: (
-    size: var(--scale-2xl-height)
-  )
-);
+@function generate-size($size) {
+  @return ("size": var(--scale-#{$size}-height));
+}
+$sizes: ();
+@each $size in variants.$circular-progress-sizes {
+  $sizes: map.set($sizes, $size, generate-size($size));
+}
 
 .moon-circular-progress {
   --value: attr(data-value type(<number>), 0);

@@ -2,7 +2,7 @@
 
 import generateConfigFile from "./scripts/generateConfigFile.js";
 import generateCoreFile from "./scripts/generateCoreFile.js";
-import getConfig from "./scripts/getConfig.js";
+import getConfig from "./scripts/utils/getConfig.js";
 import generateComponentsFile from "./scripts/generateComponentsFile.js";
 
 const install = async () => {

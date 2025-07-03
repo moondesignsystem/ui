@@ -1,5 +1,6 @@
 @use "sass:map";
 @use "variables";
+@use "variants";
 @use "button";
 @use "iconButton";
 
@@ -10,32 +11,18 @@
   gap: var(--scale-lg-gap);
 }
 
-$modes: (
-  "negative": (
-    color: var(--alert-negative-text),
-    background-color: var(--alert-negative-background),
-    box-shadow: inset 0 0 0 var(--alert-negative-stroke) var(--alert-negative-border),
-    icon-color: var(--alert-negative-icon)
-  ),
-  "neutral": (
-    color: var(--alert-neutral-text),
-    background-color: var(--alert-neutral-background),
-    box-shadow: inset 0 0 0 var(--alert-neutral-stroke) var(--alert-neutral-border),
-    icon-color: var(--alert-neutral-icon)
-  ),
-  "positive": (
-    color: var(--alert-positive-text),
-    background-color: var(--alert-positive-background),
-    box-shadow: inset 0 0 0 var(--alert-positive-stroke) var(--alert-positive-border),
-    icon-color: var(--alert-positive-icon)
-  ),
-  "info": (
-    color: var(--alert-info-text),
-    background-color: var(--alert-info-background),
-    box-shadow: inset 0 0 0 var(--alert-info-stroke) var(--alert-info-border),
-    icon-color: var(--alert-info-icon)
-  )
-);
+@function generate-variant($variant) {
+  @return (
+    "color": var(--alert-#{$variant}-text),
+    "background": var(--alert-#{$variant}-background),
+    "shadow": inset 0 0 0 var(--alert-#{$variant}-stroke) var(--alert-#{$variant}-border),
+    "icon": var(--alert-#{$variant}-icon)
+  );
+}
+$variants: ();
+@each $variant in variants.$alert-variants {
+  $variants: map.set($variants, $variant, generate-variant($variant));
+}
 
 .moon-alert {
   @include common;
@@ -45,9 +32,9 @@ $modes: (
   padding: var(--scale-lg-padding);
   border-radius: var(--scale-lg-radius);
   font: variables.$text-body-300;
-  color: map.get($modes, "neutral", "color");
-  background-color: map.get($modes, "neutral", "background-color");
-  box-shadow: map.get($modes, "neutral", "box-shadow");
+  color: map.get($variants, "neutral", "color");
+  background-color: map.get($variants, "neutral", "background");
+  box-shadow: map.get($variants, "neutral", "shadow");
 
   &:has(.moon-alert-title-wrapper) {
     flex-direction: column;
@@ -60,7 +47,7 @@ $modes: (
   }
 
   :where(svg) {
-    color: map.get($modes, "neutral", "icon-color");
+    color: map.get($variants, "neutral", "icon");
     width: var(--scale-lg-icon-size);
     height: var(--scale-lg-icon-size);
   }
@@ -80,10 +67,10 @@ $modes: (
     @extend .moon-button-sm;
     @extend .moon-button-ghost;
 
-    color: map.get($modes, "neutral", "color");
+    color: map.get($variants, "neutral", "color");
 
     :where(svg) {
-      color: map.get($modes, "neutral", "icon-color");
+      color: map.get($variants, "neutral", "icon");
     }
   }
 
@@ -93,32 +80,32 @@ $modes: (
     @extend .moon-icon-button-ghost;
 
     :where(svg) {
-      color: map.get($modes, "neutral", "icon-color");
+      color: map.get($variants, "neutral", "icon");
     }
   }
 
-  @each $mode, $prop in $modes {
-    @if $mode != "neutral" {
-      &.moon-alert-#{$mode} {
+  @each $variant, $prop in $variants {
+    @if $variant != "neutral" {
+      &.moon-alert-#{$variant} {
         color: map.get($prop, "color");
-        background-color: map.get($prop, "background-color");
-        box-shadow: map.get($prop, "box-shadow");
+        background-color: map.get($prop, "background");
+        box-shadow: map.get($prop, "shadow");
 
         :where(svg) {
-          color: map.get($prop, "icon-color");
+          color: map.get($prop, "icon");
         }
 
         :where(.moon-alert-action) {
           color: map.get($prop, "color");
 
           :where(svg) {
-            color: map.get($prop, "icon-color");
+            color: map.get($prop, "icon");
           }
         }
 
         :where(.moon-alert-dismiss) {
           :where(svg) {
-            color: map.get($prop, "icon-color");
+            color: map.get($prop, "icon");
           }
         }
       }

@@ -1,36 +1,21 @@
 @use "sass:map";
 @use "variables";
+@use "variants";
 
-$sizes: (
-  sm: (
-    gap: var(--scale-sm-gap),
-    width: var(--scale-sm-width),
-    height: var(--scale-sm-height),
-    radius: var(--utility-authenticator-radius-sm),
-    font: variables.$scale-sm-text
-  ),
-  md: (
-    gap: var(--scale-md-gap),
-    width: var(--scale-md-width),
-    height: var(--scale-md-height),
-    radius: var(--utility-authenticator-radius-md),
-    font: variables.$scale-md-text
-  ),
-  lg: (
-    gap: var(--scale-lg-gap),
-    width: var(--scale-lg-width),
-    height: var(--scale-lg-height),
-    radius: var(--utility-authenticator-radius-lg),
-    font: variables.$scale-lg-text
-  ),
-  xl: (
-    gap: var(--scale-xl-gap),
-    width: var(--scale-xl-width),
-    height: var(--scale-xl-height),
-    radius: var(--utility-authenticator-radius-xl),
-    font: variables.$scale-xl-text
-  )
-);
+@function generate-size($size) {
+  @return (
+    "gap": var(--scale-#{$size}-gap),
+    "width": var(--scale-#{$size}-width),
+    "height": var(--scale-#{$size}-height),
+    "radius": var(--utility-authenticator-radius-#{$size}),
+    "font": var(--scale-#{$size}-text-weight) var(--scale-#{$size}-text-size) / var(--scale-#{$size}-text-height)
+      var(--scale-#{$size}-text-font)
+  );
+}
+$sizes: ();
+@each $size in variants.$authenticator-sizes {
+  $sizes: map.set($sizes, $size, generate-size($size));
+}
 
 .moon-authenticator {
   display: inline-flex;

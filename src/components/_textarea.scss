@@ -1,28 +1,19 @@
 @use "sass:map";
 @use "variables";
+@use "variants";
 
-$sizes: (
-  sm: (
-    padding: var(--scale-sm-padding),
-    radius: var(--utility-textarea-radius-sm),
-    font: variables.$scale-sm-text
-  ),
-  md: (
-    padding: var(--scale-md-padding),
-    radius: var(--utility-textarea-radius-md),
-    font: variables.$scale-md-text
-  ),
-  lg: (
-    padding: var(--scale-lg-padding),
-    radius: var(--utility-textarea-radius-lg),
-    font: variables.$scale-lg-text
-  ),
-  xl: (
-    padding: var(--scale-xl-padding),
-    radius: var(--utility-textarea-radius-xl),
-    font: variables.$scale-xl-text
-  )
-);
+@function generate-size($size) {
+  @return (
+    "padding": var(--scale-#{$size}-padding),
+    "radius": var(--utility-textarea-radius-#{$size}),
+    "font": var(--scale-#{$size}-text-weight) var(--scale-#{$size}-text-size) / var(--scale-#{$size}-text-height)
+      var(--scale-#{$size}-text-font)
+  );
+}
+$sizes: ();
+@each $size in variants.$textarea-sizes {
+  $sizes: map.set($sizes, $size, generate-size($size));
+}
 
 .moon-textarea {
   display: block;
