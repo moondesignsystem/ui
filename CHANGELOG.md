@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 1.7.0
+
+### Minor Changes
+
+- feat: add dynamic variants generation
+
 ## 1.6.0
 
 ### Minor Changes

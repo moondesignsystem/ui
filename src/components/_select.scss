@@ -1,40 +1,22 @@
 @use "sass:map";
 @use "variables";
+@use "variants";
 
-$sizes: (
-  sm: (
-    height: var(--scale-sm-height),
-    padding: var(--scale-sm-padding),
-    gap: var(--scale-sm-gap),
-    radius: var(--utility-select-radius-sm),
-    font: variables.$scale-sm-text,
-    icon-size: var(--scale-sm-icon-size)
-  ),
-  md: (
-    height: var(--scale-md-height),
-    padding: var(--scale-md-padding),
-    gap: var(--scale-md-gap),
-    radius: var(--utility-select-radius-md),
-    font: variables.$scale-md-text,
-    icon-size: var(--scale-md-icon-size)
-  ),
-  lg: (
-    height: var(--scale-lg-height),
-    padding: var(--scale-lg-padding),
-    gap: var(--scale-lg-gap),
-    radius: var(--utility-select-radius-lg),
-    font: variables.$scale-lg-text,
-    icon-size: var(--scale-lg-icon-size)
-  ),
-  xl: (
-    height: var(--scale-xl-height),
-    padding: var(--scale-xl-padding),
-    gap: var(--scale-xl-gap),
-    radius: var(--utility-select-radius-xl),
-    font: variables.$scale-xl-text,
-    icon-size: var(--scale-xl-icon-size)
-  )
-);
+@function generate-size($size) {
+  @return (
+    "height": var(--scale-#{$size}-height),
+    "padding": var(--scale-#{$size}-padding),
+    "gap": var(--scale-#{$size}-gap),
+    "radius": var(--utility-select-radius-#{$size}),
+    "font": var(--scale-#{$size}-text-weight) var(--scale-#{$size}-text-size) / var(--scale-#{$size}-text-height)
+      var(--scale-#{$size}-text-font),
+    "icon-size": var(--scale-#{$size}-icon-size)
+  );
+}
+$sizes: ();
+@each $size in variants.$select-sizes {
+  $sizes: map.set($sizes, $size, generate-size($size));
+}
 
 .moon-select {
   display: flex;
@@ -47,7 +29,7 @@ $sizes: (
     box-shadow 150ms ease-in-out,
     opacity 150ms ease-in-out,
     background-color 150ms ease-in-out;
-  height: map.get($sizes, "md", "height");
+  min-height: map.get($sizes, "md", "height");
   padding: 0 map.get($sizes, "md", "padding");
   gap: map.get($sizes, "md", "gap");
   border-radius: map.get($sizes, "md", "radius");
@@ -73,7 +55,7 @@ $sizes: (
   @each $size, $prop in $sizes {
     @if $size != "md" {
       &.moon-select-#{$size} {
-        height: map.get($prop, "height");
+        min-height: map.get($prop, "height");
         padding: 0 map.get($prop, "padding");
         column-gap: map.get($prop, "gap");
         border-radius: map.get($prop, "radius");

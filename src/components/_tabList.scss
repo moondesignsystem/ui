@@ -1,4 +1,23 @@
+@use "sass:map";
+@use "variants";
 @use "variables";
+
+@function generate-size($size) {
+  @return (
+    "height": var(--scale-#{$size}-height),
+    "width": var(--scale-#{$size}-width),
+    "padding": 0 var(--scale-#{$size}-padding),
+    "gap": var(--scale-#{$size}-gap),
+    "radius": var(--scale-#{$size}-radius),
+    "font": var(--scale-#{$size}-text-weight) var(--scale-#{$size}-text-size) / var(--scale-#{$size}-text-height)
+      var(--scale-#{$size}-text-font),
+    "icon-size": var(--scale-#{$size}-icon-size)
+  );
+}
+$sizes: ();
+@each $size in variants.$tab-list-sizes {
+  $sizes: map.set($sizes, $size, generate-size($size));
+}
 
 .moon-tab-list {
   display: flex;
@@ -7,8 +26,8 @@
     position: relative;
     overflow: hidden;
     display: inline-flex;
-    height: var(--scale-md-height);
-    min-width: var(--scale-md-width);
+    height: map.get($sizes, "md", "height");
+    min-width: map.get($sizes, "md", "width");
     cursor: pointer;
     user-select: none;
     appearance: none;
@@ -18,17 +37,17 @@
     text-align: center;
     color: var(--tab-list-tab-unselected-text);
     background-color: var(--tab-list-tab-unselected-background);
-    padding: 0 var(--scale-md-padding);
-    gap: var(--scale-md-gap);
-    border-top-left-radius: var(--scale-md-radius);
-    border-top-right-radius: var(--scale-md-radius);
+    padding: map.get($sizes, "md", "padding");
+    gap: map.get($sizes, "md", "gap");
+    border-top-left-radius: map.get($sizes, "md", "radius");
+    border-top-right-radius: map.get($sizes, "md", "radius");
     border-bottom: var(--tab-list-tab-unselected-stroke) solid var(--tab-list-tab-unselected-border);
-    font: variables.$text-body-300;
+    font: map.get($sizes, "md", "font");
     font-weight: var(--font-weight-medium);
 
     :where(svg) {
-      width: var(--scale-md-icon-size);
-      height: var(--scale-md-icon-size);
+      width: map.get($sizes, "md", "icon-size");
+      height: map.get($sizes, "md", "icon-size");
       color: var(--tab-list-tab-unselected-icon);
     }
 
@@ -57,18 +76,23 @@
     }
   }
 
-  &.moon-tab-list-sm {
-    .moon-tab {
-      height: var(--scale-sm-height);
-      min-width: var(--scale-sm-height);
-      padding: 0 var(--scale-sm-padding);
-      gap: var(--scale-sm-gap);
-      border-top-left-radius: var(--scale-sm-radius);
-      border-top-right-radius: var(--scale-sm-radius);
+  @each $size, $prop in $sizes {
+    @if $size != "md" {
+      &.moon-tab-list-#{$size} {
+        .moon-tab {
+          height: map.get($prop, "height");
+          min-width: map.get($prop, "width");
+          padding: map.get($prop, "padding");
+          gap: map.get($prop, "gap");
+          border-top-left-radius: map.get($prop, "radius");
+          border-top-right-radius: map.get($prop, "radius");
+          font: map.get($prop, "font");
 
-      :where(svg) {
-        width: var(--scale-sm-icon-size);
-        height: var(--scale-sm-icon-size);
+          :where(svg) {
+            width: map.get($prop, "icon-size");
+            height: map.get($prop, "icon-size");
+          }
+        }
       }
     }
   }

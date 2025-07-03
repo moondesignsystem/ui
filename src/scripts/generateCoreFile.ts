@@ -8,7 +8,7 @@ import generateGenericUtilities from "./utils/generateGenericUtilities.js";
 import generateBorderUtilities from "./utils/generateBorderUtilities.js";
 import processCoreVariables from "./processCoreVariables.js";
 import processComponentVariables from "./processComponentVariables.js";
-import getConfig from "./getConfig.js";
+import getConfig from "./utils/getConfig.js";
 
 // STEP 1. Generate base CSS file
 const generateCoreFile = async (

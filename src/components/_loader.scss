@@ -1,27 +1,14 @@
 @use "sass:map";
+@use "variants";
 
-$sizes: (
-  2xs: (
-    width: var(--scale-2xs-width),
-    height: var(--scale-2xs-height)
-  ),
-  xs: (
-    width: var(--scale-xs-width),
-    height: var(--scale-xs-height)
-  ),
-  sm: (
-    width: var(--scale-sm-width),
-    height: var(--scale-sm-height)
-  ),
-  md: (
-    width: var(--scale-md-width),
-    height: var(--scale-md-height)
-  ),
-  lg: (
-    width: var(--scale-lg-width),
-    height: var(--scale-lg-height)
-  )
-);
+@function generate-size($size) {
+  @return ("width": var(--scale-#{$size}-width), "height": var(--scale-#{$size}-height));
+}
+$sizes: ();
+@each $size in variants.$loader-sizes {
+  $sizes: map.set($sizes, $size, generate-size($size));
+}
+
 $border: var(--dimension-border-2);
 
 .moon-loader {

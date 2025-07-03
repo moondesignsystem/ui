@@ -1,57 +1,34 @@
 @use "sass:map";
 @use "variables";
+@use "variants";
 @use "alert";
 @use "button";
 
-$modes: (
-  "positive": (
-    color: var(--snackbar-positive-text),
-    background-color: var(--snackbar-positive-background),
-    box-shadow: inset 0 0 0 var(--snackbar-positive-stroke) var(--snackbar-positive-border),
-    icon-color: var(--snackbar-positive-icon),
-    max-width: var(--snackbar-positive-max-width)
-  ),
-  "negative": (
-    color: var(--snackbar-negative-text),
-    background-color: var(--snackbar-negative-background),
-    box-shadow: inset 0 0 0 var(--snackbar-negative-stroke) var(--snackbar-negative-border),
-    icon-color: var(--snackbar-negative-icon),
-    max-width: var(--snackbar-negative-max-width)
-  ),
-  "neutral": (
-    color: var(--snackbar-neutral-text),
-    background-color: var(--snackbar-neutral-background),
-    box-shadow: inset 0 0 0 var(--snackbar-neutral-stroke) var(--snackbar-neutral-border),
-    icon-color: var(--snackbar-neutral-icon),
-    max-width: var(--snackbar-neutral-max-width)
-  ),
-  "caution": (
-    color: var(--snackbar-caution-text),
-    background-color: var(--snackbar-caution-background),
-    box-shadow: inset 0 0 0 var(--snackbar-caution-stroke) var(--snackbar-caution-border),
-    icon-color: var(--snackbar-caution-icon),
-    max-width: var(--snackbar-caution-max-width)
-  ),
-  "info": (
-    color: var(--snackbar-info-text),
-    background-color: var(--snackbar-info-background),
-    box-shadow: inset 0 0 0 var(--snackbar-info-stroke) var(--snackbar-info-border),
-    icon-color: var(--snackbar-info-icon),
-    max-width: var(--snackbar-info-max-width)
-  )
-);
+@function generate-variant($variant) {
+  @return (
+    "color": var(--snackbar-#{$variant}-text),
+    "background": var(--snackbar-#{$variant}-background),
+    "shadow": inset 0 0 0 var(--snackbar-#{$variant}-stroke) var(--snackbar-#{$variant}-border),
+    "icon": var(--snackbar-#{$variant}-icon),
+    "width": var(--snackbar-#{$variant}-max-width)
+  );
+}
+$variants: ();
+@each $variant in variants.$snackbar-variants {
+  $variants: map.set($variants, $variant, generate-variant($variant));
+}
 
 .moon-snackbar {
   @extend .moon-alert;
 
-  max-width: map.get($modes, "neutral", "max-width");
+  max-width: map.get($variants, "neutral", "width");
   display: grid;
   grid-template-columns: auto minmax(auto, 1fr);
   grid-auto-flow: column;
   justify-content: start;
   justify-items: start;
   font-weight: var(--font-weight-medium);
-  box-shadow: variables.$shadow-500, map.get($modes, "neutral", "box-shadow");
+  box-shadow: variables.$shadow-500, map.get($variants, "neutral", "shadow");
 
   :where(.moon-snackbar-action) {
     @extend .moon-button;
@@ -59,30 +36,30 @@ $modes: (
     @extend .moon-button-ghost;
 
     justify-self: end;
-    color: map.get($modes, "neutral", "color");
+    color: map.get($variants, "neutral", "color");
 
     :where(svg) {
-      color: map.get($modes, "neutral", "icon-color");
+      color: map.get($variants, "neutral", "icon");
     }
   }
 
-  @each $mode, $prop in $modes {
-    @if $mode != "neutral" {
-      &.moon-snackbar-#{$mode} {
-        max-width: map.get($prop, "max-width");
+  @each $variant, $prop in $variants {
+    @if $variant != "neutral" {
+      &.moon-snackbar-#{$variant} {
+        max-width: map.get($prop, "width");
         color: map.get($prop, "color");
-        background-color: map.get($prop, "background-color");
-        box-shadow: variables.$shadow-500, map.get($prop, "box-shadow");
+        background-color: map.get($prop, "background");
+        box-shadow: variables.$shadow-500, map.get($prop, "shadow");
 
         :where(svg) {
-          color: map.get($prop, "icon-color");
+          color: map.get($prop, "icon");
         }
 
         :where(.moon-snackbar-action) {
           color: map.get($prop, "color");
 
           :where(svg) {
-            color: map.get($prop, "icon-color");
+            color: map.get($prop, "icon");
           }
         }
       }

@@ -1,59 +1,29 @@
 @use "sass:map";
+@use "variants";
 
-$sizes: (
-  xs: (
-    height: var(--scale-xs-height),
-    width: var(--scale-xs-width),
-    radius: var(--utility-icon-button-radius-xs),
-    icon-size: var(--scale-xs-icon-size)
-  ),
-  sm: (
-    height: var(--scale-sm-height),
-    width: var(--scale-sm-width),
-    radius: var(--utility-icon-button-radius-sm),
-    icon-size: var(--scale-sm-icon-size)
-  ),
-  md: (
-    height: var(--scale-md-height),
-    width: var(--scale-md-width),
-    radius: var(--utility-icon-button-radius-md),
-    icon-size: var(--scale-md-icon-size)
-  ),
-  lg: (
-    height: var(--scale-lg-height),
-    width: var(--scale-lg-width),
-    radius: var(--utility-icon-button-radius-lg),
-    icon-size: var(--scale-lg-icon-size)
-  ),
-  xl: (
-    height: var(--scale-xl-height),
-    width: var(--scale-xl-width),
-    radius: var(--utility-icon-button-radius-xl),
-    icon-size: var(--scale-xl-icon-size)
-  )
-);
-$variants: (
-  fill: (
-    background-color: var(--icon-button-fill-background),
-    icon-color: var(--icon-button-fill-icon),
-    box-shadow: inset 0 0 0 var(--icon-button-fill-stroke) var(--icon-button-fill-border)
-  ),
-  soft: (
-    background-color: var(--icon-button-soft-background),
-    icon-color: var(--icon-button-soft-icon),
-    box-shadow: inset 0 0 0 var(--icon-button-soft-stroke) var(--icon-button-soft-border)
-  ),
-  outline: (
-    background-color: var(--icon-button-outline-background),
-    icon-color: var(--icon-button-outline-icon),
-    box-shadow: inset 0 0 0 var(--icon-button-outline-stroke) var(--icon-button-outline-border)
-  ),
-  ghost: (
-    background-color: var(--icon-button-ghost-background),
-    icon-color: var(--icon-button-ghost-icon),
-    box-shadow: inset 0 0 0 var(--icon-button-ghost-stroke) var(--icon-button-ghost-border)
-  )
-);
+@function generate-variant($variant) {
+  @return (
+    "background": var(--icon-button-#{$variant}-background),
+    "icon": var(--icon-button-#{$variant}-icon),
+    "shadow": inset 0 0 0 var(--icon-button-#{$variant}-stroke) var(--icon-button-#{$variant}-border)
+  );
+}
+$variants: ();
+@each $variant in variants.$icon-button-variants {
+  $variants: map.set($variants, $variant, generate-variant($variant));
+}
+@function generate-size($size) {
+  @return (
+    "height": var(--scale-#{$size}-height),
+    "width": var(--scale-#{$size}-width),
+    "radius": var(--utility-icon-button-radius-#{$size}),
+    "icon-size": var(--scale-#{$size}-icon-size)
+  );
+}
+$sizes: ();
+@each $size in variants.$icon-button-sizes {
+  $sizes: map.set($sizes, $size, generate-size($size));
+}
 
 .moon-icon-button {
   position: relative;
@@ -67,11 +37,11 @@ $variants: (
     transform 150ms ease-in-out;
   height: map.get($sizes, "md", "height");
   width: map.get($sizes, "md", "width");
-  background-color: map.get($variants, "fill", "background-color");
+  background-color: map.get($variants, "fill", "background");
   border-radius: map.get($sizes, "md", "radius");
 
   :where(svg) {
-    color: map.get($variants, "fill", "icon-color");
+    color: map.get($variants, "fill", "icon");
     width: map.get($sizes, "md", "icon-size");
     height: map.get($sizes, "md", "icon-size");
   }
@@ -118,11 +88,11 @@ $variants: (
   @each $variant, $prop in $variants {
     @if $variant != "fill" {
       &.moon-icon-button-#{$variant} {
-        background-color: map.get($prop, "background-color");
-        box-shadow: map.get($prop, "box-shadow");
+        background-color: map.get($prop, "background");
+        box-shadow: map.get($prop, "shadow");
 
         :where(svg) {
-          color: map.get($prop, "icon-color");
+          color: map.get($prop, "icon");
         }
       }
     }

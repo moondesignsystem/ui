@@ -1,7 +1,7 @@
 import fetchFigmaData from "./fetchFigmaData.js";
 import processPublishedVariables from "./processPublishedVariables.js";
 import formatAndAddCSSVariable from "./formatAndAddCSSVariable.js";
-import getConfig from "./getConfig.js";
+import getConfig from "./utils/getConfig.js";
 
 // STEP 2. Process Figma core variables
 

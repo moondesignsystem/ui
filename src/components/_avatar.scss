@@ -1,50 +1,34 @@
 @use "sass:map";
 @use "variables";
+@use "variants";
 
-$sizes: (
-  xs: (
-    height: var(--scale-xs-height),
-    width: var(--scale-xs-width),
-    radius: var(--utility-avatar-radius-xs),
-    font: variables.$scale-xs-text,
-    icon-size: var(--scale-xs-icon-size)
-  ),
-  sm: (
-    height: var(--scale-sm-height),
-    width: var(--scale-sm-width),
-    radius: var(--utility-avatar-radius-sm),
-    font: variables.$scale-sm-text,
-    icon-size: var(--scale-sm-icon-size)
-  ),
-  md: (
-    height: var(--scale-md-height),
-    width: var(--scale-md-width),
-    radius: var(--utility-avatar-radius-md),
-    font: variables.$scale-md-text,
-    icon-size: var(--scale-md-icon-size)
-  ),
-  lg: (
-    height: var(--scale-lg-height),
-    width: var(--scale-lg-width),
-    radius: var(--utility-avatar-radius-lg),
-    font: variables.$scale-lg-text,
-    icon-size: var(--scale-lg-icon-size)
-  ),
-  xl: (
-    height: var(--scale-xl-height),
-    width: var(--scale-xl-width),
-    radius: var(--utility-avatar-radius-xl),
-    font: variables.$scale-xl-text,
-    icon-size: var(--scale-xl-icon-size)
-  ),
-  2xl: (
-    height: var(--scale-2xl-height),
-    width: var(--scale-2xl-width),
-    radius: var(--utility-avatar-radius-2xl),
-    font: variables.$scale-2xl-text,
-    icon-size: var(--scale-2xl-icon-size)
-  )
-);
+@function generate-size($size) {
+  @return (
+    "height": var(--scale-#{$size}-height),
+    "width": var(--scale-#{$size}-width),
+    "radius": var(--utility-avatar-radius-#{$size}),
+    "icon-size": var(--scale-#{$size}-icon-size),
+    "font": var(--scale-#{$size}-text-weight) var(--scale-#{$size}-text-size) / var(--scale-#{$size}-text-height)
+      var(--scale-#{$size}-text-font)
+  );
+}
+$sizes: ();
+@each $size in variants.$avatar-sizes {
+  $sizes: map.set($sizes, $size, generate-size($size));
+}
+@function generate-variant($variant) {
+  @return (
+    "background": var(--avatar-#{$variant}-background),
+    "border": var(--avatar-#{$variant}-stroke),
+    "border-color": var(--avatar-#{$variant}-border),
+    "color": var(--avatar-#{$variant}-text),
+    "icon": var(--avatar-#{$variant}-icon)
+  );
+}
+$variants: ();
+@each $variant in variants.$avatar-variants {
+  $variants: map.set($variants, $variant, generate-variant($variant));
+}
 
 .moon-avatar {
   display: flex;
@@ -54,10 +38,10 @@ $sizes: (
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  background-color: var(--avatar-soft-background);
-  border-width: var(--avatar-soft-stroke);
-  border-color: var(--semantic-border-secondary);
-  color: var(--avatar-soft-text);
+  background-color: map.get($variants, "soft", "background");
+  border-width: map.get($variants, "soft", "border");
+  border-color: map.get($variants, "soft", "border-color");
+  color: map.get($variants, "soft", "color");
   font: map.get($sizes, "md", "font");
   width: map.get($sizes, "md", "width");
   height: map.get($sizes, "md", "height");
@@ -70,7 +54,7 @@ $sizes: (
   }
 
   :where(svg) {
-    color: var(--avatar-soft-icon);
+    color: map.get($variants, "soft", "icon");
     width: map.get($sizes, "md", "icon-size");
     height: map.get($sizes, "md", "icon-size");
   }
@@ -99,9 +83,16 @@ $sizes: (
     }
   }
 
-  &.moon-avatar-outline {
-    background-color: var(--avatar-outline-background);
-    border-width: var(--avatar-outline-stroke);
-    color: var(--avatar-outline-text);
+  @each $variant, $prop in $variants {
+    @if $variant != "soft" {
+      &.moon-avatar-#{$variant} {
+        background-color: var(--avatar-#{$variant}-background);
+        border-width: var(--avatar-#{$variant}-stroke);
+        color: var(--avatar-#{$variant}-text);
+        :where(svg) {
+          color: var(--avatar-#{$variant}-icon);
+        }
+      }
+    }
   }
 }
