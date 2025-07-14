@@ -1,9 +1,4 @@
-export default processComponentVariables;
-/**
- * @async
- * @returns {Promise<{componentVariables: string[]}>}
- * @throws {Error}
- */
-declare function processComponentVariables(): Promise<{
+declare const processComponentVariables: () => Promise<{
     componentVariables: string[];
 }>;
+export default processComponentVariables;

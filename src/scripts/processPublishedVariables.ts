@@ -1,29 +1,43 @@
 import formatName from "./utils/formatName.js";
+import type { FigmaVariableCollection, FigmaVariable } from "../types.js";
 
 // STEP 4. Process Figma published variables
 
-/**
- * @param {Object} localVariableCollections
- * @param {Object} publishedVariableCollections
- * @param {Object} localVariables
- * @param {Object} publishedVariables
- * @returns {{
- *   variableCollections: Object,
- *   themes: string[],
- *   colorCollectionName: string
- * }}
- * @throws {Error}
- */
+interface ProcessedVariable extends FigmaVariable {
+  cssVariableName: string;
+}
+
+interface ProcessedVariableCollection extends FigmaVariableCollection {
+  variables: Record<string, ProcessedVariable>;
+}
+
+interface LocalVariableCollections {
+  [key: string]: FigmaVariableCollection;
+}
+
+interface PublishedVariableCollections {
+  [key: string]: FigmaVariableCollection;
+}
+
+interface LocalVariables {
+  [key: string]: FigmaVariable;
+}
+
+interface PublishedVariables {
+  [key: string]: FigmaVariable;
+}
+
 const processPublishedVariables = (
-  localVariableCollections,
-  publishedVariableCollections,
-  localVariables,
-  publishedVariables
+  localVariableCollections: LocalVariableCollections,
+  publishedVariableCollections: PublishedVariableCollections,
+  localVariables: LocalVariables,
+  publishedVariables: PublishedVariables
 ) => {
   try {
-    let themes = [];
+    let themes: string[] = [];
     let colorCollectionName = "";
-    const variableCollections = {};
+    const variableCollections: Record<string, ProcessedVariableCollection> = {};
+
     for (const key in localVariableCollections) {
       if (publishedVariableCollections.hasOwnProperty(key)) {
         const collectionName = localVariableCollections[key].name;
@@ -61,6 +75,7 @@ const processPublishedVariables = (
     return { variableCollections, themes, colorCollectionName };
   } catch (error) {
     console.error("❌ Error in processPublishedVariables script:", error);
+    throw error;
   }
 };
 

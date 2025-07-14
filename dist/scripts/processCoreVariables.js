@@ -2,19 +2,12 @@ import fetchFigmaData from "./fetchFigmaData.js";
 import processPublishedVariables from "./processPublishedVariables.js";
 import formatAndAddCSSVariable from "./formatAndAddCSSVariable.js";
 import getConfig from "./utils/getConfig.js";
-// STEP 2. Process Figma core variables
-/**
- * @async
- * @param {string} [fileId] - Optional Figma file ID override
- * @returns {Promise<{coreVariables: string[], themes: string[], colorCollectionName: string}>}
- * @throws {Error}
- */
 const processCoreVariables = async (fileId = null) => {
     try {
         const config = getConfig();
         const figmaFileId = fileId || config.coreFileId;
         const { localVariableCollections, publishedVariableCollections, localVariables, publishedVariables, } = await fetchFigmaData(figmaFileId);
-        const { variableCollections, themes, colorCollectionName } = processPublishedVariables(localVariableCollections, publishedVariableCollections, localVariables, publishedVariables);
+        const { variableCollections, themes, colorCollectionName, } = processPublishedVariables(localVariableCollections, publishedVariableCollections, localVariables, publishedVariables);
         let coreVariables = [];
         // Group variables by modes.modeId and output cssVariables
         for (const collectionName in variableCollections) {
@@ -41,6 +34,7 @@ const processCoreVariables = async (fileId = null) => {
     }
     catch (error) {
         console.error("❌ Error in processCoreVariables script:", error);
+        throw error;
     }
 };
 export default processCoreVariables;

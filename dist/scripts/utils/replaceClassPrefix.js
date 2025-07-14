@@ -1,5 +1,8 @@
 import getConfig from "./getConfig.js";
 const replaceClassPrefix = (cssContent) => {
+    if (!cssContent) {
+        throw new Error("❌ CSS content is required");
+    }
     try {
         const config = getConfig();
         const prefix = config?.customPrefix;
@@ -9,8 +12,10 @@ const replaceClassPrefix = (cssContent) => {
         return cssContent.replace(/\.moon-/g, `.${config.projectName}-`);
     }
     catch (error) {
-        console.error("❌ Error in replaceClassPrefix script:", error);
-        return;
+        if (error instanceof Error) {
+            throw new Error(`❌ Failed to replace class prefix: ${error.message}`);
+        }
+        throw new Error("❌ Failed to replace class prefix: Unknown error");
     }
 };
 export default replaceClassPrefix;

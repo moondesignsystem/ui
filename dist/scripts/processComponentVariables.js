@@ -2,12 +2,6 @@ import fetchFigmaData from "./fetchFigmaData.js";
 import processPublishedVariables from "./processPublishedVariables.js";
 import formatAndAddCSSVariable from "./formatAndAddCSSVariable.js";
 import getConfig from "./utils/getConfig.js";
-// STEP 6. Process Figma component variables
-/**
- * @async
- * @returns {Promise<{componentVariables: string[]}>}
- * @throws {Error}
- */
 const processComponentVariables = async () => {
     try {
         // Create a new object with keys that exist in both localVariableCollections and publishedVariableCollections
@@ -40,6 +34,7 @@ const processComponentVariables = async () => {
     }
     catch (error) {
         console.error("❌ Error in processComponentVariables script:", error);
+        throw error;
     }
 };
 export default processComponentVariables;

@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 1.8.0
+
+### Minor Changes
+
+- feat: add unit tests
+
 ## 1.7.0
 
 ### Minor Changes
