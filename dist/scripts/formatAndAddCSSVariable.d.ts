@@ -1,15 +1,23 @@
+import type { FigmaResolvedType, FigmaValuesByMode, FigmaVariableAlias } from "../types.js";
+interface Variable {
+    name: string;
+    resolvedType: FigmaResolvedType;
+    variableCollectionId: string;
+    valuesByMode: Record<string, FigmaValuesByMode | FigmaVariableAlias>;
+}
+interface Mode {
+    modeId: string;
+    name: string;
+}
+interface VariableCollection {
+    name: string;
+    modes: Mode[];
+}
+interface LocalVariables {
+    [key: string]: Variable;
+}
+interface LocalVariableCollections {
+    [key: string]: VariableCollection;
+}
+declare const formatAndAddCSSVariable: (cssVariables: string[], collectionName: string, modeName: string, variableName: string, variable: Variable, modeId: string, localVariables: LocalVariables, localVariableCollections: LocalVariableCollections, singleMode: boolean) => string[];
 export default formatAndAddCSSVariable;
-/**
- * @param {string[]} cssVariables
- * @param {string} collectionName
- * @param {string} modeName
- * @param {string} variableName
- * @param {Object} variable
- * @param {string} modeId
- * @param {Object} localVariables
- * @param {Object} localVariableCollections
- * @param {boolean} singleMode
- * @returns {string[]}
- * @throws {Error}
- */
-declare function formatAndAddCSSVariable(cssVariables: string[], collectionName: string, modeName: string, variableName: string, variable: Object, modeId: string, localVariables: Object, localVariableCollections: Object, singleMode: boolean): string[];

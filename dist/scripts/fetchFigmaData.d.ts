@@ -3,5 +3,5 @@ declare const fetchFigmaData: (fileId: string) => Promise<{
     publishedVariableCollections: any;
     localVariables: any;
     publishedVariables: any;
-} | undefined>;
+}>;
 export default fetchFigmaData;

@@ -1,2 +1,2 @@
-declare const replaceClassPrefix: (cssContent: string) => string | undefined;
+declare const replaceClassPrefix: (cssContent: string) => string;
 export default replaceClassPrefix;

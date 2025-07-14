@@ -1,17 +1,4 @@
 import formatName from "./utils/formatName.js";
-// STEP 4. Process Figma published variables
-/**
- * @param {Object} localVariableCollections
- * @param {Object} publishedVariableCollections
- * @param {Object} localVariables
- * @param {Object} publishedVariables
- * @returns {{
- *   variableCollections: Object,
- *   themes: string[],
- *   colorCollectionName: string
- * }}
- * @throws {Error}
- */
 const processPublishedVariables = (localVariableCollections, publishedVariableCollections, localVariables, publishedVariables) => {
     try {
         let themes = [];
@@ -46,6 +33,7 @@ const processPublishedVariables = (localVariableCollections, publishedVariableCo
     }
     catch (error) {
         console.error("❌ Error in processPublishedVariables script:", error);
+        throw error;
     }
 };
 export default processPublishedVariables;

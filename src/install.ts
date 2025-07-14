@@ -7,12 +7,14 @@ import generateComponentsFile from "./scripts/generateComponentsFile.js";
 
 const install = async () => {
   if (!process.env.FIGMA_TOKEN) {
-    console.error("❌ FIGMA_TOKEN is not defined in environment variables");
-    return null;
+    throw new Error("❌ FIGMA_TOKEN is not defined in environment variables");
   }
   try {
     generateConfigFile();
     const config = getConfig();
+    if (!config.coreFileId) {
+      throw new Error("❌ Missing coreFileId in configuration");
+    }
     const addComponents = process.argv.includes("--add-components");
     await generateCoreFile(
       config.coreFileId,
@@ -24,17 +26,31 @@ const install = async () => {
     if (themeKeys.length > 0) {
       for (const themeName of themeKeys) {
         const themeFileId = themes[themeName];
+        if (!themeFileId) {
+          console.warn(
+            `⚠️ Warning: No file ID found for theme '${themeName}', skipping...`
+          );
+          continue;
+        }
         await generateCoreFile(themeFileId, themeName, addComponents);
       }
     }
     if (addComponents) {
+      if (!config.componentsFileId) {
+        throw new Error(
+          "❌ Missing componentsFileId in configuration for component generation"
+        );
+      }
       await generateComponentsFile();
     }
     console.log("✅ Installation complete!");
-    return;
   } catch (error) {
-    console.error("❌ Error in install script:", error);
-    return;
+    if (error instanceof Error) {
+      console.error("❌ Error in install script:", error.message);
+    } else {
+      console.error("❌ Error in install script:", String(error));
+    }
+    process.exit(1);
   }
 };
 

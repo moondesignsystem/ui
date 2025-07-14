@@ -1,26 +1,26 @@
 import formatName from "./utils/formatName.js";
 import formatValue from "./utils/formatValue.js";
-// STEP 5. Create an object with all CSS variables
-/**
- * @param {string[]} cssVariables
- * @param {string} collectionName
- * @param {string} modeName
- * @param {string} variableName
- * @param {Object} variable
- * @param {string} modeId
- * @param {Object} localVariables
- * @param {Object} localVariableCollections
- * @param {boolean} singleMode
- * @returns {string[]}
- * @throws {Error}
- */
 const formatAndAddCSSVariable = (cssVariables, collectionName, modeName, variableName, variable, modeId, localVariables, localVariableCollections, singleMode) => {
+    if (!cssVariables || !Array.isArray(cssVariables)) {
+        throw new Error("❌ cssVariables must be a valid array");
+    }
+    if (!collectionName || !modeName || !variableName || !variable || !modeId) {
+        throw new Error("❌ All required parameters must be provided");
+    }
     try {
         const cssVariableName = formatName(singleMode
             ? `--${collectionName}-${variableName}`
             : `--${collectionName}-${modeName}-${variableName}`);
-        if (variable.valuesByMode[modeId].type === "VARIABLE_ALIAS") {
-            const aliasVariableId = variable.valuesByMode[modeId].id;
+        if (typeof variable.valuesByMode[modeId] === "object" &&
+            variable.valuesByMode[modeId] !== null &&
+            variable.valuesByMode[modeId].type ===
+                "VARIABLE_ALIAS") {
+            const aliasValue = variable.valuesByMode[modeId];
+            const aliasVariableId = aliasValue.id;
+            if (!aliasVariableId) {
+                cssVariables.push(`${cssVariableName}: var(--missing-alias-id);`);
+                return cssVariables;
+            }
             const aliasVariable = localVariables[aliasVariableId];
             if (!aliasVariable) {
                 cssVariables.push(`${cssVariableName}: var(--unknown-alias);`);
@@ -46,12 +46,23 @@ const formatAndAddCSSVariable = (cssVariables, collectionName, modeName, variabl
             cssVariables.push(`${cssVariableName}: ${cssVariableAliasName};`);
         }
         else {
-            cssVariables.push(`${cssVariableName}: ${formatValue(variable.resolvedType, variable.name, variable.valuesByMode[modeId])};`);
+            const value = variable.valuesByMode[modeId];
+            if (typeof value === "string" ||
+                typeof value === "number" ||
+                (typeof value === "object" && value !== null && "r" in value)) {
+                cssVariables.push(`${cssVariableName}: ${formatValue(variable.resolvedType, variable.name, value)};`);
+            }
+            else {
+                cssVariables.push(`${cssVariableName}: ${String(value)};`);
+            }
         }
         return cssVariables;
     }
     catch (error) {
-        console.error("❌ Error in formatAndAddCSSVariable script:", error);
+        if (error instanceof Error) {
+            throw new Error(`❌ Failed to format CSS variable '${variableName}': ${error.message}`);
+        }
+        throw new Error(`❌ Failed to format CSS variable '${variableName}': Unknown error`);
     }
 };
 export default formatAndAddCSSVariable;
