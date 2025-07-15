@@ -1,5 +1,17 @@
 # @heathmont/moon-ui
 
+## 1.9.2
+
+### Patch Changes
+
+- fix: installation process
+
+## 1.9.1
+
+### Patch Changes
+
+- fix: installation process
+
 ## 1.9.0
 
 ### Minor Changes

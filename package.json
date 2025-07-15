@@ -1,15 +1,12 @@
 {
   "name": "@heathmont/moon-ui",
-  "version": "1.9.0",
+  "version": "1.9.2",
   "description": "Moon UI library for generating core and components CSS files",
   "main": "dist/install.js",
   "type": "module",
-  "bin": {
-    "moon-ui": "dist/install.js"
-  },
+  "bin": "dist/install.js",
   "scripts": {
-    "install": "npm run build && node dist/install.js --add-components",
-    "build": "tsc",
+    "build": "tsc && chmod +x dist/install.js",
     "dev": "tsc --watch",
     "typecheck": "tsc --noEmit",
     "test": "jest",
@@ -32,7 +29,7 @@
   "bugs": {
     "url": "https://github.com/coingaming/moon-ui/issues"
   },
-  "homepage": "https://github.com/coingaming/moon-ui#readme",
+  "homepage": "https://ui.moon.io",
   "dependencies": {
     "dotenv": "^16.5.0",
     "sass": "^1.89.2"
