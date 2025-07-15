@@ -38,10 +38,10 @@ $variants: ();
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  background-color: map.get($variants, "soft", "background");
-  border-width: map.get($variants, "soft", "border");
-  border-color: map.get($variants, "soft", "border-color");
-  color: map.get($variants, "soft", "color");
+  background-color: map.get($variants, "fill", "background");
+  border-width: map.get($variants, "fill", "border");
+  border-color: map.get($variants, "fill", "border-color");
+  color: map.get($variants, "fill", "color");
   font: map.get($sizes, "md", "font");
   width: map.get($sizes, "md", "width");
   height: map.get($sizes, "md", "height");
@@ -54,7 +54,7 @@ $variants: ();
   }
 
   :where(svg) {
-    color: map.get($variants, "soft", "icon");
+    color: map.get($variants, "fill", "icon");
     width: map.get($sizes, "md", "icon-size");
     height: map.get($sizes, "md", "icon-size");
   }
