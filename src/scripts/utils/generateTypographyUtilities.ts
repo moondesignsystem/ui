@@ -20,12 +20,12 @@ const generateTypographyUtilities = (
   const result = uniqueGroups
     .map(({ name, size }) => {
       const selector = `text-${name}-${size}`;
-      const properties = 
+      const properties =
         `font-size: var(--text-${name}-${size}-font-size);\n` +
         `line-height: var(--text-${name}-${size}-line-height);\n` +
         `font-weight: var(--text-${name}-${size}-font-weight);\n` +
         `font-family: var(--text-${name}-${size}-font-family);`;
-      
+
       return isTailwind
         ? `@utility ${selector} {\n${properties}\n}`
         : `.${selector} {\n${properties}\n}`;

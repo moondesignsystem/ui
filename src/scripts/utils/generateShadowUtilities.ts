@@ -13,7 +13,7 @@ const generateShadowUtilities = (isTailwind: boolean, cssContent: string) => {
   const result = uniqueSizes
     .map((size) => {
       const selector = `shadow-${size}`;
-      const properties = 
+      const properties =
         `box-shadow: \n` +
         `var(--effect-shadow-${size}-layer-1-x) \n` +
         `var(--effect-shadow-${size}-layer-1-y) \n` +
@@ -25,7 +25,7 @@ const generateShadowUtilities = (isTailwind: boolean, cssContent: string) => {
         `var(--effect-shadow-${size}-layer-2-blur) \n` +
         `var(--effect-shadow-${size}-layer-2-spread) \n` +
         `var(--effect-shadow-${size}-layer-2-color);`;
-      
+
       return isTailwind
         ? `@utility ${selector} {\n${properties}\n}`
         : `.${selector} {\n${properties}\n}`;
