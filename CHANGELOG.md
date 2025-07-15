@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 1.9.0
+
+### Minor Changes
+
+- feat: add support of vanilla CSS generation
+
 ## 1.8.0
 
 ### Minor Changes

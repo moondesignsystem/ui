@@ -15,6 +15,7 @@ const generateCoreFile = async (coreFileId, projectName, addComponents) => {
         console.log(`Generating ${projectName}-core.css file...`);
         const config = getConfig();
         const outputFolder = config.outputFolder;
+        const isTailwind = config.target === "tailwindcss";
         const { coreVariables, themes, colorCollectionName } = await processCoreVariables(coreFileId);
         let cssVariables = [...coreVariables];
         if (addComponents) {
@@ -30,7 +31,9 @@ const generateCoreFile = async (coreFileId, projectName, addComponents) => {
             const allVariables = cssVariables
                 .map((v) => removeThemePrefixesFromVariables(v, themes, colorCollectionName))
                 .sort();
-            const cssContent = "@theme {\n" + allVariables.join("\n") + "\n}\n";
+            const cssContent = isTailwind
+                ? "@theme {\n" + allVariables.join("\n") + "\n}\n"
+                : ":root {\n" + allVariables.join("\n") + "\n}\n";
             fs.writeFileSync(outputCoreFile, cssContent);
             return;
         }
@@ -40,10 +43,12 @@ const generateCoreFile = async (coreFileId, projectName, addComponents) => {
             .filter((v) => !colorVariablePattern.test(v))
             .map((v) => removeThemePrefixesFromVariables(v, themes, colorCollectionName))
             .sort();
-        let cssContent = "@theme inline {\n" + rootVariables.join("\n") + "\n}\n";
+        let cssContent = isTailwind
+            ? "@theme inline {\n" + rootVariables.join("\n") + "\n}\n"
+            : ":root {\n" + rootVariables.join("\n") + "\n}\n";
         const themedVariablePattern = new RegExp(`--(${colorCollectionName}|semantic)-[a-zA-Z0-9-]+`, "i");
         const themedVariables = cssVariables.filter((v) => themedVariablePattern.test(v));
-        cssContent += `@layer theme {\n`;
+        cssContent += isTailwind ? `@layer theme {\n` : "";
         themes.forEach((theme) => {
             const themePattern = new RegExp(`--${colorCollectionName}-${theme}-`, "i");
             let themeVariables = themedVariables
@@ -58,18 +63,17 @@ const generateCoreFile = async (coreFileId, projectName, addComponents) => {
             })
                 .sort();
             let themeContent = themeVariables.join("\n");
-            const themeValues = ["light", "dark"];
-            const themePatternForReplacement = themeValues.join("|");
+            const themePatternForReplacement = themes.join("|");
             const themeRegexForReplacement = new RegExp(`--color-(${themePatternForReplacement})-`, "g");
             themeContent = themeContent.replace(themeRegexForReplacement, "--color-");
             cssContent += `.${theme}-theme {\n${themeContent}\n}\n`;
         });
-        cssContent += `}\n`;
+        cssContent += isTailwind ? `}\n` : "";
         cssContent = replaceVariablesByPattern(cssContent);
-        cssContent += `${generateTypographyUtilities(cssContent)}\n`;
-        cssContent += `${generateShadowUtilities(cssContent)}\n`;
-        cssContent += `${generateBorderUtilities()}\n`;
-        cssContent += `${generateGenericUtilities()}\n`;
+        cssContent += `${generateTypographyUtilities(isTailwind, cssContent)}\n`;
+        cssContent += `${generateShadowUtilities(isTailwind, cssContent)}\n`;
+        cssContent += isTailwind ? `${generateBorderUtilities()}\n` : "";
+        cssContent += isTailwind ? `${generateGenericUtilities()}\n` : "";
         const version = getPackageVersion();
         const versionComment = `/* Moon UI v${version} */\n`;
         const cssWithVersionComment = versionComment + cssContent;

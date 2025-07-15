@@ -36,208 +36,152 @@ describe("formatValue", () => {
   });
 
   describe("COLOR type formatting", () => {
-    it("should format COLOR type with rgba values", () => {
-      const colorValue: FigmaColor = { r: 0.5, g: 0.75, b: 1.0, a: 0.8 };
+    const colorTestCases = [
+      {
+        name: "primary-color",
+        colorValue: { r: 0.5, g: 0.75, b: 1.0, a: 0.8 },
+        mockColors: [128, 192, 255],
+        mockAlpha: " / 0.8",
+        expected: "rgb(128 192 255 / 0.8)",
+        case: "rgba values"
+      },
+      {
+        name: "red",
+        colorValue: { r: 1, g: 0, b: 0, a: 1 },
+        mockColors: [255, 0, 0],
+        mockAlpha: "",
+        expected: "rgb(255 0 0)",
+        case: "full opacity"
+      },
+      {
+        name: "transparent",
+        colorValue: { r: 0, g: 0, b: 0, a: 0 },
+        mockColors: [0, 0, 0],
+        mockAlpha: " / 0",
+        expected: "rgb(0 0 0 / 0)",
+        case: "zero values"
+      }
+    ];
 
-      mockedGetColor
-        .mockReturnValueOnce(128) // r: 0.5
-        .mockReturnValueOnce(192) // g: 0.75
-        .mockReturnValueOnce(255); // b: 1.0
-      mockedGetAlpha.mockReturnValue(" / 0.8");
+    colorTestCases.forEach(({ name, colorValue, mockColors, mockAlpha, expected, case: caseType }) => {
+      it(`should format COLOR type with ${caseType}`, () => {
+        mockedGetColor
+          .mockReturnValueOnce(mockColors[0])
+          .mockReturnValueOnce(mockColors[1])
+          .mockReturnValueOnce(mockColors[2]);
+        mockedGetAlpha.mockReturnValue(mockAlpha);
 
-      const result = formatValue("COLOR", "primary-color", colorValue);
+        const result = formatValue("COLOR", name, colorValue);
 
-      expect(result).toBe("rgb(128 192 255 / 0.8)");
-      expect(mockedGetColor).toHaveBeenCalledTimes(3);
-      expect(mockedGetColor).toHaveBeenNthCalledWith(1, 0.5);
-      expect(mockedGetColor).toHaveBeenNthCalledWith(2, 0.75);
-      expect(mockedGetColor).toHaveBeenNthCalledWith(3, 1.0);
-      expect(mockedGetAlpha).toHaveBeenCalledWith(0.8);
-    });
-
-    it("should format COLOR type with full opacity", () => {
-      const colorValue: FigmaColor = { r: 1, g: 0, b: 0, a: 1 };
-
-      mockedGetColor
-        .mockReturnValueOnce(255)
-        .mockReturnValueOnce(0)
-        .mockReturnValueOnce(0);
-      mockedGetAlpha.mockReturnValue("");
-
-      const result = formatValue("COLOR", "red", colorValue);
-
-      expect(result).toBe("rgb(255 0 0)");
-      expect(mockedGetAlpha).toHaveBeenCalledWith(1);
-    });
-
-    it("should format COLOR type with zero values", () => {
-      const colorValue: FigmaColor = { r: 0, g: 0, b: 0, a: 0 };
-
-      mockedGetColor
-        .mockReturnValueOnce(0)
-        .mockReturnValueOnce(0)
-        .mockReturnValueOnce(0);
-      mockedGetAlpha.mockReturnValue(" / 0");
-
-      const result = formatValue("COLOR", "transparent", colorValue);
-
-      expect(result).toBe("rgb(0 0 0 / 0)");
+        expect(result).toBe(expected);
+        expect(mockedGetColor).toHaveBeenCalledTimes(3);
+        expect(mockedGetColor).toHaveBeenNthCalledWith(1, colorValue.r);
+        expect(mockedGetColor).toHaveBeenNthCalledWith(2, colorValue.g);
+        expect(mockedGetColor).toHaveBeenNthCalledWith(3, colorValue.b);
+        expect(mockedGetAlpha).toHaveBeenCalledWith(colorValue.a);
+      });
     });
   });
 
   describe("Font family formatting", () => {
-    it('should format values with "family" in name (lowercase)', () => {
-      mockedGetFontFamily.mockReturnValue('"Inter", sans-serif');
+    const testCases = [
+      { name: "font-family", value: "Inter", expected: '"Inter", sans-serif', case: "lowercase" },
+      { name: "primaryFamily", value: "Roboto", expected: '"Roboto", sans-serif', case: "mixed case" },
+      { name: "TEXT_FAMILY", value: "Arial", expected: '"Arial", sans-serif', case: "uppercase" },
+    ];
 
-      const result = formatValue("STRING", "font-family", "Inter");
+    testCases.forEach(({ name, value, expected, case: caseType }) => {
+      it(`should format values with "family" in name (${caseType})`, () => {
+        mockedGetFontFamily.mockReturnValue(expected);
 
-      expect(result).toBe('"Inter", sans-serif');
-      expect(mockedGetFontFamily).toHaveBeenCalledWith("Inter");
-    });
+        const result = formatValue("STRING", name, value);
 
-    it('should format values with "Family" in name (mixed case)', () => {
-      mockedGetFontFamily.mockReturnValue('"Roboto", sans-serif');
-
-      const result = formatValue("STRING", "primaryFamily", "Roboto");
-
-      expect(result).toBe('"Roboto", sans-serif');
-      expect(mockedGetFontFamily).toHaveBeenCalledWith("Roboto");
-    });
-
-    it('should format values with "FAMILY" in name (uppercase)', () => {
-      mockedGetFontFamily.mockReturnValue('"Arial", sans-serif');
-
-      const result = formatValue("STRING", "TEXT_FAMILY", "Arial");
-
-      expect(result).toBe('"Arial", sans-serif');
-      expect(mockedGetFontFamily).toHaveBeenCalledWith("Arial");
+        expect(result).toBe(expected);
+        expect(mockedGetFontFamily).toHaveBeenCalledWith(value);
+      });
     });
   });
 
   describe("Font weight formatting", () => {
-    it('should format values with "weight" in name using string value', () => {
-      mockedGetFontWeight.mockReturnValue(400);
+    const testCases = [
+      { type: "STRING" as const, name: "font-weight", value: "Regular", expected: 400, case: "string value" },
+      { type: "FLOAT" as const, name: "fontWeight", value: 700, expected: 700, case: "number value" },
+      { type: "STRING" as const, name: "primaryWeight", value: "SemiBold", expected: 600, case: "mixed case" },
+    ];
 
-      const result = formatValue("STRING", "font-weight", "Regular");
+    testCases.forEach(({ type, name, value, expected, case: caseType }) => {
+      it(`should format values with "weight" in name using ${caseType}`, () => {
+        mockedGetFontWeight.mockReturnValue(expected);
 
-      expect(result).toBe(400);
-      expect(mockedGetFontWeight).toHaveBeenCalledWith("Regular");
-    });
+        const result = formatValue(type, name, value);
 
-    it('should format values with "weight" in name using number value', () => {
-      mockedGetFontWeight.mockReturnValue(700);
-
-      const result = formatValue("FLOAT", "fontWeight", 700);
-
-      expect(result).toBe(700);
-      expect(mockedGetFontWeight).toHaveBeenCalledWith(700);
-    });
-
-    it('should format values with "Weight" in name (mixed case)', () => {
-      mockedGetFontWeight.mockReturnValue(600);
-
-      const result = formatValue("STRING", "primaryWeight", "SemiBold");
-
-      expect(result).toBe(600);
-      expect(mockedGetFontWeight).toHaveBeenCalledWith("SemiBold");
+        expect(result).toBe(expected);
+        expect(mockedGetFontWeight).toHaveBeenCalledWith(value);
+      });
     });
   });
 
   describe("Opacity formatting", () => {
-    it('should format values with "opacity" in name', () => {
-      mockedGetOpacity.mockReturnValue(0.005);
+    const testCases = [
+      { name: "background-opacity", value: 0.5, expected: 0.005, case: "lowercase" },
+      { name: "buttonOpacity", value: 0.75, expected: 0.0075, case: "mixed case" },
+      { name: "MAIN_OPACITY", value: 1, expected: 0.01, case: "uppercase" },
+    ];
 
-      const result = formatValue("FLOAT", "background-opacity", 0.5);
+    testCases.forEach(({ name, value, expected, case: caseType }) => {
+      it(`should format values with "opacity" in name (${caseType})`, () => {
+        mockedGetOpacity.mockReturnValue(expected);
 
-      expect(result).toBe(0.005);
-      expect(mockedGetOpacity).toHaveBeenCalledWith(0.5);
-    });
+        const result = formatValue("FLOAT", name, value);
 
-    it('should format values with "Opacity" in name (mixed case)', () => {
-      mockedGetOpacity.mockReturnValue(0.0075);
-
-      const result = formatValue("FLOAT", "buttonOpacity", 0.75);
-
-      expect(result).toBe(0.0075);
-      expect(mockedGetOpacity).toHaveBeenCalledWith(0.75);
-    });
-
-    it('should format values with "OPACITY" in name (uppercase)', () => {
-      mockedGetOpacity.mockReturnValue(0.01);
-
-      const result = formatValue("FLOAT", "MAIN_OPACITY", 1);
-
-      expect(result).toBe(0.01);
-      expect(mockedGetOpacity).toHaveBeenCalledWith(1);
+        expect(result).toBe(expected);
+        expect(mockedGetOpacity).toHaveBeenCalledWith(value);
+      });
     });
   });
 
   describe("FLOAT type formatting", () => {
-    it("should format FLOAT type values as dimensions", () => {
-      mockedGetDimension.mockReturnValue("16px");
+    const testCases = [
+      { name: "padding", value: 16, expected: "16px", case: "integer values" },
+      { name: "margin", value: 12.5, expected: "12.5px", case: "decimal values" },
+      { name: "border-width", value: 0, expected: "0px", case: "zero value" },
+    ];
 
-      const result = formatValue("FLOAT", "padding", 16);
+    testCases.forEach(({ name, value, expected, case: caseType }) => {
+      it(`should format FLOAT type values as dimensions with ${caseType}`, () => {
+        mockedGetDimension.mockReturnValue(expected);
 
-      expect(result).toBe("16px");
-      expect(mockedGetDimension).toHaveBeenCalledWith(16);
-    });
+        const result = formatValue("FLOAT", name, value);
 
-    it("should format FLOAT type with decimal values", () => {
-      mockedGetDimension.mockReturnValue("12.5px");
-
-      const result = formatValue("FLOAT", "margin", 12.5);
-
-      expect(result).toBe("12.5px");
-      expect(mockedGetDimension).toHaveBeenCalledWith(12.5);
-    });
-
-    it("should format FLOAT type with zero value", () => {
-      mockedGetDimension.mockReturnValue("0px");
-
-      const result = formatValue("FLOAT", "border-width", 0);
-
-      expect(result).toBe("0px");
-      expect(mockedGetDimension).toHaveBeenCalledWith(0);
+        expect(result).toBe(expected);
+        expect(mockedGetDimension).toHaveBeenCalledWith(value);
+      });
     });
   });
 
   describe("Default case - passthrough values", () => {
-    it("should return string values unchanged for unmatched types", () => {
-      const result = formatValue("STRING", "custom-value", "test-string");
+    const testCases = [
+      { type: "STRING" as const, name: "custom-value", value: "test-string", expected: "test-string", case: "string values unchanged" },
+      { type: "STRING" as const, name: "some-number", value: 42, expected: 42, case: "number values unchanged" },
+      { type: "BOOLEAN" as any, name: "flag", value: true as any, expected: true, case: "boolean values unchanged" },
+      { type: "STRING" as const, name: "nullable", value: null as any, expected: null, case: "null values unchanged" },
+      { type: "STRING" as const, name: "undefined-value", value: undefined as any, expected: undefined, case: "undefined values unchanged" },
+    ];
 
-      expect(result).toBe("test-string");
+    testCases.forEach(({ type, name, value, expected, case: caseType }) => {
+      it(`should return ${caseType} for unmatched types`, () => {
+        const result = formatValue(type, name, value);
 
-      // Verify no utility functions were called
-      expect(mockedGetColor).not.toHaveBeenCalled();
-      expect(mockedGetAlpha).not.toHaveBeenCalled();
-      expect(mockedGetFontFamily).not.toHaveBeenCalled();
-      expect(mockedGetFontWeight).not.toHaveBeenCalled();
-      expect(mockedGetOpacity).not.toHaveBeenCalled();
-      expect(mockedGetDimension).not.toHaveBeenCalled();
-    });
+        expect(result).toBe(expected);
 
-    it("should return number values unchanged for unmatched types", () => {
-      const result = formatValue("STRING", "some-number", 42);
-
-      expect(result).toBe(42);
-    });
-
-    it("should return boolean values unchanged", () => {
-      const result = formatValue("BOOLEAN" as any, "flag", true as any);
-
-      expect(result).toBe(true);
-    });
-
-    it("should return null values unchanged", () => {
-      const result = formatValue("STRING", "nullable", null as any);
-
-      expect(result).toBe(null);
-    });
-
-    it("should return undefined values unchanged", () => {
-      const result = formatValue("STRING", "undefined-value", undefined as any);
-
-      expect(result).toBe(undefined);
+        // Verify no utility functions were called
+        expect(mockedGetColor).not.toHaveBeenCalled();
+        expect(mockedGetAlpha).not.toHaveBeenCalled();
+        expect(mockedGetFontFamily).not.toHaveBeenCalled();
+        expect(mockedGetFontWeight).not.toHaveBeenCalled();
+        expect(mockedGetOpacity).not.toHaveBeenCalled();
+        expect(mockedGetDimension).not.toHaveBeenCalled();
+      });
     });
   });
 

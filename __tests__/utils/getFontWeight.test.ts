@@ -2,41 +2,58 @@ import { describe, it, expect } from "@jest/globals";
 import getFontWeight from "../../src/scripts/utils/getFontWeight";
 
 describe("getFontWeight", () => {
-  it("should return numeric values as-is", () => {
-    expect(getFontWeight(400)).toBe(400);
-    expect(getFontWeight(700)).toBe(700);
-    expect(getFontWeight(100)).toBe(100);
+  const numericTestCases = [
+    { input: 400, expected: 400, description: "standard weight" },
+    { input: 700, expected: 700, description: "bold weight" },
+    { input: 100, expected: 100, description: "thin weight" }
+  ];
+
+  numericTestCases.forEach(({ input, expected, description }) => {
+    it(`should return ${input} as-is (${description})`, () => {
+      expect(getFontWeight(input)).toBe(expected);
+    });
   });
 
-  it("should convert string weight names to numbers", () => {
-    expect(getFontWeight("thin")).toBe(100);
-    expect(getFontWeight("extralight")).toBe(200);
-    expect(getFontWeight("light")).toBe(300);
-    expect(getFontWeight("regular")).toBe(400);
-    expect(getFontWeight("medium")).toBe(500);
-    expect(getFontWeight("semibold")).toBe(600);
-    expect(getFontWeight("bold")).toBe(700);
-    expect(getFontWeight("extrabold")).toBe(800);
-    expect(getFontWeight("black")).toBe(900);
+  const stringTestCases = [
+    // Standard weight names
+    { input: "thin", expected: 100, description: "thin weight name" },
+    { input: "extralight", expected: 200, description: "extralight weight name" },
+    { input: "light", expected: 300, description: "light weight name" },
+    { input: "regular", expected: 400, description: "regular weight name" },
+    { input: "medium", expected: 500, description: "medium weight name" },
+    { input: "semibold", expected: 600, description: "semibold weight name" },
+    { input: "bold", expected: 700, description: "bold weight name" },
+    { input: "extrabold", expected: 800, description: "extrabold weight name" },
+    { input: "black", expected: 900, description: "black weight name" },
+    
+    // Case variations
+    { input: "BOLD", expected: 700, description: "uppercase weight name" },
+    { input: "Bold", expected: 700, description: "title case weight name" },
+    { input: "REGULAR", expected: 400, description: "uppercase regular" },
+    { input: "Medium", expected: 500, description: "title case medium" },
+    
+    // Variations with spaces and slashes
+    { input: "semi bold", expected: 600, description: "weight name with space" },
+    { input: "extra light", expected: 200, description: "compound weight with space" },
+    { input: "semi/bold", expected: 600, description: "weight name with slash" },
+    { input: "extra/light", expected: 200, description: "compound weight with slash" }
+  ];
+
+  stringTestCases.forEach(({ input, expected, description }) => {
+    it(`should convert "${input}" to ${expected} (${description})`, () => {
+      expect(getFontWeight(input)).toBe(expected);
+    });
   });
 
-  it("should handle case insensitive weight names", () => {
-    expect(getFontWeight("BOLD")).toBe(700);
-    expect(getFontWeight("Bold")).toBe(700);
-    expect(getFontWeight("REGULAR")).toBe(400);
-    expect(getFontWeight("Medium")).toBe(500);
-  });
+  const invalidTestCases = [
+    { input: "unknown", description: "unknown weight name" },
+    { input: "invalid", description: "invalid weight name" },
+    { input: "", description: "empty string" }
+  ];
 
-  it("should handle weight names with spaces and slashes", () => {
-    expect(getFontWeight("semi bold")).toBe(600);
-    expect(getFontWeight("extra light")).toBe(200);
-    expect(getFontWeight("semi/bold")).toBe(600);
-    expect(getFontWeight("extra/light")).toBe(200);
-  });
-
-  it("should return undefined for unknown weight names", () => {
-    expect(getFontWeight("unknown")).toBeUndefined();
-    expect(getFontWeight("invalid")).toBeUndefined();
-    expect(getFontWeight("")).toBeUndefined();
+  invalidTestCases.forEach(({ input, description }) => {
+    it(`should return undefined for "${input}" (${description})`, () => {
+      expect(getFontWeight(input)).toBeUndefined();
+    });
   });
 });

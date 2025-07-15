@@ -19,6 +19,14 @@ describe("fetchFigmaData", () => {
   const mockFileId = "test-file-id-123";
   const mockFigmaToken = "figma-token-abc123";
 
+  // Helper function to create mock responses
+  const createMockResponse = (data: any, ok = true, status = 200, statusText = "OK") => ({
+    ok,
+    status,
+    statusText,
+    json: async () => data,
+  } as Response);
+
   beforeEach(() => {
     jest.clearAllMocks();
     mockFetch = createMockFetch();
@@ -31,40 +39,39 @@ describe("fetchFigmaData", () => {
   });
 
   describe("Environment validation", () => {
-    it("should throw error when FIGMA_TOKEN is not defined", async () => {
-      delete process.env.FIGMA_TOKEN;
+    const invalidTokenScenarios = [
+      { token: undefined, description: "FIGMA_TOKEN is not defined" },
+      { token: "", description: "FIGMA_TOKEN is empty string" },
+    ];
 
-      await expect(fetchFigmaData(mockFileId)).rejects.toThrow(
-        "FIGMA_TOKEN is not defined in environment variables."
-      );
-    });
+    invalidTokenScenarios.forEach(({ token, description }) => {
+      it(`should throw error when ${description}`, async () => {
+        if (token === undefined) {
+          delete process.env.FIGMA_TOKEN;
+        } else {
+          process.env.FIGMA_TOKEN = token;
+        }
 
-    it("should throw error when FIGMA_TOKEN is empty string", async () => {
-      process.env.FIGMA_TOKEN = "";
-
-      await expect(fetchFigmaData(mockFileId)).rejects.toThrow(
-        "FIGMA_TOKEN is not defined in environment variables."
-      );
+        await expect(fetchFigmaData(mockFileId)).rejects.toThrow(
+          "FIGMA_TOKEN is not defined in environment variables."
+        );
+      });
     });
   });
 
   describe("Parameter validation", () => {
-    it("should throw error when fileId is not provided", async () => {
-      await expect(fetchFigmaData("")).rejects.toThrow(
-        "❌ Figma file ID is required"
-      );
-    });
+    const invalidFileIdScenarios = [
+      { fileId: "", description: "fileId is not provided" },
+      { fileId: undefined, description: "fileId is undefined" },
+      { fileId: null, description: "fileId is null" },
+    ];
 
-    it("should throw error when fileId is undefined", async () => {
-      await expect(fetchFigmaData(undefined as any)).rejects.toThrow(
-        "❌ Figma file ID is required"
-      );
-    });
-
-    it("should throw error when fileId is null", async () => {
-      await expect(fetchFigmaData(null as any)).rejects.toThrow(
-        "❌ Figma file ID is required"
-      );
+    invalidFileIdScenarios.forEach(({ fileId, description }) => {
+      it(`should throw error when ${description}`, async () => {
+        await expect(fetchFigmaData(fileId as any)).rejects.toThrow(
+          "❌ Figma file ID is required"
+        );
+      });
     });
   });
 
@@ -85,16 +92,10 @@ describe("fetchFigmaData", () => {
 
     it("should make correct API calls with proper headers", async () => {
       mockFetch.mockImplementation((url: string | URL | Request) => {
-        const response = {
-          ok: true,
-          json: async () => {
-            if (url.toString().includes("/local")) {
-              return mockLocalVariablesResponse;
-            }
-            return mockPublishedVariablesResponse;
-          },
-        };
-        return Promise.resolve(response as Response);
+        const response = url.toString().includes("/local")
+          ? createMockResponse(mockLocalVariablesResponse)
+          : createMockResponse(mockPublishedVariablesResponse);
+        return Promise.resolve(response);
       });
 
       await fetchFigmaData(mockFileId);
@@ -122,16 +123,10 @@ describe("fetchFigmaData", () => {
 
     it("should return correct data structure on successful API calls", async () => {
       mockFetch.mockImplementation((url: string | URL | Request) => {
-        const response = {
-          ok: true,
-          json: async () => {
-            if (url.toString().includes("/local")) {
-              return mockLocalVariablesResponse;
-            }
-            return mockPublishedVariablesResponse;
-          },
-        };
-        return Promise.resolve(response as Response);
+        const response = url.toString().includes("/local")
+          ? createMockResponse(mockLocalVariablesResponse)
+          : createMockResponse(mockPublishedVariablesResponse);
+        return Promise.resolve(response);
       });
 
       const result = await fetchFigmaData(mockFileId);
@@ -146,202 +141,154 @@ describe("fetchFigmaData", () => {
   });
 
   describe("Error handling", () => {
-    it("should throw error when local variables API call fails", async () => {
-      let callCount = 0;
-      mockFetch.mockImplementation(() => {
-        callCount++;
-        if (callCount === 1) {
-          return Promise.resolve({
-            ok: false,
-            status: 404,
-            statusText: "Not Found",
-          } as Response);
-        }
-        return Promise.resolve({
-          ok: true,
-          json: async () => ({
-            meta: {
-              variableCollections: {},
-              variables: {},
-            },
-          }),
-        } as Response);
-      });
+    const apiErrorScenarios = [
+      {
+        description: "local variables API call fails",
+        mockImplementation: () => {
+          let callCount = 0;
+          return () => {
+            callCount++;
+            return Promise.resolve(
+              callCount === 1
+                ? createMockResponse({}, false, 404, "Not Found")
+                : createMockResponse({ meta: { variableCollections: {}, variables: {} } })
+            );
+          };
+        },
+        expectedError: "❌ Failed to fetch local variables: 404 Not Found",
+      },
+      {
+        description: "published variables API call fails",
+        mockImplementation: () => {
+          let callCount = 0;
+          return () => {
+            callCount++;
+            return Promise.resolve(
+              callCount === 1
+                ? createMockResponse({ meta: { variableCollections: {}, variables: {} } })
+                : createMockResponse({}, false, 401, "Unauthorized")
+            );
+          };
+        },
+        expectedError: "❌ Failed to fetch published variables: 401 Unauthorized",
+      },
+    ];
 
-      await expect(fetchFigmaData(mockFileId)).rejects.toThrow(
-        "❌ Failed to fetch local variables: 404 Not Found"
-      );
+    apiErrorScenarios.forEach(({ description, mockImplementation, expectedError }) => {
+      it(`should throw error when ${description}`, async () => {
+        mockFetch.mockImplementation(mockImplementation());
+
+        await expect(fetchFigmaData(mockFileId)).rejects.toThrow(expectedError);
+      });
     });
 
-    it("should throw error when published variables API call fails", async () => {
-      let callCount = 0;
-      mockFetch.mockImplementation(() => {
-        callCount++;
-        if (callCount === 1) {
-          return Promise.resolve({
-            ok: true,
-            json: async () => ({
-              meta: {
-                variableCollections: {},
-                variables: {},
-              },
-            }),
-          } as Response);
-        }
-        return Promise.resolve({
-          ok: false,
-          status: 401,
-          statusText: "Unauthorized",
-        } as Response);
+    const invalidResponseScenarios = [
+      {
+        description: "local variables response has no meta",
+        mockImplementation: () => {
+          let callCount = 0;
+          return () => {
+            callCount++;
+            return Promise.resolve(
+              callCount === 1
+                ? createMockResponse({})
+                : createMockResponse({ meta: { variableCollections: {}, variables: {} } })
+            );
+          };
+        },
+      },
+      {
+        description: "published variables response has no meta",
+        mockImplementation: () => {
+          let callCount = 0;
+          return () => {
+            callCount++;
+            return Promise.resolve(
+              callCount === 1
+                ? createMockResponse({ meta: { variableCollections: {}, variables: {} } })
+                : createMockResponse({})
+            );
+          };
+        },
+      },
+      {
+        description: "local variables response has null meta",
+        mockImplementation: () => {
+          let callCount = 0;
+          return () => {
+            callCount++;
+            return Promise.resolve(
+              callCount === 1
+                ? createMockResponse({ meta: null })
+                : createMockResponse({ meta: { variableCollections: {}, variables: {} } })
+            );
+          };
+        },
+      },
+    ];
+
+    invalidResponseScenarios.forEach(({ description, mockImplementation }) => {
+      it(`should throw error when ${description}`, async () => {
+        mockFetch.mockImplementation(mockImplementation());
+
+        await expect(fetchFigmaData(mockFileId)).rejects.toThrow(
+          "❌ Invalid response structure from Figma API"
+        );
       });
-
-      await expect(fetchFigmaData(mockFileId)).rejects.toThrow(
-        "❌ Failed to fetch published variables: 401 Unauthorized"
-      );
-    });
-
-    it("should throw error when local variables response has no meta", async () => {
-      let callCount = 0;
-      mockFetch.mockImplementation(() => {
-        callCount++;
-        if (callCount === 1) {
-          return Promise.resolve({
-            ok: true,
-            json: async () => ({}),
-          } as Response);
-        }
-        return Promise.resolve({
-          ok: true,
-          json: async () => ({
-            meta: {
-              variableCollections: {},
-              variables: {},
-            },
-          }),
-        } as Response);
-      });
-
-      await expect(fetchFigmaData(mockFileId)).rejects.toThrow(
-        "❌ Invalid response structure from Figma API"
-      );
-    });
-
-    it("should throw error when published variables response has no meta", async () => {
-      let callCount = 0;
-      mockFetch.mockImplementation(() => {
-        callCount++;
-        if (callCount === 1) {
-          return Promise.resolve({
-            ok: true,
-            json: async () => ({
-              meta: {
-                variableCollections: {},
-                variables: {},
-              },
-            }),
-          } as Response);
-        }
-        return Promise.resolve({
-          ok: true,
-          json: async () => ({}),
-        } as Response);
-      });
-
-      await expect(fetchFigmaData(mockFileId)).rejects.toThrow(
-        "❌ Invalid response structure from Figma API"
-      );
-    });
-
-    it("should throw error when local variables response has null meta", async () => {
-      let callCount = 0;
-      mockFetch.mockImplementation(() => {
-        callCount++;
-        if (callCount === 1) {
-          return Promise.resolve({
-            ok: true,
-            json: async () => ({ meta: null }),
-          } as Response);
-        }
-        return Promise.resolve({
-          ok: true,
-          json: async () => ({
-            meta: {
-              variableCollections: {},
-              variables: {},
-            },
-          }),
-        } as Response);
-      });
-
-      await expect(fetchFigmaData(mockFileId)).rejects.toThrow(
-        "❌ Invalid response structure from Figma API"
-      );
     });
   });
 
   describe("Network error handling", () => {
-    it("should handle network errors gracefully", async () => {
-      const networkError = new Error("Network request failed");
-      mockFetch.mockImplementation(() => Promise.reject(networkError));
-
-      await expect(fetchFigmaData(mockFileId)).rejects.toThrow(
-        "❌ Failed to fetch Figma data: Network request failed"
-      );
-    });
-
-    it("should handle unknown errors gracefully", async () => {
-      mockFetch.mockImplementation(() =>
-        Promise.reject("Unknown error string")
-      );
-
-      await expect(fetchFigmaData(mockFileId)).rejects.toThrow(
-        "❌ Failed to fetch Figma data: Unknown error"
-      );
-    });
-
-    it("should handle JSON parsing errors", async () => {
-      mockFetch.mockImplementation(() => {
-        return Promise.resolve({
+    const networkErrorScenarios = [
+      {
+        description: "network errors gracefully",
+        mockImplementation: () => Promise.reject(new Error("Network request failed")),
+        expectedError: "❌ Failed to fetch Figma data: Network request failed",
+      },
+      {
+        description: "unknown errors gracefully",
+        mockImplementation: () => Promise.reject("Unknown error string"),
+        expectedError: "❌ Failed to fetch Figma data: Unknown error",
+      },
+      {
+        description: "JSON parsing errors",
+        mockImplementation: () => Promise.resolve({
           ok: true,
-          json: async () => {
-            throw new Error("Invalid JSON");
-          },
-        } as unknown as Response);
-      });
+          json: async () => { throw new Error("Invalid JSON"); },
+        } as unknown as Response),
+        expectedError: "❌ Failed to fetch Figma data: Invalid JSON",
+      },
+    ];
 
-      await expect(fetchFigmaData(mockFileId)).rejects.toThrow(
-        "❌ Failed to fetch Figma data: Invalid JSON"
-      );
+    networkErrorScenarios.forEach(({ description, mockImplementation, expectedError }) => {
+      it(`should handle ${description}`, async () => {
+        mockFetch.mockImplementation(mockImplementation);
+
+        await expect(fetchFigmaData(mockFileId)).rejects.toThrow(expectedError);
+      });
     });
   });
 
   describe("Edge cases", () => {
-    it("should handle API responses with different status codes", async () => {
-      mockFetch.mockImplementation(() => {
-        return Promise.resolve({
-          ok: false,
-          status: 500,
-          statusText: "Internal Server Error",
-        } as Response);
+    const edgeCaseScenarios = [
+      {
+        description: "API responses with different status codes",
+        mockImplementation: () => Promise.resolve(createMockResponse({}, false, 500, "Internal Server Error")),
+        expectedError: "❌ Failed to fetch local variables: 500 Internal Server Error",
+      },
+      {
+        description: "responses with missing statusText",
+        mockImplementation: () => Promise.resolve(createMockResponse({}, false, 403, "")),
+        expectedError: "❌ Failed to fetch local variables: 403",
+      },
+    ];
+
+    edgeCaseScenarios.forEach(({ description, mockImplementation, expectedError }) => {
+      it(`should handle ${description}`, async () => {
+        mockFetch.mockImplementation(mockImplementation);
+
+        await expect(fetchFigmaData(mockFileId)).rejects.toThrow(expectedError);
       });
-
-      await expect(fetchFigmaData(mockFileId)).rejects.toThrow(
-        "❌ Failed to fetch local variables: 500 Internal Server Error"
-      );
-    });
-
-    it("should handle responses with missing statusText", async () => {
-      mockFetch.mockImplementation(() => {
-        return Promise.resolve({
-          ok: false,
-          status: 403,
-          statusText: "",
-        } as Response);
-      });
-
-      await expect(fetchFigmaData(mockFileId)).rejects.toThrow(
-        "❌ Failed to fetch local variables: 403"
-      );
     });
 
     it("should handle successful responses with empty collections and variables", async () => {
@@ -352,12 +299,7 @@ describe("fetchFigmaData", () => {
         },
       };
 
-      mockFetch.mockImplementation(() => {
-        return Promise.resolve({
-          ok: true,
-          json: async () => emptyResponse,
-        } as Response);
-      });
+      mockFetch.mockImplementation(() => Promise.resolve(createMockResponse(emptyResponse)));
 
       const result = await fetchFigmaData(mockFileId);
 
@@ -371,28 +313,29 @@ describe("fetchFigmaData", () => {
   });
 
   describe("Integration scenarios", () => {
-    it("should handle timeout scenarios", async () => {
-      const timeoutError = new Error("Request timeout");
-      timeoutError.name = "TimeoutError";
-      mockFetch.mockImplementation(() => Promise.reject(timeoutError));
+    const integrationScenarios = [
+      {
+        description: "timeout scenarios",
+        mockImplementation: () => {
+          const timeoutError = new Error("Request timeout");
+          timeoutError.name = "TimeoutError";
+          return Promise.reject(timeoutError);
+        },
+        expectedError: "❌ Failed to fetch Figma data: Request timeout",
+      },
+      {
+        description: "rate limiting scenarios",
+        mockImplementation: () => Promise.resolve(createMockResponse({}, false, 429, "Too Many Requests")),
+        expectedError: "❌ Failed to fetch local variables: 429 Too Many Requests",
+      },
+    ];
 
-      await expect(fetchFigmaData(mockFileId)).rejects.toThrow(
-        "❌ Failed to fetch Figma data: Request timeout"
-      );
-    });
+    integrationScenarios.forEach(({ description, mockImplementation, expectedError }) => {
+      it(`should handle ${description}`, async () => {
+        mockFetch.mockImplementation(mockImplementation);
 
-    it("should handle rate limiting scenarios", async () => {
-      mockFetch.mockImplementation(() => {
-        return Promise.resolve({
-          ok: false,
-          status: 429,
-          statusText: "Too Many Requests",
-        } as Response);
+        await expect(fetchFigmaData(mockFileId)).rejects.toThrow(expectedError);
       });
-
-      await expect(fetchFigmaData(mockFileId)).rejects.toThrow(
-        "❌ Failed to fetch local variables: 429 Too Many Requests"
-      );
     });
 
     it("should work with different file ID formats", async () => {
@@ -404,12 +347,7 @@ describe("fetchFigmaData", () => {
         },
       };
 
-      mockFetch.mockImplementation(() => {
-        return Promise.resolve({
-          ok: true,
-          json: async () => mockResponse,
-        } as Response);
-      });
+      mockFetch.mockImplementation(() => Promise.resolve(createMockResponse(mockResponse)));
 
       const result = await fetchFigmaData(specialFileId);
 

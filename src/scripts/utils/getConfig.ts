@@ -8,6 +8,7 @@ interface Config {
   outputFolder: string;
   themes?: Record<string, string>;
   customPrefix?: boolean;
+  target: "tailwindcss" | "css";
 }
 
 const getConfig = () => {

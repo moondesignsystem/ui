@@ -5,6 +5,7 @@ interface Config {
     outputFolder: string;
     themes?: Record<string, string>;
     customPrefix?: boolean;
+    target: "tailwindcss" | "css";
 }
 declare const getConfig: () => Config;
 export default getConfig;

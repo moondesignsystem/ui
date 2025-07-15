@@ -31,6 +31,20 @@ describe("getConfig", () => {
     process.cwd = originalCwd;
   });
 
+  const setupValidConfigFile = (config: object) => {
+    mockFs.existsSync.mockReturnValue(true);
+    mockFs.readFileSync.mockReturnValue(JSON.stringify(config));
+  };
+
+  const setupMissingConfigFile = () => {
+    mockFs.existsSync.mockReturnValue(false);
+  };
+
+  const setupInvalidJsonFile = (content: string) => {
+    mockFs.existsSync.mockReturnValue(true);
+    mockFs.readFileSync.mockReturnValue(content);
+  };
+
   it("should load valid config successfully", () => {
     const validConfig = {
       coreFileId: "core123",
@@ -41,8 +55,7 @@ describe("getConfig", () => {
       customPrefix: "moon",
     };
 
-    mockFs.existsSync.mockReturnValue(true);
-    mockFs.readFileSync.mockReturnValue(JSON.stringify(validConfig));
+    setupValidConfigFile(validConfig);
 
     const result = getConfig();
 
@@ -60,66 +73,6 @@ describe("getConfig", () => {
     );
   });
 
-  it("should throw error when config file does not exist", () => {
-    mockFs.existsSync.mockReturnValue(false);
-
-    expect(() => getConfig()).toThrow(
-      "❌ moonconfig.json not found in current directory"
-    );
-  });
-
-  it("should throw error for invalid JSON", () => {
-    mockFs.existsSync.mockReturnValue(true);
-    mockFs.readFileSync.mockReturnValue("{ invalid json }");
-
-    expect(() => getConfig()).toThrow(/❌ Invalid JSON in moonconfig.json:/);
-  });
-
-  it("should throw error when missing coreFileId", () => {
-    const invalidConfig = {
-      componentsFileId: "comp456",
-      projectName: "test-project",
-      outputFolder: "./dist",
-    };
-
-    mockFs.existsSync.mockReturnValue(true);
-    mockFs.readFileSync.mockReturnValue(JSON.stringify(invalidConfig));
-
-    expect(() => getConfig()).toThrow(
-      "❌ Missing required field 'coreFileId' in moonconfig.json"
-    );
-  });
-
-  it("should throw error when missing projectName", () => {
-    const invalidConfig = {
-      coreFileId: "core123",
-      componentsFileId: "comp456",
-      outputFolder: "./dist",
-    };
-
-    mockFs.existsSync.mockReturnValue(true);
-    mockFs.readFileSync.mockReturnValue(JSON.stringify(invalidConfig));
-
-    expect(() => getConfig()).toThrow(
-      "❌ Missing required field 'projectName' in moonconfig.json"
-    );
-  });
-
-  it("should throw error when missing outputFolder", () => {
-    const invalidConfig = {
-      coreFileId: "core123",
-      componentsFileId: "comp456",
-      projectName: "test-project",
-    };
-
-    mockFs.existsSync.mockReturnValue(true);
-    mockFs.readFileSync.mockReturnValue(JSON.stringify(invalidConfig));
-
-    expect(() => getConfig()).toThrow(
-      "❌ Missing required field 'outputFolder' in moonconfig.json"
-    );
-  });
-
   it("should handle minimal valid config", () => {
     const minimalConfig = {
       coreFileId: "core123",
@@ -127,11 +80,61 @@ describe("getConfig", () => {
       outputFolder: "./dist",
     };
 
-    mockFs.existsSync.mockReturnValue(true);
-    mockFs.readFileSync.mockReturnValue(JSON.stringify(minimalConfig));
+    setupValidConfigFile(minimalConfig);
 
     const result = getConfig();
     expect(result).toEqual(minimalConfig);
+  });
+
+  const requiredFieldTests = [
+    {
+      field: "coreFileId",
+      config: {
+        componentsFileId: "comp456",
+        projectName: "test-project",
+        outputFolder: "./dist",
+      }
+    },
+    {
+      field: "projectName",
+      config: {
+        coreFileId: "core123",
+        componentsFileId: "comp456",
+        outputFolder: "./dist",
+      }
+    },
+    {
+      field: "outputFolder",
+      config: {
+        coreFileId: "core123",
+        componentsFileId: "comp456",
+        projectName: "test-project",
+      }
+    }
+  ];
+
+  requiredFieldTests.forEach(({ field, config }) => {
+    it(`should throw error when missing ${field}`, () => {
+      setupValidConfigFile(config);
+
+      expect(() => getConfig()).toThrow(
+        `❌ Missing required field '${field}' in moonconfig.json`
+      );
+    });
+  });
+
+  it("should throw error when config file does not exist", () => {
+    setupMissingConfigFile();
+
+    expect(() => getConfig()).toThrow(
+      "❌ moonconfig.json not found in current directory"
+    );
+  });
+
+  it("should throw error for invalid JSON", () => {
+    setupInvalidJsonFile("{ invalid json }");
+
+    expect(() => getConfig()).toThrow(/❌ Invalid JSON in moonconfig.json:/);
   });
 
   it("should handle file read errors", () => {

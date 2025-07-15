@@ -2,21 +2,28 @@ import { describe, it, expect } from "@jest/globals";
 import getOpacity from "../../src/scripts/utils/getOpacity";
 
 describe("getOpacity", () => {
-  it("should convert percentage to decimal", () => {
-    expect(getOpacity(100)).toBe(1);
-    expect(getOpacity(50)).toBe(0.5);
-    expect(getOpacity(0)).toBe(0);
-  });
+  const testCases = [
+    // Boundary values
+    { input: 100, expected: 1, description: "full opacity" },
+    { input: 0, expected: 0, description: "no opacity" },
+    
+    // Common percentages
+    { input: 50, expected: 0.5, description: "half opacity" },
+    { input: 25, expected: 0.25, description: "quarter opacity" },
+    { input: 75, expected: 0.75, description: "three-quarter opacity" },
+    
+    // Decimal percentages
+    { input: 12.5, expected: 0.125, description: "decimal percentage" },
+    
+    // Edge cases
+    { input: 1, expected: 0.01, description: "one percent" },
+    { input: 99, expected: 0.99, description: "near full opacity" },
+    { input: 0.1, expected: 0.001, description: "very small percentage" }
+  ];
 
-  it("should handle decimal percentages", () => {
-    expect(getOpacity(25)).toBe(0.25);
-    expect(getOpacity(75)).toBe(0.75);
-    expect(getOpacity(12.5)).toBe(0.125);
-  });
-
-  it("should handle edge cases", () => {
-    expect(getOpacity(1)).toBe(0.01);
-    expect(getOpacity(99)).toBe(0.99);
-    expect(getOpacity(0.1)).toBe(0.001);
+  testCases.forEach(({ input, expected, description }) => {
+    it(`should convert ${input}% to ${expected} (${description})`, () => {
+      expect(getOpacity(input)).toBe(expected);
+    });
   });
 });

@@ -12,72 +12,102 @@ const mockFs = fs as jest.Mocked<typeof fs>;
 const mockPath = path as jest.Mocked<typeof path>;
 
 describe("Integration Tests", () => {
+  // Helper functions
+  const expectNoThrow = (fn: () => void) => {
+    expect(fn).not.toThrow();
+  };
+
+  const expectThrowWithMessage = (fn: () => void, expectedMessage: string | RegExp) => {
+    expect(fn).toThrow(expectedMessage);
+  };
+
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
   describe("File System Operations", () => {
-    it("should handle directory creation gracefully", () => {
-      mockFs.existsSync.mockReturnValue(false);
-      mockFs.mkdirSync.mockImplementation(() => undefined);
-      mockPath.dirname.mockReturnValue("/test/output");
+    const fileSystemTestCases = [
+      {
+        description: "should handle directory creation gracefully",
+        setup: () => {
+          mockFs.existsSync.mockReturnValue(false);
+          mockFs.mkdirSync.mockImplementation(() => undefined);
+          mockPath.dirname.mockReturnValue("/test/output");
+        },
+        operation: () => {
+          if (!mockFs.existsSync("/test/output")) {
+            mockFs.mkdirSync("/test/output", { recursive: true });
+          }
+        },
+        verification: () => {
+          expect(mockFs.mkdirSync).toHaveBeenCalledWith("/test/output", {
+            recursive: true,
+          });
+        },
+      },
+      {
+        description: "should handle file writing operations",
+        setup: () => {
+          mockFs.writeFileSync.mockImplementation(() => undefined);
+        },
+        operation: () => {
+          const testContent = "/* Generated CSS */\n.test { color: red; }";
+          mockFs.writeFileSync("/test/output/test.css", testContent, "utf8");
+        },
+        verification: () => {
+          expect(mockFs.writeFileSync).toHaveBeenCalledWith(
+            "/test/output/test.css",
+            "/* Generated CSS */\n.test { color: red; }",
+            "utf8"
+          );
+        },
+      },
+    ];
 
-      // Test that directory creation would work
-      expect(() => {
-        if (!mockFs.existsSync("/test/output")) {
-          mockFs.mkdirSync("/test/output", { recursive: true });
-        }
-      }).not.toThrow();
-
-      expect(mockFs.mkdirSync).toHaveBeenCalledWith("/test/output", {
-        recursive: true,
+    fileSystemTestCases.forEach(({ description, setup, operation, verification }) => {
+      it(description, () => {
+        setup();
+        expectNoThrow(operation);
+        verification();
       });
-    });
-
-    it("should handle file writing operations", () => {
-      const testContent = "/* Generated CSS */\n.test { color: red; }";
-      mockFs.writeFileSync.mockImplementation(() => undefined);
-
-      expect(() => {
-        mockFs.writeFileSync("/test/output/test.css", testContent, "utf8");
-      }).not.toThrow();
-
-      expect(mockFs.writeFileSync).toHaveBeenCalledWith(
-        "/test/output/test.css",
-        testContent,
-        "utf8"
-      );
     });
   });
 
-  describe("Error Handling Integration", () => {
+  describe("Error Handling and Configuration Integration", () => {
     it("should handle file system errors gracefully", () => {
       const fsError = new Error("ENOENT: no such file or directory");
       mockFs.writeFileSync.mockImplementation(() => {
         throw fsError;
       });
 
-      expect(() => {
+      expectThrowWithMessage(() => {
         try {
           mockFs.writeFileSync("/invalid/path/test.css", "content", "utf8");
         } catch (error) {
           // In real code, this would be wrapped in our custom error
           throw new Error(`File System Error: ${(error as Error).message}`);
         }
-      }).toThrow("File System Error: ENOENT: no such file or directory");
+      }, "File System Error: ENOENT: no such file or directory");
     });
-  });
 
-  describe("Configuration Integration", () => {
     it("should validate required configuration fields", () => {
-      const invalidConfigs = [
-        { projectName: "test", outputFolder: "./dist" }, // missing coreFileId
-        { coreFileId: "test123", outputFolder: "./dist" }, // missing projectName
-        { coreFileId: "test123", projectName: "test" }, // missing outputFolder
+      const configTestCases = [
+        { 
+          config: { projectName: "test", outputFolder: "./dist" },
+          expectedMissingFields: ["coreFileId"]
+        },
+        { 
+          config: { coreFileId: "test123", outputFolder: "./dist" },
+          expectedMissingFields: ["projectName"]
+        },
+        { 
+          config: { coreFileId: "test123", projectName: "test" },
+          expectedMissingFields: ["outputFolder"]
+        },
       ];
 
-      invalidConfigs.forEach((config) => {
-        expect(() => {
+      configTestCases.forEach(({ config, expectedMissingFields }) => {
+        expectThrowWithMessage(() => {
           const requiredFields = ["coreFileId", "projectName", "outputFolder"];
           const missingFields = requiredFields.filter(
             (field) => !(field in config)
@@ -87,7 +117,7 @@ describe("Integration Tests", () => {
               `Missing required fields: ${missingFields.join(", ")}`
             );
           }
-        }).toThrow("Missing required fields:");
+        }, `Missing required fields: ${expectedMissingFields.join(", ")}`);
       });
     });
   });

@@ -2,41 +2,55 @@
 
 A UI library for generating core and component CSS files from Figma design tokens.
 
+## Quick Start
+
+1. **Set up Figma token**: Add your Figma personal access token to an `.env` file:
+
+   ```bash
+   FIGMA_TOKEN=YOUR_FIGMA_PERSONAL_ACCESS_TOKEN
+   ```
+
+2. **Generate CSS**: Run the tool to generate your CSS files:
+   ```bash
+   npx @heathmont/moon-ui
+   ```
+
 ## Usage
 
-### Command Line
-
-Run the tool directly using npx:
+### Command Line Options
 
 ```bash
-# Basic usage - generates core CSS
+# Basic usage - generates core CSS only
 npx @heathmont/moon-ui
 
-# Generate both core and components CSS
+# Generate both core and component CSS
 npx @heathmont/moon-ui --add-components
 
-# Customize CSS class prefix (default is 'moon')
+# Use custom CSS class prefix (uses projectName as prefix)
 npx @heathmont/moon-ui --custom-prefix
 
-# Customize project name
-npx @heathmont/moon-ui --projectName project-name
+# Customize project name (default: 'moon')
+npx @heathmont/moon-ui --projectName your-project
 
-# Specify output directory
+# Specify output directory (default: 'dist')
 npx @heathmont/moon-ui --outputFolder output-folder
 
 # Use custom Figma file IDs
 npx @heathmont/moon-ui --coreFileId CORE_FILE_ID --componentsFileId COMPONENTS_FILE_ID
+
+# Generate for vanilla CSS instead of Tailwind CSS v4 (default: 'tailwindcss')
+npx @heathmont/moon-ui --target css
 ```
 
-### Configuration
+### Configuration File
 
-Add `FIGMA_TOKEN` variable to your `.env` file. Be sure you also included this file to `.gitignore`:
+Add a `FIGMA_TOKEN` variable to your `.env` file and include this file in `.gitignore`:
 
 ```bash
 FIGMA_TOKEN=YOUR_FIGMA_PERSONAL_ACCESS_TOKEN
 ```
 
-The tool will create a `moonconfig.json` file with default values if one doesn't exist already. You also can create or modify a `moonconfig.json` file in your project root if needed:
+The tool automatically creates a `moonconfig.json` file with default values if one doesn't exist. You can also create or modify this file manually:
 
 ```json
 {
@@ -45,6 +59,17 @@ The tool will create a `moonconfig.json` file with default values if one doesn't
   "componentsFileId": "COMPONENTS_FILE_ID",
   "outputFolder": "OUTPUT_FOLDER",
   "customPrefix": false,
+  "target": "tailwindcss",
+  "themes": {}
+}
+```
+
+#### Multi-theme Support
+
+For additional themes, add theme names and their corresponding Figma file IDs to the `themes` object:
+
+```json
+{
   "themes": {
     "theme1": "THEME_1_CORE_FILE_ID",
     "theme2": "THEME_2_CORE_FILE_ID"
@@ -52,57 +77,61 @@ The tool will create a `moonconfig.json` file with default values if one doesn't
 }
 ```
 
-If you don't have additional themes, leave "theme" an empty object:
+## CSS Output Targets
 
-```json
-{
-  "projectName": "PROJECT_NAME",
-  "coreFileId": "CORE_FILE_ID",
-  "componentsFileId": "COMPONENTS_FILE_ID",
-  "outputFolder": "OUTPUT_FOLDER",
-  "customPrefix": false,
-  "themes": {}
-}
-```
+Moon UI supports two output formats:
 
-## Component Class Prefix
+### TailwindCSS v4 (Default)
 
-By default, all component classes use the `moon-` prefix (e.g., `.moon-button`, `.moon-tooltip`). You can customize this prefix using the `--custom-prefix` option. If you set it to true, `projectName` will be used as a custom prefix:
+Generates CSS compatible with TailwindCSS v4 using `@theme inline` directives:
+
+### Vanilla CSS
+
+Generates standard CSS using `:root` selectors for maximum compatibility:
 
 ```bash
-# Use custom prefix for component classes
-npx @heathmont/moon-ui --add-components --custom-prefix
+npx @heathmont/moon-ui --target css
 ```
 
-This will transform component classes from:
+**Note**: With vanilla CSS output, you'll retain typography and shadow utility classes, but some Tailwind-specific utility classes will not be generated.
+
+## Component Class Prefixes
+
+By default, all component classes use the `moon-` prefix:
 
 ```css
 .moon-button {
-  ...;
+  /* styles */
 }
 .moon-tooltip {
-  ...;
+  /* styles */
 }
 ```
 
-To use your custom prefix:
+Enable custom prefixes using `--custom-prefix` to use your `projectName` as the prefix:
+
+```bash
+npx @heathmont/moon-ui --add-components --custom-prefix --projectName company
+```
+
+This generates:
 
 ```css
 .company-button {
-  ...;
+  /* styles */
 }
 .company-tooltip {
-  ...;
+  /* styles */
 }
 ```
 
-## Output
+## Generated Files
 
-The following files will be generated in your outputFolder directory:
+The following files are created in your specified output directory:
 
-- `{projectName}-core.css` - The main CSS file with variables and utilities
-- `{projectName}-components.css` - Component classes (if `--add-components` is used)
-- `{theme}-core.css` - One file for each theme defined in your config
+- **`{projectName}-core.css`** - Core CSS variables and utilities
+- **`{projectName}-components.css`** - Component classes (when `--add-components` is used)
+- **`{themeName}-core.css`** - Theme-specific CSS files (one per theme in config)
 
 ## License
 
@@ -110,23 +139,8 @@ MIT
 
 ## Versioning
 
-Moon UI follows [Semantic Versioning](https://semver.org/). For the versions available, see the [tags on this repository](https://github.com/coingaming/moon-ui/tags).
+Moon UI follows [Semantic Versioning](https://semver.org/). View available versions in the [repository tags](https://github.com/coingaming/moon-ui/tags).
 
-- **MAJOR** version for incompatible API changes
-- **MINOR** version for new functionality in a backward compatible manner
-- **PATCH** version for backward compatible bug fixes
-
-### Contributing
-
-This project uses [Changesets](https://github.com/changesets/changesets) for version management:
-
-```bash
-# Create a new changeset
-npm run changeset
-
-# Update versions based on changesets
-npm run version
-
-# Publish new version
-npm run release
-```
+- **MAJOR**: Incompatible API changes
+- **MINOR**: New backward-compatible functionality
+- **PATCH**: Backward-compatible bug fixes

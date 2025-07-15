@@ -12,124 +12,109 @@ describe("replaceClassPrefix", () => {
     jest.clearAllMocks();
   });
 
+  // Helper function to create config mock
+  const createMockConfig = (overrides: any = {}) => ({
+    coreFileId: "test",
+    componentsFileId: "test",
+    projectName: "myproject",
+    outputFolder: "test",
+    target: "tailwindcss",
+    customPrefix: true,
+    ...overrides,
+  });
+
   describe("Error handling", () => {
-    it("should throw error when CSS content is empty string", () => {
-      expect(() => replaceClassPrefix("")).toThrow(
-        "❌ CSS content is required"
-      );
-      expect(mockedGetConfig).not.toHaveBeenCalled();
-    });
+    const invalidInputs = [
+      { input: "", description: "empty string" },
+      { input: null, description: "null" },
+      { input: undefined, description: "undefined" },
+    ];
 
-    it("should throw error when CSS content is null", () => {
-      expect(() => replaceClassPrefix(null as any)).toThrow(
-        "❌ CSS content is required"
-      );
-      expect(mockedGetConfig).not.toHaveBeenCalled();
-    });
-
-    it("should throw error when CSS content is undefined", () => {
-      expect(() => replaceClassPrefix(undefined as any)).toThrow(
-        "❌ CSS content is required"
-      );
-      expect(mockedGetConfig).not.toHaveBeenCalled();
-    });
-
-    it("should handle getConfig throwing an Error", () => {
-      const cssContent = ".moon-button { color: red; }";
-      mockedGetConfig.mockImplementation(() => {
-        throw new Error("Config file not found");
+    invalidInputs.forEach(({ input, description }) => {
+      it(`should throw error when CSS content is ${description}`, () => {
+        expect(() => replaceClassPrefix(input as any)).toThrow(
+          "❌ CSS content is required"
+        );
+        expect(mockedGetConfig).not.toHaveBeenCalled();
       });
-
-      expect(() => replaceClassPrefix(cssContent)).toThrow(
-        "❌ Failed to replace class prefix: Config file not found"
-      );
     });
 
-    it("should handle getConfig throwing unknown error", () => {
-      const cssContent = ".moon-button { color: red; }";
-      mockedGetConfig.mockImplementation(() => {
-        throw "Unknown error"; // Non-Error object
-      });
+    const errorScenarios = [
+      {
+        mockImplementation: () => { throw new Error("Config file not found"); },
+        expectedError: "❌ Failed to replace class prefix: Config file not found",
+        description: "getConfig throwing an Error"
+      },
+      {
+        mockImplementation: () => { throw "Unknown error"; },
+        expectedError: "❌ Failed to replace class prefix: Unknown error",
+        description: "getConfig throwing unknown error"
+      },
+    ];
 
-      expect(() => replaceClassPrefix(cssContent)).toThrow(
-        "❌ Failed to replace class prefix: Unknown error"
-      );
+    errorScenarios.forEach(({ mockImplementation, expectedError, description }) => {
+      it(`should handle ${description}`, () => {
+        const cssContent = ".moon-button { color: red; }";
+        mockedGetConfig.mockImplementation(mockImplementation);
+
+        expect(() => replaceClassPrefix(cssContent)).toThrow(expectedError);
+      });
     });
   });
 
   describe("No customPrefix scenarios", () => {
-    it("should return original CSS when customPrefix is false", () => {
-      const cssContent =
-        ".moon-button { color: red; }\n.moon-input { border: 1px solid blue; }";
-      mockedGetConfig.mockReturnValue({
-        coreFileId: "test",
-        componentsFileId: "test",
-        projectName: "myproject",
-        outputFolder: "test",
-        customPrefix: false,
+    const noCustomPrefixConfigs = [
+      { config: createMockConfig({ customPrefix: false }), description: "customPrefix is false" },
+      { config: createMockConfig({ customPrefix: undefined }), description: "customPrefix is undefined" },
+      { config: null, description: "config is null" },
+    ];
+
+    noCustomPrefixConfigs.forEach(({ config, description }) => {
+      it(`should return original CSS when ${description}`, () => {
+        const cssContent = ".moon-button { color: red; }\n.moon-input { border: 1px solid blue; }";
+        mockedGetConfig.mockReturnValue(config as any);
+
+        const result = replaceClassPrefix(cssContent);
+
+        expect(result).toBe(cssContent);
+        if (config !== null) {
+          expect(mockedGetConfig).toHaveBeenCalledTimes(1);
+        }
       });
-
-      const result = replaceClassPrefix(cssContent);
-
-      expect(result).toBe(cssContent);
-      expect(mockedGetConfig).toHaveBeenCalledTimes(1);
-    });
-
-    it("should return original CSS when customPrefix is undefined", () => {
-      const cssContent = ".moon-button { color: red; }";
-      mockedGetConfig.mockReturnValue({
-        coreFileId: "test",
-        componentsFileId: "test",
-        projectName: "myproject",
-        outputFolder: "test",
-        // customPrefix is undefined
-      });
-
-      const result = replaceClassPrefix(cssContent);
-
-      expect(result).toBe(cssContent);
-    });
-
-    it("should return original CSS when config is null", () => {
-      const cssContent = ".moon-button { color: red; }";
-      mockedGetConfig.mockReturnValue(null as any);
-
-      const result = replaceClassPrefix(cssContent);
-
-      expect(result).toBe(cssContent);
     });
   });
 
   describe("Class prefix replacement", () => {
-    it("should replace moon- prefix with projectName prefix", () => {
-      const cssContent = ".moon-button { color: red; }";
-      mockedGetConfig.mockReturnValue({
-        coreFileId: "test",
-        componentsFileId: "test",
+    const replacementTestCases = [
+      {
+        description: "replace moon- prefix with projectName prefix",
+        cssContent: ".moon-button { color: red; }",
         projectName: "myproject",
-        outputFolder: "test",
-        customPrefix: true,
-      });
-
-      const result = replaceClassPrefix(cssContent);
-
-      expect(result).toBe(".myproject-button { color: red; }");
-      expect(mockedGetConfig).toHaveBeenCalledTimes(1);
-    });
-
-    it("should replace multiple moon- prefixes in single CSS rule", () => {
-      const cssContent = ".moon-button.moon-primary { color: red; }";
-      mockedGetConfig.mockReturnValue({
-        coreFileId: "test",
-        componentsFileId: "test",
+        expected: ".myproject-button { color: red; }",
+      },
+      {
+        description: "replace multiple moon- prefixes in single CSS rule",
+        cssContent: ".moon-button.moon-primary { color: red; }",
         projectName: "awesome",
-        outputFolder: "test",
-        customPrefix: true,
+        expected: ".awesome-button.awesome-primary { color: red; }",
+      },
+      {
+        description: "handle projectName with special characters",
+        cssContent: ".moon-button { color: red; }",
+        projectName: "my-awesome_project123",
+        expected: ".my-awesome_project123-button { color: red; }",
+      },
+    ];
+
+    replacementTestCases.forEach(({ description, cssContent, projectName, expected }) => {
+      it(`should ${description}`, () => {
+        mockedGetConfig.mockReturnValue(createMockConfig({ projectName }));
+
+        const result = replaceClassPrefix(cssContent);
+
+        expect(result).toBe(expected);
+        expect(mockedGetConfig).toHaveBeenCalledTimes(1);
       });
-
-      const result = replaceClassPrefix(cssContent);
-
-      expect(result).toBe(".awesome-button.awesome-primary { color: red; }");
     });
 
     it("should replace moon- prefixes across multiple CSS rules", () => {
@@ -144,13 +129,7 @@ describe("replaceClassPrefix", () => {
   font-weight: bold;
 }`;
 
-      mockedGetConfig.mockReturnValue({
-        coreFileId: "test",
-        componentsFileId: "test",
-        projectName: "webapp",
-        outputFolder: "test",
-        customPrefix: true,
-      });
+      mockedGetConfig.mockReturnValue(createMockConfig({ projectName: "webapp" }));
 
       const result = replaceClassPrefix(cssContent);
 
@@ -168,21 +147,6 @@ describe("replaceClassPrefix", () => {
       expect(result).toBe(expected);
     });
 
-    it("should handle projectName with special characters", () => {
-      const cssContent = ".moon-button { color: red; }";
-      mockedGetConfig.mockReturnValue({
-        coreFileId: "test",
-        componentsFileId: "test",
-        projectName: "my-awesome_project123",
-        outputFolder: "test",
-        customPrefix: true,
-      });
-
-      const result = replaceClassPrefix(cssContent);
-
-      expect(result).toBe(".my-awesome_project123-button { color: red; }");
-    });
-
     it("should only replace .moon- and not other occurrences of moon-", () => {
       const cssContent = `
 .moon-button { color: red; }
@@ -190,13 +154,7 @@ describe("replaceClassPrefix", () => {
 .other-moon-class { background: blue; }
 content: "moon-like";`;
 
-      mockedGetConfig.mockReturnValue({
-        coreFileId: "test",
-        componentsFileId: "test",
-        projectName: "custom",
-        outputFolder: "test",
-        customPrefix: true,
-      });
+      mockedGetConfig.mockReturnValue(createMockConfig({ projectName: "custom" }));
 
       const result = replaceClassPrefix(cssContent);
 
@@ -211,25 +169,10 @@ content: "moon-like";`;
   });
 
   describe("Edge cases and complex CSS", () => {
-    it("should handle empty CSS content when customPrefix is true", () => {
-      // This should not reach the replacement logic due to early validation
-      // but testing the behavior if somehow empty string passes through
-      const cssContent = "   "; // whitespace that might be truthy
-      mockedGetConfig.mockReturnValue({
-        coreFileId: "test",
-        componentsFileId: "test",
-        projectName: "test",
-        outputFolder: "test",
-        customPrefix: true,
-      });
-
-      const result = replaceClassPrefix(cssContent);
-
-      expect(result).toBe("   "); // Should return as-is
-    });
-
-    it("should handle CSS with nested selectors and pseudo-classes", () => {
-      const cssContent = `
+    const complexCssTestCases = [
+      {
+        description: "handle CSS with nested selectors and pseudo-classes",
+        cssContent: `
 .moon-button:hover .moon-icon {
   color: blue;
 }
@@ -238,19 +181,9 @@ content: "moon-like";`;
 }
 @media (max-width: 768px) {
   .moon-mobile { display: block; }
-}`;
-
-      mockedGetConfig.mockReturnValue({
-        coreFileId: "test",
-        componentsFileId: "test",
+}`,
         projectName: "responsive",
-        outputFolder: "test",
-        customPrefix: true,
-      });
-
-      const result = replaceClassPrefix(cssContent);
-
-      const expected = `
+        expected: `
 .responsive-button:hover .responsive-icon {
   color: blue;
 }
@@ -259,37 +192,43 @@ content: "moon-like";`;
 }
 @media (max-width: 768px) {
   .responsive-mobile { display: block; }
-}`;
-
-      expect(result).toBe(expected);
-    });
-
-    it("should handle CSS with comments containing moon- references", () => {
-      const cssContent = `
+}`,
+      },
+      {
+        description: "handle CSS with comments containing moon- references",
+        cssContent: `
 /* .moon-old-class was deprecated */
 .moon-button {
   /* Based on moon-design-system */
   color: red;
-}`;
-
-      mockedGetConfig.mockReturnValue({
-        coreFileId: "test",
-        componentsFileId: "test",
+}`,
         projectName: "newdesign",
-        outputFolder: "test",
-        customPrefix: true,
-      });
-
-      const result = replaceClassPrefix(cssContent);
-
-      const expected = `
+        expected: `
 /* .newdesign-old-class was deprecated */
 .newdesign-button {
   /* Based on moon-design-system */
   color: red;
-}`;
+}`,
+      },
+    ];
 
-      expect(result).toBe(expected);
+    complexCssTestCases.forEach(({ description, cssContent, projectName, expected }) => {
+      it(`should ${description}`, () => {
+        mockedGetConfig.mockReturnValue(createMockConfig({ projectName }));
+
+        const result = replaceClassPrefix(cssContent);
+
+        expect(result).toBe(expected);
+      });
+    });
+
+    it("should handle empty CSS content when customPrefix is true", () => {
+      const cssContent = "   "; // whitespace that might be truthy
+      mockedGetConfig.mockReturnValue(createMockConfig({ projectName: "test" }));
+
+      const result = replaceClassPrefix(cssContent);
+
+      expect(result).toBe("   "); // Should return as-is
     });
 
     it("should handle very long CSS content efficiently", () => {
@@ -300,13 +239,7 @@ content: "moon-like";`;
       );
       const cssContent = moonClasses.join("\n");
 
-      mockedGetConfig.mockReturnValue({
-        coreFileId: "test",
-        componentsFileId: "test",
-        projectName: "large",
-        outputFolder: "test",
-        customPrefix: true,
-      });
+      mockedGetConfig.mockReturnValue(createMockConfig({ projectName: "large" }));
 
       const result = replaceClassPrefix(cssContent);
 
@@ -323,35 +256,44 @@ content: "moon-like";`;
   });
 
   describe("Integration with getConfig variations", () => {
-    it("should work with minimal config structure", () => {
-      const cssContent = ".moon-component { display: flex; }";
-      mockedGetConfig.mockReturnValue({
-        coreFileId: "core123",
-        componentsFileId: "comp456",
-        projectName: "minimal",
-        outputFolder: "dist",
-        customPrefix: true,
+    const configVariations = [
+      {
+        description: "work with minimal config structure",
+        cssContent: ".moon-component { display: flex; }",
+        config: {
+          coreFileId: "core123",
+          componentsFileId: "comp456",
+          projectName: "minimal",
+          outputFolder: "dist",
+          customPrefix: true,
+          target: "tailwindcss" as const,
+        },
+        expected: ".minimal-component { display: flex; }",
+      },
+      {
+        description: "work with config containing additional fields",
+        cssContent: ".moon-widget { padding: 10px; }",
+        config: {
+          coreFileId: "core123",
+          componentsFileId: "comp456",
+          projectName: "extended",
+          outputFolder: "build",
+          customPrefix: true,
+          target: "tailwindcss" as const,
+          themes: { light: "theme1", dark: "theme2" },
+        },
+        expected: ".extended-widget { padding: 10px; }",
+      },
+    ];
+
+    configVariations.forEach(({ description, cssContent, config, expected }) => {
+      it(`should ${description}`, () => {
+        mockedGetConfig.mockReturnValue(config);
+
+        const result = replaceClassPrefix(cssContent);
+
+        expect(result).toBe(expected);
       });
-
-      const result = replaceClassPrefix(cssContent);
-
-      expect(result).toBe(".minimal-component { display: flex; }");
-    });
-
-    it("should work with config containing additional fields", () => {
-      const cssContent = ".moon-widget { padding: 10px; }";
-      mockedGetConfig.mockReturnValue({
-        coreFileId: "core123",
-        componentsFileId: "comp456",
-        projectName: "extended",
-        outputFolder: "build",
-        customPrefix: true,
-        themes: { light: "theme1", dark: "theme2" },
-      });
-
-      const result = replaceClassPrefix(cssContent);
-
-      expect(result).toBe(".extended-widget { padding: 10px; }");
     });
   });
 });

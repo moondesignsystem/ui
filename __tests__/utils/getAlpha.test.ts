@@ -6,27 +6,26 @@ describe("getAlpha", () => {
     expect(getAlpha(1)).toBe("");
   });
 
-  it("should return formatted alpha for values less than 1", () => {
-    expect(getAlpha(0.8)).toBe(" / 0.80");
-    expect(getAlpha(0.5)).toBe(" / 0.50");
-    expect(getAlpha(0.25)).toBe(" / 0.25");
-  });
+  const testCases = [
+    // Standard alpha values
+    { alpha: 0.8, expected: " / 0.80", description: "0.8 alpha value" },
+    { alpha: 0.5, expected: " / 0.50", description: "0.5 alpha value" },
+    { alpha: 0.25, expected: " / 0.25", description: "0.25 alpha value" },
+    
+    // Zero and very small values
+    { alpha: 0, expected: " / 0", description: "zero alpha value" },
+    { alpha: 0.01, expected: " / 0.01", description: "small alpha value (0.01)" },
+    { alpha: 0.001, expected: " / 0", description: "very small alpha value (0.001 rounds to 0.00)" },
+    
+    // Edge cases and rounding
+    { alpha: 0.005, expected: " / 0.01", description: "edge case (0.005 rounds to 0.01)" },
+    { alpha: 0.123, expected: " / 0.12", description: "three decimal places (truncated)" },
+    { alpha: 0.999, expected: " / 1.00", description: "near 1 value (0.999)" }
+  ];
 
-  it('should return "0" for zero alpha value', () => {
-    expect(getAlpha(0)).toBe(" / 0");
-  });
-
-  it("should handle very small alpha values", () => {
-    expect(getAlpha(0.01)).toBe(" / 0.01");
-    expect(getAlpha(0.001)).toBe(" / 0"); // 0.001 gets fixed to "0.00" which becomes "0"
-  });
-
-  it("should handle edge case of 0.005 (rounds to 0.01)", () => {
-    expect(getAlpha(0.005)).toBe(" / 0.01");
-  });
-
-  it("should format alpha values with proper decimals", () => {
-    expect(getAlpha(0.123)).toBe(" / 0.12");
-    expect(getAlpha(0.999)).toBe(" / 1.00");
+  testCases.forEach(({ alpha, expected, description }) => {
+    it(`should handle ${description}`, () => {
+      expect(getAlpha(alpha)).toBe(expected);
+    });
   });
 });
