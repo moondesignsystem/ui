@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 1.9.3
+
+### Patch Changes
+
+- fix: avatar, carousel, and tag
+
 ## 1.9.2
 
 ### Patch Changes

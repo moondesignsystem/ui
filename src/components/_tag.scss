@@ -38,14 +38,14 @@ $sizes: ();
   border-radius: map.get($sizes, "xs", "radius");
   gap: map.get($sizes, "xs", "gap");
   font: map.get($sizes, "xs", "font");
-  box-shadow: map.get($variants, "outline", "shadow");
-  background-color: map.get($variants, "outline", "background");
-  color: map.get($variants, "outline", "color");
+  box-shadow: map.get($variants, "fill", "shadow");
+  background-color: map.get($variants, "fill", "background");
+  color: map.get($variants, "fill", "color");
 
   :where(svg) {
     width: map.get($sizes, "xs", "icon-size");
     height: map.get($sizes, "xs", "icon-size");
-    color: map.get($variants, "outline", "icon-color");
+    color: map.get($variants, "fill", "icon-color");
   }
 
   @each $size, $prop in $sizes {
