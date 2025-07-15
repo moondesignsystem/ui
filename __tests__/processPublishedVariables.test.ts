@@ -12,113 +12,78 @@ const mockFormatName = formatName as jest.MockedFunction<typeof formatName>;
 describe("processPublishedVariables", () => {
   let consoleErrorSpy: jest.SpiedFunction<typeof console.error>;
 
-  // Mock data types
-  interface LocalVariableCollections {
-    [key: string]: FigmaVariableCollection;
-  }
+  // Helper functions
+  const createMockCollection = (
+    id: string,
+    name: string,
+    modes = [{ modeId: "mode1", name: "Light" }],
+    variablaIds = ["var1"]
+  ): FigmaVariableCollection => ({
+    id,
+    name,
+    key: `${id}-key`,
+    modes,
+    defaultModeId: "mode1",
+    remote: false,
+    hiddenFromPublishing: false,
+    variablaIds,
+  });
 
-  interface PublishedVariableCollections {
-    [key: string]: FigmaVariableCollection;
-  }
+  const createMockVariable = (
+    id: string,
+    name: string,
+    collectionId: string,
+    resolvedType: "COLOR" | "FLOAT" | "STRING" | "BOOLEAN" = "COLOR",
+    valuesByMode: any = { mode1: { r: 0, g: 0.4, b: 1, a: 1 } }
+  ): FigmaVariable => ({
+    id,
+    name,
+    key: `${id}-key`,
+    variableCollectionId: collectionId,
+    resolvedType,
+    valuesByMode,
+    remote: false,
+    description: `${name} description`,
+    hiddenFromPublishing: false,
+    scopes: [],
+    codeSyntax: {},
+    deletedButReferenced: false,
+  });
 
-  interface LocalVariables {
-    [key: string]: FigmaVariable;
-  }
+  const callFunction = (
+    localCollections: any = mockLocalVariableCollections,
+    publishedCollections: any = mockPublishedVariableCollections,
+    localVars: any = mockLocalVariables,
+    publishedVars: any = mockPublishedVariables
+  ) => processPublishedVariables(localCollections, publishedCollections, localVars, publishedVars);
 
-  interface PublishedVariables {
-    [key: string]: FigmaVariable;
-  }
+  const expectBasicStructure = (result: any) => {
+    expect(result).toHaveProperty("variableCollections");
+    expect(result).toHaveProperty("themes");
+    expect(result).toHaveProperty("colorCollectionName");
+  };
 
   // Mock data
-  const mockLocalVariableCollections: LocalVariableCollections = {
-    collection1: {
-      id: "collection1",
-      name: "Colors",
-      key: "colors-key",
-      modes: [
-        { modeId: "mode1", name: "Light" },
-        { modeId: "mode2", name: "Dark" },
-      ],
-      defaultModeId: "mode1",
-      remote: false,
-      hiddenFromPublishing: false,
-      variablaIds: ["var1", "var2"],
-    },
-    collection2: {
-      id: "collection2",
-      name: "Spacing",
-      key: "spacing-key",
-      modes: [{ modeId: "mode1", name: "Default" }],
-      defaultModeId: "mode1",
-      remote: false,
-      hiddenFromPublishing: false,
-      variablaIds: ["var3"],
-    },
+  const mockLocalVariableCollections = {
+    collection1: createMockCollection("collection1", "Colors", [
+      { modeId: "mode1", name: "Light" },
+      { modeId: "mode2", name: "Dark" },
+    ], ["var1", "var2"]),
+    collection2: createMockCollection("collection2", "Spacing", [
+      { modeId: "mode1", name: "Default" }
+    ], ["var3"]),
   };
 
-  const mockPublishedVariableCollections: PublishedVariableCollections = {
-    collection1: mockLocalVariableCollections.collection1,
-    collection2: mockLocalVariableCollections.collection2,
+  const mockPublishedVariableCollections = { ...mockLocalVariableCollections };
+
+  const mockLocalVariables = {
+    var1: createMockVariable("var1", "primary", "collection1", "COLOR"),
+    var2: createMockVariable("var2", "secondary", "collection1", "COLOR", 
+      { mode1: { r: 1, g: 0.5, b: 0, a: 1 }, mode2: { r: 1, g: 0.7, b: 0.2, a: 1 } }),
+    var3: createMockVariable("var3", "base", "collection2", "FLOAT", { mode1: 16 }),
   };
 
-  const mockLocalVariables: LocalVariables = {
-    var1: {
-      id: "var1",
-      name: "primary",
-      key: "primary-key",
-      variableCollectionId: "collection1",
-      resolvedType: "COLOR",
-      valuesByMode: {
-        mode1: { r: 0, g: 0.4, b: 1, a: 1 },
-        mode2: { r: 0.3, g: 0.6, b: 1, a: 1 },
-      },
-      remote: false,
-      description: "Primary color",
-      hiddenFromPublishing: false,
-      scopes: [],
-      codeSyntax: {},
-      deletedButReferenced: false,
-    },
-    var2: {
-      id: "var2",
-      name: "secondary",
-      key: "secondary-key",
-      variableCollectionId: "collection1",
-      resolvedType: "COLOR",
-      valuesByMode: {
-        mode1: { r: 1, g: 0.5, b: 0, a: 1 },
-        mode2: { r: 1, g: 0.7, b: 0.2, a: 1 },
-      },
-      remote: false,
-      description: "Secondary color",
-      hiddenFromPublishing: false,
-      scopes: [],
-      codeSyntax: {},
-      deletedButReferenced: false,
-    },
-    var3: {
-      id: "var3",
-      name: "base",
-      key: "base-key",
-      variableCollectionId: "collection2",
-      resolvedType: "FLOAT",
-      valuesByMode: {
-        mode1: 16,
-      },
-      remote: false,
-      description: "Base spacing",
-      hiddenFromPublishing: false,
-      scopes: [],
-      codeSyntax: {},
-      deletedButReferenced: false,
-    },
-  };
-
-  const mockPublishedVariables: PublishedVariables = {
-    var1: mockLocalVariables.var1,
-    var2: mockLocalVariables.var2,
-    var3: mockLocalVariables.var3,
-  };
+  const mockPublishedVariables = { ...mockLocalVariables };
 
   beforeEach(() => {
     // Reset mocks
@@ -137,105 +102,87 @@ describe("processPublishedVariables", () => {
 
   describe("Basic functionality", () => {
     it("should process published variables correctly", () => {
-      const result = processPublishedVariables(
-        mockLocalVariableCollections,
-        mockPublishedVariableCollections,
-        mockLocalVariables,
-        mockPublishedVariables
-      );
+      const result = callFunction();
 
-      expect(result).toHaveProperty("variableCollections");
-      expect(result).toHaveProperty("themes");
-      expect(result).toHaveProperty("colorCollectionName");
+      expectBasicStructure(result);
+      expect(result.variableCollections).toHaveProperty("Colors");
+      expect(result.variableCollections).toHaveProperty("Spacing");
     });
 
     it("should create variable collections with correct structure", () => {
-      const result = processPublishedVariables(
-        mockLocalVariableCollections,
-        mockPublishedVariableCollections,
-        mockLocalVariables,
-        mockPublishedVariables
-      );
+      const result = callFunction();
 
-      expect(result.variableCollections).toHaveProperty("Colors");
-      expect(result.variableCollections).toHaveProperty("Spacing");
-      
-      expect(result.variableCollections.Colors).toHaveProperty("variables");
-      expect(result.variableCollections.Spacing).toHaveProperty("variables");
+      ["Colors", "Spacing"].forEach(collectionName => {
+        expect(result.variableCollections).toHaveProperty(collectionName);
+        expect(result.variableCollections[collectionName]).toHaveProperty("variables");
+      });
     });
 
     it("should include variables with cssVariableName", () => {
-      const result = processPublishedVariables(
-        mockLocalVariableCollections,
-        mockPublishedVariableCollections,
-        mockLocalVariables,
-        mockPublishedVariables
-      );
+      const result = callFunction();
 
-      const colorsVariables = result.variableCollections.Colors.variables;
-      expect(colorsVariables.primary).toHaveProperty("cssVariableName", "Colors/primary");
-      expect(colorsVariables.secondary).toHaveProperty("cssVariableName", "Colors/secondary");
+      const cssVariableTests = [
+        { collection: "Colors", variable: "primary", expected: "Colors/primary" },
+        { collection: "Colors", variable: "secondary", expected: "Colors/secondary" },
+        { collection: "Spacing", variable: "base", expected: "Spacing/base" },
+      ];
+
+      cssVariableTests.forEach(({ collection, variable, expected }) => {
+        expect(result.variableCollections[collection].variables[variable].cssVariableName).toBe(expected);
+      });
     });
   });
 
   describe("Collection filtering", () => {
-    it("should only process collections that exist in both local and published", () => {
-      const partialPublished = {
-        collection1: mockPublishedVariableCollections.collection1,
-        // collection2 is missing
-      };
+    const emptyDataTestCases = [
+      {
+        description: "should only process collections that exist in both local and published",
+        localCollections: mockLocalVariableCollections,
+        publishedCollections: { collection1: mockPublishedVariableCollections.collection1 },
+        expectedCollections: ["Colors"],
+        unexpectedCollections: ["Spacing"],
+      },
+      {
+        description: "should handle empty published collections",
+        localCollections: mockLocalVariableCollections,
+        publishedCollections: {},
+        expectedCollections: [],
+        unexpectedCollections: ["Colors", "Spacing"],
+      },
+      {
+        description: "should handle empty local collections",
+        localCollections: {},
+        publishedCollections: mockPublishedVariableCollections,
+        expectedCollections: [],
+        unexpectedCollections: ["Colors", "Spacing"],
+      },
+    ];
 
-      const result = processPublishedVariables(
-        mockLocalVariableCollections,
-        partialPublished,
-        mockLocalVariables,
-        mockPublishedVariables
-      );
+    emptyDataTestCases.forEach(({ description, localCollections, publishedCollections, expectedCollections, unexpectedCollections }) => {
+      it(description, () => {
+        const result = callFunction(localCollections, publishedCollections);
 
-      expect(result.variableCollections).toHaveProperty("Colors");
-      expect(result.variableCollections).not.toHaveProperty("Spacing");
-    });
+        expectedCollections.forEach(collection => {
+          expect(result.variableCollections).toHaveProperty(collection);
+        });
 
-    it("should handle empty published collections", () => {
-      const result = processPublishedVariables(
-        mockLocalVariableCollections,
-        {},
-        mockLocalVariables,
-        mockPublishedVariables
-      );
+        unexpectedCollections.forEach(collection => {
+          expect(result.variableCollections).not.toHaveProperty(collection);
+        });
 
-      expect(Object.keys(result.variableCollections)).toHaveLength(0);
-      expect(result.themes).toEqual([]);
-      expect(result.colorCollectionName).toBe("");
-    });
-
-    it("should handle empty local collections", () => {
-      const result = processPublishedVariables(
-        {},
-        mockPublishedVariableCollections,
-        mockLocalVariables,
-        mockPublishedVariables
-      );
-
-      expect(Object.keys(result.variableCollections)).toHaveLength(0);
-      expect(result.themes).toEqual([]);
-      expect(result.colorCollectionName).toBe("");
+        if (expectedCollections.length === 0) {
+          expect(result.themes).toEqual([]);
+          expect(result.colorCollectionName).toBe("");
+        }
+      });
     });
   });
 
   describe("Variable filtering", () => {
     it("should only include variables that exist in both local and published", () => {
-      const partialPublished = {
-        var1: mockPublishedVariables.var1,
-        // var2 and var3 are missing
-      };
+      const partialPublished = { var1: mockPublishedVariables.var1 };
 
-      const result = processPublishedVariables(
-        mockLocalVariableCollections,
-        mockPublishedVariableCollections,
-        mockLocalVariables,
-        partialPublished
-      );
+      const result = callFunction(undefined, undefined, undefined, partialPublished);
 
       const colorsVariables = result.variableCollections.Colors.variables;
       expect(colorsVariables).toHaveProperty("primary");
@@ -246,22 +193,11 @@ describe("processPublishedVariables", () => {
     });
 
     it("should filter variables by collection ID", () => {
-      const mixedVariables = {
-        ...mockLocalVariables,
-        var4: {
-          ...mockLocalVariables.var1,
-          id: "var4",
-          name: "orphan",
-          variableCollectionId: "nonexistent-collection",
-        },
-      };
+      const orphanVariable = createMockVariable("var4", "orphan", "nonexistent-collection");
+      const mixedVariables = { ...mockLocalVariables, var4: orphanVariable };
+      const mixedPublished = { ...mockPublishedVariables, var4: orphanVariable };
 
-      const result = processPublishedVariables(
-        mockLocalVariableCollections,
-        mockPublishedVariableCollections,
-        mixedVariables,
-        { ...mockPublishedVariables, var4: mixedVariables.var4 }
-      );
+      const result = callFunction(undefined, undefined, mixedVariables, mixedPublished);
 
       // Should not include the orphan variable
       expect(result.variableCollections.Colors.variables).toHaveProperty("primary");
@@ -274,51 +210,51 @@ describe("processPublishedVariables", () => {
 
   describe("Color collection detection", () => {
     it("should detect color collections and set themes", () => {
-      const result = processPublishedVariables(
-        mockLocalVariableCollections,
-        mockPublishedVariableCollections,
-        mockLocalVariables,
-        mockPublishedVariables
-      );
+      const result = callFunction();
 
-      expect(mockFormatName).toHaveBeenCalledWith("Light");
-      expect(mockFormatName).toHaveBeenCalledWith("Dark");
-      expect(mockFormatName).toHaveBeenCalledWith("Colors");
+      const expectedFormatNameCalls = ["Light", "Dark", "Colors"];
+      expectedFormatNameCalls.forEach(call => {
+        expect(mockFormatName).toHaveBeenCalledWith(call);
+      });
       
       expect(result.themes).toEqual(["light", "dark"]);
       expect(result.colorCollectionName).toBe("colors");
     });
 
-    it("should not set themes for non-color collections", () => {
-      // Remove color variables, leaving only spacing
-      const nonColorVariables = {
-        var3: mockLocalVariables.var3,
-      };
-      const nonColorPublished = {
-        var3: mockPublishedVariables.var3,
-      };
-      const nonColorCollections = {
-        collection2: mockLocalVariableCollections.collection2,
-      };
+    const colorDetectionTestCases = [
+      {
+        description: "should not set themes for non-color collections",
+        variables: { var3: mockLocalVariables.var3 },
+        published: { var3: mockPublishedVariables.var3 },
+        collections: { collection2: mockLocalVariableCollections.collection2 },
+        expectedThemes: [],
+        expectedColorCollectionName: "",
+      },
+      {
+        description: "should handle partially color collections",
+        variables: {
+          var1: mockLocalVariables.var1,
+          var2: createMockVariable("var2", "secondary", "collection1", "FLOAT"),
+        },
+        published: null, // Will use variables as published
+        collections: { collection1: mockLocalVariableCollections.collection1 },
+        expectedThemes: [],
+        expectedColorCollectionName: "",
+      },
+    ];
 
-      const result = processPublishedVariables(
-        nonColorCollections,
-        nonColorCollections,
-        nonColorVariables,
-        nonColorPublished
-      );
+    colorDetectionTestCases.forEach(({ description, variables, published, collections, expectedThemes, expectedColorCollectionName }) => {
+      it(description, () => {
+        const publishedVars = published || variables;
+        const result = callFunction(collections, collections, variables, publishedVars);
 
-      expect(result.themes).toEqual([]);
-      expect(result.colorCollectionName).toBe("");
+        expect(result.themes).toEqual(expectedThemes);
+        expect(result.colorCollectionName).toBe(expectedColorCollectionName);
+      });
     });
 
     it("should handle mixed collections (color + non-color)", () => {
-      const result = processPublishedVariables(
-        mockLocalVariableCollections,
-        mockPublishedVariableCollections,
-        mockLocalVariables,
-        mockPublishedVariables
-      );
+      const result = callFunction();
 
       // Should detect themes from the color collection
       expect(result.themes).toEqual(["light", "dark"]);
@@ -328,143 +264,114 @@ describe("processPublishedVariables", () => {
       expect(result.variableCollections).toHaveProperty("Colors");
       expect(result.variableCollections).toHaveProperty("Spacing");
     });
-
-    it("should handle partially color collections", () => {
-      // Mix COLOR and FLOAT variables in the same collection
-      const mixedVariables = {
-        var1: mockLocalVariables.var1, // COLOR
-        var2: {
-          ...mockLocalVariables.var2,
-          resolvedType: "FLOAT" as const, // FLOAT instead of COLOR
-        },
-      };
-
-      const result = processPublishedVariables(
-        { collection1: mockLocalVariableCollections.collection1 },
-        { collection1: mockPublishedVariableCollections.collection1 },
-        mixedVariables,
-        mixedVariables
-      );
-
-      // Should not set themes because not all variables are COLOR
-      expect(result.themes).toEqual([]);
-      expect(result.colorCollectionName).toBe("");
-    });
   });
 
-  describe("CSS variable naming", () => {
+  describe("CSS variable naming and formatName integration", () => {
     it("should create correct CSS variable names", () => {
-      const result = processPublishedVariables(
-        mockLocalVariableCollections,
-        mockPublishedVariableCollections,
-        mockLocalVariables,
-        mockPublishedVariables
-      );
+      const result = callFunction();
 
-      expect(result.variableCollections.Colors.variables.primary.cssVariableName).toBe("Colors/primary");
-      expect(result.variableCollections.Colors.variables.secondary.cssVariableName).toBe("Colors/secondary");
-      expect(result.variableCollections.Spacing.variables.base.cssVariableName).toBe("Spacing/base");
+      const cssNameTests = [
+        { collection: "Colors", variable: "primary", expected: "Colors/primary" },
+        { collection: "Colors", variable: "secondary", expected: "Colors/secondary" },
+        { collection: "Spacing", variable: "base", expected: "Spacing/base" },
+      ];
+
+      cssNameTests.forEach(({ collection, variable, expected }) => {
+        expect(result.variableCollections[collection].variables[variable].cssVariableName).toBe(expected);
+      });
     });
 
     it("should handle special characters in collection and variable names", () => {
       const specialCollections = {
-        "special-collection": {
-          ...mockLocalVariableCollections.collection1,
-          id: "special-collection",
-          name: "Special Collection",
-        },
+        "special-collection": createMockCollection("special-collection", "Special Collection"),
       };
-
       const specialVariables = {
-        "special-var": {
-          ...mockLocalVariables.var1,
-          id: "special-var",
-          name: "special variable",
-          variableCollectionId: "special-collection",
-        },
+        "special-var": createMockVariable("special-var", "special variable", "special-collection"),
       };
 
-      const result = processPublishedVariables(
-        specialCollections,
-        specialCollections,
-        specialVariables,
-        specialVariables
-      );
+      const result = callFunction(specialCollections, specialCollections, specialVariables, specialVariables);
 
       expect(result.variableCollections["Special Collection"].variables["special variable"].cssVariableName)
         .toBe("Special Collection/special variable");
     });
-  });
 
-  describe("formatName integration", () => {
-    it("should call formatName for mode names when processing color collections", () => {
-      processPublishedVariables(
-        mockLocalVariableCollections,
-        mockPublishedVariableCollections,
-        mockLocalVariables,
-        mockPublishedVariables
-      );
+    const formatNameTestCases = [
+      {
+        description: "should call formatName for mode names and collection name when processing color collections",
+        expectedCalls: ["Light", "Dark", "Colors"],
+      },
+      {
+        description: "should use formatName results correctly",
+        mockImplementation: (input: string) => `formatted-${input.toLowerCase()}`,
+        expectedThemes: ["formatted-light", "formatted-dark"],
+        expectedColorCollectionName: "formatted-colors",
+      },
+    ];
 
-      expect(mockFormatName).toHaveBeenCalledWith("Light");
-      expect(mockFormatName).toHaveBeenCalledWith("Dark");
-    });
+    formatNameTestCases.forEach(({ description, expectedCalls, mockImplementation, expectedThemes, expectedColorCollectionName }) => {
+      it(description, () => {
+        if (mockImplementation) {
+          mockFormatName.mockImplementation(mockImplementation);
+        }
 
-    it("should call formatName for collection name when processing color collections", () => {
-      processPublishedVariables(
-        mockLocalVariableCollections,
-        mockPublishedVariableCollections,
-        mockLocalVariables,
-        mockPublishedVariables
-      );
+        const result = callFunction();
 
-      expect(mockFormatName).toHaveBeenCalledWith("Colors");
-    });
+        if (expectedCalls) {
+          expectedCalls.forEach(call => {
+            expect(mockFormatName).toHaveBeenCalledWith(call);
+          });
+        }
 
-    it("should use formatName results correctly", () => {
-      mockFormatName.mockImplementation((input: string) => `formatted-${input.toLowerCase()}`);
-
-      const result = processPublishedVariables(
-        mockLocalVariableCollections,
-        mockPublishedVariableCollections,
-        mockLocalVariables,
-        mockPublishedVariables
-      );
-
-      expect(result.themes).toEqual(["formatted-light", "formatted-dark"]);
-      expect(result.colorCollectionName).toBe("formatted-colors");
+        if (expectedThemes) {
+          expect(result.themes).toEqual(expectedThemes);
+          expect(result.colorCollectionName).toBe(expectedColorCollectionName);
+        }
+      });
     });
   });
 
   describe("Data preservation", () => {
-    it("should preserve original variable properties", () => {
-      const result = processPublishedVariables(
-        mockLocalVariableCollections,
-        mockPublishedVariableCollections,
-        mockLocalVariables,
-        mockPublishedVariables
-      );
+    const preservationTestCases = [
+      {
+        description: "should preserve original variable properties",
+        test: (result: any) => {
+          const primaryVar = result.variableCollections.Colors.variables.primary;
+          const expectedProperties = {
+            id: "var1",
+            name: "primary",
+            resolvedType: "COLOR",
+            valuesByMode: mockLocalVariables.var1.valuesByMode,
+            description: "primary description",
+          };
+          
+          Object.entries(expectedProperties).forEach(([key, value]) => {
+            expect(primaryVar[key]).toEqual(value);
+          });
+        },
+      },
+      {
+        description: "should preserve original collection properties",
+        test: (result: any) => {
+          const colorsCollection = result.variableCollections.Colors;
+          const expectedProperties = {
+            id: "collection1",
+            name: "Colors",
+            modes: mockLocalVariableCollections.collection1.modes,
+            defaultModeId: "mode1",
+          };
+          
+          Object.entries(expectedProperties).forEach(([key, value]) => {
+            expect(colorsCollection[key]).toEqual(value);
+          });
+        },
+      },
+    ];
 
-      const primaryVar = result.variableCollections.Colors.variables.primary;
-      expect(primaryVar.id).toBe("var1");
-      expect(primaryVar.name).toBe("primary");
-      expect(primaryVar.resolvedType).toBe("COLOR");
-      expect(primaryVar.valuesByMode).toEqual(mockLocalVariables.var1.valuesByMode);
-      expect(primaryVar.description).toBe("Primary color");
-    });
-
-    it("should preserve original collection properties", () => {
-      const result = processPublishedVariables(
-        mockLocalVariableCollections,
-        mockPublishedVariableCollections,
-        mockLocalVariables,
-        mockPublishedVariables
-      );
-
-      const colorsCollection = result.variableCollections.Colors;
-      expect(colorsCollection.id).toBe("collection1");
-      expect(colorsCollection.name).toBe("Colors");
-      expect(colorsCollection.modes).toEqual(mockLocalVariableCollections.collection1.modes);
-      expect(colorsCollection.defaultModeId).toBe("mode1");
+    preservationTestCases.forEach(({ description, test }) => {
+      it(description, () => {
+        const result = callFunction();
+        test(result);
+      });
     });
   });
 
@@ -474,112 +381,116 @@ describe("processPublishedVariables", () => {
         throw new Error("Format error");
       });
 
-      expect(() => {
-        processPublishedVariables(
-          mockLocalVariableCollections,
-          mockPublishedVariableCollections,
-          mockLocalVariables,
-          mockPublishedVariables
-        );
-      }).toThrow("Format error");
-
+      expect(() => callFunction()).toThrow("Format error");
       expect(consoleErrorSpy).toHaveBeenCalledWith(
         "❌ Error in processPublishedVariables script:",
         expect.any(Error)
       );
     });
 
-    it("should handle malformed input data gracefully", () => {
-      const malformedCollections = {
-        "bad-collection": null as any,
-      };
+    const errorHandlingTestCases = [
+      {
+        description: "should handle malformed input data gracefully",
+        setup: () => ({ "bad-collection": null as any }),
+        expectThrow: false,
+        expectedResult: { variableCollections: {}, themes: [], colorCollectionName: "" },
+      },
+      {
+        description: "should handle undefined variables",
+        setup: () => ({ var1: undefined as any }),
+        expectThrow: true,
+        localCollections: mockLocalVariableCollections,
+        publishedCollections: mockPublishedVariableCollections,
+        publishedVars: mockPublishedVariables,
+      },
+    ];
 
-      // The function doesn't throw for null collection data - it just skips processing
-      const result = processPublishedVariables(
-        malformedCollections,
-        mockPublishedVariableCollections,
-        mockLocalVariables,
-        mockPublishedVariables
-      );
-
-      expect(result.variableCollections).toEqual({});
-      expect(result.themes).toEqual([]);
-      expect(result.colorCollectionName).toBe("");
-    });
-
-    it("should handle undefined variables", () => {
-      const undefinedVariables = {
-        var1: undefined as any,
-      };
-
-      expect(() => {
-        processPublishedVariables(
-          mockLocalVariableCollections,
-          mockPublishedVariableCollections,
-          undefinedVariables,
-          mockPublishedVariables
-        );
-      }).toThrow();
-
-      expect(consoleErrorSpy).toHaveBeenCalled();
+    errorHandlingTestCases.forEach(({ description, setup, expectThrow, expectedResult, localCollections, publishedCollections, publishedVars }) => {
+      it(description, () => {
+        const malformedData = setup();
+        
+        if (expectThrow) {
+          expect(() => {
+            callFunction(localCollections, publishedCollections, malformedData, publishedVars);
+          }).toThrow();
+          expect(consoleErrorSpy).toHaveBeenCalled();
+        } else {
+          const result = callFunction(malformedData, mockPublishedVariableCollections);
+          expect(result).toEqual(expectedResult);
+        }
+      });
     });
   });
 
   describe("Edge cases", () => {
-    it("should handle empty variable collections", () => {
-      const emptyCollections = {
-        collection1: {
-          ...mockLocalVariableCollections.collection1,
-          variablaIds: [],
-        },
-      };
+    const edgeCaseTestCases = [
+      {
+        description: "should handle empty variable collections",
+        setup: () => ({
+          collections: {
+            collection1: createMockCollection("collection1", "Colors", [
+              { modeId: "mode1", name: "Light" },
+              { modeId: "mode2", name: "Dark" },
+            ], []),
+          },
+          variables: {},
+        }),
+        expectedVariables: {},
+        expectedThemes: ["light", "dark"], // empty() returns true for empty arrays
+        expectedColorCollectionName: "colors",
+      },
+      {
+        description: "should handle collections with no modes",
+        setup: () => ({
+          collections: {
+            collection1: createMockCollection("collection1", "Colors", []),
+          },
+          variables: mockLocalVariables,
+        }),
+        expectedThemes: [],
+      },
+      {
+        description: "should handle collections with single mode",
+        setup: () => ({
+          collections: {
+            collection1: createMockCollection("collection1", "Colors", [
+              { modeId: "mode1", name: "Default" }
+            ]),
+          },
+          variables: mockLocalVariables,
+        }),
+        expectedThemes: ["default"],
+        expectedColorCollectionName: "colors",
+      },
+    ];
 
-      const result = processPublishedVariables(
-        emptyCollections,
-        emptyCollections,
-        {},
-        {}
-      );
+    edgeCaseTestCases.forEach(({ description, setup, expectedVariables, expectedThemes, expectedColorCollectionName }) => {
+      it(description, () => {
+        const { collections, variables } = setup();
+        const result = callFunction(collections, collections, variables, variables);
 
-      expect(result.variableCollections.Colors.variables).toEqual({});
-      // When there are no variables, the function still detects it as a color collection
-      // because every() returns true for empty arrays, so themes are set from modes
-      expect(result.themes).toEqual(["light", "dark"]);
-      expect(result.colorCollectionName).toBe("colors");
-    });
-
-    it("should handle collections with no modes", () => {
-      const noModeCollections = {
-        collection1: {
-          ...mockLocalVariableCollections.collection1,
-          modes: [],
-        },
-      };
-
-      const result = processPublishedVariables(
-        noModeCollections,
-        noModeCollections,
-        mockLocalVariables,
-        mockPublishedVariables
-      );
-
-      expect(result.themes).toEqual([]);
+        if (expectedVariables !== undefined) {
+          expect(result.variableCollections.Colors.variables).toEqual(expectedVariables);
+        }
+        if (expectedThemes !== undefined) {
+          expect(result.themes).toEqual(expectedThemes);
+        }
+        if (expectedColorCollectionName !== undefined) {
+          expect(result.colorCollectionName).toBe(expectedColorCollectionName);
+        }
+      });
     });
 
     it("should handle variables with different resolved types", () => {
       const mixedTypeVariables = {
-        var1: { ...mockLocalVariables.var1, resolvedType: "COLOR" as const },
-        var2: { ...mockLocalVariables.var1, id: "var2", name: "string-var", resolvedType: "STRING" as const },
-        var3: { ...mockLocalVariables.var1, id: "var3", name: "float-var", resolvedType: "FLOAT" as const },
-        var4: { ...mockLocalVariables.var1, id: "var4", name: "boolean-var", resolvedType: "BOOLEAN" as const },
+        var1: createMockVariable("var1", "color-var", "collection1", "COLOR"),
+        var2: createMockVariable("var2", "string-var", "collection1", "STRING"),
+        var3: createMockVariable("var3", "float-var", "collection1", "FLOAT"),
+        var4: createMockVariable("var4", "boolean-var", "collection1", "BOOLEAN"),
       };
+      const singleCollection = { collection1: mockLocalVariableCollections.collection1 };
 
-      const result = processPublishedVariables(
-        { collection1: mockLocalVariableCollections.collection1 },
-        { collection1: mockPublishedVariableCollections.collection1 },
-        mixedTypeVariables,
-        mixedTypeVariables
-      );
+      const result = callFunction(singleCollection, singleCollection, mixedTypeVariables, mixedTypeVariables);
 
       // Should include all variables
       expect(Object.keys(result.variableCollections.Colors.variables)).toHaveLength(4);
@@ -588,39 +499,13 @@ describe("processPublishedVariables", () => {
       expect(result.colorCollectionName).toBe("");
     });
 
-    it("should handle collections with single mode", () => {
-      const singleModeCollection = {
-        collection1: {
-          ...mockLocalVariableCollections.collection1,
-          modes: [{ modeId: "mode1", name: "Default" }],
-        },
-      };
-
-      const result = processPublishedVariables(
-        singleModeCollection,
-        singleModeCollection,
-        mockLocalVariables,
-        mockPublishedVariables
-      );
-
-      expect(result.themes).toEqual(["default"]);
-      expect(result.colorCollectionName).toBe("colors");
-    });
-
     it("should handle variables with no valuesByMode", () => {
       const noValuesVariables = {
-        var1: {
-          ...mockLocalVariables.var1,
-          valuesByMode: {},
-        },
+        var1: createMockVariable("var1", "primary", "collection1", "COLOR", {}),
       };
+      const singleCollection = { collection1: mockLocalVariableCollections.collection1 };
 
-      const result = processPublishedVariables(
-        { collection1: mockLocalVariableCollections.collection1 },
-        { collection1: mockPublishedVariableCollections.collection1 },
-        noValuesVariables,
-        noValuesVariables
-      );
+      const result = callFunction(singleCollection, singleCollection, noValuesVariables, noValuesVariables);
 
       expect(result.variableCollections.Colors.variables.primary.valuesByMode).toEqual({});
     });

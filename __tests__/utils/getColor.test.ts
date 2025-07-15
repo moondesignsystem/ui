@@ -2,30 +2,28 @@ import { describe, it, expect } from "@jest/globals";
 import getColor from "../../src/scripts/utils/getColor";
 
 describe("getColor", () => {
-  it("should convert 0 to 0", () => {
-    expect(getColor(0)).toBe(0);
-  });
+  const testCases = [
+    // Boundary values
+    { input: 0, expected: 0, description: "boundary value 0" },
+    { input: 1, expected: 255, description: "boundary value 1" },
+    
+    // Common values
+    { input: 0.5, expected: 128, description: "middle value 0.5" },
+    { input: 0.2, expected: 51, description: "decimal value 0.2" },
+    { input: 0.8, expected: 204, description: "decimal value 0.8" },
+    
+    // Rounding behavior
+    { input: 0.501, expected: 128, description: "rounding up (0.501)" },
+    { input: 0.499, expected: 127, description: "rounding down (0.499)" },
+    
+    // Edge cases
+    { input: 0.00001, expected: 0, description: "very small value" },
+    { input: 0.99999, expected: 255, description: "very large value" }
+  ];
 
-  it("should convert 1 to 255", () => {
-    expect(getColor(1)).toBe(255);
-  });
-
-  it("should convert 0.5 to 128 (rounded)", () => {
-    expect(getColor(0.5)).toBe(128);
-  });
-
-  it("should handle decimal values correctly", () => {
-    expect(getColor(0.2)).toBe(51);
-    expect(getColor(0.8)).toBe(204);
-  });
-
-  it("should round to nearest integer", () => {
-    expect(getColor(0.501)).toBe(128);
-    expect(getColor(0.499)).toBe(127);
-  });
-
-  it("should handle edge cases", () => {
-    expect(getColor(0.00001)).toBe(0);
-    expect(getColor(0.99999)).toBe(255);
+  testCases.forEach(({ input, expected, description }) => {
+    it(`should convert ${input} to ${expected} (${description})`, () => {
+      expect(getColor(input)).toBe(expected);
+    });
   });
 });

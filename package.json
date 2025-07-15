@@ -1,6 +1,6 @@
 {
   "name": "@heathmont/moon-ui",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "Moon UI library for generating core and components CSS files",
   "main": "dist/install.js",
   "type": "module",
@@ -8,6 +8,7 @@
     "moon-ui": "dist/install.js"
   },
   "scripts": {
+    "install": "npm run build && node dist/install.js --add-components",
     "build": "tsc",
     "dev": "tsc --watch",
     "typecheck": "tsc --noEmit",

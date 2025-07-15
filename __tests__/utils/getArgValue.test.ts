@@ -12,49 +12,60 @@ describe("getArgValue", () => {
     process.argv = originalArgv;
   });
 
-  it("should return the value after the flag", () => {
-    process.argv = ["node", "script.js", "--output", "dist"];
-    expect(getArgValue("--output", "default")).toBe("dist");
+  const setupArgv = (args: string[]) => {
+    process.argv = ["node", "script.js", ...args];
+  };
+
+  const testCases = [
+    {
+      name: "should return the value after the flag",
+      args: ["--output", "dist"],
+      flag: "--output",
+      defaultValue: "default",
+      expected: "dist"
+    },
+    {
+      name: "should return default value when flag is not found",
+      args: [],
+      flag: "--output",
+      defaultValue: "default",
+      expected: "default"
+    },
+    {
+      name: "should return default value when flag is at the end with no value",
+      args: ["--output"],
+      flag: "--output",
+      defaultValue: "default",
+      expected: "default"
+    },
+    {
+      name: "should handle short flag formats",
+      args: ["-o", "output-dir"],
+      flag: "-o",
+      defaultValue: "default",
+      expected: "output-dir"
+    },
+    {
+      name: "should return first occurrence when flag appears multiple times",
+      args: ["--output", "first", "--output", "second"],
+      flag: "--output",
+      defaultValue: "default",
+      expected: "first"
+    }
+  ];
+
+  testCases.forEach(({ name, args, flag, defaultValue, expected }) => {
+    it(name, () => {
+      setupArgv(args);
+      expect(getArgValue(flag, defaultValue)).toBe(expected);
+    });
   });
 
-  it("should return default value when flag is not found", () => {
-    process.argv = ["node", "script.js"];
-    expect(getArgValue("--output", "default")).toBe("default");
-  });
-
-  it("should return default value when flag is at the end with no value", () => {
-    process.argv = ["node", "script.js", "--output"];
-    expect(getArgValue("--output", "default")).toBe("default");
-  });
-
-  it("should handle multiple flags", () => {
-    process.argv = ["node", "script.js", "--input", "src", "--output", "dist"];
+  it("should handle multiple different flags in single argv", () => {
+    setupArgv(["--input", "src", "--output", "dist", "--verbose", "true"]);
+    
     expect(getArgValue("--input", "default")).toBe("src");
     expect(getArgValue("--output", "default")).toBe("dist");
-  });
-
-  it("should handle flags with different formats", () => {
-    process.argv = [
-      "node",
-      "script.js",
-      "-o",
-      "output-dir",
-      "--verbose",
-      "true",
-    ];
-    expect(getArgValue("-o", "default")).toBe("output-dir");
     expect(getArgValue("--verbose", "false")).toBe("true");
-  });
-
-  it("should return first occurrence when flag appears multiple times", () => {
-    process.argv = [
-      "node",
-      "script.js",
-      "--output",
-      "first",
-      "--output",
-      "second",
-    ];
-    expect(getArgValue("--output", "default")).toBe("first");
   });
 });

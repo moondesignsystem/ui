@@ -30,7 +30,7 @@
     @extend .moon-icon-button-ghost;
   }
 
-  :where(.moon-bottom-sheet-handel) {
+  :where(.moon-bottom-sheet-handle) {
     position: absolute;
     top: calc((var(--scale-md-gap) + var(--bottom-sheet-handle-height)) * -1);
     left: 50%;

@@ -29,45 +29,53 @@ describe("Error Classes", () => {
     });
   });
 
-  describe("ConfigurationError", () => {
-    it("should create configuration error", () => {
-      const error = new ConfigurationError("Invalid config");
-      expect(error.message).toBe("Configuration Error: Invalid config");
-      expect(error.name).toBe("ConfigurationError");
-      expect(error.code).toBe("CONFIG_ERROR");
-    });
+  // Test all specialized error classes with a data-driven approach
+  const errorClassTests = [
+    {
+      ErrorClass: ConfigurationError,
+      name: "ConfigurationError",
+      expectedMessage: "Configuration Error: Invalid config",
+      expectedCode: "CONFIG_ERROR",
+    },
+    {
+      ErrorClass: FigmaAPIError,
+      name: "FigmaAPIError", 
+      expectedMessage: "Figma API Error: API request failed",
+      expectedCode: "FIGMA_API_ERROR",
+    },
+    {
+      ErrorClass: FileSystemError,
+      name: "FileSystemError",
+      expectedMessage: "File System Error: Cannot write file", 
+      expectedCode: "FS_ERROR",
+    },
+    {
+      ErrorClass: ValidationError,
+      name: "ValidationError",
+      expectedMessage: "Validation Error: Invalid input",
+      expectedCode: "VALIDATION_ERROR",
+    },
+  ];
 
-    it("should create configuration error with cause", () => {
-      const cause = new Error("File not found");
-      const error = new ConfigurationError("Missing file", cause);
-      expect(error.cause).toBe(cause);
-    });
-  });
+  errorClassTests.forEach(({ ErrorClass, name, expectedMessage, expectedCode }) => {
+    describe(name, () => {
+      it("should create error with correct properties", () => {
+        const inputMessage = name === "ConfigurationError" ? "Invalid config" :
+                           name === "FigmaAPIError" ? "API request failed" :
+                           name === "FileSystemError" ? "Cannot write file" : 
+                           "Invalid input";
+        
+        const error = new ErrorClass(inputMessage);
+        expect(error.message).toBe(expectedMessage);
+        expect(error.name).toBe(name);
+        expect(error.code).toBe(expectedCode);
+      });
 
-  describe("FigmaAPIError", () => {
-    it("should create Figma API error", () => {
-      const error = new FigmaAPIError("API request failed");
-      expect(error.message).toBe("Figma API Error: API request failed");
-      expect(error.name).toBe("FigmaAPIError");
-      expect(error.code).toBe("FIGMA_API_ERROR");
-    });
-  });
-
-  describe("FileSystemError", () => {
-    it("should create file system error", () => {
-      const error = new FileSystemError("Cannot write file");
-      expect(error.message).toBe("File System Error: Cannot write file");
-      expect(error.name).toBe("FileSystemError");
-      expect(error.code).toBe("FS_ERROR");
-    });
-  });
-
-  describe("ValidationError", () => {
-    it("should create validation error", () => {
-      const error = new ValidationError("Invalid input");
-      expect(error.message).toBe("Validation Error: Invalid input");
-      expect(error.name).toBe("ValidationError");
-      expect(error.code).toBe("VALIDATION_ERROR");
+      it("should accept cause parameter", () => {
+        const cause = new Error("Root cause");
+        const error = new ErrorClass("Test message", cause);
+        expect(error.cause).toBe(cause);
+      });
     });
   });
 });
@@ -93,65 +101,39 @@ describe("wrapError", () => {
     expect(wrapped.message).toBe("Test context: String error");
   });
 
-  it("should wrap null/undefined", () => {
-    const wrapped = wrapError(null, "Test context");
-    expect(wrapped.message).toBe("Test context: null");
+  it("should wrap null/undefined values", () => {
+    expect(wrapError(null, "Test context").message).toBe("Test context: null");
+    expect(wrapError(undefined, "Test context").message).toBe("Test context: undefined");
   });
 });
 
-describe("assertDefined", () => {
-  it("should pass for defined values", () => {
-    expect(() => assertDefined("test", "Should be defined")).not.toThrow();
-    expect(() => assertDefined(0, "Should be defined")).not.toThrow();
-    expect(() => assertDefined(false, "Should be defined")).not.toThrow();
+describe("Assertion Functions", () => {
+  describe("assertDefined", () => {
+    it("should pass for defined values", () => {
+      expect(() => assertDefined("test", "Should be defined")).not.toThrow();
+      expect(() => assertDefined(0, "Should be defined")).not.toThrow();
+      expect(() => assertDefined(false, "Should be defined")).not.toThrow();
+    });
+
+    it("should throw ValidationError for null/undefined", () => {
+      expect(() => assertDefined(null, "Value is null")).toThrow(ValidationError);
+      expect(() => assertDefined(undefined, "Value is undefined")).toThrow(ValidationError);
+      expect(() => assertDefined(null, "Custom message")).toThrow("Validation Error: Custom message");
+    });
   });
 
-  it("should throw for null", () => {
-    expect(() => assertDefined(null, "Value is null")).toThrow(ValidationError);
-    expect(() => assertDefined(null, "Value is null")).toThrow(
-      "Validation Error: Value is null"
-    );
-  });
+  describe("assertNotEmpty", () => {
+    it("should pass for non-empty strings", () => {
+      expect(() => assertNotEmpty("test", "Should not be empty")).not.toThrow();
+      expect(() => assertNotEmpty("  content  ", "Should not be empty")).not.toThrow();
+    });
 
-  it("should throw for undefined", () => {
-    expect(() => assertDefined(undefined, "Value is undefined")).toThrow(
-      ValidationError
-    );
-  });
-});
-
-describe("assertNotEmpty", () => {
-  it("should pass for non-empty strings", () => {
-    expect(() => assertNotEmpty("test", "Should not be empty")).not.toThrow();
-    expect(() =>
-      assertNotEmpty("  content  ", "Should not be empty")
-    ).not.toThrow();
-  });
-
-  it("should throw for empty string", () => {
-    expect(() => assertNotEmpty("", "String is empty")).toThrow(
-      ValidationError
-    );
-    expect(() => assertNotEmpty("", "String is empty")).toThrow(
-      "Validation Error: String is empty"
-    );
-  });
-
-  it("should throw for whitespace-only string", () => {
-    expect(() => assertNotEmpty("   ", "String is whitespace")).toThrow(
-      ValidationError
-    );
-  });
-
-  it("should throw for null", () => {
-    expect(() => assertNotEmpty(null, "Value is null")).toThrow(
-      ValidationError
-    );
-  });
-
-  it("should throw for undefined", () => {
-    expect(() => assertNotEmpty(undefined, "Value is undefined")).toThrow(
-      ValidationError
-    );
+    it("should throw ValidationError for empty/invalid values", () => {
+      const invalidValues = ["", "   ", null, undefined];
+      invalidValues.forEach(value => {
+        expect(() => assertNotEmpty(value, "Invalid value")).toThrow(ValidationError);
+      });
+      expect(() => assertNotEmpty("", "Custom message")).toThrow("Validation Error: Custom message");
+    });
   });
 });

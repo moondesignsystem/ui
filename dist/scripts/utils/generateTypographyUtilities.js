@@ -1,5 +1,5 @@
 const fontSizeRegex = /--text-([a-zA-Z0-9]+)-(\d+)-font-size\s*:\s*[^;]+;/g;
-const generateTypographyUtilities = (cssContent) => {
+const generateTypographyUtilities = (isTailwind, cssContent) => {
     const groups = [];
     let match;
     while ((match = fontSizeRegex.exec(cssContent))) {
@@ -14,12 +14,14 @@ const generateTypographyUtilities = (cssContent) => {
     const result = uniqueGroups
         .map(({ name, size }) => {
         const selector = `text-${name}-${size}`;
-        return (`@utility ${selector} {\n` +
-            `font-size: var(--text-${name}-${size}-font-size);\n` +
-            `line-height: var(--text-${name}-${size}-line-height);\n` +
-            `font-weight: var(--text-${name}-${size}-font-weight);\n` +
-            `font-family: var(--text-${name}-${size}-font-family);\n` +
-            `}`);
+        return isTailwind
+            ? `@utility ${selector} {\n`
+            : `.${selector} {\n` +
+                `font-size: var(--text-${name}-${size}-font-size);\n` +
+                `line-height: var(--text-${name}-${size}-line-height);\n` +
+                `font-weight: var(--text-${name}-${size}-font-weight);\n` +
+                `font-family: var(--text-${name}-${size}-font-family);\n` +
+                `}`;
     })
         .join("\n");
     return result;

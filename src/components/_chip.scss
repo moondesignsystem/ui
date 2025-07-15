@@ -102,22 +102,24 @@ $sizes: ();
   }
 
   @each $variant, $prop in $variants {
-    &.moon-chip-#{$variant} {
-      color: map.get($prop, "unselected-color");
-      background-color: map.get($prop, "unselected-background");
-      box-shadow: map.get($prop, "unselected-shadow");
-
-      :where(svg) {
-        color: map.get($prop, "unselected-icon");
-      }
-
-      &:where(.moon-chip-selected) {
-        color: map.get($prop, "selected-color");
-        background-color: map.get($prop, "selected-background");
-        box-shadow: map.get($prop, "selected-shadow");
+    @if $variant != "fill" {
+      &.moon-chip-#{$variant} {
+        color: map.get($prop, "unselected-color");
+        background-color: map.get($prop, "unselected-background");
+        box-shadow: map.get($prop, "unselected-shadow");
 
         :where(svg) {
-          color: map.get($prop, "selected-icon");
+          color: map.get($prop, "unselected-icon");
+        }
+
+        &:where(.moon-chip-selected) {
+          color: map.get($prop, "selected-color");
+          background-color: map.get($prop, "selected-background");
+          box-shadow: map.get($prop, "selected-shadow");
+
+          :where(svg) {
+            color: map.get($prop, "selected-icon");
+          }
         }
       }
     }

@@ -16,6 +16,28 @@ describe("generateConfigFile", () => {
   let consoleLogSpy: jest.SpiedFunction<typeof console.log>;
   let consoleErrorSpy: jest.SpiedFunction<typeof console.error>;
 
+  // Helper functions
+  const setupMockForArgument = (flag: string, value: string) => {
+    mockGetArgValue.mockImplementation((argFlag: string, defaultValue: string) => {
+      return argFlag === flag ? value : defaultValue;
+    });
+  };
+
+  const getWrittenConfig = () => {
+    const writtenContent = mockFs.writeFileSync.mock.calls[0][1] as string;
+    return JSON.parse(writtenContent);
+  };
+
+  const expectDefaultConfig = () => ({
+    projectName: "moon",
+    coreFileId: "BZiHkvF7pXFHrFH8P0cG2T",
+    componentsFileId: "S3q1SkVngbwHuwpxHKCsgtJj",
+    outputFolder: "dist",
+    customPrefix: false,
+    target: "tailwindcss",
+    themes: {},
+  });
+
   beforeEach(() => {
     originalArgv = process.argv;
     
@@ -40,24 +62,41 @@ describe("generateConfigFile", () => {
   });
 
   describe("File existence check", () => {
-    it("should return early if moonconfig.json already exists", () => {
-      mockFs.existsSync.mockReturnValue(true);
+    const existenceTestCases = [
+      {
+        description: "should return early if moonconfig.json already exists",
+        fileExists: true,
+        shouldCallWriteFile: false,
+        shouldLogMessage: false,
+      },
+      {
+        description: "should proceed if moonconfig.json does not exist",
+        fileExists: false,
+        shouldCallWriteFile: true,
+        shouldLogMessage: true,
+      },
+    ];
 
-      generateConfigFile();
+    existenceTestCases.forEach(({ description, fileExists, shouldCallWriteFile, shouldLogMessage }) => {
+      it(description, () => {
+        mockFs.existsSync.mockReturnValue(fileExists);
 
-      expect(mockFs.existsSync).toHaveBeenCalledWith("moonconfig.json");
-      expect(mockFs.writeFileSync).not.toHaveBeenCalled();
-      expect(consoleLogSpy).not.toHaveBeenCalled();
-    });
+        generateConfigFile();
 
-    it("should proceed if moonconfig.json does not exist", () => {
-      mockFs.existsSync.mockReturnValue(false);
-
-      generateConfigFile();
-
-      expect(mockFs.existsSync).toHaveBeenCalledWith("moonconfig.json");
-      expect(mockFs.writeFileSync).toHaveBeenCalled();
-      expect(consoleLogSpy).toHaveBeenCalledWith("Generating moonconfig.json file...");
+        expect(mockFs.existsSync).toHaveBeenCalledWith("moonconfig.json");
+        
+        if (shouldCallWriteFile) {
+          expect(mockFs.writeFileSync).toHaveBeenCalled();
+        } else {
+          expect(mockFs.writeFileSync).not.toHaveBeenCalled();
+        }
+        
+        if (shouldLogMessage) {
+          expect(consoleLogSpy).toHaveBeenCalledWith("Generating moonconfig.json file...");
+        } else {
+          expect(consoleLogSpy).not.toHaveBeenCalled();
+        }
+      });
     });
   });
 
@@ -67,122 +106,98 @@ describe("generateConfigFile", () => {
       
       generateConfigFile();
 
-      const expectedConfig = {
-        projectName: "moon",
-        coreFileId: "BZiHkvF7pXFHrFH8P0cG2T",
-        componentsFileId: "S3q1SkVngbwHuwpxHKCsgtJj",
-        outputFolder: "dist",
-        customPrefix: false,
-        themes: {},
-      };
-
       expect(mockFs.writeFileSync).toHaveBeenCalledWith(
         "moonconfig.json",
-        JSON.stringify(expectedConfig, null, 2) + "\n"
+        JSON.stringify(expectDefaultConfig(), null, 2) + "\n"
       );
     });
 
-    it("should set customPrefix to true when --custom-prefix flag is present", () => {
-      process.argv = ["node", "script.js", "--custom-prefix"];
-      
-      generateConfigFile();
+    const customPrefixTestCases = [
+      {
+        description: "should set customPrefix to true when --custom-prefix flag is present",
+        argv: ["node", "script.js", "--custom-prefix"],
+        expectedCustomPrefix: true,
+      },
+      {
+        description: "should set customPrefix to false when --custom-prefix flag is not present",
+        argv: ["node", "script.js"],
+        expectedCustomPrefix: false,
+      },
+    ];
 
-      const writtenContent = mockFs.writeFileSync.mock.calls[0][1] as string;
-      const config = JSON.parse(writtenContent);
-      
-      expect(config.customPrefix).toBe(true);
-    });
+    customPrefixTestCases.forEach(({ description, argv, expectedCustomPrefix }) => {
+      it(description, () => {
+        process.argv = argv;
+        
+        generateConfigFile();
 
-    it("should set customPrefix to false when --custom-prefix flag is not present", () => {
-      process.argv = ["node", "script.js"];
-      
-      generateConfigFile();
-
-      const writtenContent = mockFs.writeFileSync.mock.calls[0][1] as string;
-      const config = JSON.parse(writtenContent);
-      
-      expect(config.customPrefix).toBe(false);
+        const config = getWrittenConfig();
+        expect(config.customPrefix).toBe(expectedCustomPrefix);
+      });
     });
   });
 
   describe("Command line argument parsing", () => {
-    it("should use custom projectName when provided", () => {
-      mockGetArgValue.mockImplementation((flag: string, defaultValue: string) => {
-        if (flag === "--projectName") return "custom-project";
-        return defaultValue;
+    const argumentTestCases = [
+      {
+        description: "should use custom projectName when provided",
+        flag: "--projectName",
+        value: "custom-project",
+        defaultValue: "moon",
+        configProperty: "projectName",
+      },
+      {
+        description: "should use custom outputFolder when provided",
+        flag: "--outputFolder",
+        value: "build",
+        defaultValue: "dist",
+        configProperty: "outputFolder",
+      },
+      {
+        description: "should use custom coreFileId when provided",
+        flag: "--coreFileId",
+        value: "custom-core-id",
+        defaultValue: "BZiHkvF7pXFHrFH8P0cG2T",
+        configProperty: "coreFileId",
+      },
+      {
+        description: "should use custom componentsFileId when provided",
+        flag: "--componentsFileId",
+        value: "custom-components-id",
+        defaultValue: "S3q1SkVngbwHuwpxHKCsgtJj",
+        configProperty: "componentsFileId",
+      },
+    ];
+
+    argumentTestCases.forEach(({ description, flag, value, defaultValue, configProperty }) => {
+      it(description, () => {
+        setupMockForArgument(flag, value);
+
+        generateConfigFile();
+
+        expect(mockGetArgValue).toHaveBeenCalledWith(flag, defaultValue);
+        
+        const config = getWrittenConfig();
+        expect(config[configProperty]).toBe(value);
       });
-
-      generateConfigFile();
-
-      expect(mockGetArgValue).toHaveBeenCalledWith("--projectName", "moon");
-      
-      const writtenContent = mockFs.writeFileSync.mock.calls[0][1] as string;
-      const config = JSON.parse(writtenContent);
-      expect(config.projectName).toBe("custom-project");
-    });
-
-    it("should use custom outputFolder when provided", () => {
-      mockGetArgValue.mockImplementation((flag: string, defaultValue: string) => {
-        if (flag === "--outputFolder") return "build";
-        return defaultValue;
-      });
-
-      generateConfigFile();
-
-      expect(mockGetArgValue).toHaveBeenCalledWith("--outputFolder", "dist");
-      
-      const writtenContent = mockFs.writeFileSync.mock.calls[0][1] as string;
-      const config = JSON.parse(writtenContent);
-      expect(config.outputFolder).toBe("build");
-    });
-
-    it("should use custom coreFileId when provided", () => {
-      mockGetArgValue.mockImplementation((flag: string, defaultValue: string) => {
-        if (flag === "--coreFileId") return "custom-core-id";
-        return defaultValue;
-      });
-
-      generateConfigFile();
-
-      expect(mockGetArgValue).toHaveBeenCalledWith("--coreFileId", "BZiHkvF7pXFHrFH8P0cG2T");
-      
-      const writtenContent = mockFs.writeFileSync.mock.calls[0][1] as string;
-      const config = JSON.parse(writtenContent);
-      expect(config.coreFileId).toBe("custom-core-id");
-    });
-
-    it("should use custom componentsFileId when provided", () => {
-      mockGetArgValue.mockImplementation((flag: string, defaultValue: string) => {
-        if (flag === "--componentsFileId") return "custom-components-id";
-        return defaultValue;
-      });
-
-      generateConfigFile();
-
-      expect(mockGetArgValue).toHaveBeenCalledWith("--componentsFileId", "S3q1SkVngbwHuwpxHKCsgtJj");
-      
-      const writtenContent = mockFs.writeFileSync.mock.calls[0][1] as string;
-      const config = JSON.parse(writtenContent);
-      expect(config.componentsFileId).toBe("custom-components-id");
     });
 
     it("should handle multiple custom arguments", () => {
       process.argv = ["node", "script.js", "--custom-prefix"];
       
       mockGetArgValue.mockImplementation((flag: string, defaultValue: string) => {
-        switch (flag) {
-          case "--projectName": return "my-project";
-          case "--outputFolder": return "public";
-          case "--coreFileId": return "core123";
-          case "--componentsFileId": return "comp456";
-          default: return defaultValue;
-        }
+        const argValues: Record<string, string> = {
+          "--projectName": "my-project",
+          "--outputFolder": "public",
+          "--coreFileId": "core123",
+          "--componentsFileId": "comp456",
+        };
+        return argValues[flag] || defaultValue;
       });
 
       generateConfigFile();
 
-      const writtenContent = mockFs.writeFileSync.mock.calls[0][1] as string;
-      const config = JSON.parse(writtenContent);
+      const config = getWrittenConfig();
       
       expect(config).toEqual({
         projectName: "my-project",
@@ -190,6 +205,7 @@ describe("generateConfigFile", () => {
         componentsFileId: "comp456",
         outputFolder: "public",
         customPrefix: true,
+        target: "tailwindcss",
         themes: {},
       });
     });
@@ -219,15 +235,15 @@ describe("generateConfigFile", () => {
     it("should include all required config properties", () => {
       generateConfigFile();
 
-      const writtenContent = mockFs.writeFileSync.mock.calls[0][1] as string;
-      const config = JSON.parse(writtenContent);
+      const config = getWrittenConfig();
+      const requiredProperties = [
+        "projectName", "coreFileId", "componentsFileId", 
+        "outputFolder", "customPrefix", "themes"
+      ];
       
-      expect(config).toHaveProperty("projectName");
-      expect(config).toHaveProperty("coreFileId");
-      expect(config).toHaveProperty("componentsFileId");
-      expect(config).toHaveProperty("outputFolder");
-      expect(config).toHaveProperty("customPrefix");
-      expect(config).toHaveProperty("themes");
+      requiredProperties.forEach(property => {
+        expect(config).toHaveProperty(property);
+      });
       
       expect(config.themes).toEqual({});
     });
@@ -240,43 +256,38 @@ describe("generateConfigFile", () => {
   });
 
   describe("Error handling", () => {
-    it("should handle fs.existsSync errors", () => {
-      mockFs.existsSync.mockImplementation(() => {
-        throw new Error("File system error");
+    const errorTestCases = [
+      {
+        description: "should handle fs.existsSync errors",
+        setupError: () => mockFs.existsSync.mockImplementation(() => {
+          throw new Error("File system error");
+        }),
+      },
+      {
+        description: "should handle fs.writeFileSync errors",
+        setupError: () => mockFs.writeFileSync.mockImplementation(() => {
+          throw new Error("Write error");
+        }),
+      },
+      {
+        description: "should handle getArgValue errors",
+        setupError: () => mockGetArgValue.mockImplementation(() => {
+          throw new Error("Argument parsing error");
+        }),
+      },
+    ];
+
+    errorTestCases.forEach(({ description, setupError }) => {
+      it(description, () => {
+        setupError();
+
+        generateConfigFile();
+
+        expect(consoleErrorSpy).toHaveBeenCalledWith(
+          "❌ Error in generateConfigFile script:",
+          expect.any(Error)
+        );
       });
-
-      generateConfigFile();
-
-      expect(consoleErrorSpy).toHaveBeenCalledWith(
-        "❌ Error in generateConfigFile script:",
-        expect.any(Error)
-      );
-    });
-
-    it("should handle fs.writeFileSync errors", () => {
-      mockFs.writeFileSync.mockImplementation(() => {
-        throw new Error("Write error");
-      });
-
-      generateConfigFile();
-
-      expect(consoleErrorSpy).toHaveBeenCalledWith(
-        "❌ Error in generateConfigFile script:",
-        expect.any(Error)
-      );
-    });
-
-    it("should handle getArgValue errors", () => {
-      mockGetArgValue.mockImplementation(() => {
-        throw new Error("Argument parsing error");
-      });
-
-      generateConfigFile();
-
-      expect(consoleErrorSpy).toHaveBeenCalledWith(
-        "❌ Error in generateConfigFile script:",
-        expect.any(Error)
-      );
     });
 
     it("should return undefined when error occurs", () => {
@@ -302,11 +313,19 @@ describe("generateConfigFile", () => {
     it("should call all dependencies with correct parameters", () => {
       generateConfigFile();
 
+      const expectedCalls = [
+        ["--projectName", "moon"],
+        ["--outputFolder", "dist"],
+        ["--coreFileId", "BZiHkvF7pXFHrFH8P0cG2T"],
+        ["--componentsFileId", "S3q1SkVngbwHuwpxHKCsgtJj"],
+      ];
+
       expect(mockFs.existsSync).toHaveBeenCalledWith("moonconfig.json");
-      expect(mockGetArgValue).toHaveBeenCalledWith("--projectName", "moon");
-      expect(mockGetArgValue).toHaveBeenCalledWith("--outputFolder", "dist");
-      expect(mockGetArgValue).toHaveBeenCalledWith("--coreFileId", "BZiHkvF7pXFHrFH8P0cG2T");
-      expect(mockGetArgValue).toHaveBeenCalledWith("--componentsFileId", "S3q1SkVngbwHuwpxHKCsgtJj");
+      
+      expectedCalls.forEach(([flag, defaultValue]) => {
+        expect(mockGetArgValue).toHaveBeenCalledWith(flag, defaultValue);
+      });
+      
       expect(mockFs.writeFileSync).toHaveBeenCalledWith(
         "moonconfig.json",
         expect.any(String)
@@ -324,52 +343,65 @@ describe("generateConfigFile", () => {
   });
 
   describe("Edge cases", () => {
-    it("should handle empty process.argv", () => {
-      process.argv = [];
+    const edgeCaseTestCases = [
+      {
+        description: "should handle empty process.argv",
+        argv: [],
+        expectedCustomPrefix: false,
+      },
+      {
+        description: "should handle process.argv with only --custom-prefix",
+        argv: ["--custom-prefix"],
+        expectedCustomPrefix: true,
+      },
+    ];
 
-      generateConfigFile();
+    edgeCaseTestCases.forEach(({ description, argv, expectedCustomPrefix }) => {
+      it(description, () => {
+        process.argv = argv;
 
-      const writtenContent = mockFs.writeFileSync.mock.calls[0][1] as string;
-      const config = JSON.parse(writtenContent);
-      expect(config.customPrefix).toBe(false);
+        generateConfigFile();
+
+        const config = getWrittenConfig();
+        expect(config.customPrefix).toBe(expectedCustomPrefix);
+      });
     });
 
-    it("should handle process.argv with only --custom-prefix", () => {
-      process.argv = ["--custom-prefix"];
+    const invalidValueTestCases = [
+      {
+        description: "should handle undefined return from getArgValue",
+        mockReturnValue: undefined as any,
+        expectedValues: {
+          projectName: undefined,
+          outputFolder: undefined,
+          coreFileId: undefined,
+          componentsFileId: undefined,
+        },
+      },
+      {
+        description: "should handle empty string returns from getArgValue",
+        mockReturnValue: "",
+        expectedValues: {
+          projectName: "",
+          outputFolder: "",
+          coreFileId: "",
+          componentsFileId: "",
+        },
+      },
+    ];
 
-      generateConfigFile();
+    invalidValueTestCases.forEach(({ description, mockReturnValue, expectedValues }) => {
+      it(description, () => {
+        mockGetArgValue.mockReturnValue(mockReturnValue);
 
-      const writtenContent = mockFs.writeFileSync.mock.calls[0][1] as string;
-      const config = JSON.parse(writtenContent);
-      expect(config.customPrefix).toBe(true);
-    });
+        generateConfigFile();
 
-    it("should handle undefined return from getArgValue", () => {
-      mockGetArgValue.mockReturnValue(undefined as any);
-
-      generateConfigFile();
-
-      const writtenContent = mockFs.writeFileSync.mock.calls[0][1] as string;
-      const config = JSON.parse(writtenContent);
-      
-      expect(config.projectName).toBeUndefined();
-      expect(config.outputFolder).toBeUndefined();
-      expect(config.coreFileId).toBeUndefined();
-      expect(config.componentsFileId).toBeUndefined();
-    });
-
-    it("should handle empty string returns from getArgValue", () => {
-      mockGetArgValue.mockReturnValue("");
-
-      generateConfigFile();
-
-      const writtenContent = mockFs.writeFileSync.mock.calls[0][1] as string;
-      const config = JSON.parse(writtenContent);
-      
-      expect(config.projectName).toBe("");
-      expect(config.outputFolder).toBe("");
-      expect(config.coreFileId).toBe("");
-      expect(config.componentsFileId).toBe("");
+        const config = getWrittenConfig();
+        
+        Object.entries(expectedValues).forEach(([property, expectedValue]) => {
+          expect(config[property]).toBe(expectedValue);
+        });
+      });
     });
   });
 });

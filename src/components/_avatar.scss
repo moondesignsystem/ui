@@ -84,7 +84,7 @@ $variants: ();
   }
 
   @each $variant, $prop in $variants {
-    @if $variant != "soft" {
+    @if $variant != "fill" {
       &.moon-avatar-#{$variant} {
         background-color: var(--avatar-#{$variant}-background);
         border-width: var(--avatar-#{$variant}-stroke);
