@@ -1,5 +1,5 @@
-/* Moon UI v1.9.3 */
-:root {
+/* Moon UI v1.10.0 */
+@theme inline {
 --accordion-background: var(--semantic-background-tertiary);
 --accordion-border: var(--semantic-border-primary);
 --accordion-content: var(--semantic-text-secondary);
@@ -681,6 +681,7 @@
 --utility-textarea-radius-sm: var(--scale-sm-radius);
 --utility-textarea-radius-xl: var(--scale-xl-radius);
 }
+@layer theme {
 .light-theme {
 --accordion-background: var(--semantic-background-tertiary);
 --accordion-border: var(--semantic-border-primary);
@@ -1467,67 +1468,68 @@
 --tooltip-pointer: var(--semantic-icon-primary);
 --tooltip-text: var(--semantic-text-inverse);
 }
-.text-body-100 {
+}
+@utility text-body-100 {
 font-size: var(--text-body-100-font-size);
 line-height: var(--text-body-100-line-height);
 font-weight: var(--text-body-100-font-weight);
 font-family: var(--text-body-100-font-family);
 }
-.text-body-200 {
+@utility text-body-200 {
 font-size: var(--text-body-200-font-size);
 line-height: var(--text-body-200-line-height);
 font-weight: var(--text-body-200-font-weight);
 font-family: var(--text-body-200-font-family);
 }
-.text-body-300 {
+@utility text-body-300 {
 font-size: var(--text-body-300-font-size);
 line-height: var(--text-body-300-line-height);
 font-weight: var(--text-body-300-font-weight);
 font-family: var(--text-body-300-font-family);
 }
-.text-body-400 {
+@utility text-body-400 {
 font-size: var(--text-body-400-font-size);
 line-height: var(--text-body-400-line-height);
 font-weight: var(--text-body-400-font-weight);
 font-family: var(--text-body-400-font-family);
 }
-.text-body-500 {
+@utility text-body-500 {
 font-size: var(--text-body-500-font-size);
 line-height: var(--text-body-500-line-height);
 font-weight: var(--text-body-500-font-weight);
 font-family: var(--text-body-500-font-family);
 }
-.text-heading-100 {
+@utility text-heading-100 {
 font-size: var(--text-heading-100-font-size);
 line-height: var(--text-heading-100-line-height);
 font-weight: var(--text-heading-100-font-weight);
 font-family: var(--text-heading-100-font-family);
 }
-.text-heading-200 {
+@utility text-heading-200 {
 font-size: var(--text-heading-200-font-size);
 line-height: var(--text-heading-200-line-height);
 font-weight: var(--text-heading-200-font-weight);
 font-family: var(--text-heading-200-font-family);
 }
-.text-heading-300 {
+@utility text-heading-300 {
 font-size: var(--text-heading-300-font-size);
 line-height: var(--text-heading-300-line-height);
 font-weight: var(--text-heading-300-font-weight);
 font-family: var(--text-heading-300-font-family);
 }
-.text-heading-400 {
+@utility text-heading-400 {
 font-size: var(--text-heading-400-font-size);
 line-height: var(--text-heading-400-line-height);
 font-weight: var(--text-heading-400-font-weight);
 font-family: var(--text-heading-400-font-family);
 }
-.text-heading-500 {
+@utility text-heading-500 {
 font-size: var(--text-heading-500-font-size);
 line-height: var(--text-heading-500-line-height);
 font-weight: var(--text-heading-500-font-weight);
 font-family: var(--text-heading-500-font-family);
 }
-.shadow-100 {
+@utility shadow-100 {
 box-shadow: 
 var(--effect-shadow-100-layer-1-x) 
 var(--effect-shadow-100-layer-1-y) 
@@ -1540,7 +1542,7 @@ var(--effect-shadow-100-layer-2-blur)
 var(--effect-shadow-100-layer-2-spread) 
 var(--effect-shadow-100-layer-2-color);
 }
-.shadow-200 {
+@utility shadow-200 {
 box-shadow: 
 var(--effect-shadow-200-layer-1-x) 
 var(--effect-shadow-200-layer-1-y) 
@@ -1553,7 +1555,7 @@ var(--effect-shadow-200-layer-2-blur)
 var(--effect-shadow-200-layer-2-spread) 
 var(--effect-shadow-200-layer-2-color);
 }
-.shadow-300 {
+@utility shadow-300 {
 box-shadow: 
 var(--effect-shadow-300-layer-1-x) 
 var(--effect-shadow-300-layer-1-y) 
@@ -1566,7 +1568,7 @@ var(--effect-shadow-300-layer-2-blur)
 var(--effect-shadow-300-layer-2-spread) 
 var(--effect-shadow-300-layer-2-color);
 }
-.shadow-400 {
+@utility shadow-400 {
 box-shadow: 
 var(--effect-shadow-400-layer-1-x) 
 var(--effect-shadow-400-layer-1-y) 
@@ -1579,7 +1581,7 @@ var(--effect-shadow-400-layer-2-blur)
 var(--effect-shadow-400-layer-2-spread) 
 var(--effect-shadow-400-layer-2-color);
 }
-.shadow-500 {
+@utility shadow-500 {
 box-shadow: 
 var(--effect-shadow-500-layer-1-x) 
 var(--effect-shadow-500-layer-1-y) 
@@ -1592,7 +1594,7 @@ var(--effect-shadow-500-layer-2-blur)
 var(--effect-shadow-500-layer-2-spread) 
 var(--effect-shadow-500-layer-2-color);
 }
-.shadow-600 {
+@utility shadow-600 {
 box-shadow: 
 var(--effect-shadow-600-layer-1-x) 
 var(--effect-shadow-600-layer-1-y) 
@@ -1604,4 +1606,57 @@ var(--effect-shadow-600-layer-2-y)
 var(--effect-shadow-600-layer-2-blur) 
 var(--effect-shadow-600-layer-2-spread) 
 var(--effect-shadow-600-layer-2-color);
+}
+@utility border-* {
+border-color: --value(--semantic-border- *);
+}
+@utility border-x-* {
+border-inline-color: --value(--semantic-border- *);
+}
+@utility border-y-* {
+border-block-color: --value(--semantic-border- *);
+}
+@utility border-s-* {
+border-inline-start-color: --value(--semantic-border- *);
+}
+@utility border-e-* {
+border-inline-end-color: --value(--semantic-border- *);
+}
+@utility border-t-* {
+border-top-color: --value(--semantic-border- *);
+}
+@utility border-r-* {
+border-right-color: --value(--semantic-border- *);
+}
+@utility border-b-* {
+border-bottom-color: --value(--semantic-border- *);
+}
+@utility border-l-* {
+border-left-color: --value(--semantic-border- *);
+}
+@utility divide-* {
+& > :not(:last-child) {
+border-color: --value(--semantic-border- *);
+}
+}
+@utility outline-* {
+outline-color: --value(--semantic-border- *);
+}
+@utility inset-ring-* {
+--tw-inset-ring-color: --value(--semantic-border- *);
+}
+@utility ring-* {
+--tw-ring-color: --value(--semantic-border- *);
+}
+@utility icon-* {
+color: --value(--semantic-icon-*);
+}
+@utility text-* {
+color: --value(--semantic-text-*);
+}
+@utility bg-* {
+background-color: --value(--semantic-background-*);
+}
+@utility opacity-* {
+opacity: --value(--effect-opacity-*);
 }

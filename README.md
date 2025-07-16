@@ -38,8 +38,11 @@ npx @heathmont/moon-ui --outputFolder output-folder
 # Use custom Figma file IDs
 npx @heathmont/moon-ui --coreFileId CORE_FILE_ID --componentsFileId COMPONENTS_FILE_ID
 
-# Generate for vanilla CSS instead of Tailwind CSS v4 (default: 'tailwindcss')
+# Generate vanilla CSS files instead of Tailwind CSS v4 (default: 'tailwindcss')
 npx @heathmont/moon-ui --target css
+
+# Generate vanilla CSS files with browser CSS reset. Not needed with tailwindcss target
+npx @heathmont/moon-ui --target css --preflight
 ```
 
 ### Configuration File
@@ -131,6 +134,7 @@ The following files are created in your specified output directory:
 
 - **`{projectName}-core.css`** - Core CSS variables and utilities
 - **`{projectName}-components.css`** - Component classes (when `--add-components` is used)
+- **`{projectName}-components.css`** - CSS reset (when `--preflight` is used)
 - **`{themeName}-core.css`** - Theme-specific CSS files (one per theme in config)
 
 ## License

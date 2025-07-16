@@ -53,6 +53,7 @@ describe("getConfig", () => {
       outputFolder: "./dist",
       themes: { light: "light123", dark: "dark456" },
       customPrefix: "moon",
+      preflight: false,
     };
 
     setupValidConfigFile(validConfig);
@@ -78,6 +79,7 @@ describe("getConfig", () => {
       coreFileId: "core123",
       projectName: "test-project",
       outputFolder: "./dist",
+      preflight: false,
     };
 
     setupValidConfigFile(minimalConfig);
@@ -121,6 +123,21 @@ describe("getConfig", () => {
         `❌ Missing required field '${field}' in moonconfig.json`
       );
     });
+  });
+
+  it("should throw error when missing preflight field", () => {
+    const configWithoutPreflight = {
+      coreFileId: "core123",
+      projectName: "test-project",
+      outputFolder: "./dist",
+      // missing preflight field
+    };
+
+    setupValidConfigFile(configWithoutPreflight);
+
+    expect(() => getConfig()).toThrow(
+      "❌ Missing required field 'preflight' in moonconfig.json"
+    );
   });
 
   it("should throw error when config file does not exist", () => {

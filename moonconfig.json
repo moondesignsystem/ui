@@ -4,6 +4,7 @@
   "componentsFileId": "S3q1SkVngbwHuwpxHKCsgtJj",
   "outputFolder": "dist/styles",
   "customPrefix": false,
-  "target": "css",
+  "target": "tailwindcss",
+  "preflight": false,
   "themes": {}
 }

@@ -1,2 +1,2 @@
-declare const getArgValue: (flag: string, value: string) => string;
+declare const getArgValue: (flag: string, value: string | boolean) => string | boolean;
 export default getArgValue;
