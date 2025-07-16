@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 1.10.1
+
+### Patch Changes
+
+- fix: styles folder path
+
 ## 1.10.0
 
 ### Minor Changes
