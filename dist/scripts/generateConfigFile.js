@@ -3,25 +3,52 @@ import getArgValue from "./utils/getArgValue.js";
 const generateConfigFile = () => {
     try {
         const outputConfigFile = "moonconfig.json";
-        if (fs.existsSync(outputConfigFile)) {
-            return;
+        const fileExists = fs.existsSync(outputConfigFile);
+        let existingConfig = {};
+        if (fileExists) {
+            try {
+                const configContent = fs.readFileSync(outputConfigFile, "utf8");
+                existingConfig = JSON.parse(configContent);
+            }
+            catch (parseError) {
+                console.warn("Warning: Could not parse existing config file, will recreate it");
+                existingConfig = {};
+            }
         }
-        console.log(`Generating moonconfig.json file...`);
-        const customPrefix = process.argv.includes("--custom-prefix");
+        const customPrefix = getArgValue("--custom-prefix", false);
         const projectName = getArgValue("--projectName", "moon");
         const outputFolder = getArgValue("--outputFolder", "dist");
         const coreFileId = getArgValue("--coreFileId", "BZiHkvF7pXFHrFH8P0cG2T");
         const componentsFileId = getArgValue("--componentsFileId", "S3q1SkVngbwHuwpxHKCsgtJj");
         const target = getArgValue("--target", "tailwindcss");
-        const config = {
+        const preflight = getArgValue("--preflight", false);
+        const defaultConfig = {
             projectName,
             coreFileId,
             componentsFileId,
             outputFolder,
             customPrefix,
             target,
+            preflight,
             themes: {},
         };
+        const missingProperties = Object.keys(defaultConfig).filter((key) => !(key in existingConfig));
+        const hasChanges = !fileExists || missingProperties.length > 0;
+        if (!hasChanges) {
+            return;
+        }
+        if (!fileExists) {
+            console.log(`Generating moonconfig.json file...`);
+        }
+        else if (missingProperties.length > 0) {
+            console.log(`Updating moonconfig.json file...`);
+        }
+        const config = { ...defaultConfig, ...existingConfig };
+        Object.keys(defaultConfig).forEach((key) => {
+            if (!(key in existingConfig)) {
+                config[key] = defaultConfig[key];
+            }
+        });
         fs.writeFileSync(outputConfigFile, JSON.stringify(config, null, 2) + "\n");
     }
     catch (error) {

@@ -20,16 +20,19 @@ const generateComponentsFile = async () => {
     }
     const outputComponentsFile = `${config.outputFolder}/${config.projectName}-components.css`;
     const coreCssPath = `${config.outputFolder}/${config.projectName}-core.css`;
-    const mainScssPath = path.resolve(packageRoot, "src/components/main.scss");
+    const mainScssPath = path.resolve(
+      packageRoot,
+      "src/styles/components/main.scss"
+    );
     const variantsScssPath = path.resolve(
       packageRoot,
-      "src/components/_variants.scss"
+      "src/styles/components/_variants.scss"
     );
     await generateComponentVariants(variantsScssPath, coreCssPath);
     const result = sass.compile(mainScssPath, {
       style: "compressed",
       sourceMap: true,
-      loadPaths: [path.resolve(packageRoot, "src/components")],
+      loadPaths: [path.resolve(packageRoot, "src/styles/components")],
     });
     const version = getPackageVersion();
     const versionComment = `/* Moon UI v${version} */\n`;

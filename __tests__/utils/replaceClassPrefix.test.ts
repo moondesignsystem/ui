@@ -20,6 +20,7 @@ describe("replaceClassPrefix", () => {
     outputFolder: "test",
     target: "tailwindcss",
     customPrefix: true,
+    preflight: false,
     ...overrides,
   });
 
@@ -267,6 +268,7 @@ content: "moon-like";`;
           outputFolder: "dist",
           customPrefix: true,
           target: "tailwindcss" as const,
+          preflight: false,
         },
         expected: ".minimal-component { display: flex; }",
       },
@@ -280,6 +282,7 @@ content: "moon-like";`;
           outputFolder: "build",
           customPrefix: true,
           target: "tailwindcss" as const,
+          preflight: false,
           themes: { light: "theme1", dark: "theme2" },
         },
         expected: ".extended-widget { padding: 10px; }",
