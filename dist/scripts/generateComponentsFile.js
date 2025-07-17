@@ -2,6 +2,8 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import * as sass from "sass";
+import postcss from "postcss";
+import autoprefixer from "autoprefixer";
 import getConfig from "./utils/getConfig.js";
 import getPackageVersion from "./utils/getPackageVersion.js";
 import replaceClassPrefix from "./utils/replaceClassPrefix.js";
@@ -26,9 +28,12 @@ const generateComponentsFile = async () => {
             sourceMap: true,
             loadPaths: [path.resolve(packageRoot, "src/styles/components")],
         });
+        const postCssResult = await postcss([autoprefixer]).process(result.css, {
+            from: mainScssPath,
+        });
         const version = getPackageVersion();
         const versionComment = `/* Moon UI v${version} */\n`;
-        const cssWithPrefixReplaced = replaceClassPrefix(result.css);
+        const cssWithPrefixReplaced = replaceClassPrefix(postCssResult.css);
         const cssWithVersionComment = versionComment +
             `@layer components {\n` +
             cssWithPrefixReplaced +
