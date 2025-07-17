@@ -38,6 +38,7 @@
     opacity: 1;
     background-color: var(--semantic-background-backdrop);
     .moon-dialog-box {
+      display: flex;
       translate: 0 0;
       scale: 1;
       opacity: 1;
@@ -56,7 +57,7 @@
 .moon-dialog-box {
   grid-column-start: 1;
   grid-row-start: 1;
-  display: flex;
+  display: none;
   flex-direction: column;
   max-height: 100vh;
   width: 100%;
@@ -75,14 +76,16 @@
   overscroll-behavior: contain;
 
   :where(.moon-dialog-title) {
-    display: flex;
+    display: grid;
+    grid-auto-flow: column;
     align-items: center;
-    justify-content: space-between;
     gap: var(--dialog-gap);
     font: variables.$text-heading-200;
   }
 
   :where(.moon-dialog-close) {
+    justify-self: end;
+
     @extend .moon-icon-button;
     @extend .moon-icon-button-sm;
     @extend .moon-icon-button-ghost;

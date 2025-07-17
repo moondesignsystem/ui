@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 1.12.0
+
+### Minor Changes
+
+- feat: upgrade drawer styles
+
 ## 1.11.0
 
 ### Minor Changes
