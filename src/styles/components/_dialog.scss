@@ -2,9 +2,63 @@
 @use "iconButton";
 
 .moon-dialog {
+  position: fixed;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  pointer-events: none;
+  visibility: hidden;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  max-height: none;
+  max-width: none;
+  color: inherit;
+  background-color: transparent;
+  transition:
+    translate 0.3s ease-out,
+    visibility 0.3s allow-discrete,
+    background-color 0.3s ease-out,
+    opacity 0.1s ease-out;
+  overflow-y: hidden;
+  overscroll-behavior: contain;
+  z-index: 999;
+  &::backdrop {
+    display: none;
+  }
+
+  &.moon-dialog-open,
+  &[open],
+  &:target {
+    pointer-events: auto;
+    visibility: visible;
+    opacity: 1;
+    background-color: var(--semantic-background-backdrop);
+    .moon-dialog-box {
+      translate: 0 0;
+      scale: 1;
+      opacity: 1;
+    }
+  }
+  @starting-style {
+    &.moon-dialog-open,
+    &[open],
+    &:target {
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+}
+
+.moon-dialog-box {
+  grid-column-start: 1;
+  grid-row-start: 1;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  max-height: 100vh;
   width: 100%;
   max-width: var(--dialog-max-width);
   gap: var(--dialog-gap);
@@ -15,6 +69,10 @@
   box-shadow:
     inset 0 0 0 var(--dialog-stroke) var(--dialog-border),
     variables.$shadow-300;
+  scale: 95%;
+  opacity: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 
   :where(.moon-dialog-title) {
     display: flex;

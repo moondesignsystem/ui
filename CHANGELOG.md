@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 1.11.0
+
+### Minor Changes
+
+- feat: upgrade dialog styles
+
 ## 1.10.1
 
 ### Patch Changes
