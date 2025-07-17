@@ -22,7 +22,7 @@ const generateComponentsFile = async () => {
         const variantsScssPath = path.resolve(packageRoot, "src/styles/components/_variants.scss");
         await generateComponentVariants(variantsScssPath, coreCssPath);
         const result = sass.compile(mainScssPath, {
-            style: "compressed",
+            style: "expanded",
             sourceMap: true,
             loadPaths: [path.resolve(packageRoot, "src/styles/components")],
         });
