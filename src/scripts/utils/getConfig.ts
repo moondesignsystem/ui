@@ -7,8 +7,9 @@ interface Config {
   projectName: string;
   outputFolder: string;
   themes?: Record<string, string>;
-  customPrefix?: boolean;
+  customPrefix: boolean;
   target: "tailwindcss" | "css";
+  preflight: boolean;
 }
 
 const getConfig = () => {
@@ -32,6 +33,11 @@ const getConfig = () => {
     if (!config.outputFolder) {
       throw new Error(
         "❌ Missing required field 'outputFolder' in moonconfig.json"
+      );
+    }
+    if (!config.preflight && config.preflight !== false) {
+      throw new Error(
+        "❌ Missing required field 'preflight' in moonconfig.json"
       );
     }
     return config;

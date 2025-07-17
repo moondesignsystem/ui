@@ -11,7 +11,6 @@ const processPublishedVariables = (localVariableCollections, publishedVariableCo
                     ...localVariableCollections[key],
                     variables: {},
                 };
-                // Filter variables inside each variableCollection
                 for (const variableId in localVariables) {
                     const variable = localVariables[variableId];
                     if (variable.variableCollectionId === key &&
@@ -24,8 +23,11 @@ const processPublishedVariables = (localVariableCollections, publishedVariableCo
                 }
                 const allVariablesAreColor = Object.values(variableCollections[collectionName].variables).every((variable) => variable.resolvedType === "COLOR");
                 if (allVariablesAreColor) {
-                    themes = variableCollections[collectionName].modes.map((mode) => formatName(mode.name));
-                    colorCollectionName = formatName(collectionName);
+                    const collectionModes = variableCollections[collectionName].modes.map((mode) => formatName(mode.name));
+                    if (themes.length === 0 || collectionModes.length > themes.length) {
+                        themes = collectionModes;
+                        colorCollectionName = formatName(collectionName);
+                    }
                 }
             }
         }

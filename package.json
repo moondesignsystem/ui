@@ -1,6 +1,6 @@
 {
   "name": "@heathmont/moon-ui",
-  "version": "1.9.3",
+  "version": "1.12.0",
   "description": "Moon UI library for generating core and components CSS files",
   "main": "dist/install.js",
   "type": "module",
@@ -18,7 +18,7 @@
   },
   "files": [
     "dist/**/*",
-    "src/components/*"
+    "src/styles/*"
   ],
   "repository": {
     "type": "git",
@@ -31,7 +31,9 @@
   },
   "homepage": "https://ui.moon.io",
   "dependencies": {
+    "autoprefixer": "^10.4.21",
     "dotenv": "^16.5.0",
+    "postcss": "^8.5.6",
     "sass": "^1.89.2"
   },
   "devDependencies": {

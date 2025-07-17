@@ -4,8 +4,9 @@ interface Config {
     projectName: string;
     outputFolder: string;
     themes?: Record<string, string>;
-    customPrefix?: boolean;
+    customPrefix: boolean;
     target: "tailwindcss" | "css";
+    preflight: boolean;
 }
 declare const getConfig: () => Config;
 export default getConfig;

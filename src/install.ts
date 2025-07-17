@@ -4,6 +4,7 @@ import generateConfigFile from "./scripts/generateConfigFile.js";
 import generateCoreFile from "./scripts/generateCoreFile.js";
 import getConfig from "./scripts/utils/getConfig.js";
 import generateComponentsFile from "./scripts/generateComponentsFile.js";
+import generatePreflightFile from "./scripts/generatePreflightFile.js";
 
 const install = async () => {
   if (!process.env.FIGMA_TOKEN) {
@@ -12,10 +13,10 @@ const install = async () => {
   try {
     generateConfigFile();
     const config = getConfig();
-    if (!config.coreFileId) {
-      throw new Error("❌ Missing coreFileId in configuration");
-    }
     const addComponents = process.argv.includes("--add-components");
+    if (config.preflight) {
+      await generatePreflightFile();
+    }
     await generateCoreFile(
       config.coreFileId,
       config.projectName,
@@ -36,11 +37,6 @@ const install = async () => {
       }
     }
     if (addComponents) {
-      if (!config.componentsFileId) {
-        throw new Error(
-          "❌ Missing componentsFileId in configuration for component generation"
-        );
-      }
       await generateComponentsFile();
     }
     console.log("✅ Installation complete!");

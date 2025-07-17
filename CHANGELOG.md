@@ -1,5 +1,29 @@
 # @heathmont/moon-ui
 
+## 1.12.0
+
+### Minor Changes
+
+- feat: upgrade drawer styles
+
+## 1.11.0
+
+### Minor Changes
+
+- feat: upgrade dialog styles
+
+## 1.10.1
+
+### Patch Changes
+
+- fix: styles folder path
+
+## 1.10.0
+
+### Minor Changes
+
+- feat: add preflight option
+
 ## 1.9.3
 
 ### Patch Changes
