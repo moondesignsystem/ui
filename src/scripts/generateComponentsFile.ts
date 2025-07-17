@@ -2,6 +2,8 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import * as sass from "sass";
+import postcss from "postcss";
+import autoprefixer from "autoprefixer";
 import getConfig from "./utils/getConfig.js";
 import getPackageVersion from "./utils/getPackageVersion.js";
 import replaceClassPrefix from "./utils/replaceClassPrefix.js";
@@ -20,20 +22,26 @@ const generateComponentsFile = async () => {
     }
     const outputComponentsFile = `${config.outputFolder}/${config.projectName}-components.css`;
     const coreCssPath = `${config.outputFolder}/${config.projectName}-core.css`;
-    const mainScssPath = path.resolve(packageRoot, "src/components/main.scss");
+    const mainScssPath = path.resolve(
+      packageRoot,
+      "src/styles/components/main.scss"
+    );
     const variantsScssPath = path.resolve(
       packageRoot,
-      "src/components/_variants.scss"
+      "src/styles/components/_variants.scss"
     );
     await generateComponentVariants(variantsScssPath, coreCssPath);
     const result = sass.compile(mainScssPath, {
-      style: "compressed",
+      style: "expanded",
       sourceMap: true,
-      loadPaths: [path.resolve(packageRoot, "src/components")],
+      loadPaths: [path.resolve(packageRoot, "src/styles/components")],
+    });
+    const postCssResult = await postcss([autoprefixer]).process(result.css, {
+      from: mainScssPath,
     });
     const version = getPackageVersion();
     const versionComment = `/* Moon UI v${version} */\n`;
-    const cssWithPrefixReplaced = replaceClassPrefix(result.css);
+    const cssWithPrefixReplaced = replaceClassPrefix(postCssResult.css);
     const cssWithVersionComment =
       versionComment +
       `@layer components {\n` +
