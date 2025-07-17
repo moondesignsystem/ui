@@ -134,7 +134,7 @@ The following files are created in your specified output directory:
 
 - **`{projectName}-core.css`** - Core CSS variables and utilities
 - **`{projectName}-components.css`** - Component classes (when `--add-components` is used)
-- **`{projectName}-components.css`** - CSS reset (when `--preflight` is used)
+- **`{projectName}-preflight.css`** - CSS reset (when `--preflight` is used)
 - **`{themeName}-core.css`** - Theme-specific CSS files (one per theme in config)
 
 ## License
