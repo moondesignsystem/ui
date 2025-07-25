@@ -101,6 +101,8 @@ $sizes: ();
         max-height: none;
         opacity: 1;
         padding-top: var(--spacing-space-2, 0.25rem);
+        padding-bottom: var(--spacing-space-2, 0.25rem);
+        padding-right: var(--spacing-space-12, 1.5rem);
         transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
           opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding-top 0.2s;
         will-change: max-height, opacity, padding-top;
