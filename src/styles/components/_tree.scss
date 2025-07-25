@@ -1,0 +1,124 @@
+@use "sass:map";
+@use "variables";
+@use "variants";
+
+@function generate-size($size) {
+  @return (
+    "padding": var(--scale-#{$size}-padding),
+    "gap": var(--scale-#{$size}-gap),
+    "radius": var(--utility-tree-radius-#{$size}, 0.375rem),
+    "font": var(--scale-#{$size}-text-weight) var(--scale-#{$size}-text-size) /
+      var(--scale-#{$size}-text-height) var(--scale-#{$size}-text-font)
+  );
+}
+$sizes: ();
+@each $size in ("sm", "md", "lg", "xl") {
+  $sizes: map.set($sizes, $size, generate-size($size));
+}
+
+.moon-tree-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  @each $size, $prop in $sizes {
+    &.moon-tree-#{$size} {
+      .moon-tree-item {
+        .moon-tree-btn {
+          padding: map.get($prop, "padding");
+          gap: map.get($prop, "gap");
+          border-radius: map.get($prop, "radius");
+          font: map.get($prop, "font");
+        }
+      }
+    }
+  }
+
+  .moon-tree-item {
+    width: 100%;
+    display: block;
+
+    .moon-tree-btn {
+      display: flex;
+      align-items: center;
+      gap: map.get($sizes, "md", "gap");
+      width: 100%;
+      padding: map.get($sizes, "md", "padding");
+      border: none;
+      background: var(--semantic-background-transparent);
+      border-radius: map.get($sizes, "md", "radius");
+      cursor: pointer;
+      text-align: left;
+      font: map.get($sizes, "md", "font");
+      color: var(--semantic-text-primary);
+      transition: background-color 0.2s, box-shadow 0.2s;
+
+      &:hover,
+      &:focus-visible {
+        background: var(--semantic-background-hover);
+        outline: none;
+        box-shadow: 0 0 0 var(--spacing-space-2) var(--semantic-border-active);
+      }
+
+      &:active {
+        background: var(--semantic-background-hover);
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+        opacity: var(--effect-opacity-disabled);
+      }
+
+      .moon-tree-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1em;
+        color: var(--semantic-icon-primary);
+      }
+
+      .moon-tree-label {
+        flex: 1;
+        min-width: 0;
+        overflow-wrap: break-word;
+      }
+    }
+
+    .moon-tree-children {
+      padding-left: var(--spacing-space-12, 1.5rem);
+      padding-top: var(--spacing-space-2, 0.25rem);
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .moon-tree-list {
+    .moon-tree-item {
+      .moon-tree-btn {
+        padding: var(--spacing-space-4, 0.5rem) var(--spacing-space-4, 0.5rem);
+        gap: var(--spacing-space-2, 0.25rem);
+        font-size: 0.95em;
+      }
+      .moon-tree-children {
+        padding-left: var(--spacing-space-8, 1rem);
+      }
+    }
+  }
+}
+
+@media (min-width: 900px) {
+  .moon-tree-list {
+    .moon-tree-item {
+      .moon-tree-btn {
+        padding: var(--spacing-space-6, 0.75rem) var(--spacing-space-12, 1.5rem);
+        font-size: 1.05em;
+      }
+      .moon-tree-children {
+        padding-left: var(--spacing-space-16, 2rem);
+      }
+    }
+  }
+}
