@@ -1,148 +1,252 @@
-@use "sass:map";
-@use "variables";
-@use "variants";
-
-@function generate-size($size) {
-  @return (
-    "padding": var(--scale-#{$size}-padding),
-    "gap": var(--scale-#{$size}-gap),
-    "radius": var(--utility-tree-radius-#{$size}, 0.375rem),
-    "font": var(--scale-#{$size}-text-weight) var(--scale-#{$size}-text-size) /
-      var(--scale-#{$size}-text-height) var(--scale-#{$size}-text-font)
-  );
-}
-$sizes: ();
-@each $size in ("sm", "md", "lg", "xl") {
-  $sizes: map.set($sizes, $size, generate-size($size));
-}
-
 .moon-tree-list {
+  list-style: none;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-
-  @each $size, $prop in $sizes {
-    &.moon-tree-#{$size} {
-      .moon-tree-item {
-        .moon-tree-btn {
-          padding: map.get($prop, "padding");
-          gap: map.get($prop, "gap");
-          border-radius: map.get($prop, "radius");
-          font: map.get($prop, "font");
+  gap: var(--scale-md-gap);
+  border-radius: var(--scale-sm-radius);
+  font-size: var(--text-xs);
+  transition: 0.4s ease;
+  .moon-tree-item {
+    position: relative;
+    width: 100%;
+    margin: auto;
+    padding-left: 0;
+    .moon-tree-children {
+      > .moon-tree-list {
+        .moon-tree-item {
+          padding-left: var(--spacing-space-16);
+        }
+      }
+      padding: 0 var(--spacing-space-8);
+      overflow: hidden;
+      opacity: 0;
+      height: 0;
+      min-height: 0;
+      transition: height, min-height, opacity 0.4s ease;
+      &:before {
+        content: "";
+        position: absolute;
+        bottom: var(--spacing-space-6);
+        left: var(--spacing-space-32);
+        width: var(--dimension-border-1);
+        height: calc(100% - var(--spacing-space-48));
+        border-left: var(--dimension-border-1) solid
+          var(--semantic-border-secondary);
+      }
+      .moon-tree-submenu-title {
+        display: none;
+      }
+    }
+    .moon-tree-link {
+      color: var(--semantic-text-primary);
+      width: 100%;
+      display: flex;
+      white-space: nowrap;
+      gap: var(--scale-md-gap);
+      padding: var(--scale-sm-padding);
+      text-decoration: none;
+      align-items: center;
+      border-radius: var(--scale-sm-radius);
+      transition: 0.4s ease;
+      &:where(svg) {
+        width: var(--scale-sm-icon-size);
+        height: var(--scale-sm-icon-size);
+      }
+    }
+    &:hover {
+      > .moon-tree-link {
+        background: var(--semantic-background-hover);
+        color: var(--semantic-text-primary);
+      }
+    }
+    .moon-tree-label {
+      opacity: 1;
+      pointer-events: all;
+      display: block;
+      transition: opacity, visibility 0.3s ease;
+    }
+    .moon-tree-end-icon {
+      opacity: 1;
+      pointer-events: all;
+      display: block;
+      transition: opacity, visibility 0.3s ease;
+      transform: rotate(-90deg);
+      transition: 0.4s ease;
+    }
+    .moon-tree-end-icon.moon-tree-end-icon-collapse {
+      transform: rotate(0);
+      transition: 0.4s ease;
+    }
+    .moon-tree-children.moon-tree-children-visible {
+      > .moon-tree-list {
+        padding: 0 0 var(--scale-md-padding);
+      }
+      height: 100%;
+      min-height: fit-content;
+      opacity: 1;
+    }
+    .moon-tree-children.moon-tree-children-root {
+      &:before {
+        content: "";
+        position: absolute;
+        bottom: 6px;
+        left: var(--spacing-space-16);
+        width: var(--dimension-border-1);
+        height: calc(100% - var(--spacing-space-48));
+        border-left: var(--dimension-border-1) solid
+          var(--semantic-border-secondary);
+      }
+    }
+  }
+  .moon-tree-item.moon-tree-item-selected {
+    > .moon-tree-link {
+      background: var(--semantic-background-brand-subtle);
+      color: var(--semantic-text-brand);
+    }
+  }
+  .moon-tree-item.moon-tree-item-disabled {
+    > .moon-tree-link {
+      cursor: not-allowed;
+      opacity: var(--effect-opacity-disabled);
+    }
+  }
+}
+.moon-tree-list.moon-tree-list-minified {
+  gap: 0;
+  .moon-tree-item {
+    .moon-tree-children {
+      > .moon-tree-list {
+        .moon-tree-item {
+          padding-left: 0;
+        }
+      }
+      &:before {
+        border-left: var(--semantic-border-transparent);
+      }
+      > .moon-tree-item {
+        .moon-tree-link {
+          padding: 0 var(--scale-xs-padding);
         }
       }
     }
-  }
-
-  .moon-tree-item {
-    width: 100%;
-    display: block;
-
-    .moon-tree-btn {
-      display: flex;
-      align-items: center;
-      gap: map.get($sizes, "md", "gap");
-      width: 100%;
-      padding: map.get($sizes, "md", "padding");
-      border: none;
-      background: var(--semantic-background-transparent);
-      border-radius: map.get($sizes, "md", "radius");
-      cursor: pointer;
-      text-align: left;
-      font: map.get($sizes, "md", "font");
-      color: var(--semantic-text-primary);
-      transition: background-color 0.2s, box-shadow 0.2s;
-
-      &:hover,
-      &:focus-visible {
-        background: var(--semantic-background-hover);
-        outline: none;
-        box-shadow: 0 0 0 var(--spacing-space-2) var(--semantic-border-active);
-      }
-
-      &:active {
-        background: var(--semantic-background-hover);
-      }
-
-      &:disabled {
-        cursor: not-allowed;
-        opacity: var(--effect-opacity-disabled);
-      }
-
-      .moon-tree-icon {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.1em;
-        color: var(--semantic-icon-primary);
-      }
-
-      .moon-tree-label {
-        flex: 1;
-        min-width: 0;
-        overflow-wrap: break-word;
+    > .moon-tree-children.moon-tree-children-root {
+      &:before {
+        content: "";
+        position: absolute;
+        bottom: 6px;
+        left: var(--spacing-space-16);
+        width: var(--dimension-border-1);
+        height: calc(100% - var(--spacing-space-48));
+        border-left: var(--dimension-border-1) solid
+          var(--semantic-border-secondary);
       }
     }
-
-    .moon-tree-children {
-      padding-left: var(--spacing-space-12, 1.5rem);
-      padding-top: var(--spacing-space-2, 0.25rem);
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
-      transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-        opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), padding-top 0.2s;
-      will-change: max-height, opacity, padding-top;
-
-      &.is-open {
-        max-height: none;
+    &:hover {
+      > .moon-tree-children {
         opacity: 1;
-        padding-top: var(--spacing-space-2, 0.25rem);
-        padding-bottom: var(--spacing-space-2, 0.25rem);
-        padding-right: var(--spacing-space-12, 1.5rem);
-        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-          opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding-top 0.2s;
-        will-change: max-height, opacity, padding-top;
+        pointer-events: all;
       }
+      .moon-tree-children-root {
+        > .moon-tree-submenu-title-wrapper {
+          margin-left: -36px;
+          opacity: 1;
+          pointer-events: all;
+          transition: 0.4s ease;
+          display: block;
+          .moon-tree-submenu-title {
+            display: flex;
+            margin-left: 8px;
+            width: (100% + 8px);
+            align-items: center;
+            padding: var(--scale-xs-padding);
+            color: var(--semantic-text-primary);
+            border-radius: var(--scale-xs-radius);
+            background-color: var(--semantic-background-hover);
+          }
+        }
+      }
+      .moon-tree-children {
+        .moon-tree-submenu-title {
+          svg {
+            transform: rotate(-90deg);
+          }
+        }
+        .moon-tree-item {
+          .moon-tree-label {
+            opacity: 1;
+            pointer-events: all;
+            display: block;
+          }
+          .moon-tree-end-icon {
+            opacity: 1;
+            pointer-events: all;
+            display: block;
+          }
+        }
+      }
+    }
+    .moon-tree-children-root {
+      > .moon-tree-submenu-title-wrapper {
+        opacity: 0;
+        pointer-events: none;
+        display: none;
+      }
+    }
+  }
+  .moon-tree-children.moon-tree-children-root {
+    padding: 0 0 0 var(--spacing-space-28);
+  }
+
+  .moon-tree-children {
+    position: absolute;
+    left: calc(100% + var(--scale-md-gap));
+    top: 0;
+    height: auto;
+    min-width: 100%;
+    background-color: var(--semantic-background-primary);
+    box-shadow: var(--effect-shadow-500-layer-1-x)
+        var(--effect-shadow-500-layer-1-y) var(--effect-shadow-500-layer-1-blur)
+        var(--effect-shadow-500-layer-1-spread)
+        var(--effect-shadow-500-layer-1-color),
+      var(--effect-shadow-500-layer-2-x) var(--effect-shadow-500-layer-2-y)
+        var(--effect-shadow-500-layer-2-blur)
+        var(--effect-shadow-500-layer-2-spread)
+        var(--effect-shadow-500-layer-2-color);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    border-radius: 0 0 var(--radius-4) var(--radius-4);
+    overflow: unset;
+    .moon-tree-item {
+      > .moon-tree-children {
+        left: 100%;
+      }
+    }
+  }
+}
+.moon-tree-item {
+  &:focus {
+    > .moon-tree-link {
+      box-shadow: var(--effect-focus-layer-1-x) var(--effect-focus-layer-1-y)
+          var(--effect-focus-layer-1-blur) var(--effect-focus-layer-1-spread)
+          var(--semantic-background-tertiary),
+        var(--effect-focus-layer-2-x) var(--effect-focus-layer-2-y)
+          var(--effect-focus-layer-2-blur) var(--effect-focus-layer-2-spread)
+          var(--semantic-background-brand-subtle);
+    }
+  }
+}
+.moon-tree-list-minified {
+  .moon-tree-item {
+    .moon-tree-label {
+      opacity: 0;
+      pointer-events: none;
+      display: none;
     }
     .moon-tree-end-icon {
-      display: inline-flex;
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .moon-tree-end-icon.is-open {
-      transform: rotate(180deg);
-    }
-  }
-}
-
-@media (max-width: 600px) {
-  .moon-tree-list {
-    .moon-tree-item {
-      .moon-tree-btn {
-        padding: var(--spacing-space-4, 0.5rem) var(--spacing-space-4, 0.5rem);
-        gap: var(--spacing-space-2, 0.25rem);
-        font-size: 0.95em;
-      }
-      .moon-tree-children {
-        padding-left: var(--spacing-space-8, 1rem);
-      }
-    }
-  }
-}
-
-@media (min-width: 900px) {
-  .moon-tree-list {
-    .moon-tree-item {
-      .moon-tree-btn {
-        padding: var(--spacing-space-6, 0.75rem) var(--spacing-space-12, 1.5rem);
-        font-size: 1.05em;
-      }
-      .moon-tree-children {
-        padding-left: var(--spacing-space-16, 2rem);
-      }
+      opacity: 0;
+      pointer-events: none;
+      display: none;
     }
   }
 }
