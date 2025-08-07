@@ -1,0 +1,12 @@
+name: 'Npm authentication'
+
+inputs:
+  npm_auth_token:
+    required: false
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Npm auth
+      shell: bash
+      run: echo "npm token ${{ inputs.npm_auth_token }}" && echo "//registry.npmjs.org/:_authToken=${{ inputs.npm_auth_token }}" > .npmrc

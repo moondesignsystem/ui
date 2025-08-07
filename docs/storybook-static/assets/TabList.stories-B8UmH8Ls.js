@@ -1,0 +1,9 @@
+import{j as g}from"./index-DKxaqQgQ.js";import{L as f}from"./LinksBlock-8AqbDGcr.js";import{j as L}from"./joinClassnames-CPymqmKP.js";import{g as a}from"./getChildren-Bp76MxS-.js";import{s as r}from"./starIcon-Bd4NHJf_.js";import"./iframe-B37x74Pe.js";import"./_commonjsHelpers-CqkleIqs.js";import"./index-CfOrKyLd.js";import"./index-DrFu-skq.js";import"./preview-CzSQLk2e.js";import"./DocsRenderer-CFRXHY34-CzDC7Aws.js";const u=t=>t==="md"?"":`moon-tab-list-${t}`,T=["sm","md"],E=t=>{const{label:m,size:d,length:p,hasStartIcon:b,hasEndIcon:h}=t,e=document.createElement("div");return e.setAttribute("role","tablist"),e.className=L(["moon-tab-list",u(d)]),new Array(p).fill("").forEach((S,n)=>{const s=document.createElement("button");s.setAttribute("role","tab"),s.className=`moon-tab${n===1?" moon-tab-active":""}`,b&&s.appendChild(a({children:r})),s.appendChild(a({children:`${m} ${n+1}`})),h&&s.appendChild(a({children:r})),e.appendChild(s)}),e},q={title:"Navigation/Tab List",render:E,argTypes:{label:{description:"Label of Tab List",control:"text"},size:{description:"Size of Tab List",control:"select",options:T},length:{description:"Length of Tab List",control:{type:"range",min:2,max:4,step:1}},hasStartIcon:{description:"Start icon of Tab List",control:"boolean"},hasEndIcon:{description:"End icon of Tab List",control:"boolean"}},parameters:{docs:{container:({context:t})=>g.jsx(f,{context:t,moon:"navigation/tab-list-xPXqwb2q",github:"_tabList.scss"})}}},o={args:{size:"md",length:3,hasStartIcon:!1,hasEndIcon:!1,label:"Tab"}};var i,c,l;o.parameters={...o.parameters,docs:{...(i=o.parameters)==null?void 0:i.docs,source:{originalSource:`{
+  args: {
+    size: "md",
+    length: 3,
+    hasStartIcon: false,
+    hasEndIcon: false,
+    label: "Tab"
+  }
+}`,...(l=(c=o.parameters)==null?void 0:c.docs)==null?void 0:l.source}}};const w=["TabList"];export{o as TabList,w as __namedExportsOrder,q as default};

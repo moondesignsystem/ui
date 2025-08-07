@@ -1,0 +1,5 @@
+import{j as c}from"./index-DKxaqQgQ.js";import{L as i}from"./LinksBlock-8AqbDGcr.js";import{g as m}from"./getChildren-Bp76MxS-.js";import"./iframe-B37x74Pe.js";import"./_commonjsHelpers-CqkleIqs.js";import"./index-CfOrKyLd.js";import"./index-DrFu-skq.js";import"./preview-CzSQLk2e.js";import"./DocsRenderer-CFRXHY34-CzDC7Aws.js";const p=r=>{const{children:n}=r,t=document.createElement("div"),d=m({children:n});return t.appendChild(d),t.className="moon-badge",t},j={title:"Indicators & status/Badge",render:p,argTypes:{children:{description:"Content of Badge",control:"text"}},parameters:{docs:{container:({context:r})=>c.jsx(i,{context:r,moon:"indicators-and-status/badge-Zo8Ufqsg",github:"_badge.scss"})}}},e={args:{children:""}};var o,s,a;e.parameters={...e.parameters,docs:{...(o=e.parameters)==null?void 0:o.docs,source:{originalSource:`{
+  args: {
+    children: ""
+  }
+}`,...(a=(s=e.parameters)==null?void 0:s.docs)==null?void 0:a.source}}};const E=["Badge"];export{e as Badge,E as __namedExportsOrder,j as default};

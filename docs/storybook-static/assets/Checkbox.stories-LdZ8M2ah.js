@@ -1,0 +1,9 @@
+import{j as p}from"./index-DKxaqQgQ.js";import{L as h}from"./LinksBlock-8AqbDGcr.js";import"./iframe-B37x74Pe.js";import"./_commonjsHelpers-CqkleIqs.js";import"./index-CfOrKyLd.js";import"./index-DrFu-skq.js";import"./preview-CzSQLk2e.js";import"./DocsRenderer-CFRXHY34-CzDC7Aws.js";const k=["start","end"],x=c=>{const{label:r,checked:l,indeterminate:d,disabled:b,labelPosition:m}=c,e=document.createElement("input");if(e.type="checkbox",e.setAttribute("id","moon-checkbox"),e.className="moon-checkbox",b&&e.setAttribute("disabled","true"),l&&(e.setAttribute("checked","true"),e.innerHTML="<svg />"),d&&(e.indeterminate=!0,e.innerHTML="<svg />"),r){const t=document.createElement("div"),o=document.createElement("label");return o.setAttribute("for","moon-checkbox"),o.textContent=r,t.className="moon-checkbox-wrapper",m==="end"?(t.appendChild(o),t.appendChild(e)):(t.appendChild(e),t.appendChild(o)),t}return e},T={title:"Forms & selection controls/Checkbox",render:x,argTypes:{checked:{description:"Checked state of Checkbox",control:"boolean"},disabled:{description:"Disabled state of Checkbox",control:"boolean"},indeterminate:{description:"Indeterminate state of Checkbox",control:"boolean"},label:{description:"Label of Checkbox",control:"text"},labelPosition:{description:"Position of label of Checkbox",control:"select",options:k,if:{arg:"label"}}},parameters:{docs:{container:({context:c})=>p.jsx(h,{context:c,moon:"forms-and-selection-controls/checkbox-qTGrcEvB",github:"_checkbox.scss"})}}},n={args:{disabled:!1,checked:!1,indeterminate:!1,label:"",labelPosition:"start"}};var s,a,i;n.parameters={...n.parameters,docs:{...(s=n.parameters)==null?void 0:s.docs,source:{originalSource:`{
+  args: {
+    disabled: false,
+    checked: false,
+    indeterminate: false,
+    label: "",
+    labelPosition: "start"
+  }
+}`,...(i=(a=n.parameters)==null?void 0:a.docs)==null?void 0:i.source}}};const v=["Checkbox"];export{n as Checkbox,v as __namedExportsOrder,T as default};

@@ -1,0 +1,8 @@
+import{j as m}from"./index-DKxaqQgQ.js";import{L as b}from"./LinksBlock-8AqbDGcr.js";import"./iframe-B37x74Pe.js";import"./_commonjsHelpers-CqkleIqs.js";import"./index-CfOrKyLd.js";import"./index-DrFu-skq.js";import"./preview-CzSQLk2e.js";import"./DocsRenderer-CFRXHY34-CzDC7Aws.js";const f=["start","end"],u=r=>{const{label:s,checked:l,disabled:c,labelPosition:p}=r,e=document.createElement("input");if(e.type="radio",e.setAttribute("id","moon-radio"),e.className="moon-radio",c&&e.setAttribute("disabled","true"),l&&e.setAttribute("checked","true"),s){const o=document.createElement("div"),t=document.createElement("label");return t.setAttribute("for","moon-radio"),t.textContent=s,o.className="moon-radio-wrapper",p==="end"?(o.appendChild(t),o.appendChild(e)):(o.appendChild(e),o.appendChild(t)),o}return e},A={title:"Forms & selection controls/Radio",render:u,argTypes:{checked:{description:"Checked state of Radio",control:"boolean"},disabled:{description:"Disabled state of Radio",control:"boolean"},label:{description:"Label of Radio",control:"text"},labelPosition:{description:"Position of label of Radio",control:"select",options:f,if:{arg:"label"}}},parameters:{docs:{container:({context:r})=>m.jsx(b,{context:r,moon:"forms-and-selection-controls/radio-0WSJs8Jn",github:"_radio.scss"})}}},a={args:{disabled:!1,checked:!1,label:"",labelPosition:"start"}};var i,n,d;a.parameters={...a.parameters,docs:{...(i=a.parameters)==null?void 0:i.docs,source:{originalSource:`{
+  args: {
+    disabled: false,
+    checked: false,
+    label: "",
+    labelPosition: "start"
+  }
+}`,...(d=(n=a.parameters)==null?void 0:n.docs)==null?void 0:d.source}}};const L=["Radio"];export{a as Radio,L as __namedExportsOrder,A as default};

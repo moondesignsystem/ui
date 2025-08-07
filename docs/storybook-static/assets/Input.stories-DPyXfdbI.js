@@ -1,0 +1,10 @@
+import{j as x}from"./index-DKxaqQgQ.js";import{L as I}from"./LinksBlock-8AqbDGcr.js";import{j as l}from"./joinClassnames-CPymqmKP.js";import"./iframe-B37x74Pe.js";import"./_commonjsHelpers-CqkleIqs.js";import"./index-CfOrKyLd.js";import"./index-DrFu-skq.js";import"./preview-CzSQLk2e.js";import"./DocsRenderer-CFRXHY34-CzDC7Aws.js";const d=t=>t==="md"?"":`moon-input-${t}`,g=["sm","md","lg","xl"],E=t=>{const{disabled:f,error:i,label:s,hint:a,size:p,placeholder:r}=t,e=document.createElement("input");if(e.setAttribute("type","text"),f&&e.setAttribute("disabled","true"),s||a){const o=document.createElement("div"),h=document.createElement("label"),c=document.createElement("p");return o.className=l(["moon-form-group",i?"moon-form-group-error":""]),e.className=l(["moon-input",d(p)]),r&&e.setAttribute("placeholder",r),c.className="moon-form-hint",s&&o.appendChild(h).appendChild(document.createTextNode(s)),o.appendChild(e),a&&o.appendChild(c).appendChild(document.createTextNode(a)),o}return e.className=l(["moon-input",d(p),i?"moon-input-error":""]),r&&e.setAttribute("placeholder",r),e},k={title:"Forms & selection controls/Input",render:E,argTypes:{error:{description:"Error state of Input",control:"boolean"},disabled:{description:"Disabled state of Input",control:"boolean"},label:{description:"Label of Input",control:"text"},hint:{description:"Hint of Input",control:"text"},size:{description:"Size of Input",control:"select",options:g},placeholder:{description:"Placeholder of Input",control:"text"}},parameters:{docs:{container:({context:t})=>x.jsx(I,{context:t,moon:"forms-and-selection-controls/input-7idv2lm3",github:"_input.scss"})}}},n={args:{size:"md",disabled:!1,error:!1,label:"",hint:"",placeholder:""}};var m,u,b;n.parameters={...n.parameters,docs:{...(m=n.parameters)==null?void 0:m.docs,source:{originalSource:`{
+  args: {
+    size: "md",
+    disabled: false,
+    error: false,
+    label: "",
+    hint: "",
+    placeholder: ""
+  }
+}`,...(b=(u=n.parameters)==null?void 0:u.docs)==null?void 0:b.source}}};const v=["Input"];export{n as Input,v as __namedExportsOrder,k as default};

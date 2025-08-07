@@ -1,0 +1,9 @@
+import{j as u}from"./index-DKxaqQgQ.js";import{L as b}from"./LinksBlock-8AqbDGcr.js";import{j as d}from"./joinClassnames-CPymqmKP.js";import"./iframe-B37x74Pe.js";import"./_commonjsHelpers-CqkleIqs.js";import"./index-CfOrKyLd.js";import"./index-DrFu-skq.js";import"./preview-CzSQLk2e.js";import"./DocsRenderer-CFRXHY34-CzDC7Aws.js";const h=o=>{const{label:a,hint:n,error:s,disabled:x,placeholder:l}=o,e=document.createElement("textarea");if(l&&e.setAttribute("placeholder",l),x&&e.setAttribute("disabled","true"),a||n){const t=document.createElement("div"),f=document.createElement("label"),c=document.createElement("p");return t.className=d(["moon-form-group",s?"moon-form-group-error":""]),e.className="moon-textarea",c.className="moon-form-hint",a&&t.appendChild(f).appendChild(document.createTextNode(a)),t.appendChild(e),n&&t.appendChild(c).appendChild(document.createTextNode(n)),t}return e.className=d(["moon-textarea",s?"moon-textarea-error":""]),e},A={title:"Forms & selection controls/Textarea",render:h,argTypes:{error:{description:"Error state of Textarea",control:"boolean"},disabled:{description:"Disabled state of Textarea",control:"boolean"},label:{description:"Label of Textarea",control:"text"},hint:{description:"Hint of Textarea",control:"text"},placeholder:{description:"Placeholder of Textarea",control:"text"}},parameters:{docs:{container:({context:o})=>u.jsx(b,{context:o,moon:"forms-and-selection-controls/textarea-gQJz078t",github:"_textarea.scss"})}}},r={args:{disabled:!1,error:!1,hint:"",label:"",placeholder:""}};var i,m,p;r.parameters={...r.parameters,docs:{...(i=r.parameters)==null?void 0:i.docs,source:{originalSource:`{
+  args: {
+    disabled: false,
+    error: false,
+    hint: "",
+    label: "",
+    placeholder: ""
+  }
+}`,...(p=(m=r.parameters)==null?void 0:m.docs)==null?void 0:p.source}}};const v=["Textarea"];export{r as Textarea,v as __namedExportsOrder,A as default};

@@ -1,0 +1,6 @@
+import{j as l}from"./index-DKxaqQgQ.js";import{L as c}from"./LinksBlock-8AqbDGcr.js";import{j as m}from"./joinClassnames-CPymqmKP.js";import{g as d}from"./getChildren-Bp76MxS-.js";import"./iframe-B37x74Pe.js";import"./_commonjsHelpers-CqkleIqs.js";import"./index-CfOrKyLd.js";import"./index-DrFu-skq.js";import"./preview-CzSQLk2e.js";import"./DocsRenderer-CFRXHY34-CzDC7Aws.js";const h=t=>{const{children:n,hasPointer:a}=t,e=document.createElement("div"),p=d({children:n});return e.appendChild(p),e.className=m(["moon-tooltip",a?"moon-tooltip-pointer":""]),e},E={title:"Messaging & feedback/Tooltip",render:h,argTypes:{children:{description:"Content of Tooltip",control:"text"},hasPointer:{description:"Pointer of Tooltip",control:"boolean"}},parameters:{docs:{container:({context:t})=>l.jsx(c,{context:t,moon:"messaging-and-feedback/tooltip-67OcVL5b",github:"_tooltip.scss"})}}},o={args:{hasPointer:!1,children:"Tooltip"}};var r,i,s;o.parameters={...o.parameters,docs:{...(r=o.parameters)==null?void 0:r.docs,source:{originalSource:`{
+  args: {
+    hasPointer: false,
+    children: "Tooltip"
+  }
+}`,...(s=(i=o.parameters)==null?void 0:i.docs)==null?void 0:s.source}}};const L=["Tooltip"];export{o as Tooltip,L as __namedExportsOrder,E as default};

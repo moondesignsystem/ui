@@ -1,0 +1,56 @@
+import React from "react";
+import LinksBlock from "../../shared/LinksBlock";
+import createSelect, { SIZES } from "./Select";
+import type { Meta, StoryObj } from "@storybook/html-vite";
+import type { Props } from "./Select";
+
+const meta: Meta<Props> = {
+  title: "Forms & selection controls/Select",
+  render: createSelect,
+  argTypes: {
+    error: {
+      description: "Error state of Select",
+      type: "boolean",
+    },
+    disabled: {
+      description: "Disabled state of Select",
+      type: "boolean",
+    },
+    label: {
+      description: "Label of Select",
+      control: "text",
+    },
+    hint: {
+      description: "Hint of Select",
+      control: "text",
+    },
+    size: {
+      description: "Size of Select",
+      control: "select",
+      options: SIZES,
+    },
+  },
+  parameters: {
+    docs: {
+      container: ({ context }) => (
+        <LinksBlock
+          context={context}
+          moon="forms-and-selection-controls/select-1pez5Tuw"
+          github="_select.scss"
+        />
+      ),
+    },
+  },
+};
+
+export default meta;
+
+export const Select: StoryObj<Props> = {
+  args: {
+    size: "md",
+    disabled: false,
+    error: false,
+    label: "",
+    hint: "",
+  },
+};

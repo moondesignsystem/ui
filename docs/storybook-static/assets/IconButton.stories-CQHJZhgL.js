@@ -1,0 +1,7 @@
+import{j as m}from"./index-DKxaqQgQ.js";import{L as d}from"./LinksBlock-8AqbDGcr.js";import{g as p}from"./getChildren-Bp76MxS-.js";import{j as u}from"./joinClassnames-CPymqmKP.js";import{s as f}from"./starIcon-Bd4NHJf_.js";import"./iframe-B37x74Pe.js";import"./_commonjsHelpers-CqkleIqs.js";import"./index-CfOrKyLd.js";import"./index-DrFu-skq.js";import"./preview-CzSQLk2e.js";import"./DocsRenderer-CFRXHY34-CzDC7Aws.js";const s=t=>t==="md"||t==="fill"?"":`moon-icon-button-${t}`,b=["xs","sm","md","lg","xl"],g=["fill","tonal","outline","ghost","destructive"],B=t=>{const{size:a,disabled:c,variant:l}=t,o=document.createElement("button");return o.appendChild(p({children:f})),o.className=u(["moon-icon-button",s(a),s(l)]),c&&o.setAttribute("disabled","true"),o},k={title:"Actions/Icon Button",render:B,argTypes:{size:{description:"Size of Icon Button",control:"select",options:b},disabled:{description:"Disabled state of Icon Button",control:"boolean"},variant:{description:"Variant of Icon Button",control:"select",options:g}},parameters:{docs:{container:({context:t})=>m.jsx(d,{context:t,moon:"actions/icon-button-jcDPiXWF",github:"_iconButton.scss"})}}},n={args:{size:"md",variant:"fill",disabled:!1}};var e,r,i;n.parameters={...n.parameters,docs:{...(e=n.parameters)==null?void 0:e.docs,source:{originalSource:`{
+  args: {
+    size: "md",
+    variant: "fill",
+    disabled: false
+  }
+}`,...(i=(r=n.parameters)==null?void 0:r.docs)==null?void 0:i.source}}};const D=["IconButton"];export{n as IconButton,D as __namedExportsOrder,k as default};
