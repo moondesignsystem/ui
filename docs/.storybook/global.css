@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap");
+@import "tailwindcss";
+@import "./moon-core.css";
+@import "./moon-components.css";
+
+.sbdocs div:has(.docblock-argstable) {
+  width: 100%;
+  overflow-x: auto;
+
+  table {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+.docs-story,
+.sb-main-padded {
+  background-color: var(--semantic-background-primary);
+}
