@@ -7,14 +7,14 @@
   "license": "MIT",
   "private": true,
   "workspaces": [
-    "moon-ui",
+    "packages",
     "docs"
   ],
   "scripts": {
     "dev": "npm run dev --workspace docs",
-    "build": "npm run build --workspace moon-ui",
-    "changeset": "npm run changeset --workspace moon-ui",
-    "version": "npm run version --workspace moon-ui",
-    "release": "npm run release --workspace moon-ui"
+    "build": "npm run build --workspace packages",
+    "changeset": "npm run changeset --workspace packages",
+    "version": "npm run version --workspace packages",
+    "release": "npm run release --workspace packages"
   }
 }

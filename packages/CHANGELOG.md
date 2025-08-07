@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 1.13.1
+
+### Patch Changes
+
+- feat: add monorepo structure to the project
+
 ## 1.13.0
 
 ### Minor Changes
