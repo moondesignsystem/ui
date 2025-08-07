@@ -1,9 +1,12 @@
 #!/usr/bin/env node
+import dotenv from "dotenv";
 import generateConfigFile from "./scripts/generateConfigFile.js";
 import generateCoreFile from "./scripts/generateCoreFile.js";
 import getConfig from "./scripts/utils/getConfig.js";
 import generateComponentsFile from "./scripts/generateComponentsFile.js";
 import generatePreflightFile from "./scripts/generatePreflightFile.js";
+// Load environment variables from .env file in the user's project root (current working directory)
+dotenv.config();
 const install = async () => {
     if (!process.env.FIGMA_TOKEN) {
         throw new Error("❌ FIGMA_TOKEN is not defined in environment variables");
