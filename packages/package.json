@@ -11,10 +11,7 @@
     "typecheck": "tsc --noEmit",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "changeset": "changeset",
-    "version": "changeset version && npm install && npm update && npm run build && npm run test && node dist/install.js --add-components",
-    "release": "changeset publish"
+    "test:coverage": "jest --coverage"
   },
   "files": [
     "dist/**/*",

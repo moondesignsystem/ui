@@ -7,7 +7,6 @@ import getConfig from "./scripts/utils/getConfig.js";
 import generateComponentsFile from "./scripts/generateComponentsFile.js";
 import generatePreflightFile from "./scripts/generatePreflightFile.js";
 
-// Load environment variables from .env file in the user's project root (current working directory)
 dotenv.config();
 
 const install = async () => {
