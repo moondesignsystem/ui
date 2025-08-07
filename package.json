@@ -13,8 +13,8 @@
   "scripts": {
     "dev": "npm run dev --workspace docs",
     "build": "npm run build --workspace packages",
-    "changeset": "npm run changeset --workspace packages",
-    "version": "npm run version --workspace packages",
-    "release": "npm run release --workspace packages"
+    "changeset": "changeset",
+    "version": "changeset version && npm install && npm update && npm run build && npm run test --workspace packages && node packages/dist/install.js --add-components",
+    "release": "changeset publish"
   }
 }
