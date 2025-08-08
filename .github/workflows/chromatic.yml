@@ -16,10 +16,21 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
-          node-version: 22.12.0
+          node-version: 22.18.0
       - name: Install dependencies
         run: npm install
+      # - name: Build Moon UI package
+      #   run: npm run build
+      # - name: Generate latest CSS files
+      #   run: node packages/dist/install.js --add-components
+      #   env:
+      #     FIGMA_TOKEN: ${{ secrets.FIGMA_PAT }}
+      - name: Build Storybook
+        working-directory: docs
+        run: npm run build-storybook
       - name: Run Chromatic
         uses: chromaui/action@latest
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          workingDir: docs
+          onlyChanged: true
