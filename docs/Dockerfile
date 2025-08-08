@@ -1,6 +1,9 @@
 FROM node:22-alpine AS builder
 WORKDIR /app
 
+# Accept build arguments
+ARG FIGMA_TOKEN
+
 # Copy root package files and install dependencies
 COPY package*.json ./
 RUN npm install
@@ -12,6 +15,7 @@ COPY . .
 WORKDIR /app/packages
 RUN npm run build
 WORKDIR /app
+ENV FIGMA_TOKEN=$FIGMA_TOKEN
 RUN node packages/dist/install.js --add-components
 
 # Build Storybook
