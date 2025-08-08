@@ -2,9 +2,8 @@ name: Docs release
 
 on:
   push:
-    tags: [v*]
-  release:
-    types: [published]
+    branches:
+      - main
 
 env:
   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -17,13 +16,45 @@ jobs:
     runs-on: ubuntu-24.04
     outputs:
       image: ${{ steps.get_version.outputs.TAG_VERSION }}
-    if: startsWith(github.ref, 'refs/tags/v')
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Get tag version
+        with:
+          fetch-depth: 0  # Fetch all history to get tags
+      - name: Get and increment version
         id: get_version
-        run: echo ::set-output name=TAG_VERSION::${GITHUB_REF#refs/tags/}
+        run: |
+          # Get the latest tag, if any
+          LATEST_TAG=$(git tag --sort=-version:refname | head -n 1 || echo "")
+          
+          if [ -z "$LATEST_TAG" ]; then
+            # No tags exist, start with 1.0.0
+            NEW_VERSION="1.0.0"
+          else
+            # Parse the latest tag and increment patch version
+            # Remove 'v' prefix if it exists
+            CLEAN_TAG=${LATEST_TAG#v}
+            
+            # Split version into major.minor.patch
+            IFS='.' read -ra VERSION_PARTS <<< "$CLEAN_TAG"
+            MAJOR=${VERSION_PARTS[0]}
+            MINOR=${VERSION_PARTS[1]}
+            PATCH=${VERSION_PARTS[2]}
+            
+            # Increment patch version
+            NEW_PATCH=$((PATCH + 1))
+            NEW_VERSION="${MAJOR}.${MINOR}.${NEW_PATCH}"
+          fi
+          
+          echo "Previous version: $LATEST_TAG"
+          echo "New version: v$NEW_VERSION"
+          echo "TAG_VERSION=v$NEW_VERSION" >> $GITHUB_OUTPUT
+          
+          # Create and push the new tag
+          git config user.name "${{ env.ROBOT_NAME }}"
+          git config user.email "${{ env.ROBOT_EMAIL }}"
+          git tag "v$NEW_VERSION"
+          git push origin "v$NEW_VERSION"
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
