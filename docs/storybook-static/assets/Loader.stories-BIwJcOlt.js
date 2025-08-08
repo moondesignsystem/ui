@@ -1,5 +1,0 @@
-import{j as m}from"./index-DKxaqQgQ.js";import{L as c}from"./LinksBlock-8AqbDGcr.js";import{j as d}from"./joinClassnames-CPymqmKP.js";import"./iframe-B37x74Pe.js";import"./_commonjsHelpers-CqkleIqs.js";import"./index-CfOrKyLd.js";import"./index-DrFu-skq.js";import"./preview-CzSQLk2e.js";import"./DocsRenderer-CFRXHY34-CzDC7Aws.js";const i=o=>o==="md"?"":`moon-loader-${o}`,p=["2xs","xs","sm","md","lg"],l=o=>{const{size:n}=o,r=document.createElement("div");return r.className=d(["moon-loader",i(n)]),r},_={title:"Indicators & status/Loader",render:l,argTypes:{size:{description:"Size of Loader",control:"select",options:p}},parameters:{docs:{container:({context:o})=>m.jsx(c,{context:o,moon:"indicators-and-status/loader-f9YNrGZD",github:"_loader.scss"})}}},s={args:{size:"md"}};var e,t,a;s.parameters={...s.parameters,docs:{...(e=s.parameters)==null?void 0:e.docs,source:{originalSource:`{
-  args: {
-    size: "md"
-  }
-}`,...(a=(t=s.parameters)==null?void 0:t.docs)==null?void 0:a.source}}};const k=["Loader"];export{s as Loader,k as __namedExportsOrder,_ as default};

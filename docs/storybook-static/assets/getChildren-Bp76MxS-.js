@@ -1,1 +1,0 @@
-const r=t=>{const e=document.createElement("template");e.innerHTML=t;const n=e.content.firstElementChild;return n||document.createTextNode(t)},o=({children:t})=>{const e=document.createDocumentFragment();if(!t)return e;if(typeof t=="string"){const n=r(t);return e.appendChild(n)}return t&&(Array.isArray(t)?t.forEach(n=>e.appendChild(n)):e.appendChild(t)),e};export{o as g};

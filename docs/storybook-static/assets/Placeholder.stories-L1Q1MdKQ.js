@@ -1,5 +1,0 @@
-import{j as l}from"./index-DKxaqQgQ.js";import{L as m}from"./LinksBlock-8AqbDGcr.js";import{j as n}from"./joinClassnames-CPymqmKP.js";import"./iframe-B37x74Pe.js";import"./_commonjsHelpers-CqkleIqs.js";import"./index-CfOrKyLd.js";import"./index-DrFu-skq.js";import"./preview-CzSQLk2e.js";import"./DocsRenderer-CFRXHY34-CzDC7Aws.js";const p=s=>{const{className:c}=s,a=document.createElement("div");return a.className=n(["moon-placeholder",c]),a},j={title:"Indicators & status/Placeholder",render:p,argTypes:{className:{description:"Custom classes for Placeholder",control:"text"}},parameters:{docs:{container:({context:s})=>l.jsx(m,{context:s,moon:"indicators-and-status/placeholder-nS1N1Pht",github:"_placeholder.scss"})}}},e={args:{className:"w-space-160 h-space-80"}};var r,o,t;e.parameters={...e.parameters,docs:{...(r=e.parameters)==null?void 0:r.docs,source:{originalSource:`{
-  args: {
-    className: "w-space-160 h-space-80"
-  }
-}`,...(t=(o=e.parameters)==null?void 0:o.docs)==null?void 0:t.source}}};const E=["Placeholder"];export{e as Placeholder,E as __namedExportsOrder,j as default};
