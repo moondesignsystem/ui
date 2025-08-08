@@ -1,4 +1,4 @@
-name: Docs release
+name: Release new docs
 
 on:
   push:
@@ -35,7 +35,7 @@ jobs:
       - name: Generate latest CSS files
         run: node packages/dist/install.js --add-components
         env:
-          FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
+          FIGMA_TOKEN: ${{ secrets.FIGMA_PAT }}
       - name: Set up Docker Build
         uses: docker/setup-buildx-action@v3
       - name: Login to DockerHub
