@@ -20,7 +20,7 @@ RUN node packages/dist/install.js --add-components
 
 # Build Storybook
 WORKDIR /app/docs
-ENV NODE_ENV production
+ENV NODE_ENV=production
 RUN npm run build-storybook
 
 FROM node:22-alpine AS runner

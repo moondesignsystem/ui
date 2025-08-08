@@ -47,7 +47,7 @@ jobs:
           context: .
           file: ./docs/Dockerfile
           push: true
-          tags: heathmont/${{github.event.repository.name}}:${{ steps.get_version.outputs.TAG_VERSION }}
+          tags: heathmont/${{github.event.repository.name}}-docs:${{ steps.get_version.outputs.TAG_VERSION }}
           build-args: |
             FIGMA_TOKEN=${{ secrets.FIGMA_PAT }}
             HEX_API_KEY=${{ secrets.HEX_ORGANIZATION_COINGAMING_KEY }}
@@ -73,7 +73,7 @@ jobs:
 
       - name: Prepare variables
         run: |
-          echo "IMAGE=heathmont/${{github.event.repository.name}}:${{ needs.build-and-push.outputs.image }}" >> $GITHUB_ENV
+          echo "IMAGE=heathmont/${{github.event.repository.name}}-docs:${{ needs.build-and-push.outputs.image }}" >> $GITHUB_ENV
 
       - name: Check Image variable
         run: echo "IMAGE=${{env.IMAGE}}"
