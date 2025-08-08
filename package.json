@@ -1,47 +1,21 @@
 {
-  "name": "@heathmont/moon-ui",
-  "version": "1.12.0",
-  "description": "Moon UI library for generating core and components CSS files",
-  "main": "dist/install.js",
-  "type": "module",
-  "bin": "dist/install.js",
-  "scripts": {
-    "build": "tsc && chmod +x dist/install.js",
-    "dev": "tsc --watch",
-    "typecheck": "tsc --noEmit",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "changeset": "changeset",
-    "version": "changeset version && npm install && npm update && npm run build && npm run test && node dist/install.js --add-components",
-    "release": "changeset publish"
-  },
-  "files": [
-    "dist/**/*",
-    "src/styles/*"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/coingaming/moon-ui.git"
-  },
-  "author": "Yolo Group",
+  "name": "moon-ui-monorepo",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": [],
+  "author": "",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/coingaming/moon-ui/issues"
-  },
-  "homepage": "https://ui.moon.io",
-  "dependencies": {
-    "autoprefixer": "^10.4.21",
-    "dotenv": "^16.5.0",
-    "postcss": "^8.5.6",
-    "sass": "^1.89.2"
-  },
-  "devDependencies": {
-    "@changesets/cli": "^2.29.5",
-    "@types/jest": "^30.0.0",
-    "@types/node": "^24.0.8",
-    "jest": "^30.0.4",
-    "ts-jest": "^29.4.0",
-    "typescript": "^5.8.3"
+  "private": true,
+  "workspaces": [
+    "packages",
+    "docs"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace docs",
+    "build": "npm run build --workspace packages",
+    "build-storybook": "npm run build-storybook --workspace docs",
+    "changeset": "changeset",
+    "version": "changeset version && npm install && npm update && npm run build && npm run test --workspace packages && node packages/dist/install.js --add-components",
+    "release": "changeset publish"
   }
 }
