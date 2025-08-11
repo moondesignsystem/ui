@@ -1,0 +1,228 @@
+.moon-join {
+  align-items: stretch;
+  display: inline-flex;
+  > .moon-join-item {
+    &:not(:last-child) {
+      &:not(:first-child) {
+        border-radius: 0;
+      }
+    }
+    &:where(button) {
+      &:active {
+        transform: none;
+        > * {
+          transform: scale(0.95);
+        }
+      }
+    }
+  }
+}
+.moon-join.moon-join-column {
+  flex-direction: column;
+  > .moon-join-item {
+    &:not(:first-child) {
+      &:not(:last-child) {
+        border-radius: 0;
+      }
+    }
+    &:first-child {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    &:last-child {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+    &:where(input) {
+      box-shadow: inset 1px 0 0 0 var(--semantic-border-primary),
+        inset 0 1px 0 0 var(--semantic-border-primary),
+        inset 0 -1px 0 0 var(--semantic-border-primary),
+        inset -1px 0 0 0 var(--semantic-border-primary);
+      position: relative;
+      z-index: 1;
+      &:not(:last-child) {
+        box-shadow: inset 1px 0 0 0 var(--semantic-border-primary),
+          inset -1px 0 0 0 var(--semantic-border-primary),
+          inset 0 1px 0 0 var(--semantic-border-primary);
+        margin-bottom: -1px;
+      }
+      &:focus {
+        z-index: 2;
+        box-shadow: inset 2px 0 0 0 var(--semantic-border-brand),
+          inset 0 2px 0 0 var(--semantic-border-brand),
+          inset 0 -2px 0 0 var(--semantic-border-brand),
+          inset -2px 0 0 0 var(--semantic-border-brand);
+      }
+    }
+    &:where(select) {
+      box-shadow: inset 1px 0 0 0 var(--semantic-border-primary),
+        inset 0 1px 0 0 var(--semantic-border-primary),
+        inset 0 -1px 0 0 var(--semantic-border-primary),
+        inset -1px 0 0 0 var(--semantic-border-primary);
+      position: relative;
+      z-index: 1;
+      &:not(:last-child) {
+        box-shadow: inset 1px 0 0 0 var(--semantic-border-primary),
+          inset -1px 0 0 0 var(--semantic-border-primary),
+          inset 0 1px 0 0 var(--semantic-border-primary);
+        margin-bottom: -1px;
+      }
+      &:focus {
+        z-index: 2;
+        box-shadow: inset 2px 0 0 0 var(--semantic-border-brand),
+          inset 0 2px 0 0 var(--semantic-border-brand),
+          inset 0 -2px 0 0 var(--semantic-border-brand),
+          inset -2px 0 0 0 var(--semantic-border-brand);
+      }
+    }
+    &:where(input:not(:focus)) {
+      &:hover {
+        box-shadow: inset 2px 0 0 0 var(--semantic-border-primary),
+          inset 0 2px 0 0 var(--semantic-border-primary),
+          inset 0 -2px 0 0 var(--semantic-border-primary),
+          inset -2px 0 0 0 var(--semantic-border-primary);
+      }
+    }
+    &:where(select:not(:focus)) {
+      &:hover {
+        box-shadow: inset 2px 0 0 0 var(--semantic-border-primary),
+          inset 0 2px 0 0 var(--semantic-border-primary),
+          inset 0 -2px 0 0 var(--semantic-border-primary),
+          inset -2px 0 0 0 var(--semantic-border-primary);
+      }
+    }
+    &:where(button) {
+      + {
+        .moon-join-item {
+          &:where(button) {
+            box-shadow: inset 1px 0 0 0 var(--semantic-border-primary),
+              inset -1px 0 0 0 var(--semantic-border-primary),
+              inset 0 -1px 0 0 var(--semantic-border-primary);
+          }
+        }
+      }
+      &:last-child {
+        box-shadow: inset 0 -1px 0 0 var(--semantic-border-primary),
+          inset 1px 0 0 0 var(--semantic-border-primary),
+          inset -1px 0 0 0 var(--semantic-border-primary);
+      }
+      &:first-child {
+        box-shadow: inset 1px 0 0 0 var(--semantic-border-primary),
+          inset -1px 0 0 0 var(--semantic-border-primary),
+          inset 0 1px 0 0 var(--semantic-border-primary),
+          inset 0 -1px 0 0 var(--semantic-border-primary);
+      }
+    }
+  }
+}
+.moon-join.moon-join-row {
+  flex-direction: row;
+  > .moon-join-item {
+    &:where(input) {
+      box-shadow: inset 1px 0 0 0 var(--semantic-border-primary),
+        inset 0 1px 0 0 var(--semantic-border-primary),
+        inset 0 -1px 0 0 var(--semantic-border-primary),
+        inset -1px 0 0 0 var(--semantic-border-primary);
+      position: relative;
+      z-index: 1;
+      &:not(:last-child) {
+        box-shadow: inset 1px 0 0 0 var(--semantic-border-primary),
+          inset 0 1px 0 0 var(--semantic-border-primary),
+          inset 0 -1px 0 0 var(--semantic-border-primary);
+        margin-right: -1px;
+      }
+      &:focus {
+        z-index: 2;
+        box-shadow: inset 2px 0 0 0 var(--semantic-border-brand),
+          inset 0 2px 0 0 var(--semantic-border-brand),
+          inset 0 -2px 0 0 var(--semantic-border-brand),
+          inset -2px 0 0 0 var(--semantic-border-brand);
+      }
+      + {
+        .moon-join-item {
+          &:where(button) {
+            box-shadow: inset 1px 0 0 0 var(--semantic-border-primary),
+              inset -1px 0 0 0 var(--semantic-border-primary),
+              inset 0 1px 0 0 var(--semantic-border-primary),
+              inset 0 -1px 0 0 var(--semantic-border-primary);
+            margin-left: 1px;
+          }
+        }
+      }
+    }
+    &:where(select) {
+      box-shadow: inset 1px 0 0 0 var(--semantic-border-primary),
+        inset 0 1px 0 0 var(--semantic-border-primary),
+        inset 0 -1px 0 0 var(--semantic-border-primary),
+        inset -1px 0 0 0 var(--semantic-border-primary);
+      position: relative;
+      z-index: 1;
+      &:not(:last-child) {
+        box-shadow: inset 1px 0 0 0 var(--semantic-border-primary),
+          inset 0 1px 0 0 var(--semantic-border-primary),
+          inset 0 -1px 0 0 var(--semantic-border-primary);
+        margin-right: -1px;
+      }
+      &:focus {
+        z-index: 2;
+        box-shadow: inset 2px 0 0 0 var(--semantic-border-brand),
+          inset 0 2px 0 0 var(--semantic-border-brand),
+          inset 0 -2px 0 0 var(--semantic-border-brand),
+          inset -2px 0 0 0 var(--semantic-border-brand);
+      }
+    }
+    &:first-child {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    &:last-child {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    &:where(input:not(:focus)) {
+      &:hover {
+        box-shadow: inset 2px 0 0 0 var(--semantic-border-primary),
+          inset 0 2px 0 0 var(--semantic-border-primary),
+          inset 0 -2px 0 0 var(--semantic-border-primary),
+          inset -2px 0 0 0 var(--semantic-border-primary);
+      }
+    }
+    &:where(select:not(:focus)) {
+      &:hover {
+        box-shadow: inset 2px 0 0 0 var(--semantic-border-primary),
+          inset 0 2px 0 0 var(--semantic-border-primary),
+          inset 0 -2px 0 0 var(--semantic-border-primary),
+          inset -2px 0 0 0 var(--semantic-border-primary);
+      }
+    }
+    &:where(button) {
+      + {
+        .moon-join-item {
+          &:where(button) {
+            box-shadow: inset 1px 0 0 0 var(--semantic-border-primary),
+              inset 0 1px 0 0 var(--semantic-border-primary),
+              inset 0 -1px 0 0 var(--semantic-border-primary),
+              inset -1px 0 0 0 var(--semantic-border-primary);
+          }
+          &:where(input) {
+            box-shadow: inset 1px 0 0 0 var(--semantic-border-primary),
+              inset 0 1px 0 0 var(--semantic-border-primary),
+              inset 0 -1px 0 0 var(--semantic-border-primary),
+              inset -1px 0 0 0 var(--semantic-border-primary);
+          }
+        }
+      }
+      &:last-child {
+        box-shadow: inset 0 1px 0 0 var(--semantic-border-primary),
+          inset 0 -1px 0 0 var(--semantic-border-primary),
+          inset -1px 0 0 0 var(--semantic-border-primary),
+          inset 1px 0 0 0 var(--semantic-border-primary);
+      }
+      &:first-child {
+        box-shadow: inset 0 0 0 0 var(--semantic-border-primary),
+          inset 0 1px 0 0 var(--semantic-border-primary),
+          inset 0 -1px 0 0 var(--semantic-border-primary);
+      }
+    }
+  }
+}
