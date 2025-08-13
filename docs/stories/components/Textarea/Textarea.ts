@@ -43,7 +43,7 @@ const createTextarea = (args: Props) => {
   textarea.className = joinClassnames([
     "moon-textarea",
     getClasses(size),
-    error ? "moon-textarea-error" : "",
+    error && "moon-textarea-error",
   ]);
   return textarea;
 };

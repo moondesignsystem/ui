@@ -68,7 +68,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.moon-avatar :where(svg) {
+.moon-avatar :where(svg, .moon-icon) {
   color: var(--avatar-fill-icon);
   width: var(--scale-md-icon-size);
   height: var(--scale-md-icon-size);
@@ -79,7 +79,7 @@
   height: var(--scale-xs-height);
   border-radius: var(--utility-avatar-radius-xs);
 }
-.moon-avatar.moon-avatar-xs :where(svg) {
+.moon-avatar.moon-avatar-xs :where(svg, .moon-icon) {
   width: var(--scale-xs-icon-size);
   height: var(--scale-xs-icon-size);
 }
@@ -89,7 +89,7 @@
   height: var(--scale-sm-height);
   border-radius: var(--utility-avatar-radius-sm);
 }
-.moon-avatar.moon-avatar-sm :where(svg) {
+.moon-avatar.moon-avatar-sm :where(svg, .moon-icon) {
   width: var(--scale-sm-icon-size);
   height: var(--scale-sm-icon-size);
 }
@@ -99,7 +99,7 @@
   height: var(--scale-lg-height);
   border-radius: var(--utility-avatar-radius-lg);
 }
-.moon-avatar.moon-avatar-lg :where(svg) {
+.moon-avatar.moon-avatar-lg :where(svg, .moon-icon) {
   width: var(--scale-lg-icon-size);
   height: var(--scale-lg-icon-size);
 }
@@ -109,7 +109,7 @@
   height: var(--scale-xl-height);
   border-radius: var(--utility-avatar-radius-xl);
 }
-.moon-avatar.moon-avatar-xl :where(svg) {
+.moon-avatar.moon-avatar-xl :where(svg, .moon-icon) {
   width: var(--scale-xl-icon-size);
   height: var(--scale-xl-icon-size);
 }
@@ -119,7 +119,7 @@
   height: var(--scale-2xl-height);
   border-radius: var(--utility-avatar-radius-2xl);
 }
-.moon-avatar.moon-avatar-2xl :where(svg) {
+.moon-avatar.moon-avatar-2xl :where(svg, .moon-icon) {
   width: var(--scale-2xl-icon-size);
   height: var(--scale-2xl-icon-size);
 }
@@ -128,7 +128,7 @@
   border-width: var(--avatar-outline-stroke);
   color: var(--avatar-outline-text);
 }
-.moon-avatar.moon-avatar-outline :where(svg) {
+.moon-avatar.moon-avatar-outline :where(svg, .moon-icon) {
   color: var(--avatar-outline-icon);
 }
 .moon-avatar.moon-avatar-soft {
@@ -136,7 +136,7 @@
   border-width: var(--avatar-soft-stroke);
   color: var(--avatar-soft-text);
 }
-.moon-avatar.moon-avatar-soft :where(svg) {
+.moon-avatar.moon-avatar-soft :where(svg, .moon-icon) {
   color: var(--avatar-soft-icon);
 }
 
@@ -181,7 +181,7 @@
   color: var(--button-fill-text);
   font: var(--scale-md-text-weight) var(--scale-md-text-size)/var(--scale-md-text-height) var(--scale-md-text-font);
 }
-.moon-button :where(svg), .moon-snackbar :where(.moon-snackbar-action) :where(svg), .moon-breadcrumb-item * :where(svg), .moon-alert :where(.moon-alert-action) :where(svg), .moon-snackbar :where(.moon-alert-action) :where(svg) {
+.moon-button :where(svg, .moon-icon), .moon-snackbar :where(.moon-snackbar-action) :where(svg, .moon-icon), .moon-breadcrumb-item * :where(svg, .moon-icon), .moon-alert :where(.moon-alert-action) :where(svg, .moon-icon), .moon-snackbar :where(.moon-alert-action) :where(svg, .moon-icon) {
   color: var(--button-fill-icon);
   width: var(--scale-md-icon-size);
   height: var(--scale-md-icon-size);
@@ -212,7 +212,7 @@
   border-radius: var(--utility-button-radius-xs);
   font: var(--scale-xs-text-weight) var(--scale-xs-text-size)/var(--scale-xs-text-height) var(--scale-xs-text-font);
 }
-.moon-button.moon-button-xs :where(svg), .moon-snackbar .moon-button-xs:where(.moon-snackbar-action) :where(svg), .moon-breadcrumb-item .moon-button-xs :where(svg), .moon-alert .moon-button-xs:where(.moon-alert-action) :where(svg), .moon-snackbar .moon-button-xs:where(.moon-alert-action) :where(svg) {
+.moon-button.moon-button-xs :where(svg, .moon-icon), .moon-snackbar .moon-button-xs:where(.moon-snackbar-action) :where(svg, .moon-icon), .moon-breadcrumb-item .moon-button-xs :where(svg, .moon-icon), .moon-alert .moon-button-xs:where(.moon-alert-action) :where(svg, .moon-icon), .moon-snackbar .moon-button-xs:where(.moon-alert-action) :where(svg, .moon-icon) {
   width: var(--scale-xs-icon-size);
   height: var(--scale-xs-icon-size);
 }
@@ -223,7 +223,7 @@
   border-radius: var(--utility-button-radius-sm);
   font: var(--scale-sm-text-weight) var(--scale-sm-text-size)/var(--scale-sm-text-height) var(--scale-sm-text-font);
 }
-.moon-button.moon-button-sm :where(svg), .moon-snackbar :where(.moon-snackbar-action) :where(svg), .moon-breadcrumb-item * :where(svg), .moon-alert :where(.moon-alert-action) :where(svg), .moon-snackbar :where(.moon-alert-action) :where(svg) {
+.moon-button.moon-button-sm :where(svg, .moon-icon), .moon-snackbar :where(.moon-snackbar-action) :where(svg, .moon-icon), .moon-breadcrumb-item * :where(svg, .moon-icon), .moon-alert :where(.moon-alert-action) :where(svg, .moon-icon), .moon-snackbar :where(.moon-alert-action) :where(svg, .moon-icon) {
   width: var(--scale-sm-icon-size);
   height: var(--scale-sm-icon-size);
 }
@@ -234,7 +234,7 @@
   border-radius: var(--utility-button-radius-lg);
   font: var(--scale-lg-text-weight) var(--scale-lg-text-size)/var(--scale-lg-text-height) var(--scale-lg-text-font);
 }
-.moon-button.moon-button-lg :where(svg), .moon-snackbar .moon-button-lg:where(.moon-snackbar-action) :where(svg), .moon-breadcrumb-item .moon-button-lg :where(svg), .moon-alert .moon-button-lg:where(.moon-alert-action) :where(svg), .moon-snackbar .moon-button-lg:where(.moon-alert-action) :where(svg) {
+.moon-button.moon-button-lg :where(svg, .moon-icon), .moon-snackbar .moon-button-lg:where(.moon-snackbar-action) :where(svg, .moon-icon), .moon-breadcrumb-item .moon-button-lg :where(svg, .moon-icon), .moon-alert .moon-button-lg:where(.moon-alert-action) :where(svg, .moon-icon), .moon-snackbar .moon-button-lg:where(.moon-alert-action) :where(svg, .moon-icon) {
   width: var(--scale-lg-icon-size);
   height: var(--scale-lg-icon-size);
 }
@@ -245,7 +245,7 @@
   border-radius: var(--utility-button-radius-xl);
   font: var(--scale-xl-text-weight) var(--scale-xl-text-size)/var(--scale-xl-text-height) var(--scale-xl-text-font);
 }
-.moon-button.moon-button-xl :where(svg), .moon-snackbar .moon-button-xl:where(.moon-snackbar-action) :where(svg), .moon-breadcrumb-item .moon-button-xl :where(svg), .moon-alert .moon-button-xl:where(.moon-alert-action) :where(svg), .moon-snackbar .moon-button-xl:where(.moon-alert-action) :where(svg) {
+.moon-button.moon-button-xl :where(svg, .moon-icon), .moon-snackbar .moon-button-xl:where(.moon-snackbar-action) :where(svg, .moon-icon), .moon-breadcrumb-item .moon-button-xl :where(svg, .moon-icon), .moon-alert .moon-button-xl:where(.moon-alert-action) :where(svg, .moon-icon), .moon-snackbar .moon-button-xl:where(.moon-alert-action) :where(svg, .moon-icon) {
   width: var(--scale-xl-icon-size);
   height: var(--scale-xl-icon-size);
 }
@@ -254,7 +254,7 @@
   background-color: var(--button-ghost-background);
   box-shadow: inset 0 0 0 var(--button-ghost-stroke) var(--button-ghost-border);
 }
-.moon-button.moon-button-ghost :where(svg), .moon-snackbar :where(.moon-snackbar-action) :where(svg), .moon-breadcrumb-item * :where(svg), .moon-alert :where(.moon-alert-action) :where(svg), .moon-snackbar :where(.moon-alert-action) :where(svg) {
+.moon-button.moon-button-ghost :where(svg, .moon-icon), .moon-snackbar :where(.moon-snackbar-action) :where(svg, .moon-icon), .moon-breadcrumb-item * :where(svg, .moon-icon), .moon-alert :where(.moon-alert-action) :where(svg, .moon-icon), .moon-snackbar :where(.moon-alert-action) :where(svg, .moon-icon) {
   color: var(--button-ghost-icon);
 }
 .moon-button.moon-button-outline, .moon-snackbar .moon-button-outline:where(.moon-snackbar-action), .moon-breadcrumb-item .moon-button-outline, .moon-alert .moon-button-outline:where(.moon-alert-action), .moon-snackbar .moon-button-outline:where(.moon-alert-action) {
@@ -262,7 +262,7 @@
   background-color: var(--button-outline-background);
   box-shadow: inset 0 0 0 var(--button-outline-stroke) var(--button-outline-border);
 }
-.moon-button.moon-button-outline :where(svg), .moon-snackbar .moon-button-outline:where(.moon-snackbar-action) :where(svg), .moon-breadcrumb-item .moon-button-outline :where(svg), .moon-alert .moon-button-outline:where(.moon-alert-action) :where(svg), .moon-snackbar .moon-button-outline:where(.moon-alert-action) :where(svg) {
+.moon-button.moon-button-outline :where(svg, .moon-icon), .moon-snackbar .moon-button-outline:where(.moon-snackbar-action) :where(svg, .moon-icon), .moon-breadcrumb-item .moon-button-outline :where(svg, .moon-icon), .moon-alert .moon-button-outline:where(.moon-alert-action) :where(svg, .moon-icon), .moon-snackbar .moon-button-outline:where(.moon-alert-action) :where(svg, .moon-icon) {
   color: var(--button-outline-icon);
 }
 .moon-button.moon-button-soft, .moon-snackbar .moon-button-soft:where(.moon-snackbar-action), .moon-breadcrumb-item .moon-button-soft, .moon-alert .moon-button-soft:where(.moon-alert-action), .moon-snackbar .moon-button-soft:where(.moon-alert-action) {
@@ -270,7 +270,7 @@
   background-color: var(--button-soft-background);
   box-shadow: inset 0 0 0 var(--button-soft-stroke) var(--button-soft-border);
 }
-.moon-button.moon-button-soft :where(svg), .moon-snackbar .moon-button-soft:where(.moon-snackbar-action) :where(svg), .moon-breadcrumb-item .moon-button-soft :where(svg), .moon-alert .moon-button-soft:where(.moon-alert-action) :where(svg), .moon-snackbar .moon-button-soft:where(.moon-alert-action) :where(svg) {
+.moon-button.moon-button-soft :where(svg, .moon-icon), .moon-snackbar .moon-button-soft:where(.moon-snackbar-action) :where(svg, .moon-icon), .moon-breadcrumb-item .moon-button-soft :where(svg, .moon-icon), .moon-alert .moon-button-soft:where(.moon-alert-action) :where(svg, .moon-icon), .moon-snackbar .moon-button-soft:where(.moon-alert-action) :where(svg, .moon-icon) {
   color: var(--button-soft-icon);
 }
 
@@ -306,7 +306,7 @@
 .moon-chip:hover::after {
   background-color: var(--semantic-background-hover);
 }
-.moon-chip :where(svg) {
+.moon-chip :where(svg, .moon-icon) {
   color: var(--chip-fill-unselected-icon);
   width: var(--scale-md-icon-size);
   height: var(--scale-md-icon-size);
@@ -316,7 +316,7 @@
   background-color: var(--chip-fill-selected-background);
   box-shadow: inset 0 0 0 var(--chip-fill-selected-stroke) var(--chip-fill-selected-border);
 }
-.moon-chip:where(.moon-chip-selected) :where(svg) {
+.moon-chip:where(.moon-chip-selected) :where(svg, .moon-icon) {
   color: var(--chip-fill-selected-icon);
 }
 .moon-chip.moon-chip-sm {
@@ -327,7 +327,7 @@
   border-radius: var(--utility-chip-radius-sm);
   font: var(--scale-sm-text-weight) var(--scale-sm-text-size)/var(--scale-sm-text-height) var(--scale-sm-text-font);
 }
-.moon-chip.moon-chip-sm :where(svg) {
+.moon-chip.moon-chip-sm :where(svg, .moon-icon) {
   width: var(--scale-sm-icon-size);
   height: var(--scale-sm-icon-size);
 }
@@ -336,7 +336,7 @@
   background-color: var(--chip-outline-unselected-background);
   box-shadow: inset 0 0 0 var(--chip-outline-unselected-stroke) var(--chip-outline-unselected-border);
 }
-.moon-chip.moon-chip-outline :where(svg) {
+.moon-chip.moon-chip-outline :where(svg, .moon-icon) {
   color: var(--chip-outline-unselected-icon);
 }
 .moon-chip.moon-chip-outline:where(.moon-chip-selected) {
@@ -344,7 +344,7 @@
   background-color: var(--chip-outline-selected-background);
   box-shadow: inset 0 0 0 var(--chip-outline-selected-stroke) var(--chip-outline-selected-border);
 }
-.moon-chip.moon-chip-outline:where(.moon-chip-selected) :where(svg) {
+.moon-chip.moon-chip-outline:where(.moon-chip-selected) :where(svg, .moon-icon) {
   color: var(--chip-outline-selected-icon);
 }
 
@@ -532,7 +532,7 @@
 .moon-input:not(:read-only, :disabled):focus {
   box-shadow: inset 0 0 0 var(--spacing-space-2) var(--semantic-border-active);
 }
-.moon-input :where(svg) {
+.moon-input :where(svg, .moon-icon) {
   color: var(--semantic-icon-primary);
   width: var(--scale-md-icon-size);
   height: var(--scale-md-icon-size);
@@ -545,7 +545,7 @@
   border-radius: var(--utility-input-radius-sm);
   font: var(--scale-sm-text-weight) var(--scale-sm-text-size)/var(--scale-sm-text-height) var(--scale-sm-text-font);
 }
-.moon-input.moon-input-sm :where(svg) {
+.moon-input.moon-input-sm :where(svg, .moon-icon) {
   width: var(--scale-sm-icon-size);
   height: var(--scale-sm-icon-size);
 }
@@ -557,7 +557,7 @@
   border-radius: var(--utility-input-radius-lg);
   font: var(--scale-lg-text-weight) var(--scale-lg-text-size)/var(--scale-lg-text-height) var(--scale-lg-text-font);
 }
-.moon-input.moon-input-lg :where(svg) {
+.moon-input.moon-input-lg :where(svg, .moon-icon) {
   width: var(--scale-lg-icon-size);
   height: var(--scale-lg-icon-size);
 }
@@ -569,7 +569,7 @@
   border-radius: var(--utility-input-radius-xl);
   font: var(--scale-xl-text-weight) var(--scale-xl-text-size)/var(--scale-xl-text-height) var(--scale-xl-text-font);
 }
-.moon-input.moon-input-xl :where(svg) {
+.moon-input.moon-input-xl :where(svg, .moon-icon) {
   width: var(--scale-xl-icon-size);
   height: var(--scale-xl-icon-size);
 }
@@ -1214,7 +1214,7 @@
   box-shadow: inset 0 0 0 var(--segmented-control-segment-unselected-stroke) var(--segmented-control-segment-unselected-border);
   transition: background-color 150ms ease-in-out, color 150ms ease-in-out, box-shadow 150ms ease-in-out;
 }
-.moon-segmented-control :where(.moon-segment) :where(svg) {
+.moon-segmented-control :where(.moon-segment) :where(svg, .moon-icon) {
   width: var(--scale-md-icon-size);
   height: var(--scale-md-icon-size);
   color: var(--segmented-control-segment-unselected-icon);
@@ -1225,7 +1225,7 @@
   color: var(--segmented-control-segment-selected-text);
   box-shadow: inset 0 0 0 var(--segmented-control-segment-selected-stroke) var(--segmented-control-segment-selected-border);
 }
-.moon-segmented-control :where(.moon-segment).moon-segment-active :where(svg) {
+.moon-segmented-control :where(.moon-segment).moon-segment-active :where(svg, .moon-icon) {
   color: var(--segmented-control-segment-selected-icon);
 }
 .moon-segmented-control :where(.moon-segment)[disabled] {
@@ -1257,7 +1257,7 @@
   border-radius: var(--utility-segmented-control-radius-segment-sm);
   font: var(--scale-sm-text-weight) var(--scale-sm-text-size)/var(--scale-sm-text-height) var(--scale-sm-text-font);
 }
-.moon-segmented-control.moon-segmented-control-sm :where(.moon-segment) :where(svg) {
+.moon-segmented-control.moon-segmented-control-sm :where(.moon-segment) :where(svg, .moon-icon) {
   width: var(--scale-sm-icon-size);
   height: var(--scale-sm-icon-size);
 }
@@ -1334,7 +1334,7 @@
   background-color: var(--tag-fill-background);
   color: var(--tag-fill-text);
 }
-.moon-tag :where(svg) {
+.moon-tag :where(svg, .moon-icon) {
   width: var(--scale-xs-icon-size);
   height: var(--scale-xs-icon-size);
   color: var(--tag-fill-icon);
@@ -1346,7 +1346,7 @@
   gap: var(--scale-2xs-gap);
   font: var(--scale-2xs-text-weight) var(--scale-2xs-text-size)/var(--scale-2xs-text-height) var(--scale-2xs-text-font);
 }
-.moon-tag.moon-tag-2xs :where(svg) {
+.moon-tag.moon-tag-2xs :where(svg, .moon-icon) {
   width: var(--scale-2xs-icon-size);
   height: var(--scale-2xs-icon-size);
 }
@@ -1355,7 +1355,7 @@
   background-color: var(--tag-outline-background);
   color: var(--tag-outline-text);
 }
-.moon-tag.moon-tag-outline :where(svg) {
+.moon-tag.moon-tag-outline :where(svg, .moon-icon) {
   color: var(--tag-outline-icon);
 }
 
@@ -1449,7 +1449,7 @@
   background-color: var(--icon-button-fill-background);
   border-radius: var(--utility-icon-button-radius-md);
 }
-.moon-icon-button :where(svg), .moon-carousel :where(.moon-carousel-control) :where(svg), .moon-bottom-sheet-box :where(.moon-bottom-sheet-close) :where(svg), .moon-drawer-box :where(.moon-drawer-close) :where(svg), .moon-dialog-box :where(.moon-dialog-close) :where(svg), .moon-pagination :where(.moon-pagination-item) :where(svg), .moon-alert :where(.moon-alert-dismiss) :where(svg), .moon-snackbar :where(.moon-alert-dismiss) :where(svg) {
+.moon-icon-button :where(svg, .moon-icon), .moon-carousel :where(.moon-carousel-control) :where(svg, .moon-icon), .moon-bottom-sheet-box :where(.moon-bottom-sheet-close) :where(svg, .moon-icon), .moon-drawer-box :where(.moon-drawer-close) :where(svg, .moon-icon), .moon-dialog-box :where(.moon-dialog-close) :where(svg, .moon-icon), .moon-pagination :where(.moon-pagination-item) :where(svg, .moon-icon), .moon-alert :where(.moon-alert-dismiss) :where(svg, .moon-icon), .moon-snackbar :where(.moon-alert-dismiss) :where(svg, .moon-icon) {
   color: var(--icon-button-fill-icon);
   width: var(--scale-md-icon-size);
   height: var(--scale-md-icon-size);
@@ -1478,7 +1478,7 @@
   width: var(--scale-xs-width);
   border-radius: var(--utility-icon-button-radius-xs);
 }
-.moon-icon-button.moon-icon-button-xs :where(svg), .moon-carousel .moon-icon-button-xs:where(.moon-carousel-control) :where(svg), .moon-bottom-sheet-box .moon-icon-button-xs:where(.moon-bottom-sheet-close) :where(svg), .moon-drawer-box .moon-icon-button-xs:where(.moon-drawer-close) :where(svg), .moon-dialog-box .moon-icon-button-xs:where(.moon-dialog-close) :where(svg), .moon-pagination .moon-icon-button-xs:where(.moon-pagination-item) :where(svg), .moon-alert .moon-icon-button-xs:where(.moon-alert-dismiss) :where(svg), .moon-snackbar .moon-icon-button-xs:where(.moon-alert-dismiss) :where(svg) {
+.moon-icon-button.moon-icon-button-xs :where(svg, .moon-icon), .moon-carousel .moon-icon-button-xs:where(.moon-carousel-control) :where(svg, .moon-icon), .moon-bottom-sheet-box .moon-icon-button-xs:where(.moon-bottom-sheet-close) :where(svg, .moon-icon), .moon-drawer-box .moon-icon-button-xs:where(.moon-drawer-close) :where(svg, .moon-icon), .moon-dialog-box .moon-icon-button-xs:where(.moon-dialog-close) :where(svg, .moon-icon), .moon-pagination .moon-icon-button-xs:where(.moon-pagination-item) :where(svg, .moon-icon), .moon-alert .moon-icon-button-xs:where(.moon-alert-dismiss) :where(svg, .moon-icon), .moon-snackbar .moon-icon-button-xs:where(.moon-alert-dismiss) :where(svg, .moon-icon) {
   width: var(--scale-xs-icon-size);
   height: var(--scale-xs-icon-size);
 }
@@ -1487,7 +1487,7 @@
   width: var(--scale-sm-width);
   border-radius: var(--utility-icon-button-radius-sm);
 }
-.moon-icon-button.moon-icon-button-sm :where(svg), .moon-carousel .moon-icon-button-sm:where(.moon-carousel-control) :where(svg), .moon-bottom-sheet-box :where(.moon-bottom-sheet-close) :where(svg), .moon-drawer-box :where(.moon-drawer-close) :where(svg), .moon-dialog-box :where(.moon-dialog-close) :where(svg), .moon-pagination :where(.moon-pagination-item) :where(svg), .moon-alert :where(.moon-alert-dismiss) :where(svg), .moon-snackbar :where(.moon-alert-dismiss) :where(svg) {
+.moon-icon-button.moon-icon-button-sm :where(svg, .moon-icon), .moon-carousel .moon-icon-button-sm:where(.moon-carousel-control) :where(svg, .moon-icon), .moon-bottom-sheet-box :where(.moon-bottom-sheet-close) :where(svg, .moon-icon), .moon-drawer-box :where(.moon-drawer-close) :where(svg, .moon-icon), .moon-dialog-box :where(.moon-dialog-close) :where(svg, .moon-icon), .moon-pagination :where(.moon-pagination-item) :where(svg, .moon-icon), .moon-alert :where(.moon-alert-dismiss) :where(svg, .moon-icon), .moon-snackbar :where(.moon-alert-dismiss) :where(svg, .moon-icon) {
   width: var(--scale-sm-icon-size);
   height: var(--scale-sm-icon-size);
 }
@@ -1496,7 +1496,7 @@
   width: var(--scale-lg-width);
   border-radius: var(--utility-icon-button-radius-lg);
 }
-.moon-icon-button.moon-icon-button-lg :where(svg), .moon-bottom-sheet-box .moon-icon-button-lg:where(.moon-bottom-sheet-close) :where(svg), .moon-drawer-box .moon-icon-button-lg:where(.moon-drawer-close) :where(svg), .moon-dialog-box .moon-icon-button-lg:where(.moon-dialog-close) :where(svg), .moon-pagination .moon-icon-button-lg:where(.moon-pagination-item) :where(svg), .moon-alert .moon-icon-button-lg:where(.moon-alert-dismiss) :where(svg), .moon-snackbar .moon-icon-button-lg:where(.moon-alert-dismiss) :where(svg), .moon-carousel :where(.moon-carousel-control) :where(svg) {
+.moon-icon-button.moon-icon-button-lg :where(svg, .moon-icon), .moon-bottom-sheet-box .moon-icon-button-lg:where(.moon-bottom-sheet-close) :where(svg, .moon-icon), .moon-drawer-box .moon-icon-button-lg:where(.moon-drawer-close) :where(svg, .moon-icon), .moon-dialog-box .moon-icon-button-lg:where(.moon-dialog-close) :where(svg, .moon-icon), .moon-pagination .moon-icon-button-lg:where(.moon-pagination-item) :where(svg, .moon-icon), .moon-alert .moon-icon-button-lg:where(.moon-alert-dismiss) :where(svg, .moon-icon), .moon-snackbar .moon-icon-button-lg:where(.moon-alert-dismiss) :where(svg, .moon-icon), .moon-carousel :where(.moon-carousel-control) :where(svg, .moon-icon) {
   width: var(--scale-lg-icon-size);
   height: var(--scale-lg-icon-size);
 }
@@ -1505,7 +1505,7 @@
   width: var(--scale-xl-width);
   border-radius: var(--utility-icon-button-radius-xl);
 }
-.moon-icon-button.moon-icon-button-xl :where(svg), .moon-carousel .moon-icon-button-xl:where(.moon-carousel-control) :where(svg), .moon-bottom-sheet-box .moon-icon-button-xl:where(.moon-bottom-sheet-close) :where(svg), .moon-drawer-box .moon-icon-button-xl:where(.moon-drawer-close) :where(svg), .moon-dialog-box .moon-icon-button-xl:where(.moon-dialog-close) :where(svg), .moon-pagination .moon-icon-button-xl:where(.moon-pagination-item) :where(svg), .moon-alert .moon-icon-button-xl:where(.moon-alert-dismiss) :where(svg), .moon-snackbar .moon-icon-button-xl:where(.moon-alert-dismiss) :where(svg) {
+.moon-icon-button.moon-icon-button-xl :where(svg, .moon-icon), .moon-carousel .moon-icon-button-xl:where(.moon-carousel-control) :where(svg, .moon-icon), .moon-bottom-sheet-box .moon-icon-button-xl:where(.moon-bottom-sheet-close) :where(svg, .moon-icon), .moon-drawer-box .moon-icon-button-xl:where(.moon-drawer-close) :where(svg, .moon-icon), .moon-dialog-box .moon-icon-button-xl:where(.moon-dialog-close) :where(svg, .moon-icon), .moon-pagination .moon-icon-button-xl:where(.moon-pagination-item) :where(svg, .moon-icon), .moon-alert .moon-icon-button-xl:where(.moon-alert-dismiss) :where(svg, .moon-icon), .moon-snackbar .moon-icon-button-xl:where(.moon-alert-dismiss) :where(svg, .moon-icon) {
   width: var(--scale-xl-icon-size);
   height: var(--scale-xl-icon-size);
 }
@@ -1513,21 +1513,21 @@
   background-color: var(--icon-button-ghost-background);
   box-shadow: inset 0 0 0 var(--icon-button-ghost-stroke) var(--icon-button-ghost-border);
 }
-.moon-icon-button.moon-icon-button-ghost :where(svg), .moon-carousel .moon-icon-button-ghost:where(.moon-carousel-control) :where(svg), .moon-pagination .moon-icon-button-ghost:where(.moon-pagination-item) :where(svg), .moon-bottom-sheet-box :where(.moon-bottom-sheet-close) :where(svg), .moon-drawer-box :where(.moon-drawer-close) :where(svg), .moon-dialog-box :where(.moon-dialog-close) :where(svg), .moon-alert :where(.moon-alert-dismiss) :where(svg), .moon-snackbar :where(.moon-alert-dismiss) :where(svg) {
+.moon-icon-button.moon-icon-button-ghost :where(svg, .moon-icon), .moon-carousel .moon-icon-button-ghost:where(.moon-carousel-control) :where(svg, .moon-icon), .moon-pagination .moon-icon-button-ghost:where(.moon-pagination-item) :where(svg, .moon-icon), .moon-bottom-sheet-box :where(.moon-bottom-sheet-close) :where(svg, .moon-icon), .moon-drawer-box :where(.moon-drawer-close) :where(svg, .moon-icon), .moon-dialog-box :where(.moon-dialog-close) :where(svg, .moon-icon), .moon-alert :where(.moon-alert-dismiss) :where(svg, .moon-icon), .moon-snackbar :where(.moon-alert-dismiss) :where(svg, .moon-icon) {
   color: var(--icon-button-ghost-icon);
 }
 .moon-icon-button.moon-icon-button-outline, .moon-carousel .moon-icon-button-outline:where(.moon-carousel-control), .moon-bottom-sheet-box .moon-icon-button-outline:where(.moon-bottom-sheet-close), .moon-drawer-box .moon-icon-button-outline:where(.moon-drawer-close), .moon-dialog-box .moon-icon-button-outline:where(.moon-dialog-close), .moon-pagination .moon-icon-button-outline:where(.moon-pagination-item), .moon-alert .moon-icon-button-outline:where(.moon-alert-dismiss), .moon-snackbar .moon-icon-button-outline:where(.moon-alert-dismiss) {
   background-color: var(--icon-button-outline-background);
   box-shadow: inset 0 0 0 var(--icon-button-outline-stroke) var(--icon-button-outline-border);
 }
-.moon-icon-button.moon-icon-button-outline :where(svg), .moon-carousel .moon-icon-button-outline:where(.moon-carousel-control) :where(svg), .moon-bottom-sheet-box .moon-icon-button-outline:where(.moon-bottom-sheet-close) :where(svg), .moon-drawer-box .moon-icon-button-outline:where(.moon-drawer-close) :where(svg), .moon-dialog-box .moon-icon-button-outline:where(.moon-dialog-close) :where(svg), .moon-pagination .moon-icon-button-outline:where(.moon-pagination-item) :where(svg), .moon-alert .moon-icon-button-outline:where(.moon-alert-dismiss) :where(svg), .moon-snackbar .moon-icon-button-outline:where(.moon-alert-dismiss) :where(svg) {
+.moon-icon-button.moon-icon-button-outline :where(svg, .moon-icon), .moon-carousel .moon-icon-button-outline:where(.moon-carousel-control) :where(svg, .moon-icon), .moon-bottom-sheet-box .moon-icon-button-outline:where(.moon-bottom-sheet-close) :where(svg, .moon-icon), .moon-drawer-box .moon-icon-button-outline:where(.moon-drawer-close) :where(svg, .moon-icon), .moon-dialog-box .moon-icon-button-outline:where(.moon-dialog-close) :where(svg, .moon-icon), .moon-pagination .moon-icon-button-outline:where(.moon-pagination-item) :where(svg, .moon-icon), .moon-alert .moon-icon-button-outline:where(.moon-alert-dismiss) :where(svg, .moon-icon), .moon-snackbar .moon-icon-button-outline:where(.moon-alert-dismiss) :where(svg, .moon-icon) {
   color: var(--icon-button-outline-icon);
 }
 .moon-icon-button.moon-icon-button-soft, .moon-bottom-sheet-box .moon-icon-button-soft:where(.moon-bottom-sheet-close), .moon-drawer-box .moon-icon-button-soft:where(.moon-drawer-close), .moon-dialog-box .moon-icon-button-soft:where(.moon-dialog-close), .moon-pagination .moon-icon-button-soft:where(.moon-pagination-item), .moon-alert .moon-icon-button-soft:where(.moon-alert-dismiss), .moon-snackbar .moon-icon-button-soft:where(.moon-alert-dismiss), .moon-carousel :where(.moon-carousel-control) {
   background-color: var(--icon-button-soft-background);
   box-shadow: inset 0 0 0 var(--icon-button-soft-stroke) var(--icon-button-soft-border);
 }
-.moon-icon-button.moon-icon-button-soft :where(svg), .moon-bottom-sheet-box .moon-icon-button-soft:where(.moon-bottom-sheet-close) :where(svg), .moon-drawer-box .moon-icon-button-soft:where(.moon-drawer-close) :where(svg), .moon-dialog-box .moon-icon-button-soft:where(.moon-dialog-close) :where(svg), .moon-pagination .moon-icon-button-soft:where(.moon-pagination-item) :where(svg), .moon-alert .moon-icon-button-soft:where(.moon-alert-dismiss) :where(svg), .moon-snackbar .moon-icon-button-soft:where(.moon-alert-dismiss) :where(svg), .moon-carousel :where(.moon-carousel-control) :where(svg) {
+.moon-icon-button.moon-icon-button-soft :where(svg, .moon-icon), .moon-bottom-sheet-box .moon-icon-button-soft:where(.moon-bottom-sheet-close) :where(svg, .moon-icon), .moon-drawer-box .moon-icon-button-soft:where(.moon-drawer-close) :where(svg, .moon-icon), .moon-dialog-box .moon-icon-button-soft:where(.moon-dialog-close) :where(svg, .moon-icon), .moon-pagination .moon-icon-button-soft:where(.moon-pagination-item) :where(svg, .moon-icon), .moon-alert .moon-icon-button-soft:where(.moon-alert-dismiss) :where(svg, .moon-icon), .moon-snackbar .moon-icon-button-soft:where(.moon-alert-dismiss) :where(svg, .moon-icon), .moon-carousel :where(.moon-carousel-control) :where(svg, .moon-icon) {
   color: var(--icon-button-soft-icon);
 }
 
@@ -1555,7 +1555,7 @@
   gap: var(--scale-lg-gap);
   font-weight: var(--font-weight-medium);
 }
-.moon-alert :where(svg), .moon-snackbar :where(svg) {
+.moon-alert :where(svg, .moon-icon), .moon-snackbar :where(svg, .moon-icon) {
   color: var(--alert-neutral-icon);
   width: var(--scale-lg-icon-size);
   height: var(--scale-lg-icon-size);
@@ -1571,10 +1571,10 @@
 .moon-alert :where(.moon-alert-action), .moon-snackbar :where(.moon-alert-action) {
   color: var(--alert-neutral-text);
 }
-.moon-alert :where(.moon-alert-action) :where(svg), .moon-snackbar :where(.moon-alert-action) :where(svg) {
+.moon-alert :where(.moon-alert-action) :where(svg, .moon-icon), .moon-snackbar :where(.moon-alert-action) :where(svg, .moon-icon) {
   color: var(--alert-neutral-icon);
 }
-.moon-alert :where(.moon-alert-dismiss) :where(svg), .moon-snackbar :where(.moon-alert-dismiss) :where(svg) {
+.moon-alert :where(.moon-alert-dismiss) :where(svg, .moon-icon), .moon-snackbar :where(.moon-alert-dismiss) :where(svg, .moon-icon) {
   color: var(--alert-neutral-icon);
 }
 .moon-alert.moon-alert-info, .moon-alert-info.moon-snackbar {
@@ -1582,16 +1582,16 @@
   background-color: var(--alert-info-background);
   box-shadow: inset 0 0 0 var(--alert-info-stroke) var(--alert-info-border);
 }
-.moon-alert.moon-alert-info :where(svg), .moon-alert-info.moon-snackbar :where(svg) {
+.moon-alert.moon-alert-info :where(svg, .moon-icon), .moon-alert-info.moon-snackbar :where(svg, .moon-icon) {
   color: var(--alert-info-icon);
 }
 .moon-alert.moon-alert-info :where(.moon-alert-action), .moon-alert-info.moon-snackbar :where(.moon-alert-action) {
   color: var(--alert-info-text);
 }
-.moon-alert.moon-alert-info :where(.moon-alert-action) :where(svg), .moon-alert-info.moon-snackbar :where(.moon-alert-action) :where(svg) {
+.moon-alert.moon-alert-info :where(.moon-alert-action) :where(svg, .moon-icon), .moon-alert-info.moon-snackbar :where(.moon-alert-action) :where(svg, .moon-icon) {
   color: var(--alert-info-icon);
 }
-.moon-alert.moon-alert-info :where(.moon-alert-dismiss) :where(svg), .moon-alert-info.moon-snackbar :where(.moon-alert-dismiss) :where(svg) {
+.moon-alert.moon-alert-info :where(.moon-alert-dismiss) :where(svg, .moon-icon), .moon-alert-info.moon-snackbar :where(.moon-alert-dismiss) :where(svg, .moon-icon) {
   color: var(--alert-info-icon);
 }
 .moon-alert.moon-alert-negative, .moon-alert-negative.moon-snackbar {
@@ -1599,16 +1599,16 @@
   background-color: var(--alert-negative-background);
   box-shadow: inset 0 0 0 var(--alert-negative-stroke) var(--alert-negative-border);
 }
-.moon-alert.moon-alert-negative :where(svg), .moon-alert-negative.moon-snackbar :where(svg) {
+.moon-alert.moon-alert-negative :where(svg, .moon-icon), .moon-alert-negative.moon-snackbar :where(svg, .moon-icon) {
   color: var(--alert-negative-icon);
 }
 .moon-alert.moon-alert-negative :where(.moon-alert-action), .moon-alert-negative.moon-snackbar :where(.moon-alert-action) {
   color: var(--alert-negative-text);
 }
-.moon-alert.moon-alert-negative :where(.moon-alert-action) :where(svg), .moon-alert-negative.moon-snackbar :where(.moon-alert-action) :where(svg) {
+.moon-alert.moon-alert-negative :where(.moon-alert-action) :where(svg, .moon-icon), .moon-alert-negative.moon-snackbar :where(.moon-alert-action) :where(svg, .moon-icon) {
   color: var(--alert-negative-icon);
 }
-.moon-alert.moon-alert-negative :where(.moon-alert-dismiss) :where(svg), .moon-alert-negative.moon-snackbar :where(.moon-alert-dismiss) :where(svg) {
+.moon-alert.moon-alert-negative :where(.moon-alert-dismiss) :where(svg, .moon-icon), .moon-alert-negative.moon-snackbar :where(.moon-alert-dismiss) :where(svg, .moon-icon) {
   color: var(--alert-negative-icon);
 }
 .moon-alert.moon-alert-positive, .moon-alert-positive.moon-snackbar {
@@ -1616,16 +1616,16 @@
   background-color: var(--alert-positive-background);
   box-shadow: inset 0 0 0 var(--alert-positive-stroke) var(--alert-positive-border);
 }
-.moon-alert.moon-alert-positive :where(svg), .moon-alert-positive.moon-snackbar :where(svg) {
+.moon-alert.moon-alert-positive :where(svg, .moon-icon), .moon-alert-positive.moon-snackbar :where(svg, .moon-icon) {
   color: var(--alert-positive-icon);
 }
 .moon-alert.moon-alert-positive :where(.moon-alert-action), .moon-alert-positive.moon-snackbar :where(.moon-alert-action) {
   color: var(--alert-positive-text);
 }
-.moon-alert.moon-alert-positive :where(.moon-alert-action) :where(svg), .moon-alert-positive.moon-snackbar :where(.moon-alert-action) :where(svg) {
+.moon-alert.moon-alert-positive :where(.moon-alert-action) :where(svg, .moon-icon), .moon-alert-positive.moon-snackbar :where(.moon-alert-action) :where(svg, .moon-icon) {
   color: var(--alert-positive-icon);
 }
-.moon-alert.moon-alert-positive :where(.moon-alert-dismiss) :where(svg), .moon-alert-positive.moon-snackbar :where(.moon-alert-dismiss) :where(svg) {
+.moon-alert.moon-alert-positive :where(.moon-alert-dismiss) :where(svg, .moon-icon), .moon-alert-positive.moon-snackbar :where(.moon-alert-dismiss) :where(svg, .moon-icon) {
   color: var(--alert-positive-icon);
 }
 
@@ -1704,7 +1704,7 @@
   font: var(--scale-md-text-weight) var(--scale-md-text-size)/var(--scale-md-text-height) var(--scale-md-text-font);
   font-weight: var(--font-weight-medium);
 }
-.moon-tab-list .moon-tab :where(svg) {
+.moon-tab-list .moon-tab :where(svg, .moon-icon) {
   width: var(--scale-md-icon-size);
   height: var(--scale-md-icon-size);
   color: var(--tab-list-tab-unselected-icon);
@@ -1714,7 +1714,7 @@
   color: var(--tab-list-tab-selected-text);
   border-bottom: var(--tab-list-tab-selected-stroke) solid var(--tab-list-tab-selected-border);
 }
-.moon-tab-list .moon-tab.moon-tab-active :where(svg) {
+.moon-tab-list .moon-tab.moon-tab-active :where(svg, .moon-icon) {
   color: var(--tab-list-tab-selected-icon);
 }
 .moon-tab-list .moon-tab::after {
@@ -1738,7 +1738,7 @@
   border-top-right-radius: var(--scale-sm-radius);
   font: var(--scale-sm-text-weight) var(--scale-sm-text-size)/var(--scale-sm-text-height) var(--scale-sm-text-font);
 }
-.moon-tab-list.moon-tab-list-sm .moon-tab :where(svg) {
+.moon-tab-list.moon-tab-list-sm .moon-tab :where(svg, .moon-icon) {
   width: var(--scale-sm-icon-size);
   height: var(--scale-sm-icon-size);
 }
@@ -1769,7 +1769,7 @@
   height: var(--dimension-border-1);
   background-color: var(--semantic-border-secondary);
 }
-.moon-list > * :where(svg), .moon-menu > * :where(svg) {
+.moon-list > * :where(svg, .moon-icon), .moon-menu > * :where(svg, .moon-icon) {
   width: var(--scale-md-icon-size);
   height: var(--scale-md-icon-size);
   color: var(--semantic-icon-primary);
@@ -1783,7 +1783,7 @@
   gap: var(--scale-sm-gap);
   padding: var(--list-padding-sm);
 }
-.moon-list.moon-list-sm > * :where(svg), .moon-list-sm.moon-menu > * :where(svg) {
+.moon-list.moon-list-sm > * :where(svg, .moon-icon), .moon-list-sm.moon-menu > * :where(svg, .moon-icon) {
   width: var(--scale-sm-icon-size);
   height: var(--scale-sm-icon-size);
 }
@@ -1793,7 +1793,7 @@
   gap: var(--scale-lg-gap);
   padding: var(--list-padding-lg);
 }
-.moon-list.moon-list-lg > * :where(svg), .moon-list-lg.moon-menu > * :where(svg) {
+.moon-list.moon-list-lg > * :where(svg, .moon-icon), .moon-list-lg.moon-menu > * :where(svg, .moon-icon) {
   width: var(--scale-lg-icon-size);
   height: var(--scale-lg-icon-size);
 }
@@ -1803,7 +1803,7 @@
   gap: var(--scale-xl-gap);
   padding: var(--list-padding-xl);
 }
-.moon-list.moon-list-xl > * :where(svg), .moon-list-xl.moon-menu > * :where(svg) {
+.moon-list.moon-list-xl > * :where(svg, .moon-icon), .moon-list-xl.moon-menu > * :where(svg, .moon-icon) {
   width: var(--scale-xl-icon-size);
   height: var(--scale-xl-icon-size);
 }
@@ -1813,7 +1813,7 @@
   gap: var(--scale-2xl-gap);
   padding: var(--list-padding-2xl);
 }
-.moon-list.moon-list-2xl > * :where(svg), .moon-list-2xl.moon-menu > * :where(svg) {
+.moon-list.moon-list-2xl > * :where(svg, .moon-icon), .moon-list-2xl.moon-menu > * :where(svg, .moon-icon) {
   width: var(--scale-2xl-icon-size);
   height: var(--scale-2xl-icon-size);
 }
@@ -1837,7 +1837,7 @@
   gap: var(--scale-sm-gap);
   padding: var(--list-padding-sm);
 }
-.moon-menu.moon-menu-sm > * :where(svg) {
+.moon-menu.moon-menu-sm > * :where(svg, .moon-icon) {
   width: var(--scale-sm-icon-size);
   height: var(--scale-sm-icon-size);
 }
@@ -1847,7 +1847,7 @@
   gap: var(--scale-lg-gap);
   padding: var(--list-padding-lg);
 }
-.moon-menu.moon-menu-lg > * :where(svg) {
+.moon-menu.moon-menu-lg > * :where(svg, .moon-icon) {
   width: var(--scale-lg-icon-size);
   height: var(--scale-lg-icon-size);
 }
@@ -1857,7 +1857,7 @@
   gap: var(--scale-xl-gap);
   padding: var(--list-padding-xl);
 }
-.moon-menu.moon-menu-xl > * :where(svg) {
+.moon-menu.moon-menu-xl > * :where(svg, .moon-icon) {
   width: var(--scale-xl-icon-size);
   height: var(--scale-xl-icon-size);
 }
@@ -1867,7 +1867,7 @@
   gap: var(--scale-2xl-gap);
   padding: var(--list-padding-2xl);
 }
-.moon-menu.moon-menu-2xl > * :where(svg) {
+.moon-menu.moon-menu-2xl > * :where(svg, .moon-icon) {
   width: var(--scale-2xl-icon-size);
   height: var(--scale-2xl-icon-size);
 }
@@ -1902,7 +1902,7 @@
   justify-self: end;
   color: var(--snackbar-neutral-text);
 }
-.moon-snackbar :where(.moon-snackbar-action) :where(svg) {
+.moon-snackbar :where(.moon-snackbar-action) :where(svg, .moon-icon) {
   color: var(--snackbar-neutral-icon);
 }
 .moon-snackbar.moon-snackbar-caution {
@@ -1911,13 +1911,13 @@
   background-color: var(--snackbar-caution-background);
   box-shadow: var(--effect-shadow-500-layer-1-x) var(--effect-shadow-500-layer-1-y) var(--effect-shadow-500-layer-1-blur) var(--effect-shadow-500-layer-1-spread) var(--effect-shadow-500-layer-1-color), var(--effect-shadow-500-layer-2-x) var(--effect-shadow-500-layer-2-y) var(--effect-shadow-500-layer-2-blur) var(--effect-shadow-500-layer-2-spread) var(--effect-shadow-500-layer-2-color), inset 0 0 0 var(--snackbar-caution-stroke) var(--snackbar-caution-border);
 }
-.moon-snackbar.moon-snackbar-caution :where(svg) {
+.moon-snackbar.moon-snackbar-caution :where(svg, .moon-icon) {
   color: var(--snackbar-caution-icon);
 }
 .moon-snackbar.moon-snackbar-caution :where(.moon-snackbar-action) {
   color: var(--snackbar-caution-text);
 }
-.moon-snackbar.moon-snackbar-caution :where(.moon-snackbar-action) :where(svg) {
+.moon-snackbar.moon-snackbar-caution :where(.moon-snackbar-action) :where(svg, .moon-icon) {
   color: var(--snackbar-caution-icon);
 }
 .moon-snackbar.moon-snackbar-info {
@@ -1926,13 +1926,13 @@
   background-color: var(--snackbar-info-background);
   box-shadow: var(--effect-shadow-500-layer-1-x) var(--effect-shadow-500-layer-1-y) var(--effect-shadow-500-layer-1-blur) var(--effect-shadow-500-layer-1-spread) var(--effect-shadow-500-layer-1-color), var(--effect-shadow-500-layer-2-x) var(--effect-shadow-500-layer-2-y) var(--effect-shadow-500-layer-2-blur) var(--effect-shadow-500-layer-2-spread) var(--effect-shadow-500-layer-2-color), inset 0 0 0 var(--snackbar-info-stroke) var(--snackbar-info-border);
 }
-.moon-snackbar.moon-snackbar-info :where(svg) {
+.moon-snackbar.moon-snackbar-info :where(svg, .moon-icon) {
   color: var(--snackbar-info-icon);
 }
 .moon-snackbar.moon-snackbar-info :where(.moon-snackbar-action) {
   color: var(--snackbar-info-text);
 }
-.moon-snackbar.moon-snackbar-info :where(.moon-snackbar-action) :where(svg) {
+.moon-snackbar.moon-snackbar-info :where(.moon-snackbar-action) :where(svg, .moon-icon) {
   color: var(--snackbar-info-icon);
 }
 .moon-snackbar.moon-snackbar-positive {
@@ -1941,13 +1941,13 @@
   background-color: var(--snackbar-positive-background);
   box-shadow: var(--effect-shadow-500-layer-1-x) var(--effect-shadow-500-layer-1-y) var(--effect-shadow-500-layer-1-blur) var(--effect-shadow-500-layer-1-spread) var(--effect-shadow-500-layer-1-color), var(--effect-shadow-500-layer-2-x) var(--effect-shadow-500-layer-2-y) var(--effect-shadow-500-layer-2-blur) var(--effect-shadow-500-layer-2-spread) var(--effect-shadow-500-layer-2-color), inset 0 0 0 var(--snackbar-positive-stroke) var(--snackbar-positive-border);
 }
-.moon-snackbar.moon-snackbar-positive :where(svg) {
+.moon-snackbar.moon-snackbar-positive :where(svg, .moon-icon) {
   color: var(--snackbar-positive-icon);
 }
 .moon-snackbar.moon-snackbar-positive :where(.moon-snackbar-action) {
   color: var(--snackbar-positive-text);
 }
-.moon-snackbar.moon-snackbar-positive :where(.moon-snackbar-action) :where(svg) {
+.moon-snackbar.moon-snackbar-positive :where(.moon-snackbar-action) :where(svg, .moon-icon) {
   color: var(--snackbar-positive-icon);
 }
 
@@ -2355,7 +2355,7 @@
 .moon-carousel :where(.moon-carousel-control):last-of-type {
   inset-inline-end: var(--spacing-space-8);
 }
-.moon-carousel :where(.moon-carousel-control):dir(rtl) :where(svg) {
+.moon-carousel :where(.moon-carousel-control):dir(rtl) :where(svg, .moon-icon) {
   transform: rotate(180deg);
 }
 }

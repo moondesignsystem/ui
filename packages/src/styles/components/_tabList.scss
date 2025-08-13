@@ -45,7 +45,7 @@ $sizes: ();
     font: map.get($sizes, "md", "font");
     font-weight: var(--font-weight-medium);
 
-    :where(svg) {
+    :where(svg, .moon-icon) {
       width: map.get($sizes, "md", "icon-size");
       height: map.get($sizes, "md", "icon-size");
       color: var(--tab-list-tab-unselected-icon);
@@ -56,7 +56,7 @@ $sizes: ();
       color: var(--tab-list-tab-selected-text);
       border-bottom: var(--tab-list-tab-selected-stroke) solid var(--tab-list-tab-selected-border);
 
-      :where(svg) {
+      :where(svg, .moon-icon) {
         color: var(--tab-list-tab-selected-icon);
       }
     }
@@ -88,7 +88,7 @@ $sizes: ();
           border-top-right-radius: map.get($prop, "radius");
           font: map.get($prop, "font");
 
-          :where(svg) {
+          :where(svg, .moon-icon) {
             width: map.get($prop, "icon-size");
             height: map.get($prop, "icon-size");
           }

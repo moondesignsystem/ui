@@ -46,7 +46,7 @@ $variants: ();
     font-weight: var(--font-weight-medium);
   }
 
-  :where(svg) {
+  :where(svg, .moon-icon) {
     color: map.get($variants, "neutral", "icon");
     width: var(--scale-lg-icon-size);
     height: var(--scale-lg-icon-size);
@@ -69,7 +69,7 @@ $variants: ();
 
     color: map.get($variants, "neutral", "color");
 
-    :where(svg) {
+    :where(svg, .moon-icon) {
       color: map.get($variants, "neutral", "icon");
     }
   }
@@ -79,7 +79,7 @@ $variants: ();
     @extend .moon-icon-button-sm;
     @extend .moon-icon-button-ghost;
 
-    :where(svg) {
+    :where(svg, .moon-icon) {
       color: map.get($variants, "neutral", "icon");
     }
   }
@@ -91,20 +91,20 @@ $variants: ();
         background-color: map.get($prop, "background");
         box-shadow: map.get($prop, "shadow");
 
-        :where(svg) {
+        :where(svg, .moon-icon) {
           color: map.get($prop, "icon");
         }
 
         :where(.moon-alert-action) {
           color: map.get($prop, "color");
 
-          :where(svg) {
+          :where(svg, .moon-icon) {
             color: map.get($prop, "icon");
           }
         }
 
         :where(.moon-alert-dismiss) {
-          :where(svg) {
+          :where(svg, .moon-icon) {
             color: map.get($prop, "icon");
           }
         }

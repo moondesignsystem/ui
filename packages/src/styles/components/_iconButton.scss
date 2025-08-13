@@ -40,7 +40,7 @@ $sizes: ();
   background-color: map.get($variants, "fill", "background");
   border-radius: map.get($sizes, "md", "radius");
 
-  :where(svg) {
+  :where(svg, .moon-icon) {
     color: map.get($variants, "fill", "icon");
     width: map.get($sizes, "md", "icon-size");
     height: map.get($sizes, "md", "icon-size");
@@ -77,7 +77,7 @@ $sizes: ();
         width: map.get($prop, "width");
         border-radius: map.get($prop, "radius");
 
-        :where(svg) {
+        :where(svg, .moon-icon) {
           width: map.get($prop, "icon-size");
           height: map.get($prop, "icon-size");
         }
@@ -91,7 +91,7 @@ $sizes: ();
         background-color: map.get($prop, "background");
         box-shadow: map.get($prop, "shadow");
 
-        :where(svg) {
+        :where(svg, .moon-icon) {
           color: map.get($prop, "icon");
         }
       }

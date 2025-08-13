@@ -22,7 +22,7 @@ const createTooltip = (args: Props) => {
   content.appendChild(contentChildren);
   tooltip.className = joinClassnames([
     "moon-tooltip",
-    hasPointer ? "moon-tooltip-pointer" : "",
+    hasPointer && "moon-tooltip-pointer",
     getClasses(position),
   ]);
   tooltip.appendChild(trigger);

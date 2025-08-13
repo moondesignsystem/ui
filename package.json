@@ -11,7 +11,7 @@
     "docs"
   ],
   "scripts": {
-    "dev": "npm run dev --workspace docs",
+    "dev": "npm run sass:watch --workspace packages & npm run dev --workspace docs",
     "build": "npm run build --workspace packages",
     "build-storybook": "npm run build-storybook --workspace docs",
     "changeset": "changeset",

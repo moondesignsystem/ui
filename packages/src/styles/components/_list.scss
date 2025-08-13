@@ -9,7 +9,7 @@
     gap: map.get($prop, "gap");
     padding: map.get($prop, "padding");
 
-    :where(svg) {
+    :where(svg, .moon-icon) {
       width: map.get($prop, "icon-size");
       height: map.get($prop, "icon-size");
     }
@@ -58,7 +58,7 @@ $sizes: ();
       background-color: var(--semantic-border-secondary);
     }
 
-    :where(svg) {
+    :where(svg, .moon-icon) {
       width: map.get($sizes, "md", "icon-size");
       height: map.get($sizes, "md", "icon-size");
       color: var(--semantic-icon-primary);

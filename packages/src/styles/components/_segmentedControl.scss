@@ -59,7 +59,7 @@ $sizes: ();
       color 150ms ease-in-out,
       box-shadow 150ms ease-in-out;
 
-    :where(svg) {
+    :where(svg, .moon-icon) {
       width: map.get($sizes, "md", "icon-size");
       height: map.get($sizes, "md", "icon-size");
       color: var(--segmented-control-segment-unselected-icon);
@@ -72,7 +72,7 @@ $sizes: ();
       box-shadow: inset 0 0 0 var(--segmented-control-segment-selected-stroke)
         var(--segmented-control-segment-selected-border);
 
-      :where(svg) {
+      :where(svg, .moon-icon) {
         color: var(--segmented-control-segment-selected-icon);
       }
     }
@@ -110,7 +110,7 @@ $sizes: ();
           border-radius: map.get($prop, "radius");
           font: map.get($prop, "font");
 
-          :where(svg) {
+          :where(svg, .moon-icon) {
             width: map.get($prop, "icon-size");
             height: map.get($prop, "icon-size");
           }

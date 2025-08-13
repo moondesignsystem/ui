@@ -25,7 +25,7 @@ const createInput = (args: Props) => {
     const hintNode = document.createElement("p");
     formGroup.className = joinClassnames([
       "moon-form-group",
-      error ? "moon-form-group-error" : "",
+      error && "moon-form-group-error",
     ]);
     input.className = joinClassnames(["moon-input", getClasses(size)]);
     placeholder && input.setAttribute("placeholder", placeholder);
@@ -44,7 +44,7 @@ const createInput = (args: Props) => {
   input.className = joinClassnames([
     "moon-input",
     getClasses(size),
-    error ? "moon-input-error" : "",
+    error && "moon-input-error",
   ]);
   placeholder && input.setAttribute("placeholder", placeholder);
   return input;
