@@ -48,7 +48,7 @@ const createSelect = (args: Props) => {
   select.className = joinClassnames([
     "moon-select",
     getClasses(size),
-    error ? "moon-select-error" : "",
+    error && "moon-select-error",
   ]);
   return select;
 };

@@ -1,5 +1,8 @@
 const joinClassnames = (classList = []) => {
-  const classNames = classList.filter((item) => item !== "").join(" ");
+  const classNames = classList
+    .filter((item) => item && item !== "")
+    .join(" ")
+    .trim();
 
   return classNames;
 };
