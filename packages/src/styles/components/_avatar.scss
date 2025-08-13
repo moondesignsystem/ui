@@ -53,13 +53,13 @@ $variants: ();
     white-space: nowrap;
   }
 
-  :where(svg) {
+  :where(svg, .moon-icon) {
     color: map.get($variants, "fill", "icon");
     width: map.get($sizes, "md", "icon-size");
     height: map.get($sizes, "md", "icon-size");
   }
 
-  &:not(:has(svg, img)) {
+  &:not(:has(svg, img, .moon-icon)) {
     padding: map.get($sizes, "md", "padding");
   }
 
@@ -71,12 +71,12 @@ $variants: ();
         height: map.get($prop, "height");
         border-radius: map.get($prop, "radius");
 
-        :where(svg) {
+        :where(svg, .moon-icon) {
           width: map.get($prop, "icon-size");
           height: map.get($prop, "icon-size");
         }
 
-        &:not(:has(svg, img)) {
+        &:not(:has(svg, img, .moon-icon)) {
           padding: map.get($prop, "padding");
         }
       }
@@ -89,7 +89,8 @@ $variants: ();
         background-color: var(--avatar-#{$variant}-background);
         border-width: var(--avatar-#{$variant}-stroke);
         color: var(--avatar-#{$variant}-text);
-        :where(svg) {
+
+        :where(svg, .moon-icon) {
           color: var(--avatar-#{$variant}-icon);
         }
       }

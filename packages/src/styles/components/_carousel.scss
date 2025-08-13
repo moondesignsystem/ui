@@ -51,7 +51,7 @@
     }
 
     &:dir(rtl) {
-      :where(svg) {
+      :where(svg, .moon-icon) {
         transform: rotate(180deg);
       }
     }
