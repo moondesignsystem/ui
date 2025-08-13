@@ -2,62 +2,39 @@ import React from "react";
 import { renderToString } from "react-dom/server";
 
 const formatHtml = (html: string): string => {
+  const cleanedHtml = html.replace(/<!-- -->/g, "");
   let formatted = "";
   let indent = 0;
   const indentStr = "  ";
-  const tokens = html.split(/(<[^>]*>)/g).filter(Boolean);
+  // Split by tags and preserve text content
+  const tokens = cleanedHtml.split(/(<[^>]*>)/g).filter(token => token.length > 0);
+
   for (let i = 0; i < tokens.length; i++) {
-    const token = tokens[i].trim();
-    if (!token) continue;
-    if (token.startsWith("</")) {
-      const prevToken = i > 0 ? tokens[i - 1].trim() : "";
-      const prevWasText = prevToken && !prevToken.startsWith("<");
-      const prevTokenIndex = i - 1;
-      const prevActualToken =
-        prevTokenIndex >= 0 ? tokens[prevTokenIndex].trim() : "";
-      const isEmpty =
-        prevActualToken &&
-        prevActualToken.startsWith("<") &&
-        !prevActualToken.startsWith("</");
-      if (prevWasText || isEmpty) {
-        formatted += token;
-      } else {
-        indent--;
-        formatted += "\n" + indentStr.repeat(indent) + token;
-      }
-    } else if (token.startsWith("<")) {
-      formatted += "\n" + indentStr.repeat(indent) + token;
-      if (
-        !token.endsWith("/>") &&
-        !token.match(/<(br|hr|img|input|meta|link)/)
-      ) {
-        const nextTokenIndex = i + 1;
-        const nextToken =
-          nextTokenIndex < tokens.length ? tokens[nextTokenIndex].trim() : "";
-        const isEmptyElement = nextToken && nextToken.startsWith("</");
-        let nextNonEmptyIndex = i + 1;
-        while (
-          nextNonEmptyIndex < tokens.length &&
-          !tokens[nextNonEmptyIndex].trim()
-        ) {
-          nextNonEmptyIndex++;
-        }
-        const nextNonEmptyToken =
-          nextNonEmptyIndex < tokens.length
-            ? tokens[nextNonEmptyIndex].trim()
-            : "";
-        const hasOnlyTextContent =
-          nextNonEmptyIndex < tokens.length - 1 &&
-          nextNonEmptyToken &&
-          !nextNonEmptyToken.startsWith("<") &&
-          tokens[nextNonEmptyIndex + 1] &&
-          tokens[nextNonEmptyIndex + 1].trim().startsWith("</");
-        if (!hasOnlyTextContent && !isEmptyElement) {
-          indent++;
-        }
+    const token = tokens[i];
+    const trimmedToken = token.trim();
+
+    if (!trimmedToken) continue;
+
+    if (trimmedToken.startsWith("</")) {
+      // Closing tag
+      indent--;
+      formatted += "\n" + indentStr.repeat(indent) + trimmedToken;
+    } else if (trimmedToken.startsWith("<")) {
+      // Opening tag
+      formatted += "\n" + indentStr.repeat(indent) + trimmedToken;
+
+      // Check if it's a self-closing tag or void element
+      const isSelfClosing = trimmedToken.endsWith("/>") ||
+        /^<(area|base|br|col|embed|hr|img|input|link|meta|param|source|track|wbr)/.test(trimmedToken);
+
+      if (!isSelfClosing) {
+        indent++;
       }
     } else {
-      formatted += token;
+      // Text content
+      if (trimmedToken.length > 0) {
+        formatted += "\n" + indentStr.repeat(indent) + trimmedToken;
+      }
     }
   }
 
@@ -74,10 +51,34 @@ export const createHTMLComponent = <T extends Record<string, any>>(
     tempDiv.innerHTML = htmlString;
     const element = tempDiv.firstElementChild as HTMLElement;
     if (element) {
+      // Store formatted HTML as a property for Storybook to display
       Object.defineProperty(element, "outerHTML", {
-        get: () => formattedHtml,
+        get: () => {
+          // Always re-format the current HTML content
+          const currentHtml = element.cloneNode(true) as HTMLElement;
+          const tempContainer = document.createElement("div");
+          tempContainer.appendChild(currentHtml);
+          return formatHtml(tempContainer.innerHTML);
+        },
         configurable: true,
       });
+      setTimeout(() => {
+        const openButton = element.querySelector(
+          '[data-action="open-bottom-sheet"], .moon-button'
+        );
+        const closeButton = element.querySelector(
+          '[data-action="close-bottom-sheet"], .moon-bottom-sheet-close'
+        );
+        const dialog = element.querySelector(
+          "#bottomSheet"
+        ) as HTMLDialogElement;
+        if (openButton && dialog) {
+          openButton.addEventListener("click", () => dialog.showModal());
+        }
+        if (closeButton && dialog) {
+          closeButton.addEventListener("click", () => dialog.close());
+        }
+      }, 0);
     }
 
     return element;

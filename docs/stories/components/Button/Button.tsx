@@ -1,0 +1,42 @@
+import Icon from "../../shared/Icon";
+import { createHTMLComponent } from "../../shared/utils/createHTMLComponent";
+import joinClassnames from "../../shared/utils/joinClassnames";
+import getClasses from "./utils/getClasses";
+
+export const SIZES = ["xs", "sm", "md", "lg", "xl"] as const;
+export const VARIANTS = ["fill", "soft", "outline", "ghost"] as const;
+
+export type Props = {
+  label: string;
+  size: (typeof SIZES)[number];
+  disabled: boolean;
+  variant: (typeof VARIANTS)[number];
+  hasStartIcon: boolean;
+  hasEndIcon: boolean;
+};
+
+const Button = ({
+  label,
+  size,
+  disabled,
+  variant,
+  hasStartIcon,
+  hasEndIcon,
+}: Props) => {
+  return (
+    <button
+      className={joinClassnames([
+        "moon-button",
+        getClasses(size),
+        getClasses(variant),
+      ])}
+      disabled={disabled}
+    >
+      {hasStartIcon && <Icon name="star" />}
+      {label}
+      {hasEndIcon && <Icon name="star" />}
+    </button>
+  );
+};
+
+export default createHTMLComponent(Button);

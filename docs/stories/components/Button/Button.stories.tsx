@@ -1,4 +1,3 @@
-import React from "react";
 import LinksBlock from "../../shared/LinksBlock";
 import createButton, { SIZES, VARIANTS } from "./Button";
 import type { Meta, StoryObj } from "@storybook/html-vite";

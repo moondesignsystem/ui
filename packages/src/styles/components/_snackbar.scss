@@ -38,7 +38,7 @@ $variants: ();
     justify-self: end;
     color: map.get($variants, "neutral", "color");
 
-    :where(svg) {
+    :where(svg, .moon-icon) {
       color: map.get($variants, "neutral", "icon");
     }
   }
@@ -51,14 +51,14 @@ $variants: ();
         background-color: map.get($prop, "background");
         box-shadow: variables.$shadow-500, map.get($prop, "shadow");
 
-        :where(svg) {
+        :where(svg, .moon-icon) {
           color: map.get($prop, "icon");
         }
 
         :where(.moon-snackbar-action) {
           color: map.get($prop, "color");
 
-          :where(svg) {
+          :where(svg, .moon-icon) {
             color: map.get($prop, "icon");
           }
         }

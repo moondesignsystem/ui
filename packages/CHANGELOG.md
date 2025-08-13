@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 1.13.2
+
+### Patch Changes
+
+- fix: add optional moon-icon to all components
+
 ## 1.13.1
 
 ### Patch Changes
