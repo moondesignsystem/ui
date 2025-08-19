@@ -43,4 +43,8 @@ export const Tooltip: StoryObj<Props> = {
     hasPointer: false,
     children: "Tooltip",
   },
+  play: async ({ canvasElement, userEvent }) => {
+    const button = canvasElement.querySelector("button");
+    await userEvent.hover(button);
+  },
 };
