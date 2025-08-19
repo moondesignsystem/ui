@@ -1,4 +1,8 @@
+import { createRequire } from "node:module";
+import { dirname, join } from "node:path";
 import type { StorybookConfig } from "@storybook/html-vite";
+
+const require = createRequire(import.meta.url);
 
 const config: StorybookConfig = {
   stories: [
@@ -10,14 +14,13 @@ const config: StorybookConfig = {
   staticDirs: ["../stories/assets"],
 
   addons: [
-    "@chromatic-com/storybook",
-    "@storybook/addon-a11y",
-    "@storybook/addon-docs",
-    "@storybook/addon-themes",
+    getAbsolutePath("@storybook/addon-a11y"),
+    getAbsolutePath("@storybook/addon-docs"),
+    getAbsolutePath("@storybook/addon-themes")
   ],
 
   framework: {
-    name: "@storybook/html-vite",
+    name: getAbsolutePath("@storybook/html-vite"),
     options: {},
   },
 
@@ -43,3 +46,7 @@ const config: StorybookConfig = {
 };
 
 export default config;
+
+function getAbsolutePath(value: string): any {
+  return dirname(require.resolve(join(value, "package.json")));
+}
