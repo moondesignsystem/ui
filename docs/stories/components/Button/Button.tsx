@@ -1,6 +1,7 @@
 import Icon from "../../shared/Icon";
 import { createHTMLComponent } from "../../shared/utils/createHTMLComponent";
 import joinClassnames from "../../shared/utils/joinClassnames";
+import CONTEXTS from "../../shared/contexts";
 import getClasses from "./utils/getClasses";
 
 export const SIZES = ["xs", "sm", "md", "lg", "xl"] as const;
@@ -11,6 +12,7 @@ export type Props = {
   size: (typeof SIZES)[number];
   disabled: boolean;
   variant: (typeof VARIANTS)[number];
+  context: (typeof CONTEXTS)[number];
   hasStartIcon: boolean;
   hasEndIcon: boolean;
 };
@@ -20,23 +22,23 @@ const Button = ({
   size,
   disabled,
   variant,
+  context,
   hasStartIcon,
   hasEndIcon,
-}: Props) => {
-  return (
-    <button
-      className={joinClassnames([
-        "moon-button",
-        getClasses(size),
-        getClasses(variant),
-      ])}
-      disabled={disabled}
-    >
-      {hasStartIcon && <Icon name="star" />}
-      {label}
-      {hasEndIcon && <Icon name="star" />}
-    </button>
-  );
-};
+}: Props) => (
+  <button
+    className={joinClassnames([
+      "moon-button",
+      getClasses(size),
+      getClasses(variant),
+      getClasses(context),
+    ])}
+    disabled={disabled}
+  >
+    {hasStartIcon && <Icon name="star" />}
+    {label}
+    {hasEndIcon && <Icon name="star" />}
+  </button>
+);
 
 export default createHTMLComponent(Button);

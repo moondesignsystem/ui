@@ -297,8 +297,8 @@
 }
 .moon-button :where(svg, .moon-icon), .moon-snackbar :where(.moon-snackbar-action) :where(svg, .moon-icon), .moon-breadcrumb-item * :where(svg, .moon-icon), .moon-alert :where(.moon-alert-action) :where(svg, .moon-icon), .moon-snackbar :where(.moon-alert-action) :where(svg, .moon-icon) {
   color: var(--component-button-fill-icon);
-  width: var(--sizing-height-500);
-  height: var(--sizing-height-500);
+  width: var(--sizing-icon-size-500);
+  height: var(--sizing-icon-size-500);
 }
 .moon-button::after, .moon-snackbar :where(.moon-snackbar-action)::after, .moon-breadcrumb-item ::after, .moon-alert :where(.moon-alert-action)::after, .moon-snackbar :where(.moon-alert-action)::after {
   content: "";
@@ -327,8 +327,8 @@
   font: var(--style-font-weight-medium) var(--style-text-sm-font-size)/var(--style-text-sm-line-height) var(--style-font-family-default);
 }
 .moon-button.moon-button-xs :where(svg, .moon-icon), .moon-snackbar .moon-button-xs:where(.moon-snackbar-action) :where(svg, .moon-icon), .moon-breadcrumb-item .moon-button-xs :where(svg, .moon-icon), .moon-alert .moon-button-xs:where(.moon-alert-action) :where(svg, .moon-icon), .moon-snackbar .moon-button-xs:where(.moon-alert-action) :where(svg, .moon-icon) {
-  width: var(--sizing-height-300);
-  height: var(--sizing-height-300);
+  width: var(--sizing-icon-size-300);
+  height: var(--sizing-icon-size-300);
 }
 .moon-button.moon-button-sm, .moon-snackbar :where(.moon-snackbar-action), .moon-breadcrumb-item *, .moon-alert :where(.moon-alert-action), .moon-snackbar :where(.moon-alert-action) {
   height: var(--sizing-height-700);
@@ -338,8 +338,8 @@
   font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
 }
 .moon-button.moon-button-sm :where(svg, .moon-icon), .moon-snackbar :where(.moon-snackbar-action) :where(svg, .moon-icon), .moon-breadcrumb-item * :where(svg, .moon-icon), .moon-alert :where(.moon-alert-action) :where(svg, .moon-icon), .moon-snackbar :where(.moon-alert-action) :where(svg, .moon-icon) {
-  width: var(--sizing-height-400);
-  height: var(--sizing-height-400);
+  width: var(--sizing-icon-size-400);
+  height: var(--sizing-icon-size-400);
 }
 .moon-button.moon-button-lg, .moon-snackbar .moon-button-lg:where(.moon-snackbar-action), .moon-breadcrumb-item .moon-button-lg, .moon-alert .moon-button-lg:where(.moon-alert-action), .moon-snackbar .moon-button-lg:where(.moon-alert-action) {
   height: var(--sizing-height-900);
@@ -349,8 +349,8 @@
   font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
 }
 .moon-button.moon-button-lg :where(svg, .moon-icon), .moon-snackbar .moon-button-lg:where(.moon-snackbar-action) :where(svg, .moon-icon), .moon-breadcrumb-item .moon-button-lg :where(svg, .moon-icon), .moon-alert .moon-button-lg:where(.moon-alert-action) :where(svg, .moon-icon), .moon-snackbar .moon-button-lg:where(.moon-alert-action) :where(svg, .moon-icon) {
-  width: var(--sizing-height-500);
-  height: var(--sizing-height-500);
+  width: var(--sizing-icon-size-500);
+  height: var(--sizing-icon-size-500);
 }
 .moon-button.moon-button-xl, .moon-snackbar .moon-button-xl:where(.moon-snackbar-action), .moon-breadcrumb-item .moon-button-xl, .moon-alert .moon-button-xl:where(.moon-alert-action), .moon-snackbar .moon-button-xl:where(.moon-alert-action) {
   height: var(--sizing-height-1000);
@@ -360,8 +360,8 @@
   font: var(--style-font-weight-medium) var(--style-text-lg-font-size)/var(--style-text-lg-line-height) var(--style-font-family-default);
 }
 .moon-button.moon-button-xl :where(svg, .moon-icon), .moon-snackbar .moon-button-xl:where(.moon-snackbar-action) :where(svg, .moon-icon), .moon-breadcrumb-item .moon-button-xl :where(svg, .moon-icon), .moon-alert .moon-button-xl:where(.moon-alert-action) :where(svg, .moon-icon), .moon-snackbar .moon-button-xl:where(.moon-alert-action) :where(svg, .moon-icon) {
-  width: var(--sizing-height-500);
-  height: var(--sizing-height-500);
+  width: var(--sizing-icon-size-500);
+  height: var(--sizing-icon-size-500);
 }
 .moon-button.moon-button-ghost, .moon-snackbar :where(.moon-snackbar-action), .moon-breadcrumb-item *, .moon-alert :where(.moon-alert-action), .moon-snackbar :where(.moon-alert-action) {
   color: var(--component-button-ghost-text);
@@ -386,6 +386,120 @@
 }
 .moon-button.moon-button-soft :where(svg, .moon-icon), .moon-snackbar .moon-button-soft:where(.moon-snackbar-action) :where(svg, .moon-icon), .moon-breadcrumb-item .moon-button-soft :where(svg, .moon-icon), .moon-alert .moon-button-soft:where(.moon-alert-action) :where(svg, .moon-icon), .moon-snackbar .moon-button-soft:where(.moon-alert-action) :where(svg, .moon-icon) {
   color: var(--component-button-soft-icon);
+}
+
+.moon-button-brand {
+  --component-button-fill-text: var(--context-brand-fill-text);
+  --component-button-fill-icon: var(--context-brand-fill-icon);
+  --component-button-fill-background: var(--context-brand-fill-background);
+  --component-button-fill-border: var(--context-brand-fill-border);
+  --component-button-ghost-text: var(--context-brand-ghost-text);
+  --component-button-ghost-icon: var(--context-brand-ghost-icon);
+  --component-button-ghost-background: var(--context-brand-ghost-background);
+  --component-button-ghost-border: var(--context-brand-ghost-border);
+  --component-button-outline-text: var(--context-brand-outline-text);
+  --component-button-outline-icon: var(--context-brand-outline-icon);
+  --component-button-outline-background: var(--context-brand-outline-background);
+  --component-button-outline-border: var(--context-brand-outline-border);
+  --component-button-soft-text: var(--context-brand-soft-text);
+  --component-button-soft-icon: var(--context-brand-soft-icon);
+  --component-button-soft-background: var(--context-brand-soft-background);
+  --component-button-soft-border: var(--context-brand-soft-border);
+}
+
+.moon-button-neutral {
+  --component-button-fill-text: var(--context-neutral-fill-text);
+  --component-button-fill-icon: var(--context-neutral-fill-icon);
+  --component-button-fill-background: var(--context-neutral-fill-background);
+  --component-button-fill-border: var(--context-neutral-fill-border);
+  --component-button-ghost-text: var(--context-neutral-ghost-text);
+  --component-button-ghost-icon: var(--context-neutral-ghost-icon);
+  --component-button-ghost-background: var(--context-neutral-ghost-background);
+  --component-button-ghost-border: var(--context-neutral-ghost-border);
+  --component-button-outline-text: var(--context-neutral-outline-text);
+  --component-button-outline-icon: var(--context-neutral-outline-icon);
+  --component-button-outline-background: var(--context-neutral-outline-background);
+  --component-button-outline-border: var(--context-neutral-outline-border);
+  --component-button-soft-text: var(--context-neutral-soft-text);
+  --component-button-soft-icon: var(--context-neutral-soft-icon);
+  --component-button-soft-background: var(--context-neutral-soft-background);
+  --component-button-soft-border: var(--context-neutral-soft-border);
+}
+
+.moon-button-positive {
+  --component-button-fill-text: var(--context-positive-fill-text);
+  --component-button-fill-icon: var(--context-positive-fill-icon);
+  --component-button-fill-background: var(--context-positive-fill-background);
+  --component-button-fill-border: var(--context-positive-fill-border);
+  --component-button-ghost-text: var(--context-positive-ghost-text);
+  --component-button-ghost-icon: var(--context-positive-ghost-icon);
+  --component-button-ghost-background: var(--context-positive-ghost-background);
+  --component-button-ghost-border: var(--context-positive-ghost-border);
+  --component-button-outline-text: var(--context-positive-outline-text);
+  --component-button-outline-icon: var(--context-positive-outline-icon);
+  --component-button-outline-background: var(--context-positive-outline-background);
+  --component-button-outline-border: var(--context-positive-outline-border);
+  --component-button-soft-text: var(--context-positive-soft-text);
+  --component-button-soft-icon: var(--context-positive-soft-icon);
+  --component-button-soft-background: var(--context-positive-soft-background);
+  --component-button-soft-border: var(--context-positive-soft-border);
+}
+
+.moon-button-caution {
+  --component-button-fill-text: var(--context-caution-fill-text);
+  --component-button-fill-icon: var(--context-caution-fill-icon);
+  --component-button-fill-background: var(--context-caution-fill-background);
+  --component-button-fill-border: var(--context-caution-fill-border);
+  --component-button-ghost-text: var(--context-caution-ghost-text);
+  --component-button-ghost-icon: var(--context-caution-ghost-icon);
+  --component-button-ghost-background: var(--context-caution-ghost-background);
+  --component-button-ghost-border: var(--context-caution-ghost-border);
+  --component-button-outline-text: var(--context-caution-outline-text);
+  --component-button-outline-icon: var(--context-caution-outline-icon);
+  --component-button-outline-background: var(--context-caution-outline-background);
+  --component-button-outline-border: var(--context-caution-outline-border);
+  --component-button-soft-text: var(--context-caution-soft-text);
+  --component-button-soft-icon: var(--context-caution-soft-icon);
+  --component-button-soft-background: var(--context-caution-soft-background);
+  --component-button-soft-border: var(--context-caution-soft-border);
+}
+
+.moon-button-negative {
+  --component-button-fill-text: var(--context-negative-fill-text);
+  --component-button-fill-icon: var(--context-negative-fill-icon);
+  --component-button-fill-background: var(--context-negative-fill-background);
+  --component-button-fill-border: var(--context-negative-fill-border);
+  --component-button-ghost-text: var(--context-negative-ghost-text);
+  --component-button-ghost-icon: var(--context-negative-ghost-icon);
+  --component-button-ghost-background: var(--context-negative-ghost-background);
+  --component-button-ghost-border: var(--context-negative-ghost-border);
+  --component-button-outline-text: var(--context-negative-outline-text);
+  --component-button-outline-icon: var(--context-negative-outline-icon);
+  --component-button-outline-background: var(--context-negative-outline-background);
+  --component-button-outline-border: var(--context-negative-outline-border);
+  --component-button-soft-text: var(--context-negative-soft-text);
+  --component-button-soft-icon: var(--context-negative-soft-icon);
+  --component-button-soft-background: var(--context-negative-soft-background);
+  --component-button-soft-border: var(--context-negative-soft-border);
+}
+
+.moon-button-info {
+  --component-button-fill-text: var(--context-info-fill-text);
+  --component-button-fill-icon: var(--context-info-fill-icon);
+  --component-button-fill-background: var(--context-info-fill-background);
+  --component-button-fill-border: var(--context-info-fill-border);
+  --component-button-ghost-text: var(--context-info-ghost-text);
+  --component-button-ghost-icon: var(--context-info-ghost-icon);
+  --component-button-ghost-background: var(--context-info-ghost-background);
+  --component-button-ghost-border: var(--context-info-ghost-border);
+  --component-button-outline-text: var(--context-info-outline-text);
+  --component-button-outline-icon: var(--context-info-outline-icon);
+  --component-button-outline-background: var(--context-info-outline-background);
+  --component-button-outline-border: var(--context-info-outline-border);
+  --component-button-soft-text: var(--context-info-soft-text);
+  --component-button-soft-icon: var(--context-info-soft-icon);
+  --component-button-soft-background: var(--context-info-soft-background);
+  --component-button-soft-border: var(--context-info-soft-border);
 }
 
 .moon-icon-button, .moon-pagination :where(.moon-pagination-item), .moon-drawer-box :where(.moon-drawer-close), .moon-dialog-box :where(.moon-dialog-close), .moon-carousel :where(.moon-carousel-control), .moon-bottom-sheet-box :where(.moon-bottom-sheet-close), .moon-alert :where(.moon-alert-dismiss), .moon-snackbar :where(.moon-alert-dismiss) {
@@ -481,6 +595,96 @@
 }
 .moon-icon-button.moon-icon-button-soft :where(svg, .moon-icon), .moon-pagination .moon-icon-button-soft:where(.moon-pagination-item) :where(svg, .moon-icon), .moon-drawer-box .moon-icon-button-soft:where(.moon-drawer-close) :where(svg, .moon-icon), .moon-dialog-box .moon-icon-button-soft:where(.moon-dialog-close) :where(svg, .moon-icon), .moon-bottom-sheet-box .moon-icon-button-soft:where(.moon-bottom-sheet-close) :where(svg, .moon-icon), .moon-alert .moon-icon-button-soft:where(.moon-alert-dismiss) :where(svg, .moon-icon), .moon-snackbar .moon-icon-button-soft:where(.moon-alert-dismiss) :where(svg, .moon-icon), .moon-carousel :where(.moon-carousel-control) :where(svg, .moon-icon) {
   color: var(--component-icon-button-soft-icon);
+}
+
+.moon-icon-button-brand {
+  --component-icon-button-fill-icon: var(--context-brand-fill-icon);
+  --component-icon-button-fill-background: var(--context-brand-fill-background);
+  --component-icon-button-fill-border: var(--context-brand-fill-border);
+  --component-icon-button-ghost-icon: var(--context-brand-ghost-icon);
+  --component-icon-button-ghost-background: var(--context-brand-ghost-background);
+  --component-icon-button-ghost-border: var(--context-brand-ghost-border);
+  --component-icon-button-outline-icon: var(--context-brand-outline-icon);
+  --component-icon-button-outline-background: var(--context-brand-outline-background);
+  --component-icon-button-outline-border: var(--context-brand-outline-border);
+  --component-icon-button-soft-icon: var(--context-brand-soft-icon);
+  --component-icon-button-soft-background: var(--context-brand-soft-background);
+  --component-icon-button-soft-border: var(--context-brand-soft-border);
+}
+
+.moon-icon-button-neutral {
+  --component-icon-button-fill-icon: var(--context-neutral-fill-icon);
+  --component-icon-button-fill-background: var(--context-neutral-fill-background);
+  --component-icon-button-fill-border: var(--context-neutral-fill-border);
+  --component-icon-button-ghost-icon: var(--context-neutral-ghost-icon);
+  --component-icon-button-ghost-background: var(--context-neutral-ghost-background);
+  --component-icon-button-ghost-border: var(--context-neutral-ghost-border);
+  --component-icon-button-outline-icon: var(--context-neutral-outline-icon);
+  --component-icon-button-outline-background: var(--context-neutral-outline-background);
+  --component-icon-button-outline-border: var(--context-neutral-outline-border);
+  --component-icon-button-soft-icon: var(--context-neutral-soft-icon);
+  --component-icon-button-soft-background: var(--context-neutral-soft-background);
+  --component-icon-button-soft-border: var(--context-neutral-soft-border);
+}
+
+.moon-icon-button-positive {
+  --component-icon-button-fill-icon: var(--context-positive-fill-icon);
+  --component-icon-button-fill-background: var(--context-positive-fill-background);
+  --component-icon-button-fill-border: var(--context-positive-fill-border);
+  --component-icon-button-ghost-icon: var(--context-positive-ghost-icon);
+  --component-icon-button-ghost-background: var(--context-positive-ghost-background);
+  --component-icon-button-ghost-border: var(--context-positive-ghost-border);
+  --component-icon-button-outline-icon: var(--context-positive-outline-icon);
+  --component-icon-button-outline-background: var(--context-positive-outline-background);
+  --component-icon-button-outline-border: var(--context-positive-outline-border);
+  --component-icon-button-soft-icon: var(--context-positive-soft-icon);
+  --component-icon-button-soft-background: var(--context-positive-soft-background);
+  --component-icon-button-soft-border: var(--context-positive-soft-border);
+}
+
+.moon-icon-button-caution {
+  --component-icon-button-fill-icon: var(--context-caution-fill-icon);
+  --component-icon-button-fill-background: var(--context-caution-fill-background);
+  --component-icon-button-fill-border: var(--context-caution-fill-border);
+  --component-icon-button-ghost-icon: var(--context-caution-ghost-icon);
+  --component-icon-button-ghost-background: var(--context-caution-ghost-background);
+  --component-icon-button-ghost-border: var(--context-caution-ghost-border);
+  --component-icon-button-outline-icon: var(--context-caution-outline-icon);
+  --component-icon-button-outline-background: var(--context-caution-outline-background);
+  --component-icon-button-outline-border: var(--context-caution-outline-border);
+  --component-icon-button-soft-icon: var(--context-caution-soft-icon);
+  --component-icon-button-soft-background: var(--context-caution-soft-background);
+  --component-icon-button-soft-border: var(--context-caution-soft-border);
+}
+
+.moon-icon-button-negative {
+  --component-icon-button-fill-icon: var(--context-negative-fill-icon);
+  --component-icon-button-fill-background: var(--context-negative-fill-background);
+  --component-icon-button-fill-border: var(--context-negative-fill-border);
+  --component-icon-button-ghost-icon: var(--context-negative-ghost-icon);
+  --component-icon-button-ghost-background: var(--context-negative-ghost-background);
+  --component-icon-button-ghost-border: var(--context-negative-ghost-border);
+  --component-icon-button-outline-icon: var(--context-negative-outline-icon);
+  --component-icon-button-outline-background: var(--context-negative-outline-background);
+  --component-icon-button-outline-border: var(--context-negative-outline-border);
+  --component-icon-button-soft-icon: var(--context-negative-soft-icon);
+  --component-icon-button-soft-background: var(--context-negative-soft-background);
+  --component-icon-button-soft-border: var(--context-negative-soft-border);
+}
+
+.moon-icon-button-info {
+  --component-icon-button-fill-icon: var(--context-info-fill-icon);
+  --component-icon-button-fill-background: var(--context-info-fill-background);
+  --component-icon-button-fill-border: var(--context-info-fill-border);
+  --component-icon-button-ghost-icon: var(--context-info-ghost-icon);
+  --component-icon-button-ghost-background: var(--context-info-ghost-background);
+  --component-icon-button-ghost-border: var(--context-info-ghost-border);
+  --component-icon-button-outline-icon: var(--context-info-outline-icon);
+  --component-icon-button-outline-background: var(--context-info-outline-background);
+  --component-icon-button-outline-border: var(--context-info-outline-border);
+  --component-icon-button-soft-icon: var(--context-info-soft-icon);
+  --component-icon-button-soft-background: var(--context-info-soft-background);
+  --component-icon-button-soft-border: var(--context-info-soft-border);
 }
 
 .moon-alert, .moon-snackbar {
@@ -1717,6 +1921,21 @@
 .moon-segmented-control.moon-segmented-control-sm :where(.moon-segment) :where(svg, .moon-icon) {
   width: var(--sizing-icon-size-400);
   height: var(--sizing-icon-size-400);
+}
+.moon-segmented-control.moon-segmented-control-lg {
+  border-radius: var(--component-segmented-control-track-radius-lg);
+}
+.moon-segmented-control.moon-segmented-control-lg :where(.moon-segment) {
+  height: var(--sizing-height-900);
+  min-width: var(--sizing-width-900);
+  padding: 0 var(--sizing-padding-600);
+  gap: var(--sizing-gap-400);
+  border-radius: var(--component-segmented-control-segment-radius-lg);
+  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+}
+.moon-segmented-control.moon-segmented-control-lg :where(.moon-segment) :where(svg, .moon-icon) {
+  width: var(--sizing-icon-size-500);
+  height: var(--sizing-icon-size-500);
 }
 
 .moon-select {

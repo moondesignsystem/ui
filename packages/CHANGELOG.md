@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 2.1.0
+
+### Minor Changes
+
+- feat: add context to Button, IconButton
+
 ## 2.0.1
 
 ### Patch Changes

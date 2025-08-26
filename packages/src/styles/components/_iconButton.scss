@@ -2,29 +2,36 @@
 @use "variants";
 @use "utilities";
 
-@function generate-variant($variant) {
-  @return (
-    "background": var(--component-icon-button-#{$variant}-background),
-    "icon": var(--component-icon-button-#{$variant}-icon),
-    "shadow": inset 0 0 0 var(--component-icon-button-#{$variant}-stroke)
-      var(--component-icon-button-#{$variant}-border)
-  );
-}
 $variants: ();
 @each $variant in variants.$icon-button-variants {
-  $variants: map.set($variants, $variant, generate-variant($variant));
-}
-@function generate-size($size) {
-  @return (
-    "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
-    "width": var(--sizing-width-#{utilities.get-size($size, "width")}),
-    "radius": var(--component-button-radius-#{$size}),
-    "icon-size": var(--sizing-icon-size-#{utilities.get-size($size, "icon-size")})
+  $variants: map.set(
+    $variants,
+    $variant,
+    (
+      "background": var(--component-icon-button-#{$variant}-background),
+      "icon": var(--component-icon-button-#{$variant}-icon),
+      "shadow": inset
+        0
+        0
+        0
+        var(--component-icon-button-#{$variant}-stroke)
+        var(--component-icon-button-#{$variant}-border)
+    )
   );
 }
+
 $sizes: ();
-@each $size in variants.$icon-button-sizes {
-  $sizes: map.set($sizes, $size, generate-size($size));
+@each $size in variants.$button-sizes {
+  $sizes: map.set(
+    $sizes,
+    $size,
+    (
+      "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
+      "width": var(--sizing-width-#{utilities.get-size($size, "width")}),
+      "radius": var(--component-button-radius-#{$size}),
+      "icon-size": var(--sizing-icon-size-#{utilities.get-size($size, "icon-size")})
+    )
+  );
 }
 
 .moon-icon-button {
@@ -97,6 +104,16 @@ $sizes: ();
           color: map.get($prop, "icon");
         }
       }
+    }
+  }
+}
+
+@each $context in variants.$contexts {
+  .moon-icon-button-#{$context} {
+    @each $variant in variants.$icon-button-variants {
+      --component-icon-button-#{$variant}-icon: var(--context-#{$context}-#{$variant}-icon);
+      --component-icon-button-#{$variant}-background: var(--context-#{$context}-#{$variant}-background);
+      --component-icon-button-#{$variant}-border: var(--context-#{$context}-#{$variant}-border);
     }
   }
 }
