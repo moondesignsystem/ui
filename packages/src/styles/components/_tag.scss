@@ -3,32 +3,37 @@
 @use "variants";
 @use "utilities";
 
-@function generate-variant($variant) {
-  @return (
-    "shadow": inset 0 0 0 var(--component-tag-#{$variant}-stroke) var(--componenttag-#{$variant}-border),
-    "background": var(--component-tag-#{$variant}-background),
-    "color": var(--component-tag-#{$variant}-text),
-    "icon-color": var(--component-tag-#{$variant}-icon)
-  );
-}
 $variants: ();
 @each $variant in variants.$tag-variants {
-  $variants: map.set($variants, $variant, generate-variant($variant));
-}
-@function generate-size($size) {
-  @return (
-    "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
-    "padding": 0 var(--sizing-padding-#{utilities.get-size($size, "padding")}),
-    "radius": var(--component-tag-radius-#{$size}),
-    "gap": var(--sizing-gap-#{utilities.get-size($size, "gap")}),
-    "font": var(--style-font-weight-medium) var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
-      var(--style-text-#{utilities.get-size($size, "font")}-line-height) var(--style-font-family-default),
-    "icon-size": var(--sizing-icon-size-#{utilities.get-size($size, "icon-size")})
+  $variants: map.set(
+    $variants,
+    $variant,
+    (
+      "shadow": inset 0 0 0 var(--component-tag-#{$variant}-stroke) var(--component-tag-#{$variant}-border),
+      "background": var(--component-tag-#{$variant}-background),
+      "color": var(--component-tag-#{$variant}-text),
+      "icon-color": var(--component-tag-#{$variant}-icon)
+    )
   );
 }
+
 $sizes: ();
 @each $size in variants.$tag-sizes {
-  $sizes: map.set($sizes, $size, generate-size($size));
+  $sizes: map.set(
+    $sizes,
+    $size,
+    (
+      "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
+      "padding": 0 var(--sizing-padding-#{utilities.get-size($size, "padding")}),
+      "radius": var(--component-tag-radius-#{$size}),
+      "gap": var(--sizing-gap-#{utilities.get-size($size, "gap")}),
+      "font": var(--style-font-weight-medium)
+        var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
+        var(--style-text-#{utilities.get-size($size, "font")}-line-height)
+        var(--style-font-family-default),
+      "icon-size": var(--sizing-icon-size-#{utilities.get-size($size, "icon-size")})
+    )
+  );
 }
 
 .moon-tag {
@@ -77,6 +82,17 @@ $sizes: ();
           color: map.get($prop, "icon-color");
         }
       }
+    }
+  }
+}
+
+@each $context in variants.$contexts {
+  .moon-tag-#{$context} {
+    @each $variant in variants.$tag-variants {
+      --component-tag-#{$variant}-text: var(--context-#{$context}-#{$variant}-text);
+      --component-tag-#{$variant}-icon: var(--context-#{$context}-#{$variant}-icon);
+      --component-tag-#{$variant}-background: var(--context-#{$context}-#{$variant}-background);
+      --component-tag-#{$variant}-border: var(--context-#{$context}-#{$variant}-border);
     }
   }
 }

@@ -1,6 +1,7 @@
-import LinksBlock from "../../shared/LinksBlock";
-import createTag, { SIZES, VARIANTS } from "./Tag";
 import type { Meta, StoryObj } from "@storybook/html-vite";
+import LinksBlock from "../../shared/LinksBlock";
+import CONTEXTS from "../../shared/contexts";
+import createTag, { SIZES, VARIANTS } from "./Tag";
 import type { Props } from "./Tag";
 
 const meta: Meta<Props> = {
@@ -20,6 +21,11 @@ const meta: Meta<Props> = {
       description: "Variant of Tag",
       control: "select",
       options: VARIANTS,
+    },
+    context: {
+      description: "Context of Tag",
+      control: "select",
+      options: CONTEXTS,
     },
     hasStartIcon: {
       description: "Start icon of Tag",
@@ -49,6 +55,7 @@ export const Tag: StoryObj<Props> = {
   args: {
     size: "xs",
     variant: "fill",
+    context: "brand",
     hasStartIcon: false,
     hasEndIcon: false,
     label: "Tag",

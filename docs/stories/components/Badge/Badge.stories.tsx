@@ -1,6 +1,7 @@
-import LinksBlock from "../../shared/LinksBlock";
-import createBadge from "./Badge";
 import type { Meta, StoryObj } from "@storybook/html-vite";
+import LinksBlock from "../../shared/LinksBlock";
+import CONTEXTS from "../../shared/contexts";
+import createBadge, { VARIANTS } from "./Badge";
 import type { Props } from "./Badge";
 
 const meta: Meta<Props> = {
@@ -10,6 +11,16 @@ const meta: Meta<Props> = {
     children: {
       description: "Content of Badge",
       control: "text",
+    },
+    variant: {
+      description: "Variant of Badge",
+      control: "select",
+      options: VARIANTS,
+    },
+    context: {
+      description: "Context of Badge",
+      control: "select",
+      options: CONTEXTS,
     },
   },
   parameters: {
@@ -30,5 +41,7 @@ export default meta;
 export const Badge: StoryObj<Props> = {
   args: {
     children: "",
+    variant: "fill",
+    context: "brand",
   },
 };
