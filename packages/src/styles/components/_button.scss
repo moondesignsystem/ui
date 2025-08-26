@@ -1,35 +1,38 @@
 @use "sass:map";
-@use "sass:string";
 @use "variants";
 @use "utilities";
 
-@function generate-variant($variant) {
-  @return (
-    "color": var(--component-button-#{$variant}-text),
-    "background": var(--component-button-#{$variant}-background),
-    "icon": var(--component-button-#{$variant}-icon),
-    "shadow": inset 0 0 0 var(--component-button-#{$variant}-stroke) var(--component-button-#{$variant}-border)
-  );
-}
 $variants: ();
 @each $variant in variants.$button-variants {
-  $variants: map.set($variants, $variant, generate-variant($variant));
-}
-
-@function generate-size($size) {
-  @return (
-    "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
-    "padding": var(--sizing-padding-#{utilities.get-size($size, "padding")}),
-    "gap": var(--sizing-gap-#{utilities.get-size($size, "gap")}),
-    "radius": var(--component-button-radius-#{$size}),
-    "font": var(--style-font-weight-medium) var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
-      var(--style-text-#{utilities.get-size($size, "font")}-line-height) var(--style-font-family-default),
-    "icon-size": var(--sizing-height-#{utilities.get-size($size, "icon-size")})
+  $variants: map.set(
+    $variants,
+    $variant,
+    (
+      "color": var(--component-button-#{$variant}-text),
+      "background": var(--component-button-#{$variant}-background),
+      "icon": var(--component-button-#{$variant}-icon),
+      "shadow": inset 0 0 0 var(--component-button-#{$variant}-stroke) var(--component-button-#{$variant}-border)
+    )
   );
 }
+
 $sizes: ();
 @each $size in variants.$button-sizes {
-  $sizes: map.set($sizes, $size, generate-size($size));
+  $sizes: map.set(
+    $sizes,
+    $size,
+    (
+      "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
+      "padding": var(--sizing-padding-#{utilities.get-size($size, "padding")}),
+      "gap": var(--sizing-gap-#{utilities.get-size($size, "gap")}),
+      "radius": var(--component-button-radius-#{$size}),
+      "font": var(--style-font-weight-medium)
+        var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
+        var(--style-text-#{utilities.get-size($size, "font")}-line-height)
+        var(--style-font-family-default),
+      "icon-size": var(--sizing-icon-size-#{utilities.get-size($size, "icon-size")})
+    )
+  );
 }
 
 .moon-button {
@@ -111,6 +114,17 @@ $sizes: ();
           color: map.get($prop, "icon");
         }
       }
+    }
+  }
+}
+
+@each $context in variants.$contexts {
+  .moon-button-#{$context} {
+    @each $variant in variants.$button-variants {
+      --component-button-#{$variant}-text: var(--context-#{$context}-#{$variant}-text);
+      --component-button-#{$variant}-icon: var(--context-#{$context}-#{$variant}-icon);
+      --component-button-#{$variant}-background: var(--context-#{$context}-#{$variant}-background);
+      --component-button-#{$variant}-border: var(--context-#{$context}-#{$variant}-border);
     }
   }
 }
