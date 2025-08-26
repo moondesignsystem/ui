@@ -1,15 +1,16 @@
 @use "sass:map";
 @use "variables";
 @use "variants";
+@use "utilities";
 
 @function generate-size($size) {
   @return (
-    "height": var(--scale-#{$size}-height),
-    "width": var(--scale-#{$size}-width),
-    "radius": var(--utility-avatar-radius-#{$size}),
-    "icon-size": var(--scale-#{$size}-icon-size),
-    "font": var(--scale-#{$size}-text-weight) var(--scale-#{$size}-text-size) / var(--scale-#{$size}-text-height)
-      var(--scale-#{$size}-text-font)
+    "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
+    "width": var(--sizing-width-#{utilities.get-size($size, "width")}),
+    "radius": var(--component-avatar-radius-#{$size}),
+    "icon-size": var(--sizing-icon-size-#{utilities.get-size($size, "icon-size")}),
+    "font": var(--style-font-weight-medium) var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
+      var(--style-text-#{utilities.get-size($size, "font")}-line-height) var(--style-font-family-default)
   );
 }
 $sizes: ();
@@ -18,11 +19,11 @@ $sizes: ();
 }
 @function generate-variant($variant) {
   @return (
-    "background": var(--avatar-#{$variant}-background),
-    "border": var(--avatar-#{$variant}-stroke),
-    "border-color": var(--avatar-#{$variant}-border),
-    "color": var(--avatar-#{$variant}-text),
-    "icon": var(--avatar-#{$variant}-icon)
+    "background": var(--component-avatar-#{$variant}-background),
+    "border": var(--component-avatar-#{$variant}-stroke),
+    "border-color": var(--component-avatar-#{$variant}-border),
+    "color": var(--component-avatar-#{$variant}-text),
+    "icon": var(--component-avatar-#{$variant}-icon)
   );
 }
 $variants: ();
@@ -86,12 +87,12 @@ $variants: ();
   @each $variant, $prop in $variants {
     @if $variant != "fill" {
       &.moon-avatar-#{$variant} {
-        background-color: var(--avatar-#{$variant}-background);
-        border-width: var(--avatar-#{$variant}-stroke);
-        color: var(--avatar-#{$variant}-text);
+        background-color: var(--component-avatar-#{$variant}-background);
+        border-width: var(--component-avatar-#{$variant}-stroke);
+        color: var(--component-avatar-#{$variant}-text);
 
         :where(svg, .moon-icon) {
-          color: var(--avatar-#{$variant}-icon);
+          color: var(--component-avatar-#{$variant}-icon);
         }
       }
     }

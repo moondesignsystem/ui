@@ -36,7 +36,7 @@
     pointer-events: auto;
     visibility: visible;
     opacity: 1;
-    background-color: var(--semantic-background-backdrop);
+    background-color: var(--color-background-backdrop);
     .moon-dialog-box {
       display: flex;
       translate: 0 0;
@@ -61,25 +61,22 @@
   flex-direction: column;
   max-height: 100vh;
   width: 100%;
-  max-width: var(--dialog-max-width);
-  gap: var(--dialog-gap);
-  padding: var(--dialog-padding);
-  border-radius: var(--dialog-radius);
-  color: var(--semantic-text-primary);
-  background-color: var(--dialog-background);
+  max-width: var(--component-dialog-max-width);
+  border-radius: var(--component-dialog-radius);
+  color: var(--color-text-primary);
+  background-color: var(--component-dialog-background);
   box-shadow:
-    inset 0 0 0 var(--dialog-stroke) var(--dialog-border),
+    inset 0 0 0 var(--component-dialog-stroke) var(--component-dialog-border),
     variables.$shadow-300;
   scale: 95%;
   opacity: 0;
-  overflow-y: auto;
+  overflow: auto;
   overscroll-behavior: contain;
 
   :where(.moon-dialog-title) {
     display: grid;
     grid-auto-flow: column;
     align-items: center;
-    gap: var(--dialog-gap);
     font: variables.$text-heading-200;
   }
 

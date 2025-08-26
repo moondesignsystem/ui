@@ -1,14 +1,14 @@
 import joinClassnames from "../../shared/utils/joinClassnames";
 
-export type Props = {
-  className: string;
-};
+export type Props = {};
 
 const createPlaceholder = (args: Props) => {
-  const { className } = args;
+  const wrapper = document.createElement("div");
+  wrapper.className = "w-160 h-80";
   const placeholder = document.createElement("div");
-  placeholder.className = joinClassnames(["moon-placeholder", className]);
-  return placeholder;
+  placeholder.className = "moon-placeholder";
+  wrapper.appendChild(placeholder);
+  return wrapper;
 };
 
 export default createPlaceholder;

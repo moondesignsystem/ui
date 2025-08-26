@@ -1,16 +1,17 @@
 @use "sass:map";
 @use "variables";
 @use "variants";
+@use "utilities";
 
 @function generate-size($size) {
   @return (
-    "gap": var(--scale-#{$size}-gap),
-    "radius": var(--scale-#{$size}-radius),
-    "padding": var(--scale-#{$size}-padding),
-    "padding-end": calc(var(--spacing-space-20) * 2),
-    "height": var(--scale-#{$size}-height),
-    "font": var(--scale-#{$size}-text-weight) var(--scale-#{$size}-text-size) / var(--scale-#{$size}-text-height)
-      var(--scale-#{$size}-text-font)
+    "gap": var(--sizing-gap-#{utilities.get-size($size, "gap")}),
+    "radius": var(--component-accordion-radius-#{$size}),
+    "padding": var(--sizing-padding-#{utilities.get-size($size, "padding")}),
+    "padding-end": calc(var(--spacing-20) * 2),
+    "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
+    "font": var(--style-font-weight-medium) var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
+      var(--style-text-#{utilities.get-size($size, "font")}-line-height) var(--style-font-family-default)
   );
 }
 $sizes: ();
@@ -37,10 +38,10 @@ $sizes: ();
     width: 100%;
     grid-template-rows: max-content 0fr;
     transition: grid-template-rows 0.2s;
-    background: var(--accordion-background);
-    color: var(--accordion-title);
+    background: var(--component-accordion-outline-background);
+    color: var(--component-accordion-outline-title);
     border-radius: map.get($sizes, "md", "radius");
-    box-shadow: inset 0 0 0 var(--accordion-stroke) var(--accordion-border);
+    box-shadow: inset 0 0 0 var(--component-accordion-outline-stroke) var(--component-accordion-outline-border);
     padding: 0 map.get($sizes, "md", "padding");
 
     & > input:is([type="checkbox"], [type="radio"]) {
@@ -71,7 +72,7 @@ $sizes: ();
 
     &:focus-visible,
     &:has(> input:is([type="checkbox"], [type="radio"]):focus-visible) {
-      outline: var(--dimension-border-2) solid var(--semantic-border-active);
+      outline: var(--spacing-2) solid var(--color-border-info);
     }
 
     &:not(.moon-accordion-close) {
@@ -101,8 +102,8 @@ $sizes: ();
         top: 0;
         left: 0;
         width: 100%;
-        height: var(--dimension-border-1);
-        background-color: var(--accordion-border);
+        height: var(--spacing-1);
+        background-color: var(--component-accordion-outline-border);
       }
     }
 
@@ -146,8 +147,8 @@ $sizes: ();
       min-height: 0;
       cursor: unset;
       font: map.get($sizes, "md", "font");
-      font-weight: var(--font-weight-regular);
-      color: var(--accordion-content);
+      font-weight: var(--style-font-weight-regular);
+      color: var(--component-accordion-outline-title);
       transition:
         visibility 0.2s ease-out,
         padding 0.2s ease-out,
@@ -182,7 +183,7 @@ $sizes: ();
         inset-inline-end: 1.4rem;
         content: "";
         transform-origin: 75% 75%;
-        box-shadow: var(--dimension-border-2) var(--dimension-border-2);
+        box-shadow: var(--spacing-2) var(--spacing-2);
         pointer-events: none;
       }
     }
@@ -215,8 +216,8 @@ $sizes: ();
           top: 0;
           left: 0;
           width: 100%;
-          height: var(--dimension-border-1);
-          background-color: var(--semantic-border-secondary);
+          height: var(--spacing-1);
+          background-color: var(--color-border-secondary);
         }
       }
     }
@@ -252,7 +253,7 @@ $sizes: ();
 
           .moon-accordion-content {
             font: map.get($prop, "font");
-            font-weight: var(--font-weight-regular);
+            font-weight: var(--style-font-weight-regular);
           }
 
           .moon-accordion-open {

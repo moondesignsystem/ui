@@ -1,4 +1,4 @@
-const shadowRegex = /--effect-shadow-(\d+)-/g;
+const shadowRegex = /--style-shadow-(\d+)-/g;
 
 const generateShadowUtilities = (isTailwind: boolean, cssContent: string) => {
   const shadowSizes = new Set<string>();
@@ -15,16 +15,16 @@ const generateShadowUtilities = (isTailwind: boolean, cssContent: string) => {
       const selector = `shadow-${size}`;
       const properties =
         `box-shadow: \n` +
-        `var(--effect-shadow-${size}-layer-1-x) \n` +
-        `var(--effect-shadow-${size}-layer-1-y) \n` +
-        `var(--effect-shadow-${size}-layer-1-blur) \n` +
-        `var(--effect-shadow-${size}-layer-1-spread) \n` +
-        `var(--effect-shadow-${size}-layer-1-color),\n` +
-        `var(--effect-shadow-${size}-layer-2-x) \n` +
-        `var(--effect-shadow-${size}-layer-2-y) \n` +
-        `var(--effect-shadow-${size}-layer-2-blur) \n` +
-        `var(--effect-shadow-${size}-layer-2-spread) \n` +
-        `var(--effect-shadow-${size}-layer-2-color);`;
+        `var(--style-shadow-${size}-layer-1-x) \n` +
+        `var(--style-shadow-${size}-layer-1-y) \n` +
+        `var(--style-shadow-${size}-layer-1-blur) \n` +
+        `var(--style-shadow-${size}-layer-1-spread) \n` +
+        `var(--style-shadow-${size}-layer-1-color),\n` +
+        `var(--style-shadow-${size}-layer-2-x) \n` +
+        `var(--style-shadow-${size}-layer-2-y) \n` +
+        `var(--style-shadow-${size}-layer-2-blur) \n` +
+        `var(--style-shadow-${size}-layer-2-spread) \n` +
+        `var(--style-shadow-${size}-layer-2-color);`;
 
       return isTailwind
         ? `@utility ${selector} {\n${properties}\n}`

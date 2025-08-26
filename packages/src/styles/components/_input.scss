@@ -1,16 +1,17 @@
 @use "sass:map";
 @use "variables";
 @use "variants";
+@use "utilities";
 
 @function generate-size($size) {
   @return (
-    "height": var(--scale-#{$size}-height),
-    "padding": 0 var(--scale-#{$size}-padding),
-    "gap": var(--scale-#{$size}-gap),
-    "radius": var(--utility-input-radius-#{$size}),
-    "font": var(--scale-#{$size}-text-weight) var(--scale-#{$size}-text-size) / var(--scale-#{$size}-text-height)
-      var(--scale-#{$size}-text-font),
-    "icon-size": var(--scale-#{$size}-icon-size)
+    "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
+    "padding": 0 var(--sizing-padding-#{utilities.get-size($size, "padding")}),
+    "gap": var(--sizing-height-#{utilities.get-size($size, "height")}),
+    "radius": var(--component-forms-radius-#{$size}),
+    "font": var(--style-font-weight-medium) var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
+      var(--style-text-#{utilities.get-size($size, "font")}-line-height) var(--style-font-family-default),
+    "icon-size": var(--sizing-icon-size-#{utilities.get-size($size, "icon-size")})
   );
 }
 $sizes: ();
@@ -32,12 +33,12 @@ $sizes: ();
   padding: map.get($sizes, "md", "padding");
   border-radius: map.get($sizes, "md", "radius");
   font: map.get($sizes, "md", "font");
-  box-shadow: inset 0 0 0 var(--input-stroke-default) var(--input-border);
-  color: var(--semantic-text-primary);
-  background-color: var(--input-background);
+  box-shadow: inset 0 0 0 var(--component-input-outline-stroke) var(--component-input-outline-border);
+  color: var(--component-input-outline-text-default);
+  background-color: var(--component-input-outline-background);
 
   &::placeholder {
-    color: var(--semantic-text-secondary);
+    color: var(--color-text-secondary);
   }
 
   &:read-only,
@@ -46,20 +47,20 @@ $sizes: ();
   }
 
   &:disabled {
-    opacity: var(--effect-opacity-disabled);
+    opacity: var(--style-opacity-disabled);
   }
 
   &:not(:read-only, :disabled):hover {
-    box-shadow: inset 0 0 0 var(--spacing-space-2) var(--semantic-border-primary);
-    background-color: var(--semantic-background-hover);
+    box-shadow: inset 0 0 0 var(--spacing-2) var(--color-border-primary);
+    background-color: var(--color-background-hover);
   }
 
   &:not(:read-only, :disabled):focus {
-    box-shadow: inset 0 0 0 var(--spacing-space-2) var(--semantic-border-active);
+    box-shadow: inset 0 0 0 var(--spacing-2) var(--color-border-info);
   }
 
   :where(svg, .moon-icon) {
-    color: var(--semantic-icon-primary);
+    color: var(--color-icon-primary);
     width: map.get($sizes, "md", "icon-size");
     height: map.get($sizes, "md", "icon-size");
   }
@@ -82,11 +83,11 @@ $sizes: ();
   }
 
   &.moon-input-error {
-    box-shadow: inset 0 0 0 var(--spacing-space-2) var(--semantic-border-negative);
+    box-shadow: inset 0 0 0 var(--spacing-2) var(--color-border-negative);
 
     &:hover,
     &:focus {
-      box-shadow: inset 0 0 0 var(--spacing-space-2) var(--semantic-border-negative);
+      box-shadow: inset 0 0 0 var(--spacing-2) var(--color-border-negative);
     }
   }
 }

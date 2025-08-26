@@ -1,13 +1,14 @@
 @use "sass:map";
 @use "variables";
 @use "variants";
+@use "utilities";
 
 @function generate-size($size) {
   @return (
-    "padding": var(--scale-#{$size}-padding),
-    "radius": var(--scale-#{$size}-radius),
-    "font": var(--scale-#{$size}-text-weight) var(--scale-#{$size}-text-size) / var(--scale-#{$size}-text-height)
-      var(--scale-#{$size}-text-font)
+    "padding": var(--sizing-padding-#{utilities.get-size($size, "padding")}),
+    "radius": var(--component-forms-radius-#{$size}),
+    "font": var(--style-font-weight-medium) var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
+      var(--style-text-#{utilities.get-size($size, "font")}-line-height) var(--style-font-family-default)
   );
 }
 $sizes: ();
@@ -21,16 +22,16 @@ $sizes: ();
   display: table;
   width: 100%;
   border-radius: map.get($sizes, "md", "radius");
-  color: var(--semantic-text-primary);
-  background-color: var(--semantic-background-secondary);
+  color: var(--color-text-primary);
+  background-color: var(--color-background-secondary);
   font: map.get($sizes, "md", "font");
-  font-weight: var(--font-weight-regular);
-  box-shadow: 0 0 0 var(--dimension-border-default) var(--semantic-border-secondary);
+  font-weight: var(--style-font-weight-regular);
+  box-shadow: 0 0 0 var(--spacing-1) var(--color-border-secondary);
 
   :where(thead),
   &:not(:has(thead)) tr:first-child {
     white-space: nowrap;
-    background-color: var(--semantic-background-tertiary);
+    background-color: var(--color-background-tertiary);
   }
 
   :where(thead tr, tbody tr:not(:last-child), tbody tr:first-child:last-child) td,
@@ -45,13 +46,13 @@ $sizes: ();
       bottom: 0;
       left: 0;
       right: 0;
-      height: var(--dimension-border-default);
-      background-color: var(--semantic-border-secondary);
+      height: var(--spacing-1);
+      background-color: var(--color-border-secondary);
     }
   }
 
   :where(th) {
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--style-font-weight-medium);
   }
 
   :where(th, td) {
@@ -65,8 +66,8 @@ $sizes: ();
       position: absolute;
       inset-inline-end: 0;
       inset-block: 0;
-      width: var(--dimension-border-default);
-      background-color: var(--semantic-border-secondary);
+      width: var(--spacing-1);
+      background-color: var(--color-border-secondary);
     }
   }
 

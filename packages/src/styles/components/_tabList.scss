@@ -1,17 +1,17 @@
 @use "sass:map";
 @use "variants";
-@use "variables";
+@use "utilities";
 
 @function generate-size($size) {
   @return (
-    "height": var(--scale-#{$size}-height),
-    "width": var(--scale-#{$size}-width),
-    "padding": 0 var(--scale-#{$size}-padding),
-    "gap": var(--scale-#{$size}-gap),
-    "radius": var(--scale-#{$size}-radius),
-    "font": var(--scale-#{$size}-text-weight) var(--scale-#{$size}-text-size) / var(--scale-#{$size}-text-height)
-      var(--scale-#{$size}-text-font),
-    "icon-size": var(--scale-#{$size}-icon-size)
+    "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
+    "width": var(--sizing-width-#{utilities.get-size($size, "width")}),
+    "padding": 0 var(--sizing-padding-#{utilities.get-size($size, "padding")}),
+    "gap": var(--sizing-gap-#{utilities.get-size($size, "gap")}),
+    "radius": var(--component-tab-list-tab-radius-#{$size}),
+    "font": var(--style-font-weight-medium) var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
+      var(--style-text-#{utilities.get-size($size, "font")}-line-height) var(--style-font-family-default),
+    "icon-size": var(--sizing-icon-size-#{utilities.get-size($size, "icon-size")})
   );
 }
 $sizes: ();
@@ -21,6 +21,7 @@ $sizes: ();
 
 .moon-tab-list {
   display: flex;
+  border-bottom: var(--component-tab-list-track-stroke) solid var(--component-tab-list-track-border);
 
   .moon-tab {
     position: relative;
@@ -35,29 +36,29 @@ $sizes: ();
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: var(--tab-list-tab-unselected-text);
-    background-color: var(--tab-list-tab-unselected-background);
+    color: var(--component-tab-list-tab-text-default);
+    background-color: var(--component-tab-list-tab-background-default);
     padding: map.get($sizes, "md", "padding");
     gap: map.get($sizes, "md", "gap");
     border-top-left-radius: map.get($sizes, "md", "radius");
     border-top-right-radius: map.get($sizes, "md", "radius");
-    border-bottom: var(--tab-list-tab-unselected-stroke) solid var(--tab-list-tab-unselected-border);
+    border-bottom: var(--component-tab-list-tab-stroke-default) solid var(--component-tab-list-tab-border-default);
     font: map.get($sizes, "md", "font");
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--style-font-weight-medium);
 
     :where(svg, .moon-icon) {
       width: map.get($sizes, "md", "icon-size");
       height: map.get($sizes, "md", "icon-size");
-      color: var(--tab-list-tab-unselected-icon);
+      color: var(--component-tab-list-tab-icon-default);
     }
 
     &.moon-tab-active {
-      background-color: var(--tab-list-tab-selected-background);
-      color: var(--tab-list-tab-selected-text);
-      border-bottom: var(--tab-list-tab-selected-stroke) solid var(--tab-list-tab-selected-border);
+      background-color: var(--component-tab-list-tab-background-selected);
+      color: var(--component-tab-list-tab-text-selected);
+      border-bottom: var(--component-tab-list-tab-stroke-selected) solid var(--component-tab-list-tab-border-selected);
 
       :where(svg, .moon-icon) {
-        color: var(--tab-list-tab-selected-icon);
+        color: var(--component-tab-list-tab-icon-selected);
       }
     }
 
@@ -68,11 +69,11 @@ $sizes: ();
       inset: 0;
       transition: background-color 150ms ease-in-out;
       pointer-events: none;
-      background-color: var(--semantic-background-transparent);
+      background-color: var(--color-background-transparent);
     }
 
     &:hover::after {
-      background-color: var(--semantic-background-hover);
+      background-color: var(--color-background-hover);
     }
   }
 

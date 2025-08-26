@@ -21,11 +21,39 @@ const processCoreVariables = async (fileId = null) => {
                     if (!mode)
                         continue;
                     const modeName = mode.name;
+                    // Filter modes in "product" collection to match projectName
+                    if (collectionName.toLowerCase() === "product") {
+                        // Check if mode name matches or contains the project name
+                        const projectName = config.projectName.toLowerCase();
+                        const modeNameLower = modeName.toLowerCase();
+                        // Skip modes that don't match the project name
+                        if (!modeNameLower.includes(projectName) &&
+                            modeNameLower !== projectName) {
+                            continue;
+                        }
+                    }
+                    // Filter variables in "color" collection based on product name in variable name
+                    // Pattern: --color-MODE-PRODUCT-colorName-number
+                    if (collectionName.toLowerCase() === "color") {
+                        const projectName = config.projectName.toLowerCase();
+                        const variableNameLower = variableName.toLowerCase();
+                        // Check if variable name contains the project name
+                        // Variable names are like "Moon/Gray/1" or "Bitcasino/Chichi/10"
+                        const variableNameParts = variableNameLower.split("/");
+                        if (variableNameParts.length >= 2) {
+                            const productInVariableName = variableNameParts[0];
+                            // Skip variables that don't match the project name
+                            if (productInVariableName !== projectName) {
+                                continue;
+                            }
+                        }
+                    }
                     if (!groupedVariables[modeName]) {
                         groupedVariables[modeName] = [];
                     }
                     groupedVariables[modeName].push(variable);
-                    formatAndAddCSSVariable(coreVariables, collectionName, modeName, variableName, variable, modeId, localVariables, localVariableCollections, singleMode);
+                    formatAndAddCSSVariable(coreVariables, collectionName, modeName, variableName, variable, modeId, localVariables, localVariableCollections, singleMode, false // isComponent = false for core variables
+                    );
                 }
             }
             collection.groupedVariables = groupedVariables;

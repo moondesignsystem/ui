@@ -1,15 +1,19 @@
 @use "sass:map";
 @use "variants";
+@use "utilities";
 
 @function generate-size($size) {
-  @return ("width": var(--scale-#{$size}-width), "height": var(--scale-#{$size}-height));
+  @return (
+    "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
+    "width": var(--sizing-width-#{utilities.get-size($size, "width")})
+  );
 }
 $sizes: ();
 @each $size in variants.$loader-sizes {
   $sizes: map.set($sizes, $size, generate-size($size));
 }
 
-$border: var(--dimension-border-2);
+$border: var(--spacing-2);
 
 .moon-loader {
   position: relative;
@@ -17,7 +21,7 @@ $border: var(--dimension-border-2);
   height: map.get($sizes, "md", "height");
   border-radius: 50%;
   animation: rotate 1s linear infinite;
-  box-shadow: inset 0 0 0 $border var(--loader-track);
+  box-shadow: inset 0 0 0 $border var(--component-loader-track);
 
   &::after {
     content: "";
@@ -25,7 +29,7 @@ $border: var(--dimension-border-2);
     position: absolute;
     inset: 0;
     border-radius: 50%;
-    border: $border solid var(--loader-progress);
+    border: $border solid var(--component-loader-progress);
     animation: prix-clip-fix 2s ease-in-out infinite;
   }
 

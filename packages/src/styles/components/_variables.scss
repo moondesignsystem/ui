@@ -33,32 +33,32 @@ $scale-xl-text: var(--scale-xl-text-weight) var(--scale-xl-text-size) / var(--sc
 $scale-2xl-text: var(--scale-2xl-text-weight) var(--scale-2xl-text-size) / var(--scale-2xl-text-height)
   var(--scale-2xl-text-font);
 $shadow-100:
-  var(--effect-shadow-100-layer-1-x) var(--effect-shadow-100-layer-1-y) var(--effect-shadow-100-layer-1-blur)
-    var(--effect-shadow-100-layer-1-spread) var(--effect-shadow-100-layer-1-color),
-  var(--effect-shadow-100-layer-2-x) var(--effect-shadow-100-layer-2-y) var(--effect-shadow-100-layer-2-blur)
-    var(--effect-shadow-100-layer-2-spread) var(--effect-shadow-100-layer-2-color);
+  var(--style-shadow-100-layer-1-x) var(--style-shadow-100-layer-1-y) var(--style-shadow-100-layer-1-blur)
+    var(--style-shadow-100-layer-1-spread) var(--style-shadow-100-layer-1-color),
+  var(--style-shadow-100-layer-2-x) var(--style-shadow-100-layer-2-y) var(--style-shadow-100-layer-2-blur)
+    var(--style-shadow-100-layer-2-spread) var(--style-shadow-100-layer-2-color);
 $shadow-200:
-  var(--effect-shadow-200-layer-1-x) var(--effect-shadow-200-layer-1-y) var(--effect-shadow-200-layer-1-blur)
-    var(--effect-shadow-200-layer-1-spread) var(--effect-shadow-200-layer-1-color),
-  var(--effect-shadow-200-layer-2-x) var(--effect-shadow-200-layer-2-y) var(--effect-shadow-200-layer-2-blur)
-    var(--effect-shadow-200-layer-2-spread) var(--effect-shadow-200-layer-2-color);
+  var(--style-shadow-200-layer-1-x) var(--style-shadow-200-layer-1-y) var(--style-shadow-200-layer-1-blur)
+    var(--style-shadow-200-layer-1-spread) var(--style-shadow-200-layer-1-color),
+  var(--style-shadow-200-layer-2-x) var(--style-shadow-200-layer-2-y) var(--style-shadow-200-layer-2-blur)
+    var(--style-shadow-200-layer-2-spread) var(--style-shadow-200-layer-2-color);
 $shadow-300:
-  var(--effect-shadow-300-layer-1-x) var(--effect-shadow-300-layer-1-y) var(--effect-shadow-300-layer-1-blur)
-    var(--effect-shadow-300-layer-1-spread) var(--effect-shadow-300-layer-1-color),
-  var(--effect-shadow-300-layer-2-x) var(--effect-shadow-300-layer-2-y) var(--effect-shadow-300-layer-2-blur)
-    var(--effect-shadow-300-layer-2-spread) var(--effect-shadow-300-layer-2-color);
+  var(--style-shadow-300-layer-1-x) var(--style-shadow-300-layer-1-y) var(--style-shadow-300-layer-1-blur)
+    var(--style-shadow-300-layer-1-spread) var(--style-shadow-300-layer-1-color),
+  var(--style-shadow-300-layer-2-x) var(--style-shadow-300-layer-2-y) var(--style-shadow-300-layer-2-blur)
+    var(--style-shadow-300-layer-2-spread) var(--style-shadow-300-layer-2-color);
 $shadow-400:
-  var(--effect-shadow-400-layer-1-x) var(--effect-shadow-400-layer-1-y) var(--effect-shadow-400-layer-1-blur)
-    var(--effect-shadow-400-layer-1-spread) var(--effect-shadow-400-layer-1-color),
-  var(--effect-shadow-400-layer-2-x) var(--effect-shadow-400-layer-2-y) var(--effect-shadow-400-layer-2-blur)
-    var(--effect-shadow-400-layer-2-spread) var(--effect-shadow-400-layer-2-color);
+  var(--style-shadow-400-layer-1-x) var(--style-shadow-400-layer-1-y) var(--style-shadow-400-layer-1-blur)
+    var(--style-shadow-400-layer-1-spread) var(--style-shadow-400-layer-1-color),
+  var(--style-shadow-400-layer-2-x) var(--style-shadow-400-layer-2-y) var(--style-shadow-400-layer-2-blur)
+    var(--style-shadow-400-layer-2-spread) var(--style-shadow-400-layer-2-color);
 $shadow-500:
-  var(--effect-shadow-500-layer-1-x) var(--effect-shadow-500-layer-1-y) var(--effect-shadow-500-layer-1-blur)
-    var(--effect-shadow-500-layer-1-spread) var(--effect-shadow-500-layer-1-color),
-  var(--effect-shadow-500-layer-2-x) var(--effect-shadow-500-layer-2-y) var(--effect-shadow-500-layer-2-blur)
-    var(--effect-shadow-500-layer-2-spread) var(--effect-shadow-500-layer-2-color);
+  var(--style-shadow-500-layer-1-x) var(--style-shadow-500-layer-1-y) var(--style-shadow-500-layer-1-blur)
+    var(--style-shadow-500-layer-1-spread) var(--style-shadow-500-layer-1-color),
+  var(--style-shadow-500-layer-2-x) var(--style-shadow-500-layer-2-y) var(--style-shadow-500-layer-2-blur)
+    var(--style-shadow-500-layer-2-spread) var(--style-shadow-500-layer-2-color);
 $shadow-600:
-  var(--effect-shadow-600-layer-1-x) var(--effect-shadow-600-layer-1-y) var(--effect-shadow-600-layer-1-blur)
-    var(--effect-shadow-600-layer-1-spread) var(--effect-shadow-600-layer-1-color),
-  var(--effect-shadow-600-layer-2-x) var(--effect-shadow-600-layer-2-y) var(--effect-shadow-600-layer-2-blur)
-    var(--effect-shadow-600-layer-2-spread) var(--effect-shadow-600-layer-2-color);
+  var(--style-shadow-600-layer-1-x) var(--style-shadow-600-layer-1-y) var(--style-shadow-600-layer-1-blur)
+    var(--style-shadow-600-layer-1-spread) var(--style-shadow-600-layer-1-color),
+  var(--style-shadow-600-layer-2-x) var(--style-shadow-600-layer-2-y) var(--style-shadow-600-layer-2-blur)
+    var(--style-shadow-600-layer-2-spread) var(--style-shadow-600-layer-2-color);

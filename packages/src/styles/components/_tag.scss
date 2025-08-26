@@ -1,13 +1,14 @@
 @use "sass:map";
 @use "variables";
 @use "variants";
+@use "utilities";
 
 @function generate-variant($variant) {
   @return (
-    "shadow": inset 0 0 0 var(--tag-#{$variant}-stroke) var(--tag-#{$variant}-border),
-    "background": var(--tag-#{$variant}-background),
-    "color": var(--tag-#{$variant}-text),
-    "icon-color": var(--tag-#{$variant}-icon)
+    "shadow": inset 0 0 0 var(--component-tag-#{$variant}-stroke) var(--componenttag-#{$variant}-border),
+    "background": var(--component-tag-#{$variant}-background),
+    "color": var(--component-tag-#{$variant}-text),
+    "icon-color": var(--component-tag-#{$variant}-icon)
   );
 }
 $variants: ();
@@ -16,13 +17,13 @@ $variants: ();
 }
 @function generate-size($size) {
   @return (
-    "height": var(--scale-#{$size}-height),
-    "padding": 0 var(--scale-#{$size}-padding),
-    "radius": var(--utility-tag-radius-#{$size}),
-    "gap": var(--scale-#{$size}-gap),
-    "font": var(--scale-#{$size}-text-weight) var(--scale-#{$size}-text-size) / var(--scale-#{$size}-text-height)
-      var(--scale-#{$size}-text-font),
-    "icon-size": var(--scale-#{$size}-icon-size)
+    "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
+    "padding": 0 var(--sizing-padding-#{utilities.get-size($size, "padding")}),
+    "radius": var(--component-tag-radius-#{$size}),
+    "gap": var(--sizing-gap-#{utilities.get-size($size, "gap")}),
+    "font": var(--style-font-weight-medium) var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
+      var(--style-text-#{utilities.get-size($size, "font")}-line-height) var(--style-font-family-default),
+    "icon-size": var(--sizing-icon-size-#{utilities.get-size($size, "icon-size")})
   );
 }
 $sizes: ();

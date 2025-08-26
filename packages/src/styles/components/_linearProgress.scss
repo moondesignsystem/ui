@@ -1,9 +1,10 @@
 @use "sass:map";
 @use "variables";
 @use "variants";
+@use "utilities";
 
 @function generate-size($size) {
-  @return ("height": var(--scale-#{$size}-height), "radius": var(--scale-#{$size}-radius));
+  @return ("height": var(--sizing-height-#{utilities.get-size($size, "height")}));
 }
 $sizes: ();
 @each $size in variants.$linear-progress-sizes {
@@ -13,40 +14,31 @@ $sizes: ();
 .moon-linear-progress {
   appearance: none;
   display: block;
-  border-radius: map.get($sizes, "2xs", "radius");
-  background-color: var(--linear-progress-track);
+  border-radius: var(--radius-9999);
+  background-color: var(--component-linear-progress-track);
   width: 100%;
   height: map.get($sizes, "2xs", "height");
   position: relative;
   overflow: hidden;
 
   &::-webkit-progress-bar {
-    background-color: var(--linear-progress-track);
+    background-color: var(--component-linear-progress-track);
   }
 
   &::-webkit-progress-value {
     border-radius: map.get($sizes, "2xs", "radius");
-    background-color: var(--linear-progress-progress);
+    background-color: var(--component-linear-progress-progress);
   }
 
   &::-moz-progress-bar {
     border-radius: map.get($sizes, "2xs", "radius");
-    background-color: var(--linear-progress-progress);
+    background-color: var(--component-linear-progress-progress);
   }
 
   @each $size, $prop in $sizes {
     @if ≈ != "2xs" {
       &.moon-linear-progress-#{$size} {
-        border-radius: map.get($prop, "radius");
         height: map.get($prop, "height");
-
-        &::-webkit-progress-value {
-          border-radius: map.get($prop, "radius");
-        }
-
-        &::-moz-progress-bar {
-          border-radius: map.get($prop, "radius");
-        }
       }
     }
   }
@@ -55,12 +47,12 @@ $sizes: ();
 .moon-linear-progress-wrapper {
   display: flex;
   flex-direction: column;
-  gap: var(--scale-2xs-gap);
+  gap: var(--spacing-2);
 
   :where(label) {
     font: variables.$text-body-300;
-    color: var(--semantic-text-primary);
-    font-weight: var(--font-weight-medium);
+    color: var(--color-text-primary);
+    font-weight: var(--style-font-weight-medium);
     text-align: center;
   }
 }
