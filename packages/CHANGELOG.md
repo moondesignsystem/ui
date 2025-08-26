@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 2.2.0
+
+### Minor Changes
+
+- feat: add context to Badge, Tag
+
 ## 2.1.0
 
 ### Minor Changes

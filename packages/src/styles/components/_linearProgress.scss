@@ -3,12 +3,15 @@
 @use "variants";
 @use "utilities";
 
-@function generate-size($size) {
-  @return ("height": var(--sizing-height-#{utilities.get-size($size, "height")}));
-}
 $sizes: ();
 @each $size in variants.$linear-progress-sizes {
-  $sizes: map.set($sizes, $size, generate-size($size));
+  $sizes: map.set(
+    $sizes,
+    $size,
+    (
+      "height": var(--sizing-height-#{utilities.get-size($size, "height")})
+    )
+  );
 }
 
 .moon-linear-progress {

@@ -1,4 +1,19 @@
+@use "sass:map";
 @use "variables";
+@use "variants";
+
+$variants: ();
+@each $variant in variants.$badge-variants {
+  $variants: map.set(
+    $variants,
+    $variant,
+    (
+      "shadow": inset 0 0 0 var(--component-badge-#{$variant}-stroke) var(--component-badge-#{$variant}-border),
+      "background": var(--component-badge-#{$variant}-background),
+      "color": var(--component-badge-#{$variant}-text)
+    )
+  );
+}
 
 .moon-badge {
   width: fit-content;
@@ -7,11 +22,31 @@
   min-height: var(--sizing-width-100);
   padding: 0 var(--spacing-4);
   border-radius: var(--radius-9999);
-  background-color: var(--component-badge-fill-background);
-  color: var(--component-badge-fill-text);
-  box-shadow: inset 0 0 0 var(--component-badge-fill-stroke) var(--component-badge-fill-border);
+  background-color: map.get($variants, "fill", "background");
+  color: map.get($variants, "fill", "color");
+  box-shadow: map.get($variants, "fill", "shadow");
   font: var(--style-font-weight-medium) var(--style-text-sm-font-size) / var(--style-text-sm-line-height)
     var(--style-font-family-default);
+
+  @each $variant, $prop in $variants {
+    @if $variant != "fill" {
+      &.moon-badge-#{$variant} {
+        background-color: map.get($prop, "background");
+        color: map.get($prop, "color");
+        box-shadow: map.get($prop, "shadow");
+      }
+    }
+  }
+}
+
+@each $context in variants.$contexts {
+  .moon-badge-#{$context} {
+    @each $variant in variants.$badge-variants {
+      --component-badge-#{$variant}-text: var(--context-#{$context}-#{$variant}-text);
+      --component-badge-#{$variant}-background: var(--context-#{$context}-#{$variant}-background);
+      --component-badge-#{$variant}-border: var(--context-#{$context}-#{$variant}-border);
+    }
+  }
 }
 
 .moon-badge-wrapper {

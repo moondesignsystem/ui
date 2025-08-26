@@ -940,6 +940,88 @@
   box-shadow: inset 0 0 0 var(--component-badge-fill-stroke) var(--component-badge-fill-border);
   font: var(--style-font-weight-medium) var(--style-text-sm-font-size)/var(--style-text-sm-line-height) var(--style-font-family-default);
 }
+.moon-badge.moon-badge-outline {
+  background-color: var(--component-badge-outline-background);
+  color: var(--component-badge-outline-text);
+  box-shadow: inset 0 0 0 var(--component-badge-outline-stroke) var(--component-badge-outline-border);
+}
+.moon-badge.moon-badge-soft {
+  background-color: var(--component-badge-soft-background);
+  color: var(--component-badge-soft-text);
+  box-shadow: inset 0 0 0 var(--component-badge-soft-stroke) var(--component-badge-soft-border);
+}
+
+.moon-badge-brand {
+  --component-badge-fill-text: var(--context-brand-fill-text);
+  --component-badge-fill-background: var(--context-brand-fill-background);
+  --component-badge-fill-border: var(--context-brand-fill-border);
+  --component-badge-outline-text: var(--context-brand-outline-text);
+  --component-badge-outline-background: var(--context-brand-outline-background);
+  --component-badge-outline-border: var(--context-brand-outline-border);
+  --component-badge-soft-text: var(--context-brand-soft-text);
+  --component-badge-soft-background: var(--context-brand-soft-background);
+  --component-badge-soft-border: var(--context-brand-soft-border);
+}
+
+.moon-badge-neutral {
+  --component-badge-fill-text: var(--context-neutral-fill-text);
+  --component-badge-fill-background: var(--context-neutral-fill-background);
+  --component-badge-fill-border: var(--context-neutral-fill-border);
+  --component-badge-outline-text: var(--context-neutral-outline-text);
+  --component-badge-outline-background: var(--context-neutral-outline-background);
+  --component-badge-outline-border: var(--context-neutral-outline-border);
+  --component-badge-soft-text: var(--context-neutral-soft-text);
+  --component-badge-soft-background: var(--context-neutral-soft-background);
+  --component-badge-soft-border: var(--context-neutral-soft-border);
+}
+
+.moon-badge-positive {
+  --component-badge-fill-text: var(--context-positive-fill-text);
+  --component-badge-fill-background: var(--context-positive-fill-background);
+  --component-badge-fill-border: var(--context-positive-fill-border);
+  --component-badge-outline-text: var(--context-positive-outline-text);
+  --component-badge-outline-background: var(--context-positive-outline-background);
+  --component-badge-outline-border: var(--context-positive-outline-border);
+  --component-badge-soft-text: var(--context-positive-soft-text);
+  --component-badge-soft-background: var(--context-positive-soft-background);
+  --component-badge-soft-border: var(--context-positive-soft-border);
+}
+
+.moon-badge-caution {
+  --component-badge-fill-text: var(--context-caution-fill-text);
+  --component-badge-fill-background: var(--context-caution-fill-background);
+  --component-badge-fill-border: var(--context-caution-fill-border);
+  --component-badge-outline-text: var(--context-caution-outline-text);
+  --component-badge-outline-background: var(--context-caution-outline-background);
+  --component-badge-outline-border: var(--context-caution-outline-border);
+  --component-badge-soft-text: var(--context-caution-soft-text);
+  --component-badge-soft-background: var(--context-caution-soft-background);
+  --component-badge-soft-border: var(--context-caution-soft-border);
+}
+
+.moon-badge-negative {
+  --component-badge-fill-text: var(--context-negative-fill-text);
+  --component-badge-fill-background: var(--context-negative-fill-background);
+  --component-badge-fill-border: var(--context-negative-fill-border);
+  --component-badge-outline-text: var(--context-negative-outline-text);
+  --component-badge-outline-background: var(--context-negative-outline-background);
+  --component-badge-outline-border: var(--context-negative-outline-border);
+  --component-badge-soft-text: var(--context-negative-soft-text);
+  --component-badge-soft-background: var(--context-negative-soft-background);
+  --component-badge-soft-border: var(--context-negative-soft-border);
+}
+
+.moon-badge-info {
+  --component-badge-fill-text: var(--context-info-fill-text);
+  --component-badge-fill-background: var(--context-info-fill-background);
+  --component-badge-fill-border: var(--context-info-fill-border);
+  --component-badge-outline-text: var(--context-info-outline-text);
+  --component-badge-outline-background: var(--context-info-outline-background);
+  --component-badge-outline-border: var(--context-info-outline-border);
+  --component-badge-soft-text: var(--context-info-soft-text);
+  --component-badge-soft-background: var(--context-info-soft-background);
+  --component-badge-soft-border: var(--context-info-soft-border);
+}
 
 .moon-badge-wrapper {
   position: relative;
@@ -2230,7 +2312,7 @@
   border-radius: var(--component-tag-radius-xs);
   gap: var(--sizing-gap-200);
   font: var(--style-font-weight-medium) var(--style-text-sm-font-size)/var(--style-text-sm-line-height) var(--style-font-family-default);
-  box-shadow: inset 0 0 0 var(--component-tag-fill-stroke) var(--componenttag-fill-border);
+  box-shadow: inset 0 0 0 var(--component-tag-fill-stroke) var(--component-tag-fill-border);
   background-color: var(--component-tag-fill-background);
   color: var(--component-tag-fill-text);
 }
@@ -2251,7 +2333,7 @@
   height: var(--sizing-icon-size-200);
 }
 .moon-tag.moon-tag-ghost {
-  box-shadow: inset 0 0 0 var(--component-tag-ghost-stroke) var(--componenttag-ghost-border);
+  box-shadow: inset 0 0 0 var(--component-tag-ghost-stroke) var(--component-tag-ghost-border);
   background-color: var(--component-tag-ghost-background);
   color: var(--component-tag-ghost-text);
 }
@@ -2259,7 +2341,7 @@
   color: var(--component-tag-ghost-icon);
 }
 .moon-tag.moon-tag-outline {
-  box-shadow: inset 0 0 0 var(--component-tag-outline-stroke) var(--componenttag-outline-border);
+  box-shadow: inset 0 0 0 var(--component-tag-outline-stroke) var(--component-tag-outline-border);
   background-color: var(--component-tag-outline-background);
   color: var(--component-tag-outline-text);
 }
@@ -2267,12 +2349,126 @@
   color: var(--component-tag-outline-icon);
 }
 .moon-tag.moon-tag-soft {
-  box-shadow: inset 0 0 0 var(--component-tag-soft-stroke) var(--componenttag-soft-border);
+  box-shadow: inset 0 0 0 var(--component-tag-soft-stroke) var(--component-tag-soft-border);
   background-color: var(--component-tag-soft-background);
   color: var(--component-tag-soft-text);
 }
 .moon-tag.moon-tag-soft :where(svg, .moon-icon) {
   color: var(--component-tag-soft-icon);
+}
+
+.moon-tag-brand {
+  --component-tag-fill-text: var(--context-brand-fill-text);
+  --component-tag-fill-icon: var(--context-brand-fill-icon);
+  --component-tag-fill-background: var(--context-brand-fill-background);
+  --component-tag-fill-border: var(--context-brand-fill-border);
+  --component-tag-ghost-text: var(--context-brand-ghost-text);
+  --component-tag-ghost-icon: var(--context-brand-ghost-icon);
+  --component-tag-ghost-background: var(--context-brand-ghost-background);
+  --component-tag-ghost-border: var(--context-brand-ghost-border);
+  --component-tag-outline-text: var(--context-brand-outline-text);
+  --component-tag-outline-icon: var(--context-brand-outline-icon);
+  --component-tag-outline-background: var(--context-brand-outline-background);
+  --component-tag-outline-border: var(--context-brand-outline-border);
+  --component-tag-soft-text: var(--context-brand-soft-text);
+  --component-tag-soft-icon: var(--context-brand-soft-icon);
+  --component-tag-soft-background: var(--context-brand-soft-background);
+  --component-tag-soft-border: var(--context-brand-soft-border);
+}
+
+.moon-tag-neutral {
+  --component-tag-fill-text: var(--context-neutral-fill-text);
+  --component-tag-fill-icon: var(--context-neutral-fill-icon);
+  --component-tag-fill-background: var(--context-neutral-fill-background);
+  --component-tag-fill-border: var(--context-neutral-fill-border);
+  --component-tag-ghost-text: var(--context-neutral-ghost-text);
+  --component-tag-ghost-icon: var(--context-neutral-ghost-icon);
+  --component-tag-ghost-background: var(--context-neutral-ghost-background);
+  --component-tag-ghost-border: var(--context-neutral-ghost-border);
+  --component-tag-outline-text: var(--context-neutral-outline-text);
+  --component-tag-outline-icon: var(--context-neutral-outline-icon);
+  --component-tag-outline-background: var(--context-neutral-outline-background);
+  --component-tag-outline-border: var(--context-neutral-outline-border);
+  --component-tag-soft-text: var(--context-neutral-soft-text);
+  --component-tag-soft-icon: var(--context-neutral-soft-icon);
+  --component-tag-soft-background: var(--context-neutral-soft-background);
+  --component-tag-soft-border: var(--context-neutral-soft-border);
+}
+
+.moon-tag-positive {
+  --component-tag-fill-text: var(--context-positive-fill-text);
+  --component-tag-fill-icon: var(--context-positive-fill-icon);
+  --component-tag-fill-background: var(--context-positive-fill-background);
+  --component-tag-fill-border: var(--context-positive-fill-border);
+  --component-tag-ghost-text: var(--context-positive-ghost-text);
+  --component-tag-ghost-icon: var(--context-positive-ghost-icon);
+  --component-tag-ghost-background: var(--context-positive-ghost-background);
+  --component-tag-ghost-border: var(--context-positive-ghost-border);
+  --component-tag-outline-text: var(--context-positive-outline-text);
+  --component-tag-outline-icon: var(--context-positive-outline-icon);
+  --component-tag-outline-background: var(--context-positive-outline-background);
+  --component-tag-outline-border: var(--context-positive-outline-border);
+  --component-tag-soft-text: var(--context-positive-soft-text);
+  --component-tag-soft-icon: var(--context-positive-soft-icon);
+  --component-tag-soft-background: var(--context-positive-soft-background);
+  --component-tag-soft-border: var(--context-positive-soft-border);
+}
+
+.moon-tag-caution {
+  --component-tag-fill-text: var(--context-caution-fill-text);
+  --component-tag-fill-icon: var(--context-caution-fill-icon);
+  --component-tag-fill-background: var(--context-caution-fill-background);
+  --component-tag-fill-border: var(--context-caution-fill-border);
+  --component-tag-ghost-text: var(--context-caution-ghost-text);
+  --component-tag-ghost-icon: var(--context-caution-ghost-icon);
+  --component-tag-ghost-background: var(--context-caution-ghost-background);
+  --component-tag-ghost-border: var(--context-caution-ghost-border);
+  --component-tag-outline-text: var(--context-caution-outline-text);
+  --component-tag-outline-icon: var(--context-caution-outline-icon);
+  --component-tag-outline-background: var(--context-caution-outline-background);
+  --component-tag-outline-border: var(--context-caution-outline-border);
+  --component-tag-soft-text: var(--context-caution-soft-text);
+  --component-tag-soft-icon: var(--context-caution-soft-icon);
+  --component-tag-soft-background: var(--context-caution-soft-background);
+  --component-tag-soft-border: var(--context-caution-soft-border);
+}
+
+.moon-tag-negative {
+  --component-tag-fill-text: var(--context-negative-fill-text);
+  --component-tag-fill-icon: var(--context-negative-fill-icon);
+  --component-tag-fill-background: var(--context-negative-fill-background);
+  --component-tag-fill-border: var(--context-negative-fill-border);
+  --component-tag-ghost-text: var(--context-negative-ghost-text);
+  --component-tag-ghost-icon: var(--context-negative-ghost-icon);
+  --component-tag-ghost-background: var(--context-negative-ghost-background);
+  --component-tag-ghost-border: var(--context-negative-ghost-border);
+  --component-tag-outline-text: var(--context-negative-outline-text);
+  --component-tag-outline-icon: var(--context-negative-outline-icon);
+  --component-tag-outline-background: var(--context-negative-outline-background);
+  --component-tag-outline-border: var(--context-negative-outline-border);
+  --component-tag-soft-text: var(--context-negative-soft-text);
+  --component-tag-soft-icon: var(--context-negative-soft-icon);
+  --component-tag-soft-background: var(--context-negative-soft-background);
+  --component-tag-soft-border: var(--context-negative-soft-border);
+}
+
+.moon-tag-info {
+  --component-tag-fill-text: var(--context-info-fill-text);
+  --component-tag-fill-icon: var(--context-info-fill-icon);
+  --component-tag-fill-background: var(--context-info-fill-background);
+  --component-tag-fill-border: var(--context-info-fill-border);
+  --component-tag-ghost-text: var(--context-info-ghost-text);
+  --component-tag-ghost-icon: var(--context-info-ghost-icon);
+  --component-tag-ghost-background: var(--context-info-ghost-background);
+  --component-tag-ghost-border: var(--context-info-ghost-border);
+  --component-tag-outline-text: var(--context-info-outline-text);
+  --component-tag-outline-icon: var(--context-info-outline-icon);
+  --component-tag-outline-background: var(--context-info-outline-background);
+  --component-tag-outline-border: var(--context-info-outline-border);
+  --component-tag-soft-text: var(--context-info-soft-text);
+  --component-tag-soft-icon: var(--context-info-soft-icon);
+  --component-tag-soft-background: var(--context-info-soft-background);
+  --component-tag-soft-border: var(--context-info-soft-border);
 }
 
 .moon-textarea {
