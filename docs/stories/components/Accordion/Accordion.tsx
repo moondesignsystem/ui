@@ -1,19 +1,30 @@
+import CONTEXTS from "../../shared/contexts";
 import { createHTMLComponent } from "../../shared/utils/createHTMLComponent";
 import joinClassnames from "../../shared/utils/joinClassnames";
 import getClasses from "./utils/getClasses";
 
 export const SIZES = ["sm", "md", "lg", "xl"] as const;
+export const VARIANTS = ["fill", "ghost", "outline"] as const;
 
 export type Props = {
   size: (typeof SIZES)[number];
+  variant: (typeof VARIANTS)[number];
+  context: (typeof CONTEXTS)[number];
   items: number;
 };
 
-const Accordion = ({ size, items }: Props) => {
+const Accordion = ({ size, variant, context, items }: Props) => {
   const accordionItems = new Array(items).fill("");
 
   return (
-    <div className={joinClassnames(["moon-accordion", getClasses(size)])}>
+    <div
+      className={joinClassnames([
+        "moon-accordion",
+        getClasses(size),
+        getClasses(variant),
+        getClasses(context),
+      ])}
+    >
       {accordionItems.map((_, index) => (
         <div key={index} className="moon-accordion-item">
           <input type="radio" name="accordion" />

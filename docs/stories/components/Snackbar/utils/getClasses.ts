@@ -1,6 +1,8 @@
 import type { Props } from "../Snackbar";
 
-const getClasses = (modifier: Props["variant"]) =>
-  modifier === "neutral" ? "" : `moon-snackbar-${modifier}`;
+const getClasses = (modifier: Props["variant" | "context"]) =>
+  modifier === "fill" || modifier === "brand"
+    ? ""
+    : `moon-snackbar-${modifier}`;
 
 export default getClasses;

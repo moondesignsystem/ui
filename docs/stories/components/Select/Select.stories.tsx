@@ -1,7 +1,6 @@
-import React from "react";
-import LinksBlock from "../../shared/LinksBlock";
-import createSelect, { SIZES } from "./Select";
 import type { Meta, StoryObj } from "@storybook/html-vite";
+import LinksBlock from "../../shared/LinksBlock";
+import createSelect, { SIZES, VARIANTS } from "./Select";
 import type { Props } from "./Select";
 
 const meta: Meta<Props> = {
@@ -29,6 +28,11 @@ const meta: Meta<Props> = {
       control: "select",
       options: SIZES,
     },
+    variant: {
+      description: "Variant of Select",
+      control: "select",
+      options: VARIANTS,
+    },
   },
   parameters: {
     docs: {
@@ -48,6 +52,7 @@ export default meta;
 export const Select: StoryObj<Props> = {
   args: {
     size: "md",
+    variant: "fill",
     disabled: false,
     error: false,
     label: "",

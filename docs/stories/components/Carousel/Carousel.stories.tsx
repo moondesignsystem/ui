@@ -1,4 +1,3 @@
-import React from "react";
 import LinksBlock from "../../shared/LinksBlock";
 import createCarousel from "./Carousel";
 import type { Meta, StoryObj } from "@storybook/html-vite";

@@ -1,6 +1,7 @@
-import LinksBlock from "../../shared/LinksBlock";
-import createSnackbar, { VARIANTS } from "./Snackbar";
 import type { Meta, StoryObj } from "@storybook/html-vite";
+import LinksBlock from "../../shared/LinksBlock";
+import CONTEXTS from "../../shared/contexts";
+import createSnackbar, { VARIANTS } from "./Snackbar";
 import type { Props } from "./Snackbar";
 
 const meta: Meta<Props> = {
@@ -29,6 +30,11 @@ const meta: Meta<Props> = {
       control: "select",
       options: VARIANTS,
     },
+    context: {
+      description: "Context of Snackbar",
+      control: "select",
+      options: CONTEXTS,
+    },
   },
   parameters: {
     docs: {
@@ -48,6 +54,7 @@ export default meta;
 export const Snackbar: StoryObj<Props> = {
   args: {
     variant: "fill",
+    context: "brand",
     hasStartIcon: false,
     hasActionButton: false,
     actionLabel: "Action",

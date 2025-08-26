@@ -2,6 +2,7 @@ import joinClassnames from "../../shared/utils/joinClassnames";
 import getClasses from "./utils/getClasses";
 
 export const SIZES = ["sm", "md", "lg", "xl"] as const;
+export const VARIANTS = ["fill", "outline"] as const;
 
 export type Props = {
   disabled: boolean;
@@ -9,10 +10,11 @@ export type Props = {
   label: string;
   hint: string;
   size: (typeof SIZES)[number];
+  variant: (typeof VARIANTS)[number];
 };
 
 const createSelect = (args: Props) => {
-  const { disabled, error, label, hint, size } = args;
+  const { disabled, error, label, hint, size, variant } = args;
   const select = document.createElement("select");
   const options = ["option1", "option2", "option3", "option4", "option5"];
   options.forEach((option) => {
@@ -32,7 +34,11 @@ const createSelect = (args: Props) => {
       "moon-form-group",
       error ? "moon-form-group-error" : "",
     ]);
-    select.className = joinClassnames(["moon-select", getClasses(size)]);
+    select.className = joinClassnames([
+      "moon-select",
+      getClasses(size),
+      getClasses(variant),
+    ]);
     hintNode.className = "moon-form-hint";
     label &&
       formGroup
@@ -48,6 +54,7 @@ const createSelect = (args: Props) => {
   select.className = joinClassnames([
     "moon-select",
     getClasses(size),
+    getClasses(variant),
     error && "moon-select-error",
   ]);
   return select;

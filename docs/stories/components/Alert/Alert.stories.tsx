@@ -1,6 +1,7 @@
-import LinksBlock from "../../shared/LinksBlock";
-import createAlert, { VARIANTS } from "./Alert";
 import type { Meta, StoryObj } from "@storybook/html-vite";
+import LinksBlock from "../../shared/LinksBlock";
+import CONTEXTS from "../../shared/contexts";
+import createAlert, { VARIANTS } from "./Alert";
 import type { Props } from "./Alert";
 
 const meta: Meta<Props> = {
@@ -42,6 +43,11 @@ const meta: Meta<Props> = {
       control: "select",
       options: VARIANTS,
     },
+    context: {
+      description: "Context of Alert",
+      control: "select",
+      options: CONTEXTS,
+    },
   },
   parameters: {
     docs: {
@@ -61,6 +67,7 @@ export default meta;
 export const Alert: StoryObj<Props> = {
   args: {
     variant: "fill",
+    context: "brand",
     hasStartIcon: false,
     hasDismissButton: false,
     hasActionButton: false,

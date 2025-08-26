@@ -1,4 +1,3 @@
-import React from "react";
 import LinksBlock from "../../shared/LinksBlock";
 import createSwitch, { SIZES } from "./Switch";
 import type { Meta, StoryObj } from "@storybook/html-vite";
