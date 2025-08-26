@@ -1,6 +1,6 @@
-import LinksBlock from "../../shared/LinksBlock";
-import createAuthenticator, { SIZES } from "./Authenticator";
 import type { Meta, StoryObj } from "@storybook/html-vite";
+import LinksBlock from "../../shared/LinksBlock";
+import createAuthenticator, { SIZES, VARIANTS } from "./Authenticator";
 import type { Props } from "./Authenticator";
 
 const meta: Meta<Props> = {
@@ -11,6 +11,11 @@ const meta: Meta<Props> = {
       description: "Size of Authenticator",
       control: "select",
       options: SIZES,
+    },
+    variant: {
+      description: "Variant of Authenticator",
+      control: "select",
+      options: VARIANTS,
     },
     disabled: {
       description: "Disabled state of Authenticator",
@@ -51,6 +56,7 @@ export default meta;
 export const Authenticator: StoryObj<Props> = {
   args: {
     size: "md",
+    variant: "fill",
     length: 6,
     error: false,
     disabled: false,

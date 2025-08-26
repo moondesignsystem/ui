@@ -1,6 +1,8 @@
 import type { Props } from "../Accordion";
 
-const getClasses = (modifier: Props["size"]) =>
-  modifier === "md" ? "" : `moon-accordion-${modifier}`;
+const getClasses = (modifier: Props["size" | "context" | "variant"]) =>
+  modifier === "md" || modifier === "brand" || modifier === "fill"
+    ? ""
+    : `moon-accordion-${modifier}`;
 
 export default getClasses;

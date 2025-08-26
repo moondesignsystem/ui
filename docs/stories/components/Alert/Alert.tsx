@@ -1,6 +1,7 @@
 import Icon from "../../shared/Icon";
 import { createHTMLComponent } from "../../shared/utils/createHTMLComponent";
 import joinClassnames from "../../shared/utils/joinClassnames";
+import CONTEXTS from "../../shared/contexts";
 import getClasses from "./utils/getClasses";
 
 export const VARIANTS = ["fill", "soft", "outline"] as const;
@@ -14,6 +15,7 @@ export type Props = {
   hasContent: boolean;
   contentLabel: string;
   variant: (typeof VARIANTS)[number];
+  context: (typeof CONTEXTS)[number];
 };
 
 const Alert = ({
@@ -25,10 +27,17 @@ const Alert = ({
   hasContent,
   contentLabel,
   variant,
+  context,
 }: Props) => {
   if (hasContent) {
     return (
-      <div className={joinClassnames(["moon-alert", getClasses(variant)])}>
+      <div
+        className={joinClassnames([
+          "moon-alert",
+          getClasses(variant),
+          getClasses(context),
+        ])}
+      >
         <div className="moon-alert-title-wrapper">
           {hasStartIcon && <Icon name="star" />}
           <span className="moon-alert-title">{title}</span>
@@ -47,7 +56,13 @@ const Alert = ({
   }
 
   return (
-    <div className={joinClassnames(["moon-alert", getClasses(variant)])}>
+    <div
+      className={joinClassnames([
+        "moon-alert",
+        getClasses(variant),
+        getClasses(context),
+      ])}
+    >
       {hasStartIcon && <Icon name="star" />}
       <span className="moon-alert-title">{title}</span>
       {hasActionButton && (

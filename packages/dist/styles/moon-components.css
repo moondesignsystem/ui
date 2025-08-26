@@ -59,10 +59,10 @@
   width: 100%;
   grid-template-rows: max-content 0fr;
   transition: grid-template-rows 0.2s;
-  background: var(--component-accordion-outline-background);
-  color: var(--component-accordion-outline-title);
+  background: var(--component-accordion-fill-background);
+  color: var(--component-accordion-fill-text);
   border-radius: var(--component-accordion-radius-md);
-  box-shadow: inset 0 0 0 var(--component-accordion-outline-stroke) var(--component-accordion-outline-border);
+  box-shadow: inset 0 0 0 var(--component-accordion-fill-stroke) var(--component-accordion-fill-border);
   padding: 0 var(--sizing-padding-500);
 }
 .moon-accordion :where(.moon-accordion-item):not(td, tr, colgroup) {
@@ -109,7 +109,6 @@
   left: 0;
   width: 100%;
   height: var(--spacing-1);
-  background-color: var(--component-accordion-outline-border);
 }
 .moon-accordion :where(.moon-accordion-item):is([open]).moon-accordion-arrow > .moon-accordion-title::after {
   transform: translateY(-50%) rotate(225deg);
@@ -135,7 +134,7 @@
   cursor: unset;
   font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
   font-weight: var(--style-font-weight-regular);
-  color: var(--component-accordion-outline-title);
+  color: var(--component-accordion-fill-text);
   transition: visibility 0.2s ease-out, padding 0.2s ease-out, background-color 0.2s ease-out;
 }
 .moon-accordion :where(.moon-accordion-item):is(details) {
@@ -275,6 +274,120 @@
 }
 .moon-accordion.moon-accordion-xl :where(.moon-accordion-item) .moon-accordion-open > .moon-accordion-content {
   padding: var(--sizing-padding-700) 0;
+}
+.moon-accordion.moon-accordion-fill :where(.moon-accordion-item) {
+  background: var(--component-accordion-fill-background);
+  color: var(--component-accordion-fill-text);
+  box-shadow: inset 0 0 0 var(--component-accordion-fill-stroke) var(--component-accordion-fill-border);
+}
+.moon-accordion.moon-accordion-fill :where(.moon-accordion-item) .moon-accordion-content {
+  color: var(--component-accordion-fill-text);
+}
+.moon-accordion.moon-accordion-ghost :where(.moon-accordion-item) {
+  background: var(--component-accordion-ghost-background);
+  color: var(--component-accordion-ghost-text);
+  box-shadow: inset 0 0 0 var(--component-accordion-ghost-stroke) var(--component-accordion-ghost-border);
+}
+.moon-accordion.moon-accordion-ghost :where(.moon-accordion-item) .moon-accordion-content {
+  color: var(--component-accordion-fill-text);
+}
+.moon-accordion.moon-accordion-outline :where(.moon-accordion-item) {
+  background: var(--component-accordion-outline-background);
+  color: var(--component-accordion-outline-text);
+  box-shadow: inset 0 0 0 var(--component-accordion-outline-stroke) var(--component-accordion-outline-border);
+}
+.moon-accordion.moon-accordion-outline :where(.moon-accordion-item) .moon-accordion-content {
+  color: var(--component-accordion-fill-text);
+}
+
+.moon-accordion-brand {
+  --component-accordion-fill-text: var(--context-brand-fill-text);
+  --component-accordion-fill-icon: var(--context-brand-fill-icon);
+  --component-accordion-fill-background: var(--context-brand-fill-background);
+  --component-accordion-fill-border: var(--context-brand-fill-border);
+  --component-accordion-ghost-text: var(--context-brand-ghost-text);
+  --component-accordion-ghost-icon: var(--context-brand-ghost-icon);
+  --component-accordion-ghost-background: var(--context-brand-ghost-background);
+  --component-accordion-ghost-border: var(--context-brand-ghost-border);
+  --component-accordion-outline-text: var(--context-brand-outline-text);
+  --component-accordion-outline-icon: var(--context-brand-outline-icon);
+  --component-accordion-outline-background: var(--context-brand-outline-background);
+  --component-accordion-outline-border: var(--context-brand-outline-border);
+}
+
+.moon-accordion-neutral {
+  --component-accordion-fill-text: var(--context-neutral-fill-text);
+  --component-accordion-fill-icon: var(--context-neutral-fill-icon);
+  --component-accordion-fill-background: var(--context-neutral-fill-background);
+  --component-accordion-fill-border: var(--context-neutral-fill-border);
+  --component-accordion-ghost-text: var(--context-neutral-ghost-text);
+  --component-accordion-ghost-icon: var(--context-neutral-ghost-icon);
+  --component-accordion-ghost-background: var(--context-neutral-ghost-background);
+  --component-accordion-ghost-border: var(--context-neutral-ghost-border);
+  --component-accordion-outline-text: var(--context-neutral-outline-text);
+  --component-accordion-outline-icon: var(--context-neutral-outline-icon);
+  --component-accordion-outline-background: var(--context-neutral-outline-background);
+  --component-accordion-outline-border: var(--context-neutral-outline-border);
+}
+
+.moon-accordion-positive {
+  --component-accordion-fill-text: var(--context-positive-fill-text);
+  --component-accordion-fill-icon: var(--context-positive-fill-icon);
+  --component-accordion-fill-background: var(--context-positive-fill-background);
+  --component-accordion-fill-border: var(--context-positive-fill-border);
+  --component-accordion-ghost-text: var(--context-positive-ghost-text);
+  --component-accordion-ghost-icon: var(--context-positive-ghost-icon);
+  --component-accordion-ghost-background: var(--context-positive-ghost-background);
+  --component-accordion-ghost-border: var(--context-positive-ghost-border);
+  --component-accordion-outline-text: var(--context-positive-outline-text);
+  --component-accordion-outline-icon: var(--context-positive-outline-icon);
+  --component-accordion-outline-background: var(--context-positive-outline-background);
+  --component-accordion-outline-border: var(--context-positive-outline-border);
+}
+
+.moon-accordion-caution {
+  --component-accordion-fill-text: var(--context-caution-fill-text);
+  --component-accordion-fill-icon: var(--context-caution-fill-icon);
+  --component-accordion-fill-background: var(--context-caution-fill-background);
+  --component-accordion-fill-border: var(--context-caution-fill-border);
+  --component-accordion-ghost-text: var(--context-caution-ghost-text);
+  --component-accordion-ghost-icon: var(--context-caution-ghost-icon);
+  --component-accordion-ghost-background: var(--context-caution-ghost-background);
+  --component-accordion-ghost-border: var(--context-caution-ghost-border);
+  --component-accordion-outline-text: var(--context-caution-outline-text);
+  --component-accordion-outline-icon: var(--context-caution-outline-icon);
+  --component-accordion-outline-background: var(--context-caution-outline-background);
+  --component-accordion-outline-border: var(--context-caution-outline-border);
+}
+
+.moon-accordion-negative {
+  --component-accordion-fill-text: var(--context-negative-fill-text);
+  --component-accordion-fill-icon: var(--context-negative-fill-icon);
+  --component-accordion-fill-background: var(--context-negative-fill-background);
+  --component-accordion-fill-border: var(--context-negative-fill-border);
+  --component-accordion-ghost-text: var(--context-negative-ghost-text);
+  --component-accordion-ghost-icon: var(--context-negative-ghost-icon);
+  --component-accordion-ghost-background: var(--context-negative-ghost-background);
+  --component-accordion-ghost-border: var(--context-negative-ghost-border);
+  --component-accordion-outline-text: var(--context-negative-outline-text);
+  --component-accordion-outline-icon: var(--context-negative-outline-icon);
+  --component-accordion-outline-background: var(--context-negative-outline-background);
+  --component-accordion-outline-border: var(--context-negative-outline-border);
+}
+
+.moon-accordion-info {
+  --component-accordion-fill-text: var(--context-info-fill-text);
+  --component-accordion-fill-icon: var(--context-info-fill-icon);
+  --component-accordion-fill-background: var(--context-info-fill-background);
+  --component-accordion-fill-border: var(--context-info-fill-border);
+  --component-accordion-ghost-text: var(--context-info-ghost-text);
+  --component-accordion-ghost-icon: var(--context-info-ghost-icon);
+  --component-accordion-ghost-background: var(--context-info-ghost-background);
+  --component-accordion-ghost-border: var(--context-info-ghost-border);
+  --component-accordion-outline-text: var(--context-info-outline-text);
+  --component-accordion-outline-icon: var(--context-info-outline-icon);
+  --component-accordion-outline-background: var(--context-info-outline-background);
+  --component-accordion-outline-border: var(--context-info-outline-border);
 }
 
 .moon-button, .moon-snackbar :where(.moon-snackbar-action), .moon-breadcrumb-item *, .moon-alert :where(.moon-alert-action), .moon-snackbar :where(.moon-alert-action) {
@@ -697,6 +810,9 @@
   padding: var(--sizing-padding-600);
   border-radius: var(--component-alert-radius);
   font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
+  color: var(--component-alert-fill-text);
+  background-color: var(--component-alert-fill-background);
+  box-shadow: inset 0 0 0 var(--component-alert-fill-stroke) var(--component-alert-fill-border);
 }
 .moon-alert:has(.moon-alert-title-wrapper), .moon-snackbar:has(.moon-alert-title-wrapper) {
   flex-direction: column;
@@ -709,6 +825,7 @@
   font-weight: var(--style-font-weight-medium);
 }
 .moon-alert :where(svg, .moon-icon), .moon-snackbar :where(svg, .moon-icon) {
+  color: var(--component-alert-fill-icon);
   width: var(--spacing-20);
   height: var(--spacing-20);
 }
@@ -719,23 +836,6 @@
 .moon-alert :where(.moon-alert-content), .moon-snackbar :where(.moon-alert-content) {
   width: 100%;
   text-align: start;
-}
-.moon-alert.moon-alert-fill, .moon-alert-fill.moon-snackbar {
-  color: var(--component-alert-fill-text);
-  background-color: var(--component-alert-fill-background);
-  box-shadow: inset 0 0 0 var(--component-alert-fill-stroke) var(--component-alert-fill-border);
-}
-.moon-alert.moon-alert-fill :where(svg, .moon-icon), .moon-alert-fill.moon-snackbar :where(svg, .moon-icon) {
-  color: var(--component-alert-fill-icon);
-}
-.moon-alert.moon-alert-fill :where(.moon-alert-action), .moon-alert-fill.moon-snackbar :where(.moon-alert-action) {
-  color: var(--component-alert-fill-text);
-}
-.moon-alert.moon-alert-fill :where(.moon-alert-action) :where(svg, .moon-icon), .moon-alert-fill.moon-snackbar :where(.moon-alert-action) :where(svg, .moon-icon) {
-  color: var(--component-alert-fill-icon);
-}
-.moon-alert.moon-alert-fill :where(.moon-alert-dismiss) :where(svg, .moon-icon), .moon-alert-fill.moon-snackbar :where(.moon-alert-dismiss) :where(svg, .moon-icon) {
-  color: var(--component-alert-fill-icon);
 }
 .moon-alert.moon-alert-outline, .moon-alert-outline.moon-snackbar {
   color: var(--component-alert-outline-text);
@@ -772,6 +872,96 @@
   color: var(--component-alert-soft-icon);
 }
 
+.moon-alert-brand {
+  --component-alert-fill-text: var(--context-brand-fill-text);
+  --component-alert-fill-icon: var(--context-brand-fill-icon);
+  --component-alert-fill-background: var(--context-brand-fill-background);
+  --component-alert-fill-border: var(--context-brand-fill-border);
+  --component-alert-outline-text: var(--context-brand-outline-text);
+  --component-alert-outline-icon: var(--context-brand-outline-icon);
+  --component-alert-outline-background: var(--context-brand-outline-background);
+  --component-alert-outline-border: var(--context-brand-outline-border);
+  --component-alert-soft-text: var(--context-brand-soft-text);
+  --component-alert-soft-icon: var(--context-brand-soft-icon);
+  --component-alert-soft-background: var(--context-brand-soft-background);
+  --component-alert-soft-border: var(--context-brand-soft-border);
+}
+
+.moon-alert-neutral {
+  --component-alert-fill-text: var(--context-neutral-fill-text);
+  --component-alert-fill-icon: var(--context-neutral-fill-icon);
+  --component-alert-fill-background: var(--context-neutral-fill-background);
+  --component-alert-fill-border: var(--context-neutral-fill-border);
+  --component-alert-outline-text: var(--context-neutral-outline-text);
+  --component-alert-outline-icon: var(--context-neutral-outline-icon);
+  --component-alert-outline-background: var(--context-neutral-outline-background);
+  --component-alert-outline-border: var(--context-neutral-outline-border);
+  --component-alert-soft-text: var(--context-neutral-soft-text);
+  --component-alert-soft-icon: var(--context-neutral-soft-icon);
+  --component-alert-soft-background: var(--context-neutral-soft-background);
+  --component-alert-soft-border: var(--context-neutral-soft-border);
+}
+
+.moon-alert-positive {
+  --component-alert-fill-text: var(--context-positive-fill-text);
+  --component-alert-fill-icon: var(--context-positive-fill-icon);
+  --component-alert-fill-background: var(--context-positive-fill-background);
+  --component-alert-fill-border: var(--context-positive-fill-border);
+  --component-alert-outline-text: var(--context-positive-outline-text);
+  --component-alert-outline-icon: var(--context-positive-outline-icon);
+  --component-alert-outline-background: var(--context-positive-outline-background);
+  --component-alert-outline-border: var(--context-positive-outline-border);
+  --component-alert-soft-text: var(--context-positive-soft-text);
+  --component-alert-soft-icon: var(--context-positive-soft-icon);
+  --component-alert-soft-background: var(--context-positive-soft-background);
+  --component-alert-soft-border: var(--context-positive-soft-border);
+}
+
+.moon-alert-caution {
+  --component-alert-fill-text: var(--context-caution-fill-text);
+  --component-alert-fill-icon: var(--context-caution-fill-icon);
+  --component-alert-fill-background: var(--context-caution-fill-background);
+  --component-alert-fill-border: var(--context-caution-fill-border);
+  --component-alert-outline-text: var(--context-caution-outline-text);
+  --component-alert-outline-icon: var(--context-caution-outline-icon);
+  --component-alert-outline-background: var(--context-caution-outline-background);
+  --component-alert-outline-border: var(--context-caution-outline-border);
+  --component-alert-soft-text: var(--context-caution-soft-text);
+  --component-alert-soft-icon: var(--context-caution-soft-icon);
+  --component-alert-soft-background: var(--context-caution-soft-background);
+  --component-alert-soft-border: var(--context-caution-soft-border);
+}
+
+.moon-alert-negative {
+  --component-alert-fill-text: var(--context-negative-fill-text);
+  --component-alert-fill-icon: var(--context-negative-fill-icon);
+  --component-alert-fill-background: var(--context-negative-fill-background);
+  --component-alert-fill-border: var(--context-negative-fill-border);
+  --component-alert-outline-text: var(--context-negative-outline-text);
+  --component-alert-outline-icon: var(--context-negative-outline-icon);
+  --component-alert-outline-background: var(--context-negative-outline-background);
+  --component-alert-outline-border: var(--context-negative-outline-border);
+  --component-alert-soft-text: var(--context-negative-soft-text);
+  --component-alert-soft-icon: var(--context-negative-soft-icon);
+  --component-alert-soft-background: var(--context-negative-soft-background);
+  --component-alert-soft-border: var(--context-negative-soft-border);
+}
+
+.moon-alert-info {
+  --component-alert-fill-text: var(--context-info-fill-text);
+  --component-alert-fill-icon: var(--context-info-fill-icon);
+  --component-alert-fill-background: var(--context-info-fill-background);
+  --component-alert-fill-border: var(--context-info-fill-border);
+  --component-alert-outline-text: var(--context-info-outline-text);
+  --component-alert-outline-icon: var(--context-info-outline-icon);
+  --component-alert-outline-background: var(--context-info-outline-background);
+  --component-alert-outline-border: var(--context-info-outline-border);
+  --component-alert-soft-text: var(--context-info-soft-text);
+  --component-alert-soft-icon: var(--context-info-soft-icon);
+  --component-alert-soft-background: var(--context-info-soft-background);
+  --component-alert-soft-border: var(--context-info-soft-border);
+}
+
 .moon-authenticator {
   display: inline-flex;
   gap: var(--sizing-gap-400);
@@ -784,16 +974,16 @@
   outline: none;
   border-color: transparent;
   align-items: center;
-  box-shadow: inset 0 0 0 var(--component-authenticator-outline-stroke) var(--component-authenticator-outline-border);
-  color: var(--component-authenticator-outline-text-default);
-  background-color: var(--component-authenticator-outline-background);
+  box-shadow: inset 0 0 0 var(--component-authenticator-fill-stroke) var(--component-authenticator-fill-border);
+  color: var(--component-authenticator-fill-text-default);
+  background-color: var(--component-authenticator-fill-background);
   border-radius: var(--component-forms-radius-md);
   text-align: center;
   font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
   transition: box-shadow 150ms ease-in-out, opacity 150ms ease-in-out, background-color 150ms ease-in-out;
 }
 .moon-authenticator :where(input)::placeholder {
-  color: var(--component-authenticator-outline-text-placeholder);
+  color: var(--component-authenticator-fill-text-placeholder);
 }
 .moon-authenticator :where(input):read-only, .moon-authenticator :where(input):disabled {
   cursor: not-allowed;
@@ -840,6 +1030,14 @@
   height: var(--sizing-height-1000);
   border-radius: var(--component-forms-radius-xl);
   font: var(--style-font-weight-medium) var(--style-text-lg-font-size)/var(--style-text-lg-line-height) var(--style-font-family-default);
+}
+.moon-authenticator.moon-authenticator-outline :where(input) {
+  box-shadow: inset 0 0 0 var(--component-authenticator-outline-stroke) var(--component-authenticator-outline-border);
+  color: var(--component-authenticator-outline-text-default);
+  background-color: var(--component-authenticator-outline-background);
+}
+.moon-authenticator.moon-authenticator-outline :where(input)::placeholder {
+  color: var(--component-authenticator-outline-text-placeholder);
 }
 
 .moon-avatar {
@@ -1567,12 +1765,12 @@
   padding: 0 var(--sizing-padding-500);
   border-radius: var(--component-forms-radius-md);
   font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
-  box-shadow: inset 0 0 0 var(--component-input-outline-stroke) var(--component-input-outline-border);
-  color: var(--component-input-outline-text-default);
-  background-color: var(--component-input-outline-background);
+  box-shadow: inset 0 0 0 var(--component-input-fill-stroke) var(--component-input-fill-border);
+  color: var(--component-input-fill-text-default);
+  background-color: var(--component-input-fill-background);
 }
 .moon-input::placeholder {
-  color: var(--color-text-secondary);
+  color: var(--component-input-fill-text-placeholder);
 }
 .moon-input:read-only, .moon-input:disabled {
   cursor: not-allowed;
@@ -1624,6 +1822,14 @@
 .moon-input.moon-input-xl :where(svg, .moon-icon) {
   width: var(--sizing-icon-size-500);
   height: var(--sizing-icon-size-500);
+}
+.moon-input.moon-input-outline {
+  box-shadow: inset 0 0 0 var(--component-input-outline-stroke) var(--component-input-outline-border);
+  color: var(--component-input-outline-text-default);
+  background-color: var(--component-input-outline-background);
+}
+.moon-input.moon-input-outline::placeholder {
+  color: var(--component-input-outline-text-placeholder);
 }
 .moon-input.moon-input-error {
   box-shadow: inset 0 0 0 var(--spacing-2) var(--color-border-negative);
@@ -2033,9 +2239,9 @@
   gap: var(--sizing-gap-400);
   border-radius: var(--component-forms-radius-md);
   font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
-  box-shadow: inset 0 0 0 var(--component-select-outline-stroke) var(--component-select-outline-border);
-  color: var(--color-text-primary);
-  background-color: var(--component-select-background);
+  box-shadow: inset 0 0 0 var(--component-select-fill-stroke) var(--component-select-fill-border);
+  color: var(--component-select-fill-text-default);
+  background-color: var(--component-select-fill-background);
 }
 .moon-select:disabled {
   cursor: not-allowed;
@@ -2068,6 +2274,11 @@
   column-gap: var(--sizing-gap-600);
   border-radius: var(--component-forms-radius-xl);
   font: var(--style-font-weight-medium) var(--style-text-lg-font-size)/var(--style-text-lg-line-height) var(--style-font-family-default);
+}
+.moon-select.moon-select-outline {
+  box-shadow: inset 0 0 0 var(--component-select-outline-stroke) var(--component-select-outline-border);
+  color: var(--component-select-outline-text-default);
+  background-color: var(--component-select-outline-background);
 }
 .moon-select.moon-select-error {
   box-shadow: inset 0 0 0 var(--spacing-2) var(--color-border-negative);
@@ -2109,6 +2320,72 @@
 }
 .moon-snackbar.moon-snackbar-soft :where(.moon-snackbar-action) :where(svg, .moon-icon) {
   color: var(--component-snackbar-soft-icon);
+}
+
+.moon-snackbar-brand {
+  --component-snackbar-fill-text: var(--context-brand-fill-text);
+  --component-snackbar-fill-icon: var(--context-brand-fill-icon);
+  --component-snackbar-fill-background: var(--context-brand-fill-background);
+  --component-snackbar-fill-border: var(--context-brand-fill-border);
+  --component-snackbar-soft-text: var(--context-brand-soft-text);
+  --component-snackbar-soft-icon: var(--context-brand-soft-icon);
+  --component-snackbar-soft-background: var(--context-brand-soft-background);
+  --component-snackbar-soft-border: var(--context-brand-soft-border);
+}
+
+.moon-snackbar-neutral {
+  --component-snackbar-fill-text: var(--context-neutral-fill-text);
+  --component-snackbar-fill-icon: var(--context-neutral-fill-icon);
+  --component-snackbar-fill-background: var(--context-neutral-fill-background);
+  --component-snackbar-fill-border: var(--context-neutral-fill-border);
+  --component-snackbar-soft-text: var(--context-neutral-soft-text);
+  --component-snackbar-soft-icon: var(--context-neutral-soft-icon);
+  --component-snackbar-soft-background: var(--context-neutral-soft-background);
+  --component-snackbar-soft-border: var(--context-neutral-soft-border);
+}
+
+.moon-snackbar-positive {
+  --component-snackbar-fill-text: var(--context-positive-fill-text);
+  --component-snackbar-fill-icon: var(--context-positive-fill-icon);
+  --component-snackbar-fill-background: var(--context-positive-fill-background);
+  --component-snackbar-fill-border: var(--context-positive-fill-border);
+  --component-snackbar-soft-text: var(--context-positive-soft-text);
+  --component-snackbar-soft-icon: var(--context-positive-soft-icon);
+  --component-snackbar-soft-background: var(--context-positive-soft-background);
+  --component-snackbar-soft-border: var(--context-positive-soft-border);
+}
+
+.moon-snackbar-caution {
+  --component-snackbar-fill-text: var(--context-caution-fill-text);
+  --component-snackbar-fill-icon: var(--context-caution-fill-icon);
+  --component-snackbar-fill-background: var(--context-caution-fill-background);
+  --component-snackbar-fill-border: var(--context-caution-fill-border);
+  --component-snackbar-soft-text: var(--context-caution-soft-text);
+  --component-snackbar-soft-icon: var(--context-caution-soft-icon);
+  --component-snackbar-soft-background: var(--context-caution-soft-background);
+  --component-snackbar-soft-border: var(--context-caution-soft-border);
+}
+
+.moon-snackbar-negative {
+  --component-snackbar-fill-text: var(--context-negative-fill-text);
+  --component-snackbar-fill-icon: var(--context-negative-fill-icon);
+  --component-snackbar-fill-background: var(--context-negative-fill-background);
+  --component-snackbar-fill-border: var(--context-negative-fill-border);
+  --component-snackbar-soft-text: var(--context-negative-soft-text);
+  --component-snackbar-soft-icon: var(--context-negative-soft-icon);
+  --component-snackbar-soft-background: var(--context-negative-soft-background);
+  --component-snackbar-soft-border: var(--context-negative-soft-border);
+}
+
+.moon-snackbar-info {
+  --component-snackbar-fill-text: var(--context-info-fill-text);
+  --component-snackbar-fill-icon: var(--context-info-fill-icon);
+  --component-snackbar-fill-background: var(--context-info-fill-background);
+  --component-snackbar-fill-border: var(--context-info-fill-border);
+  --component-snackbar-soft-text: var(--context-info-soft-text);
+  --component-snackbar-soft-icon: var(--context-info-soft-icon);
+  --component-snackbar-soft-background: var(--context-info-soft-background);
+  --component-snackbar-soft-border: var(--context-info-soft-border);
 }
 
 .moon-switch {
@@ -2481,12 +2758,12 @@
   padding: var(--sizing-padding-500);
   border-radius: var(--component-forms-radius-md);
   font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
-  box-shadow: inset 0 0 0 var(--component-textarea-outline-stroke) var(--component-textarea-outline-border);
-  color: var(--color-text-primary);
-  background-color: var(--component-textarea-outline-background);
+  box-shadow: inset 0 0 0 var(--component-textarea-fill-stroke) var(--component-textarea-fill-border);
+  color: var(--component-textarea-fill-text-default);
+  background-color: var(--component-textarea-fill-background);
 }
 .moon-textarea::placeholder {
-  color: var(--color-text-secondary);
+  color: var(--component-textarea-fill-text-placeholder);
 }
 .moon-textarea:read-only, .moon-textarea:disabled {
   cursor: not-allowed;
@@ -2521,6 +2798,14 @@
   padding: var(--sizing-padding-700);
   border-radius: var(--component-forms-radius-xl);
   font: var(--style-font-weight-medium) var(--style-text-lg-font-size)/var(--style-text-lg-line-height) var(--style-font-family-default);
+}
+.moon-textarea.moon-textarea-outline {
+  box-shadow: inset 0 0 0 var(--component-textarea-outline-stroke) var(--component-textarea-outline-border);
+  color: var(--component-textarea-outline-text-default);
+  background-color: var(--component-textarea-outline-background);
+}
+.moon-textarea.moon-textarea-outline::placeholder {
+  color: var(--component-textarea-outline-text-placeholder);
 }
 
 .moon-tooltip {

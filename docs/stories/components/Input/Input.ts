@@ -2,6 +2,7 @@ import joinClassnames from "../../shared/utils/joinClassnames";
 import getClasses from "./utils/getClasses";
 
 export const SIZES = ["sm", "md", "lg", "xl"] as const;
+export const VARIANTS = ["fill", "outline"] as const;
 
 export type Props = {
   disabled: boolean;
@@ -10,10 +11,11 @@ export type Props = {
   hint: string;
   placeholder: string;
   size: (typeof SIZES)[number];
+  variant: (typeof VARIANTS)[number];
 };
 
 const createInput = (args: Props) => {
-  const { disabled, error, label, hint, size, placeholder } = args;
+  const { disabled, error, label, hint, size, placeholder, variant } = args;
   const input = document.createElement("input");
   input.setAttribute("type", "text");
   if (disabled) {
@@ -27,7 +29,11 @@ const createInput = (args: Props) => {
       "moon-form-group",
       error && "moon-form-group-error",
     ]);
-    input.className = joinClassnames(["moon-input", getClasses(size)]);
+    input.className = joinClassnames([
+      "moon-input",
+      getClasses(size),
+      getClasses(variant),
+    ]);
     placeholder && input.setAttribute("placeholder", placeholder);
     hintNode.className = "moon-form-hint";
     label &&
@@ -44,6 +50,7 @@ const createInput = (args: Props) => {
   input.className = joinClassnames([
     "moon-input",
     getClasses(size),
+    getClasses(variant),
     error && "moon-input-error",
   ]);
   placeholder && input.setAttribute("placeholder", placeholder);

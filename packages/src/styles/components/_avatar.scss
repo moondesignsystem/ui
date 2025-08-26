@@ -3,32 +3,37 @@
 @use "variants";
 @use "utilities";
 
-@function generate-size($size) {
-  @return (
-    "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
-    "width": var(--sizing-width-#{utilities.get-size($size, "width")}),
-    "radius": var(--component-avatar-radius-#{$size}),
-    "icon-size": var(--sizing-icon-size-#{utilities.get-size($size, "icon-size")}),
-    "font": var(--style-font-weight-medium) var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
-      var(--style-text-#{utilities.get-size($size, "font")}-line-height) var(--style-font-family-default)
-  );
-}
 $sizes: ();
 @each $size in variants.$avatar-sizes {
-  $sizes: map.set($sizes, $size, generate-size($size));
-}
-@function generate-variant($variant) {
-  @return (
-    "background": var(--component-avatar-#{$variant}-background),
-    "border": var(--component-avatar-#{$variant}-stroke),
-    "border-color": var(--component-avatar-#{$variant}-border),
-    "color": var(--component-avatar-#{$variant}-text),
-    "icon": var(--component-avatar-#{$variant}-icon)
+  $sizes: map.set(
+    $sizes,
+    $size,
+    (
+      "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
+      "width": var(--sizing-width-#{utilities.get-size($size, "width")}),
+      "radius": var(--component-avatar-radius-#{$size}),
+      "icon-size": var(--sizing-icon-size-#{utilities.get-size($size, "icon-size")}),
+      "font": var(--style-font-weight-medium)
+        var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
+        var(--style-text-#{utilities.get-size($size, "font")}-line-height)
+        var(--style-font-family-default)
+    )
   );
 }
+
 $variants: ();
 @each $variant in variants.$avatar-variants {
-  $variants: map.set($variants, $variant, generate-variant($variant));
+  $variants: map.set(
+    $variants,
+    $variant,
+    (
+      "background": var(--component-avatar-#{$variant}-background),
+      "border": var(--component-avatar-#{$variant}-stroke),
+      "border-color": var(--component-avatar-#{$variant}-border),
+      "color": var(--component-avatar-#{$variant}-text),
+      "icon": var(--component-avatar-#{$variant}-icon)
+    )
+  );
 }
 
 .moon-avatar {

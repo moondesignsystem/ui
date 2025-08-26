@@ -3,20 +3,36 @@
 @use "variants";
 @use "utilities";
 
-@function generate-size($size) {
-  @return (
-    "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
-    "padding": var(--sizing-padding-#{utilities.get-size($size, "padding")}),
-    "gap": var(--sizing-gap-#{utilities.get-size($size, "gap")}),
-    "radius": var(--component-forms-radius-#{$size}),
-    "font": var(--style-font-weight-medium) var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
-      var(--style-text-#{utilities.get-size($size, "font")}-line-height) var(--style-font-family-default),
-    "icon-size": var(--sizing-icon-size-#{utilities.get-size($size, "icon-size")})
-  );
-}
 $sizes: ();
 @each $size in variants.$select-sizes {
-  $sizes: map.set($sizes, $size, generate-size($size));
+  $sizes: map.set(
+    $sizes,
+    $size,
+    (
+      "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
+      "padding": var(--sizing-padding-#{utilities.get-size($size, "padding")}),
+      "gap": var(--sizing-gap-#{utilities.get-size($size, "gap")}),
+      "radius": var(--component-forms-radius-#{$size}),
+      "font": var(--style-font-weight-medium)
+        var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
+        var(--style-text-#{utilities.get-size($size, "font")}-line-height)
+        var(--style-font-family-default),
+      "icon-size": var(--sizing-icon-size-#{utilities.get-size($size, "icon-size")})
+    )
+  );
+}
+
+$variants: ();
+@each $variant in variants.$select-variants {
+  $variants: map.set(
+    $variants,
+    $variant,
+    (
+      "shadow": inset 0 0 0 var(--component-select-#{$variant}-stroke) var(--component-select-#{$variant}-border),
+      "color": var(--component-select-#{$variant}-text-default),
+      "background": var(--component-select-#{$variant}-background)
+    )
+  );
 }
 
 .moon-select {
@@ -35,9 +51,9 @@ $sizes: ();
   gap: map.get($sizes, "md", "gap");
   border-radius: map.get($sizes, "md", "radius");
   font: map.get($sizes, "md", "font");
-  box-shadow: inset 0 0 0 var(--component-select-outline-stroke) var(--component-select-outline-border);
-  color: var(--color-text-primary);
-  background-color: var(--component-select-background);
+  box-shadow: map.get($variants, "fill", "shadow");
+  color: map.get($variants, "fill", "color");
+  background-color: map.get($variants, "fill", "background");
 
   &:disabled {
     cursor: not-allowed;
@@ -61,6 +77,16 @@ $sizes: ();
         column-gap: map.get($prop, "gap");
         border-radius: map.get($prop, "radius");
         font: map.get($prop, "font");
+      }
+    }
+  }
+
+  @each $variant, $prop in $variants {
+    @if $variant != "fill" {
+      &.moon-select-#{$variant} {
+        box-shadow: map.get($prop, "shadow");
+        color: map.get($prop, "color");
+        background-color: map.get($prop, "background");
       }
     }
   }
