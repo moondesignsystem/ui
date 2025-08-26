@@ -1,4 +1,3 @@
-import React from "react";
 import { createHTMLComponent } from "../../shared/utils/createHTMLComponent";
 
 export type Props = {

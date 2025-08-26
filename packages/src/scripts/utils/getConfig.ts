@@ -3,7 +3,8 @@ import fs from "fs";
 
 interface Config {
   coreFileId: string;
-  componentsFileId: string;
+  componentsFileId?: string; // Keep for backward compatibility
+  componentsProjectId?: string; // New field for project-based approach
   projectName: string;
   outputFolder: string;
   themes?: Record<string, string>;

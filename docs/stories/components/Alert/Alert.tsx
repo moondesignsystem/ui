@@ -3,7 +3,7 @@ import { createHTMLComponent } from "../../shared/utils/createHTMLComponent";
 import joinClassnames from "../../shared/utils/joinClassnames";
 import getClasses from "./utils/getClasses";
 
-export const VARIANTS = ["neutral", "negative", "positive", "info"] as const;
+export const VARIANTS = ["fill", "soft", "outline"] as const;
 
 export type Props = {
   title: string;

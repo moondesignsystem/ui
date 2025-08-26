@@ -1,4 +1,3 @@
-import React from "react";
 import LinksBlock from "../../shared/LinksBlock";
 import createPlaceholder from "./Placeholder";
 import type { Meta, StoryObj } from "@storybook/html-vite";
@@ -29,7 +28,5 @@ const meta: Meta<Props> = {
 export default meta;
 
 export const Placeholder: StoryObj<Props> = {
-  args: {
-    className: "w-space-160 h-space-80",
-  },
+  args: {},
 };

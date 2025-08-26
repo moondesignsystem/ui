@@ -1,4 +1,3 @@
-import React from "react";
 import LinksBlock from "../../shared/LinksBlock";
 import createPagination from "./Pagination";
 import type { Meta, StoryObj } from "@storybook/html-vite";

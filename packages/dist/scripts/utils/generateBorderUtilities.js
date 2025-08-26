@@ -1,42 +1,42 @@
 const generateBorderUtilities = () => `@utility border-* {
-border-color: --value(--semantic-border- *);
+border-color: --value(--color-border- *);
 }
 @utility border-x-* {
-border-inline-color: --value(--semantic-border- *);
+border-inline-color: --value(--color-border- *);
 }
 @utility border-y-* {
-border-block-color: --value(--semantic-border- *);
+border-block-color: --value(--color-border- *);
 }
 @utility border-s-* {
-border-inline-start-color: --value(--semantic-border- *);
+border-inline-start-color: --value(--color-border- *);
 }
 @utility border-e-* {
-border-inline-end-color: --value(--semantic-border- *);
+border-inline-end-color: --value(--color-border- *);
 }
 @utility border-t-* {
-border-top-color: --value(--semantic-border- *);
+border-top-color: --value(--color-border- *);
 }
 @utility border-r-* {
-border-right-color: --value(--semantic-border- *);
+border-right-color: --value(--color-border- *);
 }
 @utility border-b-* {
-border-bottom-color: --value(--semantic-border- *);
+border-bottom-color: --value(--color-border- *);
 }
 @utility border-l-* {
-border-left-color: --value(--semantic-border- *);
+border-left-color: --value(--color-border- *);
 }
 @utility divide-* {
 & > :not(:last-child) {
-border-color: --value(--semantic-border- *);
+border-color: --value(--color-border- *);
 }
 }
 @utility outline-* {
-outline-color: --value(--semantic-border- *);
+outline-color: --value(--color-border- *);
 }
 @utility inset-ring-* {
---tw-inset-ring-color: --value(--semantic-border- *);
+--tw-inset-ring-color: --value(--color-border- *);
 }
 @utility ring-* {
---tw-ring-color: --value(--semantic-border- *);
+--tw-ring-color: --value(--color-border- *);
 }`;
 export default generateBorderUtilities;

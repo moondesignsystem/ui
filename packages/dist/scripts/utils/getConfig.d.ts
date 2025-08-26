@@ -1,6 +1,7 @@
 interface Config {
     coreFileId: string;
-    componentsFileId: string;
+    componentsFileId?: string;
+    componentsProjectId?: string;
     projectName: string;
     outputFolder: string;
     themes?: Record<string, string>;

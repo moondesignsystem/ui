@@ -15,7 +15,7 @@ const Carousel = ({ length, hasPagination, hasArrows }: Props) => {
       <ul className="moon-carousel-reel">
         {items.map((_, index) => (
           <li key={index} className="moon-carousel-item">
-            <div className="flex items-center justify-center h-space-160 w-2xs bg-brand-subtle text-brand">
+            <div className="flex items-center justify-center h-160 w-2xs bg-brand-subtle text-brand">
               Item {index + 1}
             </div>
           </li>
@@ -38,8 +38,9 @@ const Carousel = ({ length, hasPagination, hasArrows }: Props) => {
           {items.map((_, index) => (
             <button
               key={index}
-              className={`moon-pagination-item${index === 2 ? " moon-pagination-item-active" : ""
-                }`}
+              className={`moon-pagination-item${
+                index === 2 ? " moon-pagination-item-active" : ""
+              }`}
             >
               {index + 1}
             </button>
