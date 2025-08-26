@@ -3,15 +3,16 @@
 @use "variants";
 @use "utilities";
 
-@function generate-size($size) {
-  @return (
-    "padding": var(--sizing-padding-#{utilities.get-size($size, "padding")}),
-    "radius": var(--component-menu-radius-#{$size})
-  );
-}
 $sizes: ();
 @each $size in variants.$menu-sizes {
-  $sizes: map.set($sizes, $size, generate-size($size));
+  $sizes: map.set(
+    $sizes,
+    $size,
+    (
+      "padding": var(--sizing-padding-#{utilities.get-size($size, "padding")}),
+      "radius": var(--component-menu-radius-#{$size})
+    )
+  );
 }
 
 .moon-menu {
