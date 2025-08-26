@@ -1,9 +1,10 @@
 import { createHTMLComponent } from "../../shared/utils/createHTMLComponent";
 import joinClassnames from "../../shared/utils/joinClassnames";
 import starIcon from "../../shared/icons/starIcon";
+import CONTEXTS from "../../shared/contexts";
 import getClasses from "./utils/getClasses";
 
-export const VARIANTS = ["fill", "soft", "outline", "ghost"] as const;
+export const VARIANTS = ["fill", "soft"] as const;
 
 export type Props = {
   title: string;
@@ -11,6 +12,7 @@ export type Props = {
   hasActionButton: boolean;
   actionLabel: string;
   variant: (typeof VARIANTS)[number];
+  context: (typeof CONTEXTS)[number];
 };
 
 export const Snackbar = ({
@@ -19,8 +21,15 @@ export const Snackbar = ({
   hasActionButton,
   actionLabel,
   variant,
+  context,
 }: Props) => (
-  <div className={joinClassnames(["moon-snackbar", getClasses(variant)])}>
+  <div
+    className={joinClassnames([
+      "moon-snackbar",
+      getClasses(variant),
+      getClasses(context),
+    ])}
+  >
     {hasStartIcon && <span dangerouslySetInnerHTML={{ __html: starIcon }} />}
     <span className="moon-snackbar-title">{title}</span>
     {hasActionButton && (

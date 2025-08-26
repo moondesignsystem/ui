@@ -3,20 +3,37 @@
 @use "variants";
 @use "utilities";
 
-@function generate-size($size) {
-  @return (
-    "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
-    "padding": 0 var(--sizing-padding-#{utilities.get-size($size, "padding")}),
-    "gap": var(--sizing-height-#{utilities.get-size($size, "height")}),
-    "radius": var(--component-forms-radius-#{$size}),
-    "font": var(--style-font-weight-medium) var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
-      var(--style-text-#{utilities.get-size($size, "font")}-line-height) var(--style-font-family-default),
-    "icon-size": var(--sizing-icon-size-#{utilities.get-size($size, "icon-size")})
-  );
-}
 $sizes: ();
 @each $size in variants.$input-sizes {
-  $sizes: map.set($sizes, $size, generate-size($size));
+  $sizes: map.set(
+    $sizes,
+    $size,
+    (
+      "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
+      "padding": 0 var(--sizing-padding-#{utilities.get-size($size, "padding")}),
+      "gap": var(--sizing-height-#{utilities.get-size($size, "height")}),
+      "radius": var(--component-forms-radius-#{$size}),
+      "font": var(--style-font-weight-medium)
+        var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
+        var(--style-text-#{utilities.get-size($size, "font")}-line-height)
+        var(--style-font-family-default),
+      "icon-size": var(--sizing-icon-size-#{utilities.get-size($size, "icon-size")})
+    )
+  );
+}
+
+$variants: ();
+@each $variant in variants.$input-variants {
+  $variants: map.set(
+    $variants,
+    $variant,
+    (
+      "shadow": inset 0 0 0 var(--component-input-#{$variant}-stroke) var(--component-input-#{$variant}-border),
+      "color": var(--component-input-#{$variant}-text-default),
+      "placeholder": var(--component-input-#{$variant}-text-placeholder),
+      "background": var(--component-input-#{$variant}-background)
+    )
+  );
 }
 
 .moon-input {
@@ -33,12 +50,12 @@ $sizes: ();
   padding: map.get($sizes, "md", "padding");
   border-radius: map.get($sizes, "md", "radius");
   font: map.get($sizes, "md", "font");
-  box-shadow: inset 0 0 0 var(--component-input-outline-stroke) var(--component-input-outline-border);
-  color: var(--component-input-outline-text-default);
-  background-color: var(--component-input-outline-background);
+  box-shadow: map.get($variants, "fill", "shadow");
+  color: map.get($variants, "fill", "color");
+  background-color: map.get($variants, "fill", "background");
 
   &::placeholder {
-    color: var(--color-text-secondary);
+    color: map.get($variants, "fill", "placeholder");
   }
 
   &:read-only,
@@ -77,6 +94,20 @@ $sizes: ();
         :where(svg, .moon-icon) {
           width: map.get($prop, "icon-size");
           height: map.get($prop, "icon-size");
+        }
+      }
+    }
+  }
+
+  @each $variant, $prop in $variants {
+    @if $variant != "fill" {
+      &.moon-input-#{$variant} {
+        box-shadow: map.get($prop, "shadow");
+        color: map.get($prop, "color");
+        background-color: map.get($prop, "background");
+
+        &::placeholder {
+          color: map.get($prop, "placeholder");
         }
       }
     }

@@ -1,7 +1,6 @@
-import React from "react";
-import LinksBlock from "../../shared/LinksBlock";
-import createTextarea, { SIZES } from "./Textarea";
 import type { Meta, StoryObj } from "@storybook/html-vite";
+import LinksBlock from "../../shared/LinksBlock";
+import createTextarea, { SIZES, VARIANTS } from "./Textarea";
 import type { Props } from "./Textarea";
 
 const meta: Meta<Props> = {
@@ -29,9 +28,14 @@ const meta: Meta<Props> = {
       control: "text",
     },
     size: {
-      description: "Size of Textares",
+      description: "Size of Textarea",
       control: "select",
       options: SIZES,
+    },
+    variant: {
+      description: "Variant of Textarea",
+      control: "select",
+      options: VARIANTS,
     },
   },
   parameters: {
@@ -52,6 +56,7 @@ export default meta;
 export const Textarea: StoryObj<Props> = {
   args: {
     size: "md",
+    variant: "fill",
     disabled: false,
     error: false,
     hint: "",

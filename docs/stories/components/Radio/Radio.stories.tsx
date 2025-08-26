@@ -1,4 +1,3 @@
-import React from "react";
 import LinksBlock from "../../shared/LinksBlock";
 import createRadio, { LABEL_POSITIONS } from "./Radio";
 import type { Meta, StoryObj } from "@storybook/html-vite";

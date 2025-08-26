@@ -1,4 +1,3 @@
-import React from "react";
 import LinksBlock from "../../shared/LinksBlock";
 import createCheckbox, { LABEL_POSITIONS } from "./Checkbox";
 import type { Meta, StoryObj } from "@storybook/html-vite";

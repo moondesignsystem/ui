@@ -4,7 +4,7 @@ import joinClassnames from "../../shared/utils/joinClassnames";
 import getClasses from "./utils/getClasses";
 
 export const SIZES = ["sm", "md"] as const;
-export const VARIANTS = ["fill", "outline"] as const;
+export const VARIANTS = ["fill", "soft", "outline"] as const;
 
 export type Props = {
   label: string;

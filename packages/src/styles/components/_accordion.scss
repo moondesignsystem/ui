@@ -3,20 +3,37 @@
 @use "variants";
 @use "utilities";
 
-@function generate-size($size) {
-  @return (
-    "gap": var(--sizing-gap-#{utilities.get-size($size, "gap")}),
-    "radius": var(--component-accordion-radius-#{$size}),
-    "padding": var(--sizing-padding-#{utilities.get-size($size, "padding")}),
-    "padding-end": calc(var(--spacing-20) * 2),
-    "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
-    "font": var(--style-font-weight-medium) var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
-      var(--style-text-#{utilities.get-size($size, "font")}-line-height) var(--style-font-family-default)
-  );
-}
 $sizes: ();
 @each $size in variants.$accordion-sizes {
-  $sizes: map.set($sizes, $size, generate-size($size));
+  $sizes: map.set(
+    $sizes,
+    $size,
+    (
+      "gap": var(--sizing-gap-#{utilities.get-size($size, "gap")}),
+      "radius": var(--component-accordion-radius-#{$size}),
+      "padding": var(--sizing-padding-#{utilities.get-size($size, "padding")}),
+      "padding-end": calc(var(--spacing-20) * 2),
+      "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
+      "font": var(--style-font-weight-medium)
+        var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
+        var(--style-text-#{utilities.get-size($size, "font")}-line-height)
+        var(--style-font-family-default)
+    )
+  );
+}
+
+$variants: ();
+@each $variant in variants.$accordion-variants {
+  $variants: map.set(
+    $variants,
+    $variant,
+    (
+      "color": var(--component-accordion-#{$variant}-text),
+      "background": var(--component-accordion-#{$variant}-background),
+      "icon": var(--component-accordion-#{$variant}-icon),
+      "shadow": inset 0 0 0 var(--component-accordion-#{$variant}-stroke) var(--component-accordion-#{$variant}-border)
+    )
+  );
 }
 
 .moon-accordion {
@@ -38,10 +55,10 @@ $sizes: ();
     width: 100%;
     grid-template-rows: max-content 0fr;
     transition: grid-template-rows 0.2s;
-    background: var(--component-accordion-outline-background);
-    color: var(--component-accordion-outline-title);
+    background: map.get($variants, "fill", "background");
+    color: map.get($variants, "fill", "color");
     border-radius: map.get($sizes, "md", "radius");
-    box-shadow: inset 0 0 0 var(--component-accordion-outline-stroke) var(--component-accordion-outline-border);
+    box-shadow: map.get($variants, "fill", "shadow");
     padding: 0 map.get($sizes, "md", "padding");
 
     & > input:is([type="checkbox"], [type="radio"]) {
@@ -103,7 +120,7 @@ $sizes: ();
         left: 0;
         width: 100%;
         height: var(--spacing-1);
-        background-color: var(--component-accordion-outline-border);
+        background-color: map.get($variants, "fill", "border");
       }
     }
 
@@ -148,7 +165,7 @@ $sizes: ();
       cursor: unset;
       font: map.get($sizes, "md", "font");
       font-weight: var(--style-font-weight-regular);
-      color: var(--component-accordion-outline-title);
+      color: map.get($variants, "fill", "color");
       transition:
         visibility 0.2s ease-out,
         padding 0.2s ease-out,
@@ -263,6 +280,41 @@ $sizes: ();
           }
         }
       }
+    }
+  }
+
+  @each $variant, $prop in $variants {
+    @if $variant != "md" {
+      &.moon-accordion-#{$variant} {
+        :where(.moon-accordion-item) {
+          background: map.get($prop, "background");
+          color: map.get($prop, "color");
+          box-shadow: map.get($prop, "shadow");
+
+          &:is([open], :focus:not(.moon-accordion-close)) > :where(.moon-accordion-content),
+          &:not(.moon-accordion-close)
+            > :where(input:is([type="checkbox"], [type="radio"]):checked ~ .moon-accordion-content) {
+            &::after {
+              background-color: map.get($prop, "border");
+            }
+          }
+
+          .moon-accordion-content {
+            color: map.get($variants, "fill", "color");
+          }
+        }
+      }
+    }
+  }
+}
+
+@each $context in variants.$contexts {
+  .moon-accordion-#{$context} {
+    @each $variant in variants.$accordion-variants {
+      --component-accordion-#{$variant}-text: var(--context-#{$context}-#{$variant}-text);
+      --component-accordion-#{$variant}-icon: var(--context-#{$context}-#{$variant}-icon);
+      --component-accordion-#{$variant}-background: var(--context-#{$context}-#{$variant}-background);
+      --component-accordion-#{$variant}-border: var(--context-#{$context}-#{$variant}-border);
     }
   }
 }
