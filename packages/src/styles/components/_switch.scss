@@ -3,15 +3,16 @@
 @use "variants";
 @use "utilities";
 
-@function generate-size($size) {
-  @return (
-    "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
-    "width": calc(var(--sizing-width-#{utilities.get-size($size, "width")}) * 2)
-  );
-}
 $sizes: ();
 @each $size in variants.$switch-sizes {
-  $sizes: map.set($sizes, $size, generate-size($size));
+  $sizes: map.set(
+    $sizes,
+    $size,
+    (
+      "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
+      "width": calc(var(--sizing-width-#{utilities.get-size($size, "width")}) * 2)
+    )
+  );
 }
 
 .moon-switch {

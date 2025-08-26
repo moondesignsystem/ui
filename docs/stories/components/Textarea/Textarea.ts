@@ -2,6 +2,7 @@ import joinClassnames from "../../shared/utils/joinClassnames";
 import getClasses from "./utils/getClasses";
 
 export const SIZES = ["sm", "md", "lg", "xl"] as const;
+export const VARIANTS = ["fill", "outline"] as const;
 
 export type Props = {
   label: string;
@@ -10,10 +11,11 @@ export type Props = {
   disabled: boolean;
   placeholder: string;
   size: (typeof SIZES)[number];
+  variant: (typeof VARIANTS)[number];
 };
 
 const createTextarea = (args: Props) => {
-  const { label, hint, error, disabled, placeholder, size } = args;
+  const { label, hint, error, disabled, placeholder, size, variant } = args;
   const textarea = document.createElement("textarea");
   placeholder && textarea.setAttribute("placeholder", placeholder);
   if (disabled) {
@@ -27,7 +29,11 @@ const createTextarea = (args: Props) => {
       "moon-form-group",
       error ? "moon-form-group-error" : "",
     ]);
-    textarea.className = joinClassnames(["moon-textarea", getClasses(size)]);
+    textarea.className = joinClassnames([
+      "moon-textarea",
+      getClasses(size),
+      getClasses(variant),
+    ]);
     hintNode.className = "moon-form-hint";
     label &&
       formGroup
@@ -43,6 +49,7 @@ const createTextarea = (args: Props) => {
   textarea.className = joinClassnames([
     "moon-textarea",
     getClasses(size),
+    getClasses(variant),
     error && "moon-textarea-error",
   ]);
   return textarea;

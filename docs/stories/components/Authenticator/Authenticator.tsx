@@ -3,9 +3,11 @@ import joinClassnames from "../../shared/utils/joinClassnames";
 import getClasses from "./utils/getClasses";
 
 export const SIZES = ["sm", "md", "lg", "xl"] as const;
+export const VARIANTS = ["fill", "outline"] as const;
 
 export type Props = {
   size: (typeof SIZES)[number];
+  variant: (typeof VARIANTS)[number];
   length: number;
   label: string;
   hint: string;
@@ -15,6 +17,7 @@ export type Props = {
 
 const Authenticator = ({
   size,
+  variant,
   length,
   label,
   hint,
@@ -33,6 +36,7 @@ const Authenticator = ({
       className={joinClassnames([
         "moon-authenticator",
         getClasses(size),
+        getClasses(variant),
         !label && !hint && error && "moon-authenticator-error",
       ])}
     >

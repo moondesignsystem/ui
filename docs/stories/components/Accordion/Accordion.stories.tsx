@@ -1,6 +1,7 @@
-import LinksBlock from "../../shared/LinksBlock";
-import createAccordion, { SIZES } from "./Accordion";
 import type { Meta, StoryObj } from "@storybook/html-vite";
+import LinksBlock from "../../shared/LinksBlock";
+import CONTEXTS from "../../shared/contexts";
+import createAccordion, { SIZES, VARIANTS } from "./Accordion";
 import type { Props } from "./Accordion";
 
 const meta: Meta<Props> = {
@@ -11,6 +12,16 @@ const meta: Meta<Props> = {
       description: "Size of Accordion",
       control: "select",
       options: SIZES,
+    },
+    variant: {
+      description: "Variant of Accordion",
+      control: "select",
+      options: VARIANTS,
+    },
+    context: {
+      description: "Context of Accordion",
+      control: "select",
+      options: CONTEXTS,
     },
     items: {
       description: "Amount of Accordion items",
@@ -35,6 +46,8 @@ export default meta;
 export const Accordion: StoryObj<Props> = {
   args: {
     size: "md",
+    variant: "fill",
+    context: "brand",
     items: 3,
   },
 };

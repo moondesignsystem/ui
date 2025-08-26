@@ -11,17 +11,18 @@
   gap: var(--sizing-gap-400);
 }
 
-@function generate-variant($variant) {
-  @return (
-    "color": var(--component-alert-#{$variant}-text),
-    "background": var(--component-alert-#{$variant}-background),
-    "shadow": inset 0 0 0 var(--component-alert-#{$variant}-stroke) var(--component-alert-#{$variant}-border),
-    "icon": var(--component-alert-#{$variant}-icon)
-  );
-}
 $variants: ();
 @each $variant in variants.$alert-variants {
-  $variants: map.set($variants, $variant, generate-variant($variant));
+  $variants: map.set(
+    $variants,
+    $variant,
+    (
+      "color": var(--component-alert-#{$variant}-text),
+      "background": var(--component-alert-#{$variant}-background),
+      "shadow": inset 0 0 0 var(--component-alert-#{$variant}-stroke) var(--component-alert-#{$variant}-border),
+      "icon": var(--component-alert-#{$variant}-icon)
+    )
+  );
 }
 
 .moon-alert {
@@ -33,9 +34,9 @@ $variants: ();
   border-radius: var(--component-alert-radius);
   font: var(--style-font-weight-medium) var(--style-text-md-font-size) / var(--style-text-md-line-height)
     var(--style-font-family-default);
-  color: map.get($variants, "neutral", "color");
-  background-color: map.get($variants, "neutral", "background");
-  box-shadow: map.get($variants, "neutral", "shadow");
+  color: map.get($variants, "fill", "color");
+  background-color: map.get($variants, "fill", "background");
+  box-shadow: map.get($variants, "fill", "shadow");
 
   &:has(.moon-alert-title-wrapper) {
     flex-direction: column;
@@ -48,7 +49,7 @@ $variants: ();
   }
 
   :where(svg, .moon-icon) {
-    color: map.get($variants, "neutral", "icon");
+    color: map.get($variants, "fill", "icon");
     width: var(--spacing-20);
     height: var(--spacing-20);
   }
@@ -86,7 +87,7 @@ $variants: ();
   }
 
   @each $variant, $prop in $variants {
-    @if $variant != "neutral" {
+    @if $variant != "fill" {
       &.moon-alert-#{$variant} {
         color: map.get($prop, "color");
         background-color: map.get($prop, "background");
@@ -110,6 +111,17 @@ $variants: ();
           }
         }
       }
+    }
+  }
+}
+
+@each $context in variants.$contexts {
+  .moon-alert-#{$context} {
+    @each $variant in variants.$alert-variants {
+      --component-alert-#{$variant}-text: var(--context-#{$context}-#{$variant}-text);
+      --component-alert-#{$variant}-icon: var(--context-#{$context}-#{$variant}-icon);
+      --component-alert-#{$variant}-background: var(--context-#{$context}-#{$variant}-background);
+      --component-alert-#{$variant}-border: var(--context-#{$context}-#{$variant}-border);
     }
   }
 }

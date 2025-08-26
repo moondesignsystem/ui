@@ -3,19 +3,41 @@
 @use "variants";
 @use "utilities";
 
-@function generate-size($size) {
-  @return (
-    "gap": var(--sizing-gap-#{utilities.get-size($size, "gap")}),
-    "width": var(--sizing-width-#{utilities.get-size($size, "width")}),
-    "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
-    "radius": var(--component-forms-radius-#{$size}),
-    "font": var(--style-font-weight-medium) var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
-      var(--style-text-#{utilities.get-size($size, "font")}-line-height) var(--style-font-family-default)
-  );
-}
 $sizes: ();
 @each $size in variants.$authenticator-sizes {
-  $sizes: map.set($sizes, $size, generate-size($size));
+  $sizes: map.set(
+    $sizes,
+    $size,
+    (
+      "gap": var(--sizing-gap-#{utilities.get-size($size, "gap")}),
+      "width": var(--sizing-width-#{utilities.get-size($size, "width")}),
+      "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
+      "radius": var(--component-forms-radius-#{$size}),
+      "font": var(--style-font-weight-medium)
+        var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
+        var(--style-text-#{utilities.get-size($size, "font")}-line-height)
+        var(--style-font-family-default)
+    )
+  );
+}
+
+$variants: ();
+@each $variant in variants.$authenticator-variants {
+  $variants: map.set(
+    $variants,
+    $variant,
+    (
+      "shadow": inset
+        0
+        0
+        0
+        var(--component-authenticator-#{$variant}-stroke)
+        var(--component-authenticator-#{$variant}-border),
+      "color": var(--component-authenticator-#{$variant}-text-default),
+      "placeholder": var(--component-authenticator-#{$variant}-text-placeholder),
+      "background": var(--component-authenticator-#{$variant}-background)
+    )
+  );
 }
 
 .moon-authenticator {
@@ -30,9 +52,9 @@ $sizes: ();
     outline: none;
     border-color: transparent;
     align-items: center;
-    box-shadow: inset 0 0 0 var(--component-authenticator-outline-stroke) var(--component-authenticator-outline-border);
-    color: var(--component-authenticator-outline-text-default);
-    background-color: var(--component-authenticator-outline-background);
+    box-shadow: map.get($variants, "fill", "shadow");
+    color: map.get($variants, "fill", "color");
+    background-color: map.get($variants, "fill", "background");
     border-radius: map.get($sizes, "md", "radius");
     text-align: center;
     font: map.get($sizes, "md", "font");
@@ -42,7 +64,7 @@ $sizes: ();
       background-color 150ms ease-in-out;
 
     &::placeholder {
-      color: var(--component-authenticator-outline-text-placeholder);
+      color: map.get($variants, "fill", "placeholder");
     }
 
     &:read-only,
@@ -86,6 +108,22 @@ $sizes: ();
           height: map.get($prop, "height");
           border-radius: map.get($prop, "radius");
           font: map.get($prop, "font");
+        }
+      }
+    }
+  }
+
+  @each $variant, $prop in $variants {
+    @if $variant != "fill" {
+      &.moon-authenticator-#{$variant} {
+        :where(input) {
+          box-shadow: map.get($prop, "shadow");
+          color: map.get($prop, "color");
+          background-color: map.get($prop, "background");
+
+          &::placeholder {
+            color: map.get($prop, "placeholder");
+          }
         }
       }
     }

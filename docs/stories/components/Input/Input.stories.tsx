@@ -1,7 +1,6 @@
-import React from "react";
-import LinksBlock from "../../shared/LinksBlock";
-import createInput, { SIZES } from "./Input";
 import type { Meta, StoryObj } from "@storybook/html-vite";
+import LinksBlock from "../../shared/LinksBlock";
+import createInput, { SIZES, VARIANTS } from "./Input";
 import type { Props } from "./Input";
 
 const meta: Meta<Props> = {
@@ -29,6 +28,11 @@ const meta: Meta<Props> = {
       control: "select",
       options: SIZES,
     },
+    variant: {
+      description: "Variant of Input",
+      control: "select",
+      options: VARIANTS,
+    },
     placeholder: {
       description: "Placeholder of Input",
       control: "text",
@@ -52,6 +56,7 @@ export default meta;
 export const Input: StoryObj<Props> = {
   args: {
     size: "md",
+    variant: "fill",
     disabled: false,
     error: false,
     label: "",

@@ -3,17 +3,20 @@
 @use "variants";
 @use "utilities";
 
-@function generate-size($size) {
-  @return (
-    "padding": var(--sizing-padding-#{utilities.get-size($size, "padding")}),
-    "radius": var(--component-forms-radius-#{$size}),
-    "font": var(--style-font-weight-medium) var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
-      var(--style-text-#{utilities.get-size($size, "font")}-line-height) var(--style-font-family-default)
-  );
-}
 $sizes: ();
 @each $size in variants.$table-sizes {
-  $sizes: map.set($sizes, $size, generate-size($size));
+  $sizes: map.set(
+    $sizes,
+    $size,
+    (
+      "padding": var(--sizing-padding-#{utilities.get-size($size, "padding")}),
+      "radius": var(--component-forms-radius-#{$size}),
+      "font": var(--style-font-weight-medium)
+        var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
+        var(--style-text-#{utilities.get-size($size, "font")}-line-height)
+        var(--style-font-family-default)
+    )
+  );
 }
 
 .moon-table {

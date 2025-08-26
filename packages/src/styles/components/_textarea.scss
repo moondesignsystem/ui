@@ -3,17 +3,34 @@
 @use "variants";
 @use "utilities";
 
-@function generate-size($size) {
-  @return (
-    "padding": var(--sizing-padding-#{utilities.get-size($size, "padding")}),
-    "radius": var(--component-forms-radius-#{$size}),
-    "font": var(--style-font-weight-medium) var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
-      var(--style-text-#{utilities.get-size($size, "font")}-line-height) var(--style-font-family-default)
-  );
-}
 $sizes: ();
 @each $size in variants.$textarea-sizes {
-  $sizes: map.set($sizes, $size, generate-size($size));
+  $sizes: map.set(
+    $sizes,
+    $size,
+    (
+      "padding": var(--sizing-padding-#{utilities.get-size($size, "padding")}),
+      "radius": var(--component-forms-radius-#{$size}),
+      "font": var(--style-font-weight-medium)
+        var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
+        var(--style-text-#{utilities.get-size($size, "font")}-line-height)
+        var(--style-font-family-default)
+    )
+  );
+}
+
+$variants: ();
+@each $variant in variants.$textarea-variants {
+  $variants: map.set(
+    $variants,
+    $variant,
+    (
+      "shadow": inset 0 0 0 var(--component-textarea-#{$variant}-stroke) var(--component-textarea-#{$variant}-border),
+      "color": var(--component-textarea-#{$variant}-text-default),
+      "placeholder": var(--component-textarea-#{$variant}-text-placeholder),
+      "background": var(--component-textarea-#{$variant}-background)
+    )
+  );
 }
 
 .moon-textarea {
@@ -29,12 +46,12 @@ $sizes: ();
   padding: map.get($sizes, "md", "padding");
   border-radius: map.get($sizes, "md", "radius");
   font: map.get($sizes, "md", "font");
-  box-shadow: inset 0 0 0 var(--component-textarea-outline-stroke) var(--component-textarea-outline-border);
-  color: var(--color-text-primary);
-  background-color: var(--component-textarea-outline-background);
+  box-shadow: map.get($variants, "fill", "shadow");
+  color: map.get($variants, "fill", "color");
+  background-color: map.get($variants, "fill", "background");
 
   &::placeholder {
-    color: var(--color-text-secondary);
+    color: map.get($variants, "fill", "placeholder");
   }
 
   &:read-only,
@@ -70,6 +87,20 @@ $sizes: ();
         padding: map.get($prop, "padding");
         border-radius: map.get($prop, "radius");
         font: map.get($prop, "font");
+      }
+    }
+  }
+
+  @each $variant, $prop in $variants {
+    @if $variant != "fill" {
+      &.moon-textarea-#{$variant} {
+        box-shadow: map.get($prop, "shadow");
+        color: map.get($prop, "color");
+        background-color: map.get($prop, "background");
+
+        &::placeholder {
+          color: map.get($prop, "placeholder");
+        }
       }
     }
   }
