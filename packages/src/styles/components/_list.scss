@@ -1,6 +1,7 @@
 @use "sass:map";
 @use "variables";
 @use "variants";
+@use "utilities";
 
 @mixin list-sizes($size, $prop) {
   & > * {
@@ -18,12 +19,12 @@
 
 @function generate-size($size) {
   @return (
-    "height": var(--scale-#{$size}-height),
-    "gap": var(--scale-#{$size}-gap),
-    "padding": var(--list-padding-#{$size}),
-    "icon-size": var(--scale-#{$size}-icon-size),
-    "font": var(--scale-#{$size}-text-weight) var(--scale-#{$size}-text-size) / var(--scale-#{$size}-text-height)
-      var(--scale-#{$size}-text-font)
+    "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
+    "gap": var(--sizing-gap-#{utilities.get-size($size, "gap")}),
+    "padding": var(--sizing-padding-#{utilities.get-size($size, "padding")}),
+    "icon-size": var(--sizing-icon-size-#{utilities.get-size($size, "icon-size")}),
+    "font": var(--style-font-weight-medium) var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
+      var(--style-text-#{utilities.get-size($size, "font")}-line-height) var(--style-font-family-default)
   );
 }
 $sizes: ();
@@ -47,21 +48,21 @@ $sizes: ();
     padding: map.get($sizes, "md", "padding");
     height: map.get($sizes, "md", "height");
     font: map.get($sizes, "md", "font");
-    color: var(--semantic-text-primary);
+    color: var(--component-list-text-default);
 
     &:not(:last-child)::after {
       content: "";
       position: absolute;
       bottom: 0;
       inset-inline: 0;
-      height: var(--dimension-border-1);
-      background-color: var(--semantic-border-secondary);
+      height: var(--spacing-1);
+      background-color: var(--color-border-secondary);
     }
 
     :where(svg, .moon-icon) {
       width: map.get($sizes, "md", "icon-size");
       height: map.get($sizes, "md", "icon-size");
-      color: var(--semantic-icon-primary);
+      color: var(--color-icon-primary);
     }
 
     :where(:last-child) {

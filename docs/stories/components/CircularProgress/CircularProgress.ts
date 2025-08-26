@@ -1,7 +1,7 @@
 import joinClassnames from "../../shared/utils/joinClassnames";
 import getClasses from "./utils/getClasses";
 
-export const SIZES = ["2xs", "xs", "sm", "md", "lg", "xl", "2xl"] as const;
+export const SIZES = ["xs", "sm", "md", "lg", "xl", "2xl"] as const;
 
 export type Props = {
   size: (typeof SIZES)[number];

@@ -23,14 +23,16 @@ const Dialog = ({ title, hasTitle, hasDismissButton }: Props) => (
             {hasDismissButton && (
               <button
                 className="moon-dialog-close"
-                {...({ onclick: "document.getElementById('dialog').close()" } as any)}
+                {...({
+                  onclick: "document.getElementById('dialog').close()",
+                } as any)}
               >
                 <Icon name="close" />
               </button>
             )}
           </p>
         )}
-        <div className="w-full flex items-center justify-center h-space-160 bg-brand-subtle text-brand">
+        <div className="w-full flex items-center justify-center h-160 bg-brand-subtle text-brand">
           Content
         </div>
       </div>

@@ -25,12 +25,17 @@ const generateConfigFile = () => {
       "--componentsFileId",
       "S3q1SkVngbwHuwpxHKCsgtJj"
     );
+    const componentsProjectId = getArgValue(
+      "--componentsProjectId",
+      "408714341"
+    );
     const target = getArgValue("--target", "tailwindcss");
     const preflight = getArgValue("--preflight", false);
     const defaultConfig: Record<string, any> = {
       projectName,
       coreFileId,
       componentsFileId,
+      componentsProjectId,
       outputFolder,
       customPrefix,
       target,

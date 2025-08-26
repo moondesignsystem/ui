@@ -1,9 +1,13 @@
 @use "sass:map";
 @use "variables";
 @use "variants";
+@use "utilities";
 
 @function generate-size($size) {
-  @return ("height": var(--scale-#{$size}-height), "width": calc(var(--scale-#{$size}-width) * 2));
+  @return (
+    "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
+    "width": calc(var(--sizing-width-#{utilities.get-size($size, "width")}) * 2)
+  );
 }
 $sizes: ();
 @each $size in variants.$switch-sizes {
@@ -15,32 +19,32 @@ $sizes: ();
   width: map.get($sizes, "sm", "width");
   cursor: pointer;
   appearance: none;
-  border-radius: var(--radius-full);
-  border-width: var(--spacing-space-1);
-  border-color: var(--switch-unselected-border);
+  border-radius: var(--radius-9999);
+  border-width: var(--spacing-1);
+  border-color: var(--component-switch-border-default);
   background-color: currentcolor;
-  color: var(--switch-unselected-icon);
+  color: var(--component-switch-icon-unselected);
   transition:
     color 150ms ease-in-out,
     box-shadow 150ms ease-in-out,
     border-color 150ms ease-in-out;
   box-shadow:
-    calc(map.get($sizes, "sm", "height") * -1) 0 0 var(--spacing-space-1) var(--switch-unselected-background) inset,
-    0 0 0 var(--spacing-space-1) var(--switch-unselected-background) inset,
+    calc(map.get($sizes, "sm", "height") * -1) 0 0 var(--spacing-1) var(--component-switch-background-default) inset,
+    0 0 0 var(--spacing-1) var(--component-switch-background-default) inset,
     0 0;
 
   &:checked {
     background-image: none;
-    color: var(--switch-selected-icon);
-    border-color: var(--switch-selected-background);
+    color: var(--component-switch-icon-selected);
+    border-color: var(--component-switch-background-selected);
     box-shadow:
-      map.get($sizes, "sm", "height") 0 0 var(--spacing-space-1) var(--switch-selected-background) inset,
-      0 0 0 var(--spacing-space-1) var(--switch-selected-background) inset,
+      map.get($sizes, "sm", "height") 0 0 var(--spacing-1) var(--component-switch-background-selected) inset,
+      0 0 0 var(--spacing-1) var(--component-switch-background-selected) inset,
       0 0;
   }
 
   &:disabled {
-    opacity: var(--effect-opacity-60);
+    opacity: var(--style-opacity-disabled);
     cursor: not-allowed;
   }
 
@@ -50,14 +54,14 @@ $sizes: ();
         height: map.get($prop, "height");
         width: map.get($prop, "width");
         box-shadow:
-          calc(map.get($prop, "height") * -1) 0 0 var(--spacing-space-1) var(--switch-unselected-background) inset,
-          0 0 0 var(--spacing-space-1) var(--switch-unselected-background) inset,
+          calc(map.get($prop, "height") * -1) 0 0 var(--spacing-1) var(--component-switch-background-default) inset,
+          0 0 0 var(--spacing-1) var(--component-switch-background-default) inset,
           0 0;
 
         &:checked {
           box-shadow:
-            map.get($prop, "height") 0 0 var(--spacing-space-1) var(--switch-selected-background) inset,
-            0 0 0 var(--spacing-space-1) var(--switch-selected-background) inset,
+            map.get($prop, "height") 0 0 var(--spacing-1) var(--component-switch-background-selected) inset,
+            0 0 0 var(--spacing-1) var(--component-switch-background-selected) inset,
             0 0;
         }
       }
@@ -66,14 +70,15 @@ $sizes: ();
 
   &:dir(rtl) {
     box-shadow:
-      map.get($sizes, "sm", "height") 0 0 var(--spacing-space-1) var(--switch-unselected-background) inset,
-      0 0 0 var(--spacing-space-1) var(--switch-unselected-background) inset,
+      map.get($sizes, "sm", "height") 0 0 var(--spacing-1) var(--component-switch-background-default) inset,
+      0 0 0 var(--spacing-1) var(--component-switch-background-default) inset,
       0 0;
 
     &:checked {
       box-shadow:
-        calc(map.get($sizes, "sm", "height") * -1) 0 0 var(--spacing-space-1) var(--switch-selected-background) inset,
-        0 0 0 var(--spacing-space-1) var(--switch-selected-background) inset,
+        calc(map.get($sizes, "sm", "height") * -1) 0 0 var(--spacing-1) var(--component-switch-background-selected)
+          inset,
+        0 0 0 var(--spacing-1) var(--component-switch-background-selected) inset,
         0 0;
     }
 
@@ -81,14 +86,14 @@ $sizes: ();
       @if $size != "sm" {
         &.moon-switch-#{$size} {
           box-shadow:
-            map.get($prop, "height") 0 0 var(--spacing-space-1) var(--switch-unselected-background) inset,
-            0 0 0 var(--spacing-space-1) var(--switch-unselected-background) inset,
+            map.get($prop, "height") 0 0 var(--spacing-1) var(--switch-unselected-background) inset,
+            0 0 0 var(--spacing-1) var(--switch-unselected-background) inset,
             0 0;
 
           &:checked {
             box-shadow:
-              calc(map.get($prop, "height") * -1) 0 0 var(--spacing-space-1) var(--switch-selected-background) inset,
-              0 0 0 var(--spacing-space-1) var(--switch-selected-background) inset,
+              calc(map.get($prop, "height") * -1) 0 0 var(--spacing-1) var(--switch-selected-background) inset,
+              0 0 0 var(--spacing-1) var(--switch-selected-background) inset,
               0 0;
           }
         }

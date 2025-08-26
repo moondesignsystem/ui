@@ -41,20 +41,26 @@ const generateCoreFile = async (coreFileId, projectName, addComponents) => {
         }
         // Otherwise, separate root and theme variables
         const colorVariablePattern = new RegExp(`^--${colorCollectionName}-[a-zA-Z0-9-]+:`, "i");
+        // Pattern for utility variables that should always be in :root for Tailwind CSS v4
+        const utilityVariablePattern = new RegExp(`^--(${colorCollectionName})-(background|border|text|icon)-`, "i");
         const rootVariables = cssVariables
-            .filter((v) => !colorVariablePattern.test(v))
+            .filter((v) => !colorVariablePattern.test(v) || utilityVariablePattern.test(v))
             .map((v) => removeThemePrefixesFromVariables(v, themes, colorCollectionName))
             .sort();
         let cssContent = isTailwind
             ? "@theme inline {\n" + rootVariables.join("\n") + "\n}\n"
             : ":root {\n" + rootVariables.join("\n") + "\n}\n";
         const themedVariablePattern = new RegExp(`--(${colorCollectionName}|semantic)-[a-zA-Z0-9-]+`, "i");
-        const themedVariables = cssVariables.filter((v) => themedVariablePattern.test(v));
+        const themedVariables = cssVariables.filter((v) => themedVariablePattern.test(v) && !utilityVariablePattern.test(v));
         cssContent += isTailwind ? `@layer theme {\n` : "";
         themes.forEach((theme) => {
             const themePattern = new RegExp(`--${colorCollectionName}-${theme}-`, "i");
+            // Pattern to match semantic variables like --color-background-, --color-border-, etc.
+            const semanticVariablePattern = new RegExp(`^--${colorCollectionName}-(background|border|icon|text)-`, "i");
             let themeVariables = themedVariables
-                .filter((v) => themePattern.test(v) || !v.startsWith(`--${colorCollectionName}-`))
+                .filter((v) => themePattern.test(v) ||
+                !v.startsWith(`--${colorCollectionName}-`) ||
+                semanticVariablePattern.test(v))
                 .map((variable) => {
                 if (themePattern.test(variable)) {
                     const themePrefix = `--${colorCollectionName}-${theme}-`;

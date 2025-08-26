@@ -1,4 +1,3 @@
-import React from "react";
 import LinksBlock from "../../shared/LinksBlock";
 import createTag, { SIZES, VARIANTS } from "./Tag";
 import type { Meta, StoryObj } from "@storybook/html-vite";

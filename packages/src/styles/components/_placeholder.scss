@@ -1,15 +1,15 @@
 .moon-placeholder {
   width: 100%;
   height: 100%;
-  border-radius: var(--radius-4);
-  background-color: var(--placeholder-background);
+  border-radius: var(--radius-200);
+  background-color: var(--color-background-tertiary);
   will-change: background-position;
   animation: placeholder 1.8s ease-in-out infinite;
   background-image: linear-gradient(
     105deg,
     transparent 0%,
     transparent 40%,
-    var(--semantic-background-secondary) 50%,
+    var(--color-background-secondary) 50%,
     transparent 60%,
     transparent 100%
   );

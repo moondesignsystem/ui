@@ -1,5 +1,4 @@
 @use "iconButton";
-@use "variables";
 
 .moon-pagination {
   display: flex;
@@ -10,15 +9,16 @@
     @extend .moon-icon-button;
     @extend .moon-icon-button-sm;
 
-    font: variables.$scale-sm-text;
-    background-color: var(--pagination-unselected-background);
-    color: var(--pagination-unselected-text);
-    box-shadow: inset 0 0 0 var(--pagination-unselected-stroke) var(--pagination-unselected-border);
+    font: var(--style-font-weight-medium) var(--style-text-sm-font-size) / var(--style-text-sm-line-height)
+      var(--style-font-family-default);
+    background-color: var(--component-pagination-background-default);
+    color: var(--component-pagination-text-default);
+    box-shadow: inset 0 0 0 var(--component-pagination-stroke-default) var(--component-pagination-border-default);
 
     &.moon-pagination-item-active {
-      background-color: var(--pagination-selected-background);
-      color: var(--pagination-selected-text);
-      box-shadow: inset 0 0 0 var(--pagination-selected-stroke) var(--pagination-selected-border);
+      background-color: var(--component-pagination-background-selected);
+      color: var(--component-pagination-text-selected);
+      box-shadow: inset 0 0 0 var(--component-pagination-stroke-selected) var(--component-pagination-border-selected);
     }
   }
 }

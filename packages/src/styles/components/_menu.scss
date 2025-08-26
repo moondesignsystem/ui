@@ -1,9 +1,13 @@
 @use "sass:map";
 @use "list";
 @use "variants";
+@use "utilities";
 
 @function generate-size($size) {
-  @return ("padding": var(--scale-#{$size}-padding), "radius": var(--scale-#{$size}-radius));
+  @return (
+    "padding": var(--sizing-padding-#{utilities.get-size($size, "padding")}),
+    "radius": var(--component-menu-radius-#{$size})
+  );
 }
 $sizes: ();
 @each $size in variants.$menu-sizes {
@@ -16,12 +20,12 @@ $sizes: ();
   & > * {
     padding: 0 map.get($sizes, "md", "padding");
     border-radius: map.get($sizes, "md", "radius");
-    background-color: var(--semantic-background-transparent);
+    background-color: var(--color-background-transparent);
     cursor: pointer;
     transition: background-color 150ms ease-in-out;
 
     &:hover {
-      background-color: var(--semantic-background-hover);
+      background-color: var(--color-background-hover);
     }
 
     &:not(:last-child)::after {

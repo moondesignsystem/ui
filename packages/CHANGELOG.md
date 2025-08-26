@@ -1,5 +1,19 @@
 # @heathmont/moon-ui
 
+## 2.0.1
+
+### Patch Changes
+
+- feat: update css components
+
+## 2.0.0
+
+### Major Changes
+
+- feat!: migrate to new scalabe components approach
+
+  BREAKING CHANGE: all component variables come from one Figam componentsProjectId. Core and component variables have totally different names
+
 ## 1.13.2
 
 ### Patch Changes

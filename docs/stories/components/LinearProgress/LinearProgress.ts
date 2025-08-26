@@ -1,7 +1,7 @@
 import joinClassnames from "../../shared/utils/joinClassnames";
 import getClasses from "./utils/getClasses";
 
-export const SIZES = ["3xs", "2xs"] as const;
+export const SIZES = ["5xs", "4xs", "3xs", "2xs"] as const;
 
 export type Props = {
   hasLabel: boolean;

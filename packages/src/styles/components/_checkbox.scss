@@ -7,11 +7,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: var(--checkbox-size-container);
-  height: var(--checkbox-size-container);
-  box-shadow: inset 0 0 0 var(--checkbox-unselected-stroke) var(--checkbox-unselected-border);
-  background-color: var(--checkbox-unselected-background);
-  border-radius: var(--checkbox-size-radius);
+  width: var(--sizing-width-400);
+  height: var(--sizing-height-400);
+  box-shadow: inset 0 0 0 var(--component-checkbox-stroke-default) var(--component-checkbox-border-default);
+  background-color: var(--component-checkbox-background-default);
+  border-radius: var(--component-checkbox-radius);
   transition:
     background-color 150ms ease-in-out,
     opacity 150ms ease-in-out;
@@ -24,8 +24,8 @@
     inset: 0;
     transition: background-color 150ms ease-in-out;
     pointer-events: none;
-    border-radius: var(--checkbox-size-radius);
-    background-color: var(--semantic-background-transparent);
+    border-radius: var(--component-checkbox-radius);
+    background-color: var(--color-background-transparent);
   }
 
   &::before {
@@ -34,17 +34,17 @@
     width: 0;
     height: 0;
     mask-size: contain;
-    background-color: var(--checkbox-selected-icon);
+    background-color: var(--component-checkbox-icon-selected);
   }
 
   &:disabled {
     cursor: not-allowed;
-    opacity: var(--effect-opacity-disabled);
+    opacity: var(--style-opacity-disabled);
   }
 
   &:checked,
   &:indeterminate {
-    background-color: var(--checkbox-selected-background);
+    background-color: var(--component-checkbox-background-selected);
     box-shadow: none;
   }
 
@@ -61,23 +61,23 @@
   }
 
   &:hover::after {
-    background-color: var(--semantic-background-hover);
+    background-color: var(--color-background-hover);
   }
 }
 
 .moon-checkbox-wrapper {
   display: flex;
-  gap: var(--spacing-space-8);
+  gap: var(--spacing-8);
   align-items: center;
 
   :where(label) {
     font: variables.$text-body-300;
-    color: var(--semantic-text-primary);
+    color: var(--color-text-primary);
     cursor: pointer;
   }
 
   &:has(:disabled) label {
     cursor: not-allowed;
-    opacity: var(--effect-opacity-disabled);
+    opacity: var(--style-opacity-disabled);
   }
 }

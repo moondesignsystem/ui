@@ -1,6 +1,7 @@
 import formatName from "./utils/formatName.js";
 import formatValue from "./utils/formatValue.js";
-const formatAndAddCSSVariable = (cssVariables, collectionName, modeName, variableName, variable, modeId, localVariables, localVariableCollections, singleMode) => {
+import getConfig from "./utils/getConfig.js";
+const formatAndAddCSSVariable = (cssVariables, collectionName, modeName, variableName, variable, modeId, localVariables, localVariableCollections, singleMode, isComponent = false) => {
     if (!cssVariables || !Array.isArray(cssVariables)) {
         throw new Error("❌ cssVariables must be a valid array");
     }
@@ -8,9 +9,19 @@ const formatAndAddCSSVariable = (cssVariables, collectionName, modeName, variabl
         throw new Error("❌ All required parameters must be provided");
     }
     try {
-        const cssVariableName = formatName(singleMode
+        const config = getConfig();
+        let cssVariableName = formatName(singleMode
             ? `--${collectionName}-${variableName}`
             : `--${collectionName}-${modeName}-${variableName}`);
+        // Add component prefix for component variables
+        if (isComponent) {
+            cssVariableName = cssVariableName.replace(/^--/, "--component-");
+        }
+        cssVariableName = cssVariableName.replace(/^--product-[^-]*-/, "--");
+        const projectName = config.projectName.toLowerCase();
+        // Transform --color-MODE-moon-COLOR to --color-MODE-COLOR
+        const colorProjectRegex = new RegExp(`^--color-([^-]*-)?${projectName}-`, "i");
+        cssVariableName = cssVariableName.replace(colorProjectRegex, "--color-$1");
         if (typeof variable.valuesByMode[modeId] === "object" &&
             variable.valuesByMode[modeId] !== null &&
             variable.valuesByMode[modeId].type ===
@@ -42,8 +53,10 @@ const formatAndAddCSSVariable = (cssVariables, collectionName, modeName, variabl
             }
             const cssVariableAliasName = formatName(aliasSingleMode
                 ? `var(--${aliasVariableCollectionName}-${aliasVariableName})`
-                : `var(--${aliasVariableCollectionName}-${aliasModeName}-${aliasVariableName})`);
-            cssVariables.push(`${cssVariableName}: ${cssVariableAliasName};`);
+                : `var(--${aliasVariableCollectionName}-${aliasModeName}-${aliasVariableName})`).replace(/var\(--product-[^-]*-/, "var(--");
+            const aliasColorProjectRegex = new RegExp(`var\\(--color-([^-]*-)?${projectName}-`, "i");
+            const finalAliasName = cssVariableAliasName.replace(aliasColorProjectRegex, "var(--color-$1");
+            cssVariables.push(`${cssVariableName}: ${finalAliasName};`);
         }
         else {
             const value = variable.valuesByMode[modeId];

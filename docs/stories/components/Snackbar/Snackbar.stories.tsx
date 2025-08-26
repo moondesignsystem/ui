@@ -47,7 +47,7 @@ export default meta;
 
 export const Snackbar: StoryObj<Props> = {
   args: {
-    variant: "neutral",
+    variant: "fill",
     hasStartIcon: false,
     hasActionButton: false,
     actionLabel: "Action",
