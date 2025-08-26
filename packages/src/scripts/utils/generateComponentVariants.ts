@@ -9,7 +9,7 @@ const updateComponentVariants = async (
   if (componentName === "chip") {
     cssPattern = `--${componentName}-(\\w+)-unselected-background`;
   } else {
-    cssPattern = `--${componentName}-(\\w+)-background`;
+    cssPattern = `--component-${componentName}-(\\w+)-background`;
   }
   const cssVariantPattern = new RegExp(cssPattern, "g");
   const foundVariants = new Set<string>();
@@ -49,6 +49,12 @@ const generateComponentVariants = async (
       "alert",
       "snackbar",
       "tag",
+      "accordion",
+      "authenticator",
+      "badge",
+      "input",
+      "select",
+      "textarea",
     ];
     let updatedContent = variantsContent;
     for (const component of components) {
