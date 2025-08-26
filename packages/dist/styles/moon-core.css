@@ -1,4 +1,4 @@
-/* Moon UI v2.0.1 */
+/* Moon UI v2.1.0 */
 @theme inline {
 --color-background-backdrop: var(--color-gray-alpha-72);
 --color-background-brand-alpha: var(--color-mystic-indigo-alpha-12);
@@ -249,7 +249,7 @@
 --component-drawer-border: var(--color-border-secondary);
 --component-drawer-max-width: var(--container-width-900);
 --component-drawer-min-width: var(--container-width-300);
---component-drawer-radius: var(--dimension-radius-xl);
+--component-drawer-radius: var(--radius-600);
 --component-drawer-stroke: var(--sizing-stroke-100);
 --component-dropdown-background: var(--color-background-primary);
 --component-dropdown-border: var(--color-border-primary);
@@ -385,7 +385,7 @@
 --component-switch-border-selected: var(--color-border-positive);
 --component-switch-icon-selected: var(--color-icon-on-positive);
 --component-switch-icon-unselected: var(--color-icon-secondary);
---component-switch-size-padding: var(--dimension-dimension-2);
+--component-switch-size-padding: var(--sizing-padding-100);
 --component-switch-stroke-default: var(--sizing-stroke-100);
 --component-switch-stroke-selected: var(--sizing-stroke-0);
 --component-tab-list-tab-background-default: var(--color-background-transparent);
@@ -480,7 +480,7 @@
 --context-brand-outline-border: var(--color-border-brand);
 --context-brand-outline-icon: var(--color-icon-brand);
 --context-brand-outline-text: var(--color-text-brand);
---context-brand-soft-background: var(--color-background-brand-subtle);
+--context-brand-soft-background: var(--color-background-brand-alpha);
 --context-brand-soft-border: var(--color-border-brand);
 --context-brand-soft-icon: var(--color-icon-brand-strong);
 --context-brand-soft-text: var(--color-text-brand-strong);
@@ -1183,7 +1183,7 @@
 --context-brand-outline-border: var(--color-border-brand);
 --context-brand-outline-icon: var(--color-icon-brand);
 --context-brand-outline-text: var(--color-text-brand);
---context-brand-soft-background: var(--color-background-brand-subtle);
+--context-brand-soft-background: var(--color-background-brand-alpha);
 --context-brand-soft-border: var(--color-border-brand);
 --context-brand-soft-icon: var(--color-icon-brand-strong);
 --context-brand-soft-text: var(--color-text-brand-strong);
@@ -1592,7 +1592,7 @@
 --context-brand-outline-border: var(--color-border-brand);
 --context-brand-outline-icon: var(--color-icon-brand);
 --context-brand-outline-text: var(--color-text-brand);
---context-brand-soft-background: var(--color-background-brand-subtle);
+--context-brand-soft-background: var(--color-background-brand-alpha);
 --context-brand-soft-border: var(--color-border-brand);
 --context-brand-soft-icon: var(--color-icon-brand-strong);
 --context-brand-soft-text: var(--color-text-brand-strong);

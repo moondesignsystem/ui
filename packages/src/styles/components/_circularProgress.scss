@@ -2,12 +2,15 @@
 @use "variants";
 @use "utilities";
 
-@function generate-size($size) {
-  @return ("size": var(--sizing-height-#{utilities.get-size($size, "height")}));
-}
 $sizes: ();
 @each $size in variants.$circular-progress-sizes {
-  $sizes: map.set($sizes, $size, generate-size($size));
+  $sizes: map.set(
+    $sizes,
+    $size,
+    (
+      "size": var(--sizing-height-#{utilities.get-size($size, "height")})
+    )
+  );
 }
 
 .moon-circular-progress {

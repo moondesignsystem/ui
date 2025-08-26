@@ -2,15 +2,16 @@
 @use "variants";
 @use "utilities";
 
-@function generate-size($size) {
-  @return (
-    "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
-    "width": var(--sizing-width-#{utilities.get-size($size, "width")})
-  );
-}
 $sizes: ();
 @each $size in variants.$loader-sizes {
-  $sizes: map.set($sizes, $size, generate-size($size));
+  $sizes: map.set(
+    $sizes,
+    $size,
+    (
+      "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
+      "width": var(--sizing-width-#{utilities.get-size($size, "width")})
+    )
+  );
 }
 
 $border: var(--spacing-2);
