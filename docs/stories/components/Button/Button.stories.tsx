@@ -1,6 +1,7 @@
-import LinksBlock from "../../shared/LinksBlock";
-import createButton, { SIZES, VARIANTS } from "./Button";
 import type { Meta, StoryObj } from "@storybook/html-vite";
+import LinksBlock from "../../shared/LinksBlock";
+import CONTEXTS from "../../shared/contexts";
+import createButton, { SIZES, VARIANTS } from "./Button";
 import type { Props } from "./Button";
 
 const meta: Meta<Props> = {
@@ -29,6 +30,11 @@ const meta: Meta<Props> = {
       control: "select",
       options: VARIANTS,
     },
+    context: {
+      description: "Context of Button",
+      control: "select",
+      options: CONTEXTS,
+    },
   },
   parameters: {
     docs: {
@@ -49,6 +55,7 @@ export const Button: StoryObj<Props> = {
   args: {
     size: "md",
     variant: "fill",
+    context: "brand",
     disabled: false,
     hasStartIcon: false,
     hasEndIcon: false,

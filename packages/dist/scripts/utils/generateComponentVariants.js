@@ -5,7 +5,7 @@ const updateComponentVariants = async (componentName, coreCssContent, variantsCo
         cssPattern = `--${componentName}-(\\w+)-unselected-background`;
     }
     else {
-        cssPattern = `--${componentName}-(\\w+)-background`;
+        cssPattern = `--component-${componentName}-(\\w+)-background`;
     }
     const cssVariantPattern = new RegExp(cssPattern, "g");
     const foundVariants = new Set();
@@ -36,6 +36,12 @@ const generateComponentVariants = async (variantsScssPath, coreCssPath) => {
             "alert",
             "snackbar",
             "tag",
+            "accordion",
+            "authenticator",
+            "badge",
+            "input",
+            "select",
+            "textarea",
         ];
         let updatedContent = variantsContent;
         for (const component of components) {
