@@ -1,20 +1,19 @@
 @use "sass:map";
 @use "variables";
 @use "variants";
+@use "utilities";
 
 @function generate-size($size) {
   @return (
-    "track-radius": var(--utility-segmented-control-radius-track-#{$size}),
-    "track-padding": var(--segmented-control-track-#{$size}-padding),
-    "track-gap": var(--segmented-control-track-#{$size}-gap),
-    "height": var(--scale-#{$size}-height),
-    "width": var(--scale-#{$size}-width),
-    "padding": 0 var(--scale-#{$size}-padding),
-    "gap": var(--scale-#{$size}-gap),
-    "radius": var(--utility-segmented-control-radius-segment-#{$size}),
-    "font": var(--scale-#{$size}-text-weight) var(--scale-#{$size}-text-size) / var(--scale-#{$size}-text-height)
-      var(--scale-#{$size}-text-font),
-    "icon-size": var(--scale-#{$size}-icon-size)
+    "track-radius": var(--component-segmented-control-track-radius-#{$size}),
+    "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
+    "width": var(--sizing-width-#{utilities.get-size($size, "width")}),
+    "padding": 0 var(--sizing-padding-#{utilities.get-size($size, "padding")}),
+    "gap": var(--sizing-gap-#{utilities.get-size($size, "gap")}),
+    "radius": var(--component-segmented-control-segment-radius-#{$size}),
+    "font": var(--style-font-weight-medium) var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
+      var(--style-text-#{utilities.get-size($size, "font")}-line-height) var(--style-font-family-default),
+    "icon-size": var(--sizing-icon-size-#{utilities.get-size($size, "icon-size")})
   );
 }
 $sizes: ();
@@ -27,10 +26,11 @@ $sizes: ();
   width: 100%;
   justify-content: stretch;
   border-radius: map.get($sizes, "md", "track-radius");
-  background-color: var(--segmented-control-track-background);
-  padding: map.get($sizes, "md", "track-padding");
-  gap: map.get($sizes, "md", "track-gap");
-  box-shadow: inset 0 0 0 var(--segmented-control-track-stroke) var(--segmented-control-track-border);
+  background-color: var(--component-segmented-control-track-background);
+  padding: var(--sizing-padding-200);
+  gap: var(--sizing-gap-200);
+  box-shadow: inset 0 0 0 var(--component-segmented-control-track-stroke)
+    var(--component-segmented-control-track-border);
 
   :where(.moon-segment) {
     position: relative;
@@ -46,14 +46,14 @@ $sizes: ();
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: var(--segmented-control-segment-unselected-text);
-    background-color: var(--segmented-control-segment-unselected-background);
+    color: var(--component-segmented-control-segment-text-default);
+    background-color: var(--component-segmented-control-segment-background-default);
     padding: map.get($sizes, "md", "padding");
     gap: map.get($sizes, "md", "gap");
     border-radius: map.get($sizes, "md", "radius");
     font: map.get($sizes, "md", "font");
-    box-shadow: inset 0 0 0 var(--segmented-control-segment-unselected-stroke)
-      var(--segmented-control-segment-unselected-border);
+    box-shadow: inset 0 0 0 var(--component-segmented-control-segment-stroke-default)
+      var(--component-segmented-control-segment-border-default);
     transition:
       background-color 150ms ease-in-out,
       color 150ms ease-in-out,
@@ -62,23 +62,23 @@ $sizes: ();
     :where(svg, .moon-icon) {
       width: map.get($sizes, "md", "icon-size");
       height: map.get($sizes, "md", "icon-size");
-      color: var(--segmented-control-segment-unselected-icon);
+      color: var(--component-segmented-control-segment-icon-default);
       flex-shrink: 0;
     }
 
     &.moon-segment-active {
-      background-color: var(--segmented-control-segment-selected-background);
-      color: var(--segmented-control-segment-selected-text);
-      box-shadow: inset 0 0 0 var(--segmented-control-segment-selected-stroke)
-        var(--segmented-control-segment-selected-border);
+      background-color: var(--component-segmented-control-segment-background-selected);
+      color: var(--component-segmented-control-segment-text-selected);
+      box-shadow: inset 0 0 0 var(--component-segmented-control-segment-stroke-selected)
+        var(--component-segmented-control-segment-border-selected);
 
       :where(svg, .moon-icon) {
-        color: var(--segmented-control-segment-selected-icon);
+        color: var(--component-segmented-control-segment-icon-selected);
       }
     }
     &[disabled] {
       cursor: not-allowed;
-      opacity: var(--effect-opacity-disabled);
+      opacity: var(--style-opacity-disabled);
     }
 
     &::after {
@@ -88,19 +88,17 @@ $sizes: ();
       inset: 0;
       transition: background-color 150ms ease-in-out;
       pointer-events: none;
-      background-color: var(--semantic-background-transparent);
+      background-color: var(--color-background-transparent);
     }
 
     &:not([disabled]):hover::after {
-      background-color: var(--semantic-background-hover);
+      background-color: var(--color-background-hover);
     }
   }
   @each $size, $prop in $sizes {
     @if $size != "md" {
       &.moon-segmented-control-#{$size} {
         border-radius: map.get($prop, "track-radius");
-        padding: map.get($prop, "track-padding");
-        gap: map.get($prop, "track-gap");
 
         :where(.moon-segment) {
           height: map.get($prop, "height");

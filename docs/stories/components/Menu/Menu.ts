@@ -3,7 +3,7 @@ import joinClassnames from "../../shared/utils/joinClassnames";
 import starIcon from "../../shared/icons/starIcon";
 import getClasses from "./utils/getClasses";
 
-export const SIZES = ["sm", "md", "lg", "xl", "2xl"] as const;
+export const SIZES = ["sm", "md", "lg"] as const;
 
 export type Props = {
   items: number;

@@ -1,14 +1,5 @@
-import React, { useEffect } from "react";
 import type { Preview } from "@storybook/html-vite";
 import { withThemeByClassName } from "@storybook/addon-themes";
-import {
-  Title,
-  Subtitle,
-  Description,
-  Primary,
-  Controls,
-  Stories,
-} from "@storybook/addon-docs/blocks";
 import "./global.css";
 
 const preview: Preview = {
@@ -33,20 +24,6 @@ const preview: Preview = {
         color: /(background|color)$/i,
         date: /Date$/i,
       },
-    },
-    docs: {
-      toc: true,
-      page: () => (
-        <>
-          asdasd
-          <Title />
-          <Subtitle />
-          <Description />
-          <Primary />
-          {/* <Controls />
-          <Stories /> */}
-        </>
-      ),
     },
   },
   decorators: [

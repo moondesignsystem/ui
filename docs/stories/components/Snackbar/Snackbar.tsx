@@ -3,7 +3,7 @@ import joinClassnames from "../../shared/utils/joinClassnames";
 import starIcon from "../../shared/icons/starIcon";
 import getClasses from "./utils/getClasses";
 
-export const VARIANTS = ["neutral", "positive", "caution", "info"] as const;
+export const VARIANTS = ["fill", "soft", "outline", "ghost"] as const;
 
 export type Props = {
   title: string;

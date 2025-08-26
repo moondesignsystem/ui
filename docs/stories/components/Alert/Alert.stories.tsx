@@ -60,7 +60,7 @@ export default meta;
 
 export const Alert: StoryObj<Props> = {
   args: {
-    variant: "neutral",
+    variant: "fill",
     hasStartIcon: false,
     hasDismissButton: false,
     hasActionButton: false,

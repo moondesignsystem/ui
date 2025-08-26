@@ -6,11 +6,11 @@
 
 @function generate-variant($variant) {
   @return (
-    "color": var(--snackbar-#{$variant}-text),
-    "background": var(--snackbar-#{$variant}-background),
-    "shadow": inset 0 0 0 var(--snackbar-#{$variant}-stroke) var(--snackbar-#{$variant}-border),
-    "icon": var(--snackbar-#{$variant}-icon),
-    "width": var(--snackbar-#{$variant}-max-width)
+    "color": var(--component-snackbar-#{$variant}-text),
+    "background": var(--component-snackbar-#{$variant}-background),
+    "shadow": inset 0 0 0 var(--component-snackbar-#{$variant}-stroke) var(--component-snackbar-#{$variant}-border),
+    "icon": var(--component-snackbar-#{$variant}-icon),
+    "width": var(--component-snackbar-#{$variant}-max-width)
   );
 }
 $variants: ();
@@ -21,14 +21,16 @@ $variants: ();
 .moon-snackbar {
   @extend .moon-alert;
 
-  max-width: map.get($variants, "neutral", "width");
+  max-width: map.get($variants, "fill", "width");
   display: grid;
   grid-template-columns: auto minmax(auto, 1fr);
   grid-auto-flow: column;
   justify-content: start;
   justify-items: start;
-  font-weight: var(--font-weight-medium);
-  box-shadow: variables.$shadow-500, map.get($variants, "neutral", "shadow");
+  font-weight: var(--style-font-weight-medium);
+  color: map.get($variants, "fill", "color");
+  background-color: map.get($variants, "fill", "background");
+  box-shadow: variables.$shadow-500, map.get($variants, "fill", "shadow");
 
   :where(.moon-snackbar-action) {
     @extend .moon-button;
@@ -36,15 +38,15 @@ $variants: ();
     @extend .moon-button-ghost;
 
     justify-self: end;
-    color: map.get($variants, "neutral", "color");
+    color: map.get($variants, "fill", "color");
 
     :where(svg, .moon-icon) {
-      color: map.get($variants, "neutral", "icon");
+      color: map.get($variants, "fill", "icon");
     }
   }
 
   @each $variant, $prop in $variants {
-    @if $variant != "neutral" {
+    @if $variant != "fill" {
       &.moon-snackbar-#{$variant} {
         max-width: map.get($prop, "width");
         color: map.get($prop, "color");

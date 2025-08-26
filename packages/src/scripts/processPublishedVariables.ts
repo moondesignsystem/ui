@@ -60,14 +60,18 @@ const processPublishedVariables = (
         const allVariablesAreColor = Object.values(
           variableCollections[collectionName].variables
         ).every((variable) => variable.resolvedType === "COLOR");
-        if (allVariablesAreColor) {
+        if (collectionName.toLowerCase() === "color") {
           const collectionModes = variableCollections[collectionName].modes.map(
             (mode) => formatName(mode.name)
           );
-          if (themes.length === 0 || collectionModes.length > themes.length) {
-            themes = collectionModes;
-            colorCollectionName = formatName(collectionName);
-          }
+          themes = collectionModes;
+          colorCollectionName = formatName(collectionName);
+        } else if (allVariablesAreColor && themes.length === 0) {
+          const collectionModes = variableCollections[collectionName].modes.map(
+            (mode) => formatName(mode.name)
+          );
+          themes = collectionModes;
+          colorCollectionName = formatName(collectionName);
         }
       }
     }

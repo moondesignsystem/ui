@@ -8,15 +8,15 @@
   display: flex;
   align-items: center;
   width: 100%;
-  gap: var(--scale-lg-gap);
+  gap: var(--sizing-gap-400);
 }
 
 @function generate-variant($variant) {
   @return (
-    "color": var(--alert-#{$variant}-text),
-    "background": var(--alert-#{$variant}-background),
-    "shadow": inset 0 0 0 var(--alert-#{$variant}-stroke) var(--alert-#{$variant}-border),
-    "icon": var(--alert-#{$variant}-icon)
+    "color": var(--component-alert-#{$variant}-text),
+    "background": var(--component-alert-#{$variant}-background),
+    "shadow": inset 0 0 0 var(--component-alert-#{$variant}-stroke) var(--component-alert-#{$variant}-border),
+    "icon": var(--component-alert-#{$variant}-icon)
   );
 }
 $variants: ();
@@ -28,10 +28,11 @@ $variants: ();
   @include common;
 
   text-align: start;
-  min-height: var(--scale-lg-height);
-  padding: var(--scale-lg-padding);
-  border-radius: var(--scale-lg-radius);
-  font: variables.$text-body-300;
+  min-height: var(--sizing-height-1000);
+  padding: var(--sizing-padding-600);
+  border-radius: var(--component-alert-radius);
+  font: var(--style-font-weight-medium) var(--style-text-md-font-size) / var(--style-text-md-line-height)
+    var(--style-font-family-default);
   color: map.get($variants, "neutral", "color");
   background-color: map.get($variants, "neutral", "background");
   box-shadow: map.get($variants, "neutral", "shadow");
@@ -43,18 +44,18 @@ $variants: ();
   :where(.moon-alert-title-wrapper) {
     @include common;
 
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--style-font-weight-medium);
   }
 
   :where(svg, .moon-icon) {
     color: map.get($variants, "neutral", "icon");
-    width: var(--scale-lg-icon-size);
-    height: var(--scale-lg-icon-size);
+    width: var(--spacing-20);
+    height: var(--spacing-20);
   }
 
   :where(.moon-alert-title) {
     flex-grow: 1;
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--style-font-weight-medium);
   }
 
   :where(.moon-alert-content) {

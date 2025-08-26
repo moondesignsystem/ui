@@ -20,7 +20,7 @@ const createDialog = (args: Props) => {
   form.className = "moon-backdrop";
   form.appendChild(formButton);
   content.className =
-    "w-full flex items-center justify-center h-space-160 bg-brand-subtle text-brand";
+    "w-full flex items-center justify-center h-160 bg-brand-subtle text-brand";
   content.textContent = "Content";
   dialog.className = "moon-dialog";
   dialog.id = "dialog";
