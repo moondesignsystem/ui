@@ -50,8 +50,8 @@ $variants: ();
 
   :where(svg, .moon-icon) {
     color: map.get($variants, "fill", "icon");
-    width: var(--spacing-20);
-    height: var(--spacing-20);
+    width: var(--spacing-space-20);
+    height: var(--spacing-space-20);
   }
 
   :where(.moon-alert-title) {

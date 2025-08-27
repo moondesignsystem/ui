@@ -13,6 +13,34 @@ const processCoreVariables = async (fileId = null) => {
         for (const collectionName in variableCollections) {
             const collection = variableCollections[collectionName];
             const groupedVariables = {};
+            const collectionNameLower = collectionName.toLowerCase();
+            const projectName = config.projectName?.toLowerCase?.() || "";
+            let allowedProductModeIds = null;
+            if (collectionNameLower === "product") {
+                const matchingModes = collection.modes.filter((m) => m.name.toLowerCase().includes(projectName));
+                if (matchingModes.length > 0) {
+                    allowedProductModeIds = new Set(matchingModes.map((m) => m.modeId));
+                }
+                else if (collection.modes.length > 0) {
+                    allowedProductModeIds = new Set([collection.modes[0].modeId]);
+                }
+            }
+            let colorHasProjectPrefix = false;
+            let colorFallbackPrefix = null;
+            if (collectionNameLower === "color") {
+                for (const vName in collection.variables) {
+                    const parts = vName.split("/");
+                    if (parts.length >= 2) {
+                        const prefix = parts[0].toLowerCase();
+                        if (!colorFallbackPrefix)
+                            colorFallbackPrefix = prefix;
+                        if (prefix === projectName) {
+                            colorHasProjectPrefix = true;
+                            break;
+                        }
+                    }
+                }
+            }
             for (const variableName in collection.variables) {
                 const variable = collection.variables[variableName];
                 const singleMode = Object.keys(variable.valuesByMode).length === 1;
@@ -21,29 +49,20 @@ const processCoreVariables = async (fileId = null) => {
                     if (!mode)
                         continue;
                     const modeName = mode.name;
-                    // Filter modes in "product" collection to match projectName
-                    if (collectionName.toLowerCase() === "product") {
-                        // Check if mode name matches or contains the project name
-                        const projectName = config.projectName.toLowerCase();
-                        const modeNameLower = modeName.toLowerCase();
-                        // Skip modes that don't match the project name
-                        if (!modeNameLower.includes(projectName) &&
-                            modeNameLower !== projectName) {
+                    if (collectionNameLower === "product" && allowedProductModeIds) {
+                        if (!allowedProductModeIds.has(modeId))
                             continue;
-                        }
                     }
-                    // Filter variables in "color" collection based on product name in variable name
-                    // Pattern: --color-MODE-PRODUCT-colorName-number
-                    if (collectionName.toLowerCase() === "color") {
-                        const projectName = config.projectName.toLowerCase();
-                        const variableNameLower = variableName.toLowerCase();
-                        // Check if variable name contains the project name
-                        // Variable names are like "Moon/Gray/1" or "Bitcasino/Chichi/10"
-                        const variableNameParts = variableNameLower.split("/");
-                        if (variableNameParts.length >= 2) {
-                            const productInVariableName = variableNameParts[0];
-                            // Skip variables that don't match the project name
-                            if (productInVariableName !== projectName) {
+                    if (collectionNameLower === "color") {
+                        const parts = variableName.split("/");
+                        if (parts.length >= 2) {
+                            const prefix = parts[0].toLowerCase();
+                            if (colorHasProjectPrefix) {
+                                if (prefix !== projectName)
+                                    continue;
+                            }
+                            else if (colorFallbackPrefix &&
+                                prefix !== colorFallbackPrefix) {
                                 continue;
                             }
                         }

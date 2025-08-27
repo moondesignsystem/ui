@@ -20,7 +20,7 @@ $variants: ();
   display: inline-block;
   min-width: var(--sizing-width-100);
   min-height: var(--sizing-width-100);
-  padding: 0 var(--spacing-4);
+  padding: 0 var(--spacing-space-4);
   border-radius: var(--radius-9999);
   background-color: map.get($variants, "fill", "background");
   color: map.get($variants, "fill", "color");
@@ -54,7 +54,7 @@ $variants: ();
 
   :where(.moon-badge) {
     position: absolute;
-    bottom: calc(100% - var(--spacing-2));
-    inset-inline-start: calc(100% - var(--spacing-2));
+    bottom: calc(100% - var(--spacing-space-2));
+    inset-inline-start: calc(100% - var(--spacing-space-2));
   }
 }
