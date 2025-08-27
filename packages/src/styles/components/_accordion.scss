@@ -307,14 +307,3 @@ $variants: ();
     }
   }
 }
-
-@each $context in variants.$contexts {
-  .moon-accordion-#{$context} {
-    @each $variant in variants.$accordion-variants {
-      --component-accordion-#{$variant}-text: var(--context-#{$context}-#{$variant}-text);
-      --component-accordion-#{$variant}-icon: var(--context-#{$context}-#{$variant}-icon);
-      --component-accordion-#{$variant}-background: var(--context-#{$context}-#{$variant}-background);
-      --component-accordion-#{$variant}-border: var(--context-#{$context}-#{$variant}-border);
-    }
-  }
-}

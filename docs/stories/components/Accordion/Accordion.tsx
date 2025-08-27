@@ -9,11 +9,10 @@ export const VARIANTS = ["fill", "ghost", "outline"] as const;
 export type Props = {
   size: (typeof SIZES)[number];
   variant: (typeof VARIANTS)[number];
-  context: (typeof CONTEXTS)[number];
   items: number;
 };
 
-const Accordion = ({ size, variant, context, items }: Props) => {
+const Accordion = ({ size, variant, items }: Props) => {
   const accordionItems = new Array(items).fill("");
 
   return (
@@ -22,7 +21,6 @@ const Accordion = ({ size, variant, context, items }: Props) => {
         "moon-accordion",
         getClasses(size),
         getClasses(variant),
-        getClasses(context),
       ])}
     >
       {accordionItems.map((_, index) => (
