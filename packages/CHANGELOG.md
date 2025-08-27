@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 2.4.0
+
+### Minor Changes
+
+- feat: remove context from Accordion
+
 ## 2.3.1
 
 ### Patch Changes
