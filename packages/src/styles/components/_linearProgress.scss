@@ -50,7 +50,7 @@ $sizes: ();
 .moon-linear-progress-wrapper {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-2);
+  gap: var(--spacing-space-2);
 
   :where(label) {
     font: variables.$text-body-300;

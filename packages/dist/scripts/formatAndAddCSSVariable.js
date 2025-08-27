@@ -13,15 +13,16 @@ const formatAndAddCSSVariable = (cssVariables, collectionName, modeName, variabl
         let cssVariableName = formatName(singleMode
             ? `--${collectionName}-${variableName}`
             : `--${collectionName}-${modeName}-${variableName}`);
-        // Add component prefix for component variables
         if (isComponent) {
             cssVariableName = cssVariableName.replace(/^--/, "--component-");
         }
         cssVariableName = cssVariableName.replace(/^--product-[^-]*-/, "--");
         const projectName = config.projectName.toLowerCase();
-        // Transform --color-MODE-moon-COLOR to --color-MODE-COLOR
         const colorProjectRegex = new RegExp(`^--color-([^-]*-)?${projectName}-`, "i");
         cssVariableName = cssVariableName.replace(colorProjectRegex, "--color-$1");
+        if (/^--color-.*moon-/.test(cssVariableName)) {
+            cssVariableName = cssVariableName.replace(/--color-([^-]*-)?moon-/, "--color-$1");
+        }
         if (typeof variable.valuesByMode[modeId] === "object" &&
             variable.valuesByMode[modeId] !== null &&
             variable.valuesByMode[modeId].type ===
@@ -55,7 +56,10 @@ const formatAndAddCSSVariable = (cssVariables, collectionName, modeName, variabl
                 ? `var(--${aliasVariableCollectionName}-${aliasVariableName})`
                 : `var(--${aliasVariableCollectionName}-${aliasModeName}-${aliasVariableName})`).replace(/var\(--product-[^-]*-/, "var(--");
             const aliasColorProjectRegex = new RegExp(`var\\(--color-([^-]*-)?${projectName}-`, "i");
-            const finalAliasName = cssVariableAliasName.replace(aliasColorProjectRegex, "var(--color-$1");
+            let finalAliasName = cssVariableAliasName.replace(aliasColorProjectRegex, "var(--color-$1");
+            if (/var\(--color-.*moon-/.test(finalAliasName)) {
+                finalAliasName = finalAliasName.replace(/var\(--color-([^-]*-)?moon-/, "var(--color-$1");
+            }
             cssVariables.push(`${cssVariableName}: ${finalAliasName};`);
         }
         else {

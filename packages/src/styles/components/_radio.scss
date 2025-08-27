@@ -32,8 +32,8 @@
   &::before {
     content: "";
     display: block;
-    width: var(--spacing-0);
-    height: var(--spacing-0);
+    width: var(--spacing-space-0);
+    height: var(--spacing-space-0);
     border-radius: var(--radius-9999);
     background-color: var(--component-radio-icon-selected);
     transition:
@@ -63,7 +63,7 @@
 
 .moon-radio-wrapper {
   display: flex;
-  gap: var(--spacing-8);
+  gap: var(--spacing-space-8);
   align-items: center;
 
   :where(label) {
