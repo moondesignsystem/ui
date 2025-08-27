@@ -90,7 +90,7 @@
 
   :where(.moon-bottom-sheet-handle) {
     position: absolute;
-    top: calc((var(--spacing-8) + var(--component-bottom-sheet-handle-height)) * -1);
+    top: calc((var(--spacing-space-8) + var(--component-bottom-sheet-handle-height)) * -1);
     left: 50%;
     transform: translateX(-50%);
     width: var(--component-bottom-sheet-handle-width);

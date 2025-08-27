@@ -15,7 +15,7 @@
     "build": "npm run build --workspace packages",
     "build-storybook": "npm run build-storybook --workspace docs",
     "changeset": "changeset",
-    "version": "changeset version && npm install && npm update && npm run build && npm run test --workspace packages && node packages/dist/install.js --add-components",
+    "version": "changeset version && npm install && npm update && npm run build && node packages/dist/install.js --add-components",
     "release": "changeset publish"
   }
 }

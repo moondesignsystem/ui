@@ -13,16 +13,16 @@ type Props = {
 
 const LinksBlock = ({ context, moon, github }: Props) => (
   <DocsContainer context={context}>
-    <div className="sb-unstyled flex flex-col sm:flex-row gap-12 mb-40">
+    <div className="sb-unstyled flex flex-col sm:flex-row gap-space-12 mb-space-40">
       <a
         href={`https://beta.moon.io/latest/components/${moon}`}
         target="_blank"
-        className="overflow-hidden flex items-center border border-primary rounded-200 h-48"
+        className="overflow-hidden flex items-center border border-primary rounded-200 h-space-48"
       >
         <div className="flex items-center justify-center h-full aspect-square bg-tertiary">
-          <img src="/logo.png" alt="Website" className="w-40" />
+          <img src="/logo.png" alt="Website" className="w-space-40" />
         </div>
-        <div className="flex flex-col px-8">
+        <div className="flex flex-col px-space-8">
           <span className="text-md font-medium">View component</span>
           <span className="text-sm text-secondary">Moon Design System</span>
         </div>
@@ -30,12 +30,12 @@ const LinksBlock = ({ context, moon, github }: Props) => (
       <a
         href="https://www.npmjs.com/package/@heathmont/moon-ui"
         target="_blank"
-        className="overflow-hidden flex items-center border border-primary rounded-200 h-48"
+        className="overflow-hidden flex items-center border border-primary rounded-200 h-space-48"
       >
         <div className="flex items-center justify-center h-full aspect-square bg-tertiary">
-          <img src="/npm.png" alt="NPM" className="w-40" />
+          <img src="/npm.png" alt="NPM" className="w-space-40" />
         </div>
-        <div className="flex flex-col px-8">
+        <div className="flex flex-col px-space-8">
           <span className="text-md font-medium">View package</span>
           <span className="text-sm text-secondary">NPM</span>
         </div>
@@ -43,12 +43,12 @@ const LinksBlock = ({ context, moon, github }: Props) => (
       <a
         href={`https://github.com/coingaming/moon-ui/blob/main/src/components/${github}`}
         target="_blank"
-        className="overflow-hidden flex items-center border border-primary rounded-200 h-48"
+        className="overflow-hidden flex items-center border border-primary rounded-200 h-space-48"
       >
         <div className="flex items-center justify-center h-full aspect-square bg-tertiary">
-          <img src="/github.png" alt="GitHub" className="w-40" />
+          <img src="/github.png" alt="GitHub" className="w-space-40" />
         </div>
-        <div className="flex flex-col px-8">
+        <div className="flex flex-col px-space-8">
           <span className="text-md font-medium">View component</span>
           <span className="text-sm text-secondary">GitHub</span>
         </div>

@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 2.5.0
+
+### Minor Changes
+
+- feat: update spacing tokens
+
 ## 2.4.0
 
 ### Minor Changes

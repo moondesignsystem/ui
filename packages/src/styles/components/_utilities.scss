@@ -3,20 +3,20 @@
 
 .moon-form-hint {
   font: variables.$text-body-200;
-  color: var(--semantic-text-secondary);
+  color: var(--color-text-secondary);
 }
 
 .moon-form-group-error {
   :where(.moon-form-hint) {
-    color: var(--semantic-text-negative);
+    color: var(--color-text-negative);
   }
 
   :where(input, textarea, select) {
-    box-shadow: inset 0 0 0 var(--spacing-space-2) var(--semantic-border-negative);
+    box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-negative);
 
     &:hover,
     &:focus {
-      box-shadow: inset 0 0 0 var(--spacing-space-2) var(--semantic-border-negative);
+      box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-negative);
     }
   }
 }
@@ -26,20 +26,20 @@
   flex-direction: column;
   width: 100%;
   gap: var(--spacing-space-8);
-  opacity: var(--effect-opacity-100);
+  opacity: 1;
 
   :where(label) {
     font: variables.$text-body-300;
-    color: var(--semantic-text-primary);
+    color: var(--color-text-primary);
   }
 
   :where(.required) {
-    color: var(--semantic-text-negative);
+    color: var(--color-text-negative);
   }
 
   &:has(:disabled) label,
   &:has(:disabled) .moon-form-hint {
-    opacity: var(--effect-opacity-disabled);
+    opacity: var(--style-opacity-disabled);
   }
 }
 

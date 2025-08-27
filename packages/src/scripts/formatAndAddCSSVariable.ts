@@ -59,18 +59,22 @@ const formatAndAddCSSVariable = (
         ? `--${collectionName}-${variableName}`
         : `--${collectionName}-${modeName}-${variableName}`
     );
-    // Add component prefix for component variables
     if (isComponent) {
       cssVariableName = cssVariableName.replace(/^--/, "--component-");
     }
     cssVariableName = cssVariableName.replace(/^--product-[^-]*-/, "--");
     const projectName = config.projectName.toLowerCase();
-    // Transform --color-MODE-moon-COLOR to --color-MODE-COLOR
     const colorProjectRegex = new RegExp(
       `^--color-([^-]*-)?${projectName}-`,
       "i"
     );
     cssVariableName = cssVariableName.replace(colorProjectRegex, "--color-$1");
+    if (/^--color-.*moon-/.test(cssVariableName)) {
+      cssVariableName = cssVariableName.replace(
+        /--color-([^-]*-)?moon-/,
+        "--color-$1"
+      );
+    }
     if (
       typeof variable.valuesByMode[modeId] === "object" &&
       variable.valuesByMode[modeId] !== null &&
@@ -115,10 +119,16 @@ const formatAndAddCSSVariable = (
         `var\\(--color-([^-]*-)?${projectName}-`,
         "i"
       );
-      const finalAliasName = cssVariableAliasName.replace(
+      let finalAliasName = cssVariableAliasName.replace(
         aliasColorProjectRegex,
         "var(--color-$1"
       );
+      if (/var\(--color-.*moon-/.test(finalAliasName)) {
+        finalAliasName = finalAliasName.replace(
+          /var\(--color-([^-]*-)?moon-/,
+          "var(--color-$1"
+        );
+      }
       cssVariables.push(`${cssVariableName}: ${finalAliasName};`);
     } else {
       const value = variable.valuesByMode[modeId];
