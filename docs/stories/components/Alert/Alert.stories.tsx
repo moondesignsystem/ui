@@ -54,7 +54,7 @@ const meta: Meta<Props> = {
       container: ({ context }) => (
         <LinksBlock
           context={context}
-          moon="messaging-and-feedback/alert-pHlCZcnN"
+          moon="messaging-and-feedback/alert"
           github="_alert.scss"
         />
       ),

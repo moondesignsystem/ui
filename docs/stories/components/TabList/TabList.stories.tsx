@@ -34,7 +34,7 @@ const meta: Meta<Props> = {
       container: ({ context }) => (
         <LinksBlock
           context={context}
-          moon="navigation/tab-list-xPXqwb2q"
+          moon="navigation/tab-list"
           github="_tabList.scss"
         />
       ),

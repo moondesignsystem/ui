@@ -45,7 +45,7 @@ $sizes: ();
         var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
         var(--style-text-#{utilities.get-size($size, "font")}-line-height)
         var(--style-font-family-default),
-      "icon-size": var(--sizing-icon-size-#{utilities.get-size($size, "icon-size")})
+      "icon-size": var(--sizing-height-#{utilities.get-size($size, "icon-size")})
     )
   );
 }

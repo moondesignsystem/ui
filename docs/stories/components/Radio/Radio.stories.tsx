@@ -31,7 +31,7 @@ const meta: Meta<Props> = {
       container: ({ context }) => (
         <LinksBlock
           context={context}
-          moon="forms-and-selection-controls/radio-0WSJs8Jn"
+          moon="forms-and-selection-controls/radio"
           github="_radio.scss"
         />
       ),

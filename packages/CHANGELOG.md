@@ -1,5 +1,17 @@
 # @heathmont/moon-ui
 
+## 2.5.2
+
+### Patch Changes
+
+- fix: icon sizing
+
+## 2.5.1
+
+### Patch Changes
+
+- fix: update default coreFileId
+
 ## 2.5.0
 
 ### Minor Changes

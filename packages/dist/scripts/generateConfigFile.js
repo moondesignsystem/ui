@@ -18,7 +18,7 @@ const generateConfigFile = () => {
         const customPrefix = getArgValue("--custom-prefix", false);
         const projectName = getArgValue("--projectName", "moon");
         const outputFolder = getArgValue("--outputFolder", "dist");
-        const coreFileId = getArgValue("--coreFileId", "BZiHkvF7pXFHrFH8P0cG2T");
+        const coreFileId = getArgValue("--coreFileId", "tvIuWlowgVG4gzXjDuVIEw");
         const componentsFileId = getArgValue("--componentsFileId", "S3q1SkVngbwHuwpxHKCsgtJj");
         const componentsProjectId = getArgValue("--componentsProjectId", "408714341");
         const target = getArgValue("--target", "tailwindcss");

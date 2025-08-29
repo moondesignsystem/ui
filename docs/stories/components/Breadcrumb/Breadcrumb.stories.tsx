@@ -17,7 +17,7 @@ const meta: Meta<Props> = {
       container: ({ context }) => (
         <LinksBlock
           context={context}
-          moon="navigation/breadcrumb-fmvO4kmF"
+          moon="navigation/breadcrumb"
           github="_breadcrumb.scss"
         />
       ),

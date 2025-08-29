@@ -27,7 +27,7 @@ const meta: Meta<Props> = {
       container: ({ context }) => (
         <LinksBlock
           context={context}
-          moon="content-display/accordion-E9XfQUMP"
+          moon="content-display/accordion"
           github="_accordion.scss"
         />
       ),

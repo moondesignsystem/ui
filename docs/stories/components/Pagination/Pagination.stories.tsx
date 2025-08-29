@@ -21,7 +21,7 @@ const meta: Meta<Props> = {
       container: ({ context }) => (
         <LinksBlock
           context={context}
-          moon="navigation/pagination-0eAoS12R"
+          moon="navigation/pagination"
           github="_pagination.scss"
         />
       ),
