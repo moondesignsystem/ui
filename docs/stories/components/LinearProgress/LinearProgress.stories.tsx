@@ -31,7 +31,7 @@ const meta: Meta<Props> = {
       container: ({ context }) => (
         <LinksBlock
           context={context}
-          moon="indicators-and-status/linear-progress-21B8jv1D"
+          moon="indicators-and-status/linear-progress"
           github="_linearProgress.scss"
         />
       ),

@@ -39,7 +39,7 @@ const meta: Meta<Props> = {
       container: ({ context }) => (
         <LinksBlock
           context={context}
-          moon="forms-and-selection-controls/select-1pez5Tuw"
+          moon="forms-and-selection-controls/select"
           github="_select.scss"
         />
       ),

@@ -34,7 +34,7 @@ const meta: Meta<Props> = {
       container: ({ context }) => (
         <LinksBlock
           context={context}
-          moon="forms-and-selection-controls/segmented-control-4LpDPTEq"
+          moon="forms-and-selection-controls/segmented-control"
           github="_segmentedControl.scss"
         />
       ),

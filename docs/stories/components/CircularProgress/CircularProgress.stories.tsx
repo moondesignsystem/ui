@@ -22,7 +22,7 @@ const meta: Meta<Props> = {
       container: ({ context }) => (
         <LinksBlock
           context={context}
-          moon="indicators-and-status/circular-progress-oh6jQAgy"
+          moon="indicators-and-status/circular-progress"
           github="_circularProgress.scss"
         />
       ),
