@@ -41,7 +41,7 @@ const meta: Meta<Props> = {
       container: ({ context }) => (
         <LinksBlock
           context={context}
-          moon="actions/button-lyMcENoZ"
+          moon="actions/button"
           github="_button.scss"
         />
       ),

@@ -33,7 +33,7 @@ const meta: Meta<Props> = {
       container: ({ context }) => (
         <LinksBlock
           context={context}
-          moon="content-display/avatar-m0aYYxhj"
+          moon="content-display/avatar"
           github="_avatar.scss"
         />
       ),

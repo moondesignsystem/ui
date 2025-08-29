@@ -41,7 +41,7 @@ const meta: Meta<Props> = {
       container: ({ context }) => (
         <LinksBlock
           context={context}
-          moon="indicators-and-status/tag-WbODLvEF"
+          moon="indicators-and-status/tag"
           github="_tag.scss"
         />
       ),

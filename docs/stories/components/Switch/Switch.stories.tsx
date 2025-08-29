@@ -26,7 +26,7 @@ const meta: Meta<Props> = {
       container: ({ context }) => (
         <LinksBlock
           context={context}
-          moon="forms-and-selection-controls/switch-5jjecI2N"
+          moon="forms-and-selection-controls/switch"
           github="_switch.scss"
         />
       ),

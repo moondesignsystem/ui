@@ -40,7 +40,7 @@ const meta: Meta<Props> = {
       container: ({ context }) => (
         <LinksBlock
           context={context}
-          moon="forms-and-selection-controls/chip-KxJbxHjO"
+          moon="forms-and-selection-controls/chip"
           github="_chip.scss"
         />
       ),

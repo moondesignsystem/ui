@@ -32,7 +32,7 @@ const meta: Meta<Props> = {
       container: ({ context }) => (
         <LinksBlock
           context={context}
-          moon="containers-and-layout/drawer-eg6vuUa8"
+          moon="containers-and-layout/drawer"
           github="_drawer.scss"
         />
       ),

@@ -18,7 +18,7 @@ const meta: Meta<Props> = {
       container: ({ context }) => (
         <LinksBlock
           context={context}
-          moon="indicators-and-status/loader-f9YNrGZD"
+          moon="indicators-and-status/loader"
           github="_loader.scss"
         />
       ),
