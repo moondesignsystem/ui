@@ -26,7 +26,7 @@ $sizes: ();
       "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
       "gap": var(--sizing-gap-#{utilities.get-size($size, "gap")}),
       "padding": var(--sizing-padding-#{utilities.get-size($size, "padding")}),
-      "icon-size": var(--sizing-icon-size-#{utilities.get-size($size, "icon-size")}),
+      "icon-size": var(--sizing-height-#{utilities.get-size($size, "icon-size")}),
       "font": var(--style-font-weight-medium)
         var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
         var(--style-text-#{utilities.get-size($size, "font")}-line-height)

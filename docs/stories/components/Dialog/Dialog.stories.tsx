@@ -27,7 +27,7 @@ const meta: Meta<Props> = {
       container: ({ context }) => (
         <LinksBlock
           context={context}
-          moon="containers-and-layout/dialog-YEd9j6uo"
+          moon="containers-and-layout/dialog"
           github="_dialog.scss"
         />
       ),

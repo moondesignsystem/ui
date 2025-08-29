@@ -26,7 +26,7 @@ const meta: Meta<Props> = {
       container: ({ context }) => (
         <LinksBlock
           context={context}
-          moon="content-display/table-djm1mitt"
+          moon="content-display/table"
           github="_table.scss"
         />
       ),

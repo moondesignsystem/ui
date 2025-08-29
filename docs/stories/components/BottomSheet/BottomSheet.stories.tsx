@@ -31,7 +31,7 @@ const meta: Meta<Props> = {
       container: ({ context }) => (
         <LinksBlock
           context={context}
-          moon="containers-and-layout/bottom-sheet-qsmy4AdA"
+          moon="containers-and-layout/bottom-sheet"
           github="_bottomSheet.scss"
         />
       ),

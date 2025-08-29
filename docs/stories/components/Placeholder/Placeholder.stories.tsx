@@ -17,7 +17,7 @@ const meta: Meta<Props> = {
       container: ({ context }) => (
         <LinksBlock
           context={context}
-          moon="indicators-and-status/placeholder-nS1N1Pht"
+          moon="indicators-and-status/placeholder"
           github="_placeholder.scss"
         />
       ),

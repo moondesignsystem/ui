@@ -12,7 +12,7 @@ const meta: Meta<Props> = {
       container: ({ context }) => (
         <LinksBlock
           context={context}
-          moon="containers-and-layout/dropdown-7PTKuVFo-7PTKuVFo"
+          moon="containers-and-layout/dropdown"
           github="_dropdown.scss"
         />
       ),

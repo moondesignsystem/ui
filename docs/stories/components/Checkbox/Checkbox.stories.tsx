@@ -35,7 +35,7 @@ const meta: Meta<Props> = {
       container: ({ context }) => (
         <LinksBlock
           context={context}
-          moon="forms-and-selection-controls/checkbox-qTGrcEvB"
+          moon="forms-and-selection-controls/checkbox"
           github="_checkbox.scss"
         />
       ),

@@ -43,7 +43,7 @@ const meta: Meta<Props> = {
       container: ({ context }) => (
         <LinksBlock
           context={context}
-          moon="forms-and-selection-controls/textarea-gQJz078t"
+          moon="forms-and-selection-controls/textarea"
           github="_textarea.scss"
         />
       ),

@@ -41,7 +41,7 @@ const meta: Meta<Props> = {
       container: ({ context }) => (
         <LinksBlock
           context={context}
-          moon="messaging-and-feedback/snackbar-MAmMffP9"
+          moon="messaging-and-feedback/snackbar"
           github="_snackbar.scss"
         />
       ),

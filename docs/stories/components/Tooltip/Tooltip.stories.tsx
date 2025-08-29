@@ -27,7 +27,7 @@ const meta: Meta<Props> = {
       container: ({ context }) => (
         <LinksBlock
           context={context}
-          moon="messaging-and-feedback/tooltip-67OcVL5b"
+          moon="messaging-and-feedback/tooltip"
           github="_tooltip.scss"
         />
       ),

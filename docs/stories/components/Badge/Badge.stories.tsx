@@ -28,7 +28,7 @@ const meta: Meta<Props> = {
       container: ({ context }) => (
         <LinksBlock
           context={context}
-          moon="indicators-and-status/badge-Zo8Ufqsg"
+          moon="indicators-and-status/badge"
           github="_badge.scss"
         />
       ),

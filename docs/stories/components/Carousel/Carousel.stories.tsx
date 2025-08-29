@@ -25,7 +25,7 @@ const meta: Meta<Props> = {
       container: ({ context }) => (
         <LinksBlock
           context={context}
-          moon="content-display/carousel-oPVnjD6U"
+          moon="content-display/carousel"
           github="_carousel.scss"
         />
       ),

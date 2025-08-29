@@ -33,7 +33,7 @@ const meta: Meta<Props> = {
       container: ({ context }) => (
         <LinksBlock
           context={context}
-          moon="actions/icon-button-jcDPiXWF"
+          moon="actions/icon-button"
           github="_iconButton.scss"
         />
       ),
