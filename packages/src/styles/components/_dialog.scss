@@ -77,7 +77,9 @@
     display: grid;
     grid-auto-flow: column;
     align-items: center;
-    font: variables.$text-heading-200;
+    padding: var(--sizing-padding-700) var(--sizing-padding-900);
+    font: var(--style-font-weight-medium) var(--style-text-3xl-font-size) / var(--style-text-3xl-line-height)
+      var(--style-font-family-default);
   }
 
   :where(.moon-dialog-close) {

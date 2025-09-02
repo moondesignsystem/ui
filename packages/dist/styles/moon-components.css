@@ -1,7 +1,7 @@
-/* Moon UI v2.6.0 */
+/* Moon UI v2.6.1 */
 @layer components {
 .moon-form-hint {
-  font: var(--text-body-200-font-weight) var(--text-body-200-font-size)/var(--text-body-200-line-height) var(--text-body-200-font-family);
+  font: var(--style-font-weight-medium) var(--style-text-sm-font-size)/var(--style-text-sm-line-height) var(--style-font-family-default);
   color: var(--color-text-secondary);
 }
 
@@ -23,7 +23,7 @@
   opacity: 1;
 }
 .moon-form-group :where(label) {
-  font: var(--text-body-300-font-weight) var(--text-body-300-font-size)/var(--text-body-300-line-height) var(--text-body-300-font-family);
+  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
   color: var(--color-text-primary);
 }
 .moon-form-group :where(.required) {
@@ -1240,7 +1240,8 @@
   display: grid;
   grid-auto-flow: column;
   align-items: center;
-  font: var(--text-heading-200-font-weight) var(--text-heading-200-font-size)/var(--text-heading-200-line-height) var(--text-heading-200-font-family);
+  padding: var(--sizing-padding-700) var(--sizing-padding-900);
+  font: var(--style-font-weight-medium) var(--style-text-3xl-font-size)/var(--style-text-3xl-line-height) var(--style-font-family-default);
 }
 .moon-bottom-sheet-box :where(.moon-bottom-sheet-close) {
   justify-self: end;
@@ -1394,7 +1395,7 @@
   align-items: center;
 }
 .moon-checkbox-wrapper :where(label) {
-  font: var(--text-body-300-font-weight) var(--text-body-300-font-size)/var(--text-body-300-line-height) var(--text-body-300-font-family);
+  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
   color: var(--color-text-primary);
   cursor: pointer;
 }
@@ -1610,7 +1611,8 @@
   display: grid;
   grid-auto-flow: column;
   align-items: center;
-  font: var(--text-heading-200-font-weight) var(--text-heading-200-font-size)/var(--text-heading-200-line-height) var(--text-heading-200-font-family);
+  padding: var(--sizing-padding-700) var(--sizing-padding-900);
+  font: var(--style-font-weight-medium) var(--style-text-3xl-font-size)/var(--style-text-3xl-line-height) var(--style-font-family-default);
 }
 .moon-dialog-box :where(.moon-dialog-close) {
   justify-self: end;
@@ -1687,7 +1689,8 @@
   display: grid;
   grid-auto-flow: column;
   align-items: center;
-  font: var(--text-heading-200-font-weight) var(--text-heading-200-font-size)/var(--text-heading-200-line-height) var(--text-heading-200-font-family);
+  padding: var(--sizing-padding-700) var(--sizing-padding-900);
+  font: var(--style-font-weight-medium) var(--style-text-3xl-font-size)/var(--style-text-3xl-line-height) var(--style-font-family-default);
 }
 .moon-drawer-box :where(.moon-drawer-close) {
   justify-self: end;
@@ -1845,7 +1848,7 @@
   gap: var(--spacing-space-2);
 }
 .moon-linear-progress-wrapper :where(label) {
-  font: var(--text-body-300-font-weight) var(--text-body-300-font-size)/var(--text-body-300-line-height) var(--text-body-300-font-family);
+  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
   color: var(--color-text-primary);
   font-weight: var(--style-font-weight-medium);
   text-align: center;
@@ -2100,7 +2103,7 @@
   align-items: center;
 }
 .moon-radio-wrapper :where(label) {
-  font: var(--text-body-300-font-weight) var(--text-body-300-font-size)/var(--text-body-300-line-height) var(--text-body-300-font-family);
+  font: var(--style-font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--style-font-family-default);
   color: var(--color-text-primary);
   cursor: pointer;
 }
@@ -2451,7 +2454,6 @@
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   text-align: center;

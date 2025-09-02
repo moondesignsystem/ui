@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 2.6.1
+
+### Patch Changes
+
+- fix: typography mapping
+
 ## 2.6.0
 
 ### Minor Changes
