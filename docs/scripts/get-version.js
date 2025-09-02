@@ -28,3 +28,6 @@ const extractVersionFromCSS = () => {
 };
 
 const version = extractVersionFromCSS();
+console.log(version);
+
+export default version;

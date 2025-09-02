@@ -8,7 +8,7 @@ interface Config {
   projectName: string;
   outputFolder: string;
   themes?: Record<string, string>;
-  customPrefix: boolean;
+  customPrefix: string;
   target: "tailwindcss" | "css";
   preflight: boolean;
 }
