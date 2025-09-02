@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 2.6.0
+
+### Minor Changes
+
+- fix: generation of core and config files
+
 ## 2.5.2
 
 ### Patch Changes

@@ -15,7 +15,7 @@ const generateConfigFile = () => {
                 existingConfig = {};
             }
         }
-        const customPrefix = getArgValue("--custom-prefix", false);
+        const customPrefix = getArgValue("--custom-prefix", "");
         const projectName = getArgValue("--projectName", "moon");
         const outputFolder = getArgValue("--outputFolder", "dist");
         const coreFileId = getArgValue("--coreFileId", "tvIuWlowgVG4gzXjDuVIEw");

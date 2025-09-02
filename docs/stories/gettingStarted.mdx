@@ -3,44 +3,44 @@ import Version from "./shared/Version.tsx";
 
 <Meta title="Getting started" />
 
-<div class="sb-unstyled flex flex-col sm:flex-row gap-space-12 mb-space-40">
+<div className="sb-unstyled flex flex-col sm:flex-row gap-space-12 mb-space-40">
   <a
     href="https://beta.moon.io/"
     target="_blank"
-    class="overflow-hidden flex items-center border border-primary rounded-200 h-space-48"
+    className="overflow-hidden flex items-center border border-primary rounded-200 h-space-48"
   >
-    <div class="flex items-center justify-center h-full aspect-square bg-tertiary">
-      <img src="/logo.png" alt="Website" class="w-space-40" />
+    <div className="flex items-center justify-center h-full aspect-square bg-tertiary">
+      <img src="/logo.png" alt="Website" className="w-space-40" />
     </div>
-    <div class="flex flex-col px-space-8">
-      <span class="text-md font-medium">Moon Design System</span>
-      <span class="text-sm text-secondary">Website</span>
+    <div className="flex flex-col px-space-8">
+      <span className="text-md font-medium">Moon Design System</span>
+      <span className="text-sm text-secondary">Website</span>
     </div>
   </a>
   <a
     href="https://www.npmjs.com/package/@heathmont/moon-ui"
     target="_blank"
-    class="overflow-hidden flex items-center border border-primary rounded-200 h-space-48"
+    className="overflow-hidden flex items-center border border-primary rounded-200 h-space-48"
   >
-    <div class="flex items-center justify-center h-full aspect-square bg-tertiary">
-      <img src="/npm.png" alt="NPM" class="w-space-40" />
+    <div className="flex items-center justify-center h-full aspect-square bg-tertiary">
+      <img src="/npm.png" alt="NPM" className="w-space-40" />
     </div>
-    <div class="flex flex-col px-space-8">
-      <span class="text-md font-medium">View package</span>
-      <span class="text-sm text-secondary">NPM</span>
+    <div className="flex flex-col px-space-8">
+      <span className="text-md font-medium">View package</span>
+      <span className="text-sm text-secondary">NPM</span>
     </div>
   </a>
   <a
     href="https://github.com/coingaming/moon-ui"
     target="_blank"
-    class="overflow-hidden flex items-center border border-primary rounded-200 h-space-48"
+    className="overflow-hidden flex items-center border border-primary rounded-200 h-space-48"
   >
-    <div class="flex items-center justify-center h-full aspect-square bg-tertiary">
-      <img src="/github.png" alt="GitHub" class="w-space-40" />
+    <div className="flex items-center justify-center h-full aspect-square bg-tertiary">
+      <img src="/github.png" alt="GitHub" className="w-space-40" />
     </div>
-    <div class="flex flex-col px-space-8">
-      <span class="text-md font-medium">View repository</span>
-      <span class="text-sm text-secondary">GitHub</span>
+    <div className="flex flex-col px-space-8">
+      <span className="text-md font-medium">View repository</span>
+      <span className="text-sm text-secondary">GitHub</span>
     </div>
   </a>
 </div>
@@ -73,8 +73,8 @@ npx @heathmont/moon-ui
 # Generate both core and component CSS
 npx @heathmont/moon-ui --add-components
 
-# Use custom CSS class prefix (uses projectName as prefix)
-npx @heathmont/moon-ui --custom-prefix
+# Use custom CSS class prefix
+npx @heathmont/moon-ui --custom-prefix your-prefix
 
 # Customize project name (default: 'moon')
 npx @heathmont/moon-ui --projectName your-project
@@ -106,9 +106,9 @@ The tool automatically creates a `moonconfig.json` file with default values if o
 {
   "projectName": "PROJECT_NAME",
   "coreFileId": "CORE_FILE_ID",
-  "componentsFileId": "COMPONENTS_FILE_ID",
+  "componentsProjectId": "COMPONENTS_PROJECT_ID",
   "outputFolder": "OUTPUT_FOLDER",
-  "customPrefix": false,
+  "customPrefix": "",
   "target": "tailwindcss",
   "themes": {}
 }
@@ -158,19 +158,19 @@ By default, all component classes use the `moon-` prefix:
 }
 ```
 
-Enable custom prefixes using `--custom-prefix` to use your `projectName` as the prefix:
+Enable custom prefixes using `--custom-prefix` to use your own prefix:
 
 ```bash
-npx @heathmont/moon-ui --add-components --custom-prefix --projectName company
+npx @heathmont/moon-ui --add-components --custom-prefix your-prefix
 ```
 
 This generates:
 
 ```css
-.company-button {
+.your-prefix-button {
   /* styles */
 }
-.company-tooltip {
+.your-prefix-tooltip {
   /* styles */
 }
 ```

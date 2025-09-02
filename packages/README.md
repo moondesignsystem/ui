@@ -26,8 +26,8 @@ npx @heathmont/moon-ui
 # Generate both core and component CSS
 npx @heathmont/moon-ui --add-components
 
-# Use custom CSS class prefix (uses projectName as prefix)
-npx @heathmont/moon-ui --custom-prefix
+# Use custom CSS class prefix
+npx @heathmont/moon-ui --custom-prefix your-prefix
 
 # Customize project name (default: 'moon')
 npx @heathmont/moon-ui --projectName your-project
@@ -59,9 +59,9 @@ The tool automatically creates a `moonconfig.json` file with default values if o
 {
   "projectName": "PROJECT_NAME",
   "coreFileId": "CORE_FILE_ID",
-  "componentsFileId": "COMPONENTS_FILE_ID",
+  "componentsProjectId": "COMPONENTS_PROJECT_ID",
   "outputFolder": "OUTPUT_FOLDER",
-  "customPrefix": false,
+  "customPrefix": "",
   "target": "tailwindcss",
   "themes": {}
 }
@@ -111,19 +111,19 @@ By default, all component classes use the `moon-` prefix:
 }
 ```
 
-Enable custom prefixes using `--custom-prefix` to use your `projectName` as the prefix:
+Enable custom prefixes using `--custom-prefix` to use your own prefix:
 
 ```bash
-npx @heathmont/moon-ui --add-components --custom-prefix --projectName company
+npx @heathmont/moon-ui --add-components --custom-prefix your-prefix
 ```
 
 This generates:
 
 ```css
-.company-button {
+.your-prefix-button {
   /* styles */
 }
-.company-tooltip {
+.your-prefix-tooltip {
   /* styles */
 }
 ```

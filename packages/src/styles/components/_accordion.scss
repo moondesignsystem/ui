@@ -28,7 +28,7 @@ $variants: ();
     $variants,
     $variant,
     (
-      "color": var(--component-accordion-#{$variant}-text),
+      "color": var(--component-accordion-#{$variant}-title),
       "background": var(--component-accordion-#{$variant}-background),
       "border": var(--component-accordion-#{$variant}-border),
       "icon": var(--component-accordion-#{$variant}-icon),
