@@ -6,11 +6,10 @@ const replaceClassPrefix = (cssContent: string) => {
   }
   try {
     const config = getConfig();
-    const prefix = config?.customPrefix;
-    if (!prefix) {
+    if (!config?.customPrefix || config.customPrefix === "") {
       return cssContent;
     }
-    return cssContent.replace(/\.moon-/g, `.${config.projectName}-`);
+    return cssContent.replace(/\.moon-/g, `.${config.customPrefix}-`);
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(`❌ Failed to replace class prefix: ${error.message}`);
