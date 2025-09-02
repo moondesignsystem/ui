@@ -7,8 +7,8 @@
   "main": "test_file.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "storybook dev -p 6006",
-    "build-storybook": "MOON_UI_VERSION=$(node scripts/get-version.js) storybook build",
+    "dev": "VITE_MOON_UI_VERSION=$(node scripts/get-version.js) storybook dev -p 6006",
+    "build-storybook": "VITE_MOON_UI_VERSION=$(node scripts/get-version.js) storybook build",
     "moon-ui": "npx @heathmont/moon-ui --add-components"
   },
   "keywords": [],

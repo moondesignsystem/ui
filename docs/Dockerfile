@@ -22,8 +22,8 @@ RUN node packages/dist/install.js --add-components
 WORKDIR /app/docs
 ENV NODE_ENV=production
 # Extract version from CSS and set as environment variable for Vite
-RUN MOON_UI_VERSION=$(node scripts/get-version.js) && \
-  export MOON_UI_VERSION && \
+RUN VITE_MOON_UI_VERSION=$(node scripts/get-version.js) && \
+  export VITE_MOON_UI_VERSION && \
   npm run build-storybook
 
 FROM node:22-alpine AS runner

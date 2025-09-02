@@ -11,6 +11,7 @@ import processComponentVariables from "./processComponentVariables.js";
 import getConfig from "./utils/getConfig.js";
 
 // STEP 1. Generate base CSS file
+
 const generateCoreFile = async (
   coreFileId: string,
   projectName: string,
@@ -34,7 +35,6 @@ const generateCoreFile = async (
     const outputCoreFile = `${outputFolder}/${projectName}-core.css`;
     const version = getPackageVersion();
     const versionComment = `/* Moon UI v${version} */\n`;
-    // If fewer than 2 themes, put all variables in :root
     if (themes.length < 2) {
       const allVariables = cssVariables
         .map((v) =>
@@ -47,51 +47,120 @@ const generateCoreFile = async (
       fs.writeFileSync(outputCoreFile, versionComment + cssContent);
       return;
     }
-    // Otherwise, separate root and theme variables
     const colorVariablePattern = new RegExp(
       `^--${colorCollectionName}-[a-zA-Z0-9-]+:`,
       "i"
     );
-    // Pattern for utility variables that should always be in :root for Tailwind CSS v4
-    const utilityVariablePattern = new RegExp(
-      `^--(${colorCollectionName})-(background|border|text|icon)-`,
-      "i"
-    );
-    const rootVariables = cssVariables
-      .filter(
-        (v) => !colorVariablePattern.test(v) || utilityVariablePattern.test(v)
-      )
-      .map((v) =>
-        removeThemePrefixesFromVariables(v, themes, colorCollectionName)
-      )
-      .sort();
-    let cssContent = isTailwind
-      ? "@theme inline {\n" + rootVariables.join("\n") + "\n}\n"
-      : ":root {\n" + rootVariables.join("\n") + "\n}\n";
+
+    let cssContent: string;
+
+    if (isTailwind) {
+      const defaultTheme = themes[0];
+      const defaultThemePattern = new RegExp(
+        `--${colorCollectionName}-${defaultTheme}-`,
+        "i"
+      );
+
+      const defaultThemeVariables = cssVariables.filter((v) =>
+        defaultThemePattern.test(v)
+      );
+
+      const nonThemeVariables = cssVariables
+        .filter((v) => !colorVariablePattern.test(v))
+        .map((v) =>
+          removeThemePrefixesFromVariables(v, themes, colorCollectionName)
+        );
+
+      const themedVariablesWithDefaults = cssVariables
+        .filter(
+          (v) =>
+            colorVariablePattern.test(v) ||
+            v.includes(`var(--${colorCollectionName}-`) ||
+            v.includes("var(--context-")
+        )
+        .map((v) => {
+          const cleaned = removeThemePrefixesFromVariables(
+            v,
+            themes,
+            colorCollectionName
+          );
+          const varName = cleaned.split(":")[0];
+
+          const defaultVariable = defaultThemeVariables.find((defaultVar) => {
+            const defaultCleaned = removeThemePrefixesFromVariables(
+              defaultVar,
+              themes,
+              colorCollectionName
+            );
+            return defaultCleaned.split(":")[0] === varName;
+          });
+
+          if (defaultVariable) {
+            return removeThemePrefixesFromVariables(
+              defaultVariable,
+              themes,
+              colorCollectionName
+            );
+          }
+
+          return cleaned;
+        })
+        .filter((variable) => {
+          // Exclude variables with RGB values (primitive color tokens)
+          const value = variable.split(":")[1]?.trim() || "";
+          return !value.startsWith("rgb(");
+        })
+        .filter((name, index, arr) => arr.indexOf(name) === index);
+
+      const allVariables = [
+        ...nonThemeVariables,
+        ...themedVariablesWithDefaults,
+      ].sort();
+      cssContent = "@theme inline {\n" + allVariables.join("\n") + "\n}\n";
+    } else {
+      const rootVariables = cssVariables
+        .filter((v) => !colorVariablePattern.test(v))
+        .map((v) =>
+          removeThemePrefixesFromVariables(v, themes, colorCollectionName)
+        )
+        .sort();
+      cssContent = ":root {\n" + rootVariables.join("\n") + "\n}\n";
+    }
+
     const themedVariablePattern = new RegExp(
-      `--(${colorCollectionName}|semantic)-[a-zA-Z0-9-]+`,
+      `--(${colorCollectionName}|semantic|component|context)-[a-zA-Z0-9-]+`,
       "i"
     );
-    const themedVariables = cssVariables.filter(
-      (v) => themedVariablePattern.test(v) && !utilityVariablePattern.test(v)
-    );
+
+    let themedVariables;
+    if (isTailwind) {
+      themedVariables = cssVariables.filter((v) => {
+        return (
+          themedVariablePattern.test(v) ||
+          colorVariablePattern.test(v) ||
+          v.includes(`var(--${colorCollectionName}-`) ||
+          v.includes("var(--context-")
+        );
+      });
+    } else {
+      themedVariables = cssVariables.filter((v) =>
+        colorVariablePattern.test(v)
+      );
+    }
     cssContent += isTailwind ? `@layer theme {\n` : "";
     themes.forEach((theme) => {
       const themePattern = new RegExp(
         `--${colorCollectionName}-${theme}-`,
         "i"
       );
-      // Pattern to match semantic variables like --color-background-, --color-border-, etc.
-      const semanticVariablePattern = new RegExp(
-        `^--${colorCollectionName}-(background|border|icon|text)-`,
-        "i"
-      );
+
       let themeVariables = themedVariables
         .filter(
           (v) =>
             themePattern.test(v) ||
             !v.startsWith(`--${colorCollectionName}-`) ||
-            semanticVariablePattern.test(v)
+            v.includes(`var(--${colorCollectionName}-`) ||
+            v.includes("var(--context-")
         )
         .map((variable) => {
           if (themePattern.test(variable)) {
