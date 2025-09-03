@@ -25,6 +25,14 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    docs: {
+      toc: true,
+    },
+    options: {
+      storySort: {
+        order: ['Getting started', '*'],
+      },
+    },
   },
   decorators: [
     withThemeByClassName({
