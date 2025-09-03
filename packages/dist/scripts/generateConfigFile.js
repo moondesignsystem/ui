@@ -15,18 +15,16 @@ const generateConfigFile = () => {
                 existingConfig = {};
             }
         }
-        const customPrefix = getArgValue("--custom-prefix", "");
+        const customPrefix = getArgValue("--customPrefix", "");
         const projectName = getArgValue("--projectName", "moon");
         const outputFolder = getArgValue("--outputFolder", "dist");
         const coreFileId = getArgValue("--coreFileId", "tvIuWlowgVG4gzXjDuVIEw");
-        const componentsFileId = getArgValue("--componentsFileId", "S3q1SkVngbwHuwpxHKCsgtJj");
         const componentsProjectId = getArgValue("--componentsProjectId", "408714341");
         const target = getArgValue("--target", "tailwindcss");
         const preflight = getArgValue("--preflight", false);
         const defaultConfig = {
             projectName,
             coreFileId,
-            componentsFileId,
             componentsProjectId,
             outputFolder,
             customPrefix,

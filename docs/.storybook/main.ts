@@ -24,6 +24,10 @@ const config: StorybookConfig = {
     options: {},
   },
 
+  docs: {
+    defaultName: "Getting started",
+  },
+
   managerHead: (head) => `
    <!-- Google tag (gtag.js) -->
   <script

@@ -4,16 +4,17 @@ A UI library for generating core and component CSS files from Figma design token
 
 ## Quick Start
 
-1. **Set up Figma token**: Add your Figma personal access token to an `.env` file:
+**Set up Figma token**: Add your Figma personal access token to an `.env` file:
 
-   ```bash
-   FIGMA_TOKEN=YOUR_FIGMA_PERSONAL_ACCESS_TOKEN
-   ```
+```bash
+FIGMA_TOKEN=YOUR_FIGMA_PERSONAL_ACCESS_TOKEN
+```
 
-2. **Generate CSS**: Run the tool to generate your CSS files:
-   ```bash
-   npx @heathmont/moon-ui
-   ```
+**Generate CSS**: Run the tool to generate your CSS files:
+
+```bash
+npx @heathmont/moon-ui
+```
 
 ## Usage
 
@@ -27,7 +28,7 @@ npx @heathmont/moon-ui
 npx @heathmont/moon-ui --add-components
 
 # Use custom CSS class prefix
-npx @heathmont/moon-ui --custom-prefix your-prefix
+npx @heathmont/moon-ui --customPrefix your-prefix
 
 # Customize project name (default: 'moon')
 npx @heathmont/moon-ui --projectName your-project
@@ -63,6 +64,7 @@ The tool automatically creates a `moonconfig.json` file with default values if o
   "outputFolder": "OUTPUT_FOLDER",
   "customPrefix": "",
   "target": "tailwindcss",
+  "preflight": false,
   "themes": {}
 }
 ```
@@ -111,10 +113,10 @@ By default, all component classes use the `moon-` prefix:
 }
 ```
 
-Enable custom prefixes using `--custom-prefix` to use your own prefix:
+Enable custom prefixes using `--customPrefix` to use your own prefix:
 
 ```bash
-npx @heathmont/moon-ui --add-components --custom-prefix your-prefix
+npx @heathmont/moon-ui --add-components --customPrefix your-prefix
 ```
 
 This generates:
