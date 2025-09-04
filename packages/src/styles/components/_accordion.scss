@@ -14,10 +14,10 @@ $sizes: ();
       "padding": var(--sizing-padding-#{utilities.get-size($size, "padding")}),
       "padding-end": calc(var(--spacing-space-20) * 2),
       "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
-      "font": var(--style-font-weight-medium)
+      "font": var(--font-weight-medium)
         var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
         var(--style-text-#{utilities.get-size($size, "font")}-line-height)
-        var(--style-font-family-default)
+        var(--font-default)
     )
   );
 }
@@ -165,7 +165,7 @@ $variants: ();
       min-height: 0;
       cursor: unset;
       font: map.get($sizes, "md", "font");
-      font-weight: var(--style-font-weight-regular);
+      font-weight: var(--font-weight-default);
       color: map.get($variants, "fill", "color");
       transition:
         visibility 0.2s ease-out,
@@ -271,7 +271,7 @@ $variants: ();
 
           .moon-accordion-content {
             font: map.get($prop, "font");
-            font-weight: var(--style-font-weight-regular);
+            font-weight: var(--font-weight-default);
           }
 
           .moon-accordion-open {

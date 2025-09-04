@@ -26,10 +26,10 @@ $sizes: ();
       "padding": var(--sizing-padding-#{utilities.get-size($size, "padding")}),
       "gap": var(--sizing-gap-#{utilities.get-size($size, "gap")}),
       "radius": var(--component-button-radius-#{$size}),
-      "font": var(--style-font-weight-medium)
+      "font": var(--font-weight-medium)
         var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
         var(--style-text-#{utilities.get-size($size, "font")}-line-height)
-        var(--style-font-family-default),
+        var(--font-default),
       "icon-size": var(--sizing-height-#{utilities.get-size($size, "icon-size")})
     )
   );

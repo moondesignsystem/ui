@@ -27,10 +27,10 @@ $sizes: ();
       "gap": var(--sizing-gap-#{utilities.get-size($size, "gap")}),
       "padding": var(--sizing-padding-#{utilities.get-size($size, "padding")}),
       "icon-size": var(--sizing-height-#{utilities.get-size($size, "icon-size")}),
-      "font": var(--style-font-weight-medium)
+      "font": var(--font-weight-medium)
         var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
         var(--style-text-#{utilities.get-size($size, "font")}-line-height)
-        var(--style-font-family-default)
+        var(--font-default)
     )
   );
 }

@@ -11,10 +11,10 @@ $sizes: ();
     (
       "padding": var(--sizing-padding-#{utilities.get-size($size, "padding")}),
       "radius": var(--component-forms-radius-#{$size}),
-      "font": var(--style-font-weight-medium)
+      "font": var(--font-weight-medium)
         var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
         var(--style-text-#{utilities.get-size($size, "font")}-line-height)
-        var(--style-font-family-default)
+        var(--font-default)
     )
   );
 }
