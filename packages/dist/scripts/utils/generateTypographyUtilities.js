@@ -14,8 +14,8 @@ const generateTypographyUtilities = (isTailwind, cssContent) => {
         const selector = `text-${name}`;
         const properties = `font-size: var(--style-text-${name}-font-size);\n` +
             `line-height: var(--style-text-${name}-line-height);\n` +
-            `font-weight: var(--style-text-${name}-font-weight);\n` +
-            `font-family: var(--style-text-${name}-font-family);`;
+            `font-weight: var(--style-text-${name}-font-weight-default);\n` +
+            `font-family: var(--font-default);`;
         return isTailwind
             ? `@utility ${selector} {\n${properties}\n}`
             : `.${selector} {\n${properties}\n}`;

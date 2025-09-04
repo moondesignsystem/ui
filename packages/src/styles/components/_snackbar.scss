@@ -28,7 +28,7 @@ $variants: ();
   grid-auto-flow: column;
   justify-content: start;
   justify-items: start;
-  font-weight: var(--style-font-weight-medium);
+  font-weight: var(--font-weight-medium);
   color: map.get($variants, "fill", "color");
   background-color: map.get($variants, "fill", "background");
   box-shadow: variables.$shadow-500, map.get($variants, "fill", "shadow");

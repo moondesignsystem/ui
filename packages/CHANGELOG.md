@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 2.8.0
+
+### Minor Changes
+
+- feat: improve typography styling
+
 ## 2.7.0
 
 ### Minor Changes
