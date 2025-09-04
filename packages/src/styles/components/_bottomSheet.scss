@@ -78,8 +78,8 @@
     grid-auto-flow: column;
     align-items: center;
     padding: var(--sizing-padding-700) var(--sizing-padding-900);
-    font: var(--style-font-weight-medium) var(--style-text-3xl-font-size) / var(--style-text-3xl-line-height)
-      var(--style-font-family-default);
+    font: var(--font-weight-medium) var(--style-text-3xl-font-size) / var(--style-text-3xl-line-height)
+      var(--font-default);
   }
 
   :where(.moon-bottom-sheet-close) {

@@ -32,8 +32,7 @@ $variants: ();
   min-height: var(--sizing-height-1000);
   padding: var(--sizing-padding-600);
   border-radius: var(--component-alert-radius-radius);
-  font: var(--style-font-weight-medium) var(--style-text-md-font-size) / var(--style-text-md-line-height)
-    var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-md-font-size) / var(--style-text-md-line-height) var(--font-default);
   color: map.get($variants, "fill", "color");
   background-color: map.get($variants, "fill", "background");
   box-shadow: map.get($variants, "fill", "shadow");
@@ -45,7 +44,7 @@ $variants: ();
   :where(.moon-alert-title-wrapper) {
     @include common;
 
-    font-weight: var(--style-font-weight-medium);
+    font-weight: var(--font-weight-medium);
   }
 
   :where(svg, .moon-icon) {
@@ -56,7 +55,7 @@ $variants: ();
 
   :where(.moon-alert-title) {
     flex-grow: 1;
-    font-weight: var(--style-font-weight-medium);
+    font-weight: var(--font-weight-medium);
   }
 
   :where(.moon-alert-content) {
