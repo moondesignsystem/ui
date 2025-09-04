@@ -25,8 +25,7 @@ $variants: ();
   background-color: map.get($variants, "fill", "background");
   color: map.get($variants, "fill", "color");
   box-shadow: map.get($variants, "fill", "shadow");
-  font: var(--style-font-weight-medium) var(--style-text-sm-font-size) / var(--style-text-sm-line-height)
-    var(--style-font-family-default);
+  font: var(--font-weight-medium) var(--style-text-sm-font-size) / var(--style-text-sm-line-height) var(--font-default);
 
   @each $variant, $prop in $variants {
     @if $variant != "fill" {

@@ -11,10 +11,10 @@ $sizes: ();
     (
       "padding": var(--sizing-padding-#{utilities.get-size($size, "padding")}),
       "radius": var(--component-forms-radius-#{$size}),
-      "font": var(--style-font-weight-medium)
+      "font": var(--font-weight-medium)
         var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
         var(--style-text-#{utilities.get-size($size, "font")}-line-height)
-        var(--style-font-family-default)
+        var(--font-default)
     )
   );
 }
@@ -28,7 +28,7 @@ $sizes: ();
   color: var(--color-text-primary);
   background-color: var(--color-background-secondary);
   font: map.get($sizes, "md", "font");
-  font-weight: var(--style-font-weight-regular);
+  font-weight: var(--font-weight-default);
   box-shadow: 0 0 0 var(--spacing-space-1) var(--color-border-secondary);
 
   :where(thead),
@@ -55,7 +55,7 @@ $sizes: ();
   }
 
   :where(th) {
-    font-weight: var(--style-font-weight-medium);
+    font-weight: var(--font-weight-medium);
   }
 
   :where(th, td) {

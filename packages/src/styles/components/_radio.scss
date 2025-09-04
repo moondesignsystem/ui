@@ -67,8 +67,8 @@
   align-items: center;
 
   :where(label) {
-    font: var(--style-font-weight-medium) var(--style-text-md-font-size) / var(--style-text-md-line-height)
-      var(--style-font-family-default);
+    font: var(--font-weight-medium) var(--style-text-md-font-size) / var(--style-text-md-line-height)
+      var(--font-default);
     color: var(--color-text-primary);
     cursor: pointer;
   }

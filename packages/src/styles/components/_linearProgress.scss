@@ -53,10 +53,10 @@ $sizes: ();
   gap: var(--spacing-space-2);
 
   :where(label) {
-    font: var(--style-font-weight-medium) var(--style-text-md-font-size) / var(--style-text-md-line-height)
-      var(--style-font-family-default);
+    font: var(--font-weight-medium) var(--style-text-md-font-size) / var(--style-text-md-line-height)
+      var(--font-default);
     color: var(--color-text-primary);
-    font-weight: var(--style-font-weight-medium);
+    font-weight: var(--font-weight-medium);
     text-align: center;
   }
 }

@@ -13,10 +13,10 @@ $sizes: ();
       "padding": 0 var(--sizing-padding-#{utilities.get-size($size, "padding")}),
       "gap": var(--sizing-gap-#{utilities.get-size($size, "gap")}),
       "radius": var(--component-tab-list-tab-radius-#{$size}),
-      "font": var(--style-font-weight-medium)
+      "font": var(--font-weight-medium)
         var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
         var(--style-text-#{utilities.get-size($size, "font")}-line-height)
-        var(--style-font-family-default),
+        var(--font-default),
       "icon-size": var(--sizing-height-#{utilities.get-size($size, "icon-size")})
     )
   );
@@ -46,7 +46,7 @@ $sizes: ();
     border-top-right-radius: map.get($sizes, "md", "radius");
     border-bottom: var(--component-tab-list-tab-stroke-default) solid var(--component-tab-list-tab-border-default);
     font: map.get($sizes, "md", "font");
-    font-weight: var(--style-font-weight-medium);
+    font-weight: var(--font-weight-medium);
 
     :where(svg, .moon-icon) {
       width: map.get($sizes, "md", "icon-size");
