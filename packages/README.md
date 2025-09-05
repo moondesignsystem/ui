@@ -2,20 +2,6 @@
 
 A UI library for generating core and component CSS files from Figma design tokens.
 
-## Quick Start
-
-**Set up Figma token**: Add your Figma personal access token to an `.env` file:
-
-```bash
-FIGMA_TOKEN=YOUR_FIGMA_PERSONAL_ACCESS_TOKEN
-```
-
-**Generate CSS**: Run the tool to generate your CSS files:
-
-```bash
-npx @heathmont/moon-ui
-```
-
 ## Usage
 
 ### Command Line Options
@@ -48,13 +34,13 @@ npx @heathmont/moon-ui --target css --preflight
 
 ### Configuration File
 
-Add a `FIGMA_TOKEN` variable to your `.env` file and include this file in `.gitignore`:
+If you need to customize default Moon core and components styling, add a `FIGMA_TOKEN` variable to your `.env` file and include this file in `.gitignore`:
 
 ```bash
 FIGMA_TOKEN=YOUR_FIGMA_PERSONAL_ACCESS_TOKEN
 ```
 
-The tool automatically creates a `moonconfig.json` file with default values if one doesn't exist. You can also create or modify this file manually:
+The Moon UI library automatically creates a `moonconfig.json` file with default values if one doesn't exist. You can also create or modify this file manually:
 
 ```json
 {
