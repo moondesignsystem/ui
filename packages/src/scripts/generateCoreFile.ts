@@ -106,7 +106,6 @@ const generateCoreFile = async (
           return cleaned;
         })
         .filter((variable) => {
-          // Exclude variables with RGB values (primitive color tokens)
           const value = variable.split(":")[1]?.trim() || "";
           return !value.startsWith("rgb(");
         })
@@ -115,7 +114,9 @@ const generateCoreFile = async (
       const allVariables = [
         ...nonThemeVariables,
         ...themedVariablesWithDefaults,
-      ].sort();
+      ]
+        .filter((name, index, arr) => arr.indexOf(name) === index)
+        .sort();
       cssContent = "@theme inline {\n" + allVariables.join("\n") + "\n}\n";
     } else {
       const rootVariables = cssVariables
@@ -174,6 +175,7 @@ const generateCoreFile = async (
             colorCollectionName
           );
         })
+        .filter((name, index, arr) => arr.indexOf(name) === index)
         .sort();
       let themeContent = themeVariables.join("\n");
       const themePatternForReplacement = themes.join("|");

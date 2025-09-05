@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 2.9.0
+
+### Minor Changes
+
+- feat: add posibility not to use FIGMA_TOKEN
+
 ## 2.8.0
 
 ### Minor Changes
