@@ -7,7 +7,9 @@ const formatHtml = (html: string): string => {
   let indent = 0;
   const indentStr = "  ";
   // Split by tags and preserve text content
-  const tokens = cleanedHtml.split(/(<[^>]*>)/g).filter(token => token.length > 0);
+  const tokens = cleanedHtml
+    .split(/(<[^>]*>)/g)
+    .filter((token) => token.length > 0);
 
   for (let i = 0; i < tokens.length; i++) {
     const token = tokens[i];
@@ -24,8 +26,11 @@ const formatHtml = (html: string): string => {
       formatted += "\n" + indentStr.repeat(indent) + trimmedToken;
 
       // Check if it's a self-closing tag or void element
-      const isSelfClosing = trimmedToken.endsWith("/>") ||
-        /^<(area|base|br|col|embed|hr|img|input|link|meta|param|source|track|wbr)/.test(trimmedToken);
+      const isSelfClosing =
+        trimmedToken.endsWith("/>") ||
+        /^<(area|base|br|col|embed|hr|img|input|link|meta|param|source|track|wbr)/.test(
+          trimmedToken
+        );
 
       if (!isSelfClosing) {
         indent++;
@@ -46,7 +51,6 @@ export const createHTMLComponent = <T extends Record<string, any>>(
 ) => {
   return (args: T): HTMLElement => {
     const htmlString = renderToString(<Component {...args} />);
-    const formattedHtml = formatHtml(htmlString);
     const tempDiv = document.createElement("div");
     tempDiv.innerHTML = htmlString;
     const element = tempDiv.firstElementChild as HTMLElement;
