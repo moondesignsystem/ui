@@ -12,12 +12,12 @@ $sizes: ();
       "gap": var(--sizing-gap-#{utilities.get-size($size, "gap")}),
       "radius": var(--component-accordion-radius-#{$size}),
       "padding": var(--sizing-padding-#{utilities.get-size($size, "padding")}),
-      "padding-end": calc(var(--spacing-space-20) * 2),
       "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
-      "font": var(--font-weight-medium)
+      "font":
+        var(--font-weight-medium)
         var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
         var(--style-text-#{utilities.get-size($size, "font")}-line-height)
-        var(--font-default)
+        var(--font-default),
     )
   );
 }
@@ -32,7 +32,13 @@ $variants: ();
       "background": var(--component-accordion-#{$variant}-background),
       "border": var(--component-accordion-#{$variant}-border),
       "icon": var(--component-accordion-#{$variant}-icon),
-      "shadow": inset 0 0 0 var(--component-accordion-#{$variant}-stroke) var(--component-accordion-#{$variant}-border)
+      "shadow":
+        inset
+        0
+        0
+        0
+        var(--component-accordion-#{$variant}-stroke)
+        var(--component-accordion-#{$variant}-border),
     )
   );
 }
@@ -77,13 +83,22 @@ $variants: ();
     }
 
     &:is([open], :focus:not(.moon-accordion-close)),
-    &:not(.moon-accordion-close):has(> input:is([type="checkbox"], [type="radio"]):checked) {
+    &:not(.moon-accordion-close):has(
+        > input:is([type="checkbox"], [type="radio"]):checked
+      ) {
       grid-template-rows: max-content 1fr;
+
+      .moon-accordion-chevron-button .moon-accordion-chevron-icon {
+        transform: rotate(90deg);
+      }
     }
 
     &:is([open], :focus:not(.moon-accordion-close)) > .moon-accordion-content,
     &:not(.moon-accordion-close)
-      > :where(input:is([type="checkbox"], [type="radio"]):checked ~ .moon-accordion-content) {
+      > :where(
+        input:is([type="checkbox"], [type="radio"]):checked
+          ~ .moon-accordion-content
+      ) {
       visibility: visible;
       min-height: fit-content;
     }
@@ -105,14 +120,16 @@ $variants: ();
       cursor: unset;
     }
 
-    &:is([open], :focus:not(.moon-accordion-close)) > :where(.moon-accordion-content),
+    &:is([open], :focus:not(.moon-accordion-close))
+      > :where(.moon-accordion-content),
     &:not(.moon-accordion-close)
-      > :where(input:is([type="checkbox"], [type="radio"]):checked ~ .moon-accordion-content) {
+      > :where(
+        input:is([type="checkbox"], [type="radio"]):checked
+          ~ .moon-accordion-content
+      ) {
       position: relative;
       padding: map.get($sizes, "md", "padding") 0;
-      transition:
-        padding 0.2s ease-out,
-        background-color 0.2s ease-out;
+      transition: padding 0.2s ease-out, background-color 0.2s ease-out;
 
       &::after {
         content: "";
@@ -148,7 +165,9 @@ $variants: ();
     }
 
     &.moon-accordion-arrow:not(.moon-accordion-close) {
-      & > input:is([type="checkbox"], [type="radio"]):checked ~ .moon-accordion-title::after {
+      &
+        > input:is([type="checkbox"], [type="radio"]):checked
+        ~ .moon-accordion-title::after {
         transform: translateY(-50%) rotate(225deg);
       }
     }
@@ -167,9 +186,7 @@ $variants: ();
       font: map.get($sizes, "md", "font");
       font-weight: var(--font-weight-default);
       color: map.get($variants, "fill", "color");
-      transition:
-        visibility 0.2s ease-out,
-        padding 0.2s ease-out,
+      transition: visibility 0.2s ease-out, padding 0.2s ease-out,
         background-color 0.2s ease-out;
     }
 
@@ -214,6 +231,52 @@ $variants: ();
       min-height: map.get($sizes, "md", "min-height");
       transition: background-color 0.2s ease-out;
       font: map.get($sizes, "md", "font");
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .moon-accordion-title-text {
+        flex: 1;
+      }
+
+      .moon-accordion-chevron-button {
+        background: transparent;
+        border: none;
+        padding: 0.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border-radius: 0.25rem;
+        transition: background-color 0.2s ease-out;
+        margin-inline-start: 0.5rem;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        &:focus {
+          outline: 2px solid var(--color-border-info);
+          outline-offset: 1px;
+        }
+
+        .moon-accordion-chevron-icon {
+          width: 1rem;
+          height: 1rem;
+          background-color: currentColor;
+          transition: transform 0.2s ease-out;
+
+          // RTL: Start rotated 180deg (pointing left)
+          [dir="rtl"] & {
+            transform: rotate(180deg);
+          }
+        }
+
+        .moon-icon {
+          display: inline-block;
+          background-color: currentColor;
+        }
+      }
     }
 
     .moon-accordion-open {
@@ -224,9 +287,7 @@ $variants: ();
         visibility: visible;
         min-height: fit-content;
         padding: map.get($sizes, "md", "padding") 0;
-        transition:
-          padding 0.2s ease-out,
-          background-color 0.2s ease-out;
+        transition: padding 0.2s ease-out, background-color 0.2s ease-out;
 
         &::after {
           content: "";
@@ -256,9 +317,13 @@ $variants: ();
             min-height: map.get($prop, "height");
           }
 
-          &:is([open], :focus:not(.moon-accordion-close)) > :where(.moon-accordion-content),
+          &:is([open], :focus:not(.moon-accordion-close))
+            > :where(.moon-accordion-content),
           &:not(.moon-accordion-close)
-            > :where(input:is([type="checkbox"], [type="radio"]):checked ~ .moon-accordion-content) {
+            > :where(
+              input:is([type="checkbox"], [type="radio"]):checked
+                ~ .moon-accordion-content
+            ) {
             padding: map.get($prop, "padding") 0;
           }
 
@@ -267,6 +332,26 @@ $variants: ();
             padding-inline-end: map.get($prop, "padding-end");
             min-height: map.get($prop, "height");
             font: map.get($prop, "font");
+
+            .moon-accordion-chevron-button {
+              .moon-accordion-chevron-icon {
+                @if $size == "sm" {
+                  width: 0.875rem;
+                  height: 0.875rem;
+                } @else if $size == "lg" {
+                  width: 1.125rem;
+                  height: 1.125rem;
+                } @else if $size == "xl" {
+                  width: 1.25rem;
+                  height: 1.25rem;
+                }
+
+                // RTL: Start rotated 180deg for all sizes
+                [dir="rtl"] & {
+                  transform: rotate(180deg);
+                }
+              }
+            }
           }
 
           .moon-accordion-content {
@@ -292,9 +377,13 @@ $variants: ();
           color: map.get($prop, "color");
           box-shadow: map.get($prop, "shadow");
 
-          &:is([open], :focus:not(.moon-accordion-close)) > :where(.moon-accordion-content),
+          &:is([open], :focus:not(.moon-accordion-close))
+            > :where(.moon-accordion-content),
           &:not(.moon-accordion-close)
-            > :where(input:is([type="checkbox"], [type="radio"]):checked ~ .moon-accordion-content) {
+            > :where(
+              input:is([type="checkbox"], [type="radio"]):checked
+                ~ .moon-accordion-content
+            ) {
             &::after {
               background-color: map.get($prop, "border");
             }

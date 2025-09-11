@@ -27,11 +27,11 @@ const Accordion = ({ size, variant, items }: Props) => {
         <div key={index} className="moon-accordion-item">
           <input type="radio" name="accordion" />
           <p className="moon-accordion-title">
-            Item {index + 1}
-            <button>
+            <span className="moon-accordion-title-text">Item {index + 1}</span>
+            <button className="moon-accordion-chevron-button">
               <Icon
                 name="chevron-right"
-                className="w-4 h-4 inline-block border border-red-500 ml-2"
+                className="moon-accordion-chevron-icon"
               />
             </button>
           </p>
