@@ -83,7 +83,7 @@
 .moon-accordion :where(.moon-accordion-item):is([open], :focus:not(.moon-accordion-close)), .moon-accordion :where(.moon-accordion-item):not(.moon-accordion-close):has(> input:is([type=checkbox], [type=radio]):checked) {
   grid-template-rows: max-content 1fr;
 }
-.moon-accordion :where(.moon-accordion-item):is([open], :focus:not(.moon-accordion-close)) .moon-accordion-chevron-button .moon-accordion-chevron-icon, .moon-accordion :where(.moon-accordion-item):not(.moon-accordion-close):has(> input:is([type=checkbox], [type=radio]):checked) .moon-accordion-chevron-button .moon-accordion-chevron-icon {
+.moon-accordion :where(.moon-accordion-item):is([open], :focus:not(.moon-accordion-close)) .moon-accordion-title > button .moon-icon, .moon-accordion :where(.moon-accordion-item):not(.moon-accordion-close):has(> input:is([type=checkbox], [type=radio]):checked) .moon-accordion-title > button .moon-icon {
   transform: rotate(90deg);
 }
 .moon-accordion :where(.moon-accordion-item):is([open], :focus:not(.moon-accordion-close)) > .moon-accordion-content, .moon-accordion :where(.moon-accordion-item):not(.moon-accordion-close) > :where(input:is([type=checkbox], [type=radio]):checked ~ .moon-accordion-content) {
@@ -177,10 +177,10 @@
   align-items: center;
   justify-content: space-between;
 }
-.moon-accordion :where(.moon-accordion-item) .moon-accordion-title .moon-accordion-title-text {
+.moon-accordion :where(.moon-accordion-item) .moon-accordion-title > span {
   flex: 1;
 }
-.moon-accordion :where(.moon-accordion-item) .moon-accordion-title .moon-accordion-chevron-button {
+.moon-accordion :where(.moon-accordion-item) .moon-accordion-title > button {
   background: transparent;
   border: none;
   padding: 0.25rem;
@@ -192,25 +192,22 @@
   transition: background-color 0.2s ease-out;
   margin-inline-start: 0.5rem;
 }
-.moon-accordion :where(.moon-accordion-item) .moon-accordion-title .moon-accordion-chevron-button:hover {
+.moon-accordion :where(.moon-accordion-item) .moon-accordion-title > button:hover {
   background-color: rgba(0, 0, 0, 0.05);
 }
-.moon-accordion :where(.moon-accordion-item) .moon-accordion-title .moon-accordion-chevron-button:focus {
+.moon-accordion :where(.moon-accordion-item) .moon-accordion-title > button:focus {
   outline: 2px solid var(--color-border-info);
   outline-offset: 1px;
 }
-.moon-accordion :where(.moon-accordion-item) .moon-accordion-title .moon-accordion-chevron-button .moon-accordion-chevron-icon {
+.moon-accordion :where(.moon-accordion-item) .moon-accordion-title > button .moon-icon {
   width: 1rem;
   height: 1rem;
+  display: inline-block;
   background-color: currentColor;
   transition: transform 0.2s ease-out;
 }
-[dir=rtl] .moon-accordion :where(.moon-accordion-item) .moon-accordion-title .moon-accordion-chevron-button .moon-accordion-chevron-icon {
+[dir=rtl] .moon-accordion :where(.moon-accordion-item) .moon-accordion-title > button .moon-icon {
   transform: rotate(180deg);
-}
-.moon-accordion :where(.moon-accordion-item) .moon-accordion-title .moon-accordion-chevron-button .moon-icon {
-  display: inline-block;
-  background-color: currentColor;
 }
 .moon-accordion :where(.moon-accordion-item) .moon-accordion-open {
   grid-template-rows: max-content 1fr;
@@ -250,11 +247,11 @@
   min-height: var(--sizing-height-700);
   font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
 }
-.moon-accordion.moon-accordion-sm :where(.moon-accordion-item) .moon-accordion-title .moon-accordion-chevron-button .moon-accordion-chevron-icon {
+.moon-accordion.moon-accordion-sm :where(.moon-accordion-item) .moon-accordion-title > button .moon-icon {
   width: 0.875rem;
   height: 0.875rem;
 }
-[dir=rtl] .moon-accordion.moon-accordion-sm :where(.moon-accordion-item) .moon-accordion-title .moon-accordion-chevron-button .moon-accordion-chevron-icon {
+[dir=rtl] .moon-accordion.moon-accordion-sm :where(.moon-accordion-item) .moon-accordion-title > button .moon-icon {
   transform: rotate(180deg);
 }
 .moon-accordion.moon-accordion-sm :where(.moon-accordion-item) .moon-accordion-content {
@@ -283,11 +280,11 @@
   min-height: var(--sizing-height-900);
   font: var(--font-weight-medium) var(--style-text-md-font-size)/var(--style-text-md-line-height) var(--font-default);
 }
-.moon-accordion.moon-accordion-lg :where(.moon-accordion-item) .moon-accordion-title .moon-accordion-chevron-button .moon-accordion-chevron-icon {
+.moon-accordion.moon-accordion-lg :where(.moon-accordion-item) .moon-accordion-title > button .moon-icon {
   width: 1.125rem;
   height: 1.125rem;
 }
-[dir=rtl] .moon-accordion.moon-accordion-lg :where(.moon-accordion-item) .moon-accordion-title .moon-accordion-chevron-button .moon-accordion-chevron-icon {
+[dir=rtl] .moon-accordion.moon-accordion-lg :where(.moon-accordion-item) .moon-accordion-title > button .moon-icon {
   transform: rotate(180deg);
 }
 .moon-accordion.moon-accordion-lg :where(.moon-accordion-item) .moon-accordion-content {
@@ -316,11 +313,11 @@
   min-height: var(--sizing-height-1000);
   font: var(--font-weight-medium) var(--style-text-lg-font-size)/var(--style-text-lg-line-height) var(--font-default);
 }
-.moon-accordion.moon-accordion-xl :where(.moon-accordion-item) .moon-accordion-title .moon-accordion-chevron-button .moon-accordion-chevron-icon {
+.moon-accordion.moon-accordion-xl :where(.moon-accordion-item) .moon-accordion-title > button .moon-icon {
   width: 1.25rem;
   height: 1.25rem;
 }
-[dir=rtl] .moon-accordion.moon-accordion-xl :where(.moon-accordion-item) .moon-accordion-title .moon-accordion-chevron-button .moon-accordion-chevron-icon {
+[dir=rtl] .moon-accordion.moon-accordion-xl :where(.moon-accordion-item) .moon-accordion-title > button .moon-icon {
   transform: rotate(180deg);
 }
 .moon-accordion.moon-accordion-xl :where(.moon-accordion-item) .moon-accordion-content {

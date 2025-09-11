@@ -88,7 +88,7 @@ $variants: ();
       ) {
       grid-template-rows: max-content 1fr;
 
-      .moon-accordion-chevron-button .moon-accordion-chevron-icon {
+      .moon-accordion-title > button .moon-icon {
         transform: rotate(90deg);
       }
     }
@@ -235,11 +235,11 @@ $variants: ();
       align-items: center;
       justify-content: space-between;
 
-      .moon-accordion-title-text {
+      > span {
         flex: 1;
       }
 
-      .moon-accordion-chevron-button {
+      > button {
         background: transparent;
         border: none;
         padding: 0.25rem;
@@ -260,21 +260,16 @@ $variants: ();
           outline-offset: 1px;
         }
 
-        .moon-accordion-chevron-icon {
+        .moon-icon {
           width: 1rem;
           height: 1rem;
+          display: inline-block;
           background-color: currentColor;
           transition: transform 0.2s ease-out;
 
-          // RTL: Start rotated 180deg (pointing left)
           [dir="rtl"] & {
             transform: rotate(180deg);
           }
-        }
-
-        .moon-icon {
-          display: inline-block;
-          background-color: currentColor;
         }
       }
     }
@@ -333,23 +328,20 @@ $variants: ();
             min-height: map.get($prop, "height");
             font: map.get($prop, "font");
 
-            .moon-accordion-chevron-button {
-              .moon-accordion-chevron-icon {
-                @if $size == "sm" {
-                  width: 0.875rem;
-                  height: 0.875rem;
-                } @else if $size == "lg" {
-                  width: 1.125rem;
-                  height: 1.125rem;
-                } @else if $size == "xl" {
-                  width: 1.25rem;
-                  height: 1.25rem;
-                }
+            > button .moon-icon {
+              @if $size == "sm" {
+                width: 0.875rem;
+                height: 0.875rem;
+              } @else if $size == "lg" {
+                width: 1.125rem;
+                height: 1.125rem;
+              } @else if $size == "xl" {
+                width: 1.25rem;
+                height: 1.25rem;
+              }
 
-                // RTL: Start rotated 180deg for all sizes
-                [dir="rtl"] & {
-                  transform: rotate(180deg);
-                }
+              [dir="rtl"] & {
+                transform: rotate(180deg);
               }
             }
           }
