@@ -50,6 +50,6 @@ export const Menu: StoryObj<Props> = {
     items: 3,
     hasStartIcon: false,
     hasEndIcon: false,
-    label: "Label",
+    label: "Item",
   },
 };
