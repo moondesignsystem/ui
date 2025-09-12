@@ -15,7 +15,7 @@ const meta: Meta<Props> = {
       description: "Has pagination controls",
       control: "boolean",
     },
-    hasArrows: {
+    hasControls: {
       description: "Has arrow controls",
       control: "boolean",
     },
@@ -38,7 +38,7 @@ export default meta;
 export const Carousel: StoryObj<Props> = {
   args: {
     length: 5,
-    hasArrows: false,
+    hasControls: false,
     hasPagination: false,
   },
 };

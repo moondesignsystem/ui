@@ -4,10 +4,10 @@ import { createHTMLComponent } from "../../shared/utils/createHTMLComponent";
 export type Props = {
   length: number;
   hasPagination: boolean;
-  hasArrows: boolean;
+  hasControls: boolean;
 };
 
-const Carousel = ({ length, hasPagination, hasArrows }: Props) => {
+const Carousel = ({ length, hasPagination, hasControls }: Props) => {
   const items = new Array(length).fill("");
 
   return (
@@ -22,7 +22,7 @@ const Carousel = ({ length, hasPagination, hasArrows }: Props) => {
         ))}
       </ul>
 
-      {hasArrows && (
+      {hasControls && (
         <>
           <button className="moon-carousel-control">
             <Icon name="chevron-left" />
