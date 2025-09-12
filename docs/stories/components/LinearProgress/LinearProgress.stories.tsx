@@ -44,7 +44,7 @@ export default meta;
 export const LinearProgress: StoryObj<Props> = {
   args: {
     size: "2xs",
-    value: 25,
+    value: 70,
     hasLabel: false,
     label: "Progress",
   },
