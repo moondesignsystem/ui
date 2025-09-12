@@ -26,7 +26,9 @@ const Accordion = ({ size, variant, items }: Props) => {
       {accordionItems.map((_, index) => (
         <div key={index} className="moon-accordion-item">
           <input type="radio" name="accordion" />
-          <p className="moon-accordion-title">Title</p>
+          <p className="moon-accordion-title">
+            <span>Item {index + 1}</span>
+          </p>
           <p className="moon-accordion-content">Content</p>
         </div>
       ))}
