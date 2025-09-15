@@ -1,10 +1,18 @@
 # @heathmont/moon-ui
 
+## 3.0.1
+
+### Patch Changes
+
+- fix: update components.css file
+
 ## 3.0.0
 
 ### Major Changes
 
-- feat: align component composition
+- feat!: align component composition
+
+  BREAKING CHANGE: changed scales for paddings, gaps, and other spacing properties. Updated composition of Accordion, Alert, BottomSheet, Dialog, Drawer, SegmentedControl, and TabList.
 
 ## 2.9.0
 
@@ -96,7 +104,7 @@
 
 - feat!: migrate to new scalabe components approach
 
-  BREAKING CHANGE: all component variables come from one Figam componentsProjectId. Core and component variables have totally different names
+  BREAKING CHANGE: all component variables come from one Figma componentsProjectId. Core and component variables have totally different names
 
 ## 1.13.2
 
