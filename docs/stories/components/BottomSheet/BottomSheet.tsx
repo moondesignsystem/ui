@@ -32,13 +32,15 @@ const BottomSheet = ({
         <div className="moon-bottom-sheet-box">
           {hasHandle && <div className="moon-bottom-sheet-handle" />}
           {hasTitle && (
-            <div className="moon-bottom-sheet-title">
+            <div className="moon-bottom-sheet-header">
               <span>{title}</span>
               {hasDismissButton && (
                 <button
                   className="moon-bottom-sheet-close"
                   onClick={handleCloseClick}
-                ><Icon name="close" /></button>
+                >
+                  <Icon name="close" />
+                </button>
               )}
             </div>
           )}

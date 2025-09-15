@@ -38,7 +38,7 @@ const createDrawer = (args: Props) => {
     const dismissButton = document.createElement("button");
     dismissButton.className = "moon-drawer-close";
     dismissButton.setAttribute("onclick", "drawer.close()");
-    titleElement.className = "moon-drawer-title";
+    titleElement.className = "moon-drawer-header";
     titleElement.textContent = title;
     dismissButton.appendChild(getChildren({ children: closeIcon }));
     hasDismissButton && titleElement.appendChild(dismissButton);

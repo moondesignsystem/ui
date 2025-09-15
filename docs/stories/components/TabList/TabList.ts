@@ -22,7 +22,9 @@ const createTabs = (args: Props) => {
   segments.forEach((_, item) => {
     const segment = document.createElement("button");
     segment.setAttribute("role", "tab");
-    segment.className = `moon-tab${item === 1 ? " moon-tab-active" : ""}`;
+    segment.className = `moon-tab-list-item${
+      item === 1 ? " moon-tab-list-item-active" : ""
+    }`;
     hasStartIcon && segment.appendChild(getChildren({ children: starIcon }));
     segment.appendChild(getChildren({ children: `${label} ${item + 1}` }));
     hasEndIcon && segment.appendChild(getChildren({ children: starIcon }));

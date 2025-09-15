@@ -25,8 +25,8 @@ const createSegmentedControl = (args: Props) => {
   segments.forEach((_, item) => {
     const segment = document.createElement("button");
     segment.setAttribute("role", "tab");
-    segment.className = `moon-segment${
-      item === 1 ? " moon-segment-active" : ""
+    segment.className = `moon-segmented-control-item${
+      item === 1 ? " moon-segmented-control-item-active" : ""
     }`;
     hasStartIcon && segment.appendChild(getChildren({ children: starIcon }));
     segment.appendChild(getChildren({ children: `${label} ${item + 1}` }));

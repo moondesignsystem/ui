@@ -81,9 +81,9 @@ $variants: ();
       grid-template-rows: max-content 1fr;
     }
 
-    &:is([open], :focus:not(.moon-accordion-close)) > .moon-accordion-content,
+    &:is([open], :focus:not(.moon-accordion-close)) > .moon-accordion-item-content,
     &:not(.moon-accordion-close)
-      > :where(input:is([type="checkbox"], [type="radio"]):checked ~ .moon-accordion-content) {
+      > :where(input:is([type="checkbox"], [type="radio"]):checked ~ .moon-accordion-item-content) {
       visibility: visible;
       min-height: fit-content;
     }
@@ -96,18 +96,18 @@ $variants: ();
     &:not(.moon-accordion-close) {
       & > input[type="checkbox"],
       & > input[type="radio"]:not(:checked),
-      & > .moon-accordion-title {
+      & > .moon-accordion-item-header {
         cursor: pointer;
       }
     }
 
-    &:focus:not(.moon-accordion-close, &[open]) > .moon-accordion-title {
+    &:focus:not(.moon-accordion-close, &[open]) > .moon-accordion-item-header {
       cursor: unset;
     }
 
-    &:is([open], :focus:not(.moon-accordion-close)) > :where(.moon-accordion-content),
+    &:is([open], :focus:not(.moon-accordion-close)) > :where(.moon-accordion-item-content),
     &:not(.moon-accordion-close)
-      > :where(input:is([type="checkbox"], [type="radio"]):checked ~ .moon-accordion-content) {
+      > :where(input:is([type="checkbox"], [type="radio"]):checked ~ .moon-accordion-item-content) {
       position: relative;
       padding: map.get($sizes, "md", "padding") 0;
       transition:
@@ -127,7 +127,7 @@ $variants: ();
 
     &:is([open]) {
       &.moon-accordion-arrow {
-        & > .moon-accordion-title::after {
+        & > .moon-accordion-item-header::after {
           transform: translateY(-50%) rotate(225deg);
         }
       }
@@ -135,31 +135,31 @@ $variants: ();
 
     &.moon-accordion-open {
       &.moon-accordion-arrow {
-        & > .moon-accordion-title::after {
+        & > .moon-accordion-item-header::after {
           transform: translateY(-50%) rotate(225deg);
         }
       }
     }
 
     &.moon-accordion-arrow:focus:not(.moon-accordion-close) {
-      & > .moon-accordion-title::after {
+      & > .moon-accordion-item-header::after {
         transform: translateY(-50%) rotate(225deg);
       }
     }
 
     &.moon-accordion-arrow:not(.moon-accordion-close) {
-      & > input:is([type="checkbox"], [type="radio"]):checked ~ .moon-accordion-title::after {
+      & > input:is([type="checkbox"], [type="radio"]):checked ~ .moon-accordion-item-header::after {
         transform: translateY(-50%) rotate(225deg);
       }
     }
 
-    .moon-accordion-title,
-    .moon-accordion-content {
+    .moon-accordion-item-header,
+    .moon-accordion-item-content {
       grid-column-start: 1;
       grid-row-start: 1;
     }
 
-    .moon-accordion-content {
+    .moon-accordion-item-content {
       grid-column-start: 1;
       grid-row-start: 2;
       min-height: 0;
@@ -188,7 +188,7 @@ $variants: ();
     }
 
     .moon-accordion-arrow {
-      & > .moon-accordion-title::after {
+      & > .moon-accordion-item-header::after {
         position: absolute;
         display: block;
         height: 0.5rem;
@@ -206,7 +206,7 @@ $variants: ();
       }
     }
 
-    .moon-accordion-title {
+    .moon-accordion-item-header {
       position: relative;
       width: 100%;
       padding: map.get($sizes, "md", "padding") 0;
@@ -219,7 +219,7 @@ $variants: ();
     .moon-accordion-open {
       grid-template-rows: max-content 1fr;
 
-      & > .moon-accordion-content {
+      & > .moon-accordion-item-content {
         position: relative;
         visibility: visible;
         min-height: fit-content;
@@ -256,26 +256,26 @@ $variants: ();
             min-height: map.get($prop, "height");
           }
 
-          &:is([open], :focus:not(.moon-accordion-close)) > :where(.moon-accordion-content),
+          &:is([open], :focus:not(.moon-accordion-close)) > :where(.moon-accordion-item-content),
           &:not(.moon-accordion-close)
-            > :where(input:is([type="checkbox"], [type="radio"]):checked ~ .moon-accordion-content) {
+            > :where(input:is([type="checkbox"], [type="radio"]):checked ~ .moon-accordion-item-content) {
             padding: map.get($prop, "padding") 0;
           }
 
-          .moon-accordion-title {
+          .moon-accordion-item-header {
             padding: map.get($prop, "padding") 0;
             padding-inline-end: map.get($prop, "padding-end");
             min-height: map.get($prop, "height");
             font: map.get($prop, "font");
           }
 
-          .moon-accordion-content {
+          .moon-accordion-item-content {
             font: map.get($prop, "font");
             font-weight: var(--font-weight-default);
           }
 
           .moon-accordion-open {
-            & > .moon-accordion-content {
+            & > .moon-accordion-item-content {
               padding: map.get($prop, "padding") 0;
             }
           }
@@ -292,15 +292,15 @@ $variants: ();
           color: map.get($prop, "color");
           box-shadow: map.get($prop, "shadow");
 
-          &:is([open], :focus:not(.moon-accordion-close)) > :where(.moon-accordion-content),
+          &:is([open], :focus:not(.moon-accordion-close)) > :where(.moon-accordion-item-content),
           &:not(.moon-accordion-close)
-            > :where(input:is([type="checkbox"], [type="radio"]):checked ~ .moon-accordion-content) {
+            > :where(input:is([type="checkbox"], [type="radio"]):checked ~ .moon-accordion-item-content) {
             &::after {
               background-color: map.get($prop, "border");
             }
           }
 
-          .moon-accordion-content {
+          .moon-accordion-item-content {
             color: map.get($variants, "fill", "color");
           }
         }
