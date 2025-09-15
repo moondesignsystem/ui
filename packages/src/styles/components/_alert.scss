@@ -37,11 +37,11 @@ $variants: ();
   background-color: map.get($variants, "fill", "background");
   box-shadow: map.get($variants, "fill", "shadow");
 
-  &:has(.moon-alert-title-wrapper) {
+  &:has(.moon-alert-header-wrapper) {
     flex-direction: column;
   }
 
-  :where(.moon-alert-title-wrapper) {
+  :where(.moon-alert-header-wrapper) {
     @include common;
 
     font-weight: var(--font-weight-medium);
@@ -53,7 +53,7 @@ $variants: ();
     height: var(--spacing-space-20);
   }
 
-  :where(.moon-alert-title) {
+  :where(.moon-alert-header) {
     flex-grow: 1;
     font-weight: var(--font-weight-medium);
   }
@@ -75,7 +75,7 @@ $variants: ();
     }
   }
 
-  :where(.moon-alert-dismiss) {
+  :where(.moon-alert-close) {
     @extend .moon-icon-button;
     @extend .moon-icon-button-sm;
     @extend .moon-icon-button-ghost;
@@ -104,7 +104,7 @@ $variants: ();
           }
         }
 
-        :where(.moon-alert-dismiss) {
+        :where(.moon-alert-close) {
           :where(svg, .moon-icon) {
             color: map.get($prop, "icon");
           }

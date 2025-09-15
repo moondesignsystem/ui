@@ -35,7 +35,7 @@ $sizes: ();
   box-shadow: inset 0 0 0 var(--component-segmented-control-track-stroke)
     var(--component-segmented-control-track-border);
 
-  :where(.moon-segment) {
+  :where(.moon-segmented-control-item) {
     position: relative;
     width: 100%;
     overflow: hidden;
@@ -69,7 +69,7 @@ $sizes: ();
       flex-shrink: 0;
     }
 
-    &.moon-segment-active {
+    &.moon-segmented-control-item-active {
       background-color: var(--component-segmented-control-segment-background-selected);
       color: var(--component-segmented-control-segment-text-selected);
       box-shadow: inset 0 0 0 var(--component-segmented-control-segment-stroke-selected)
@@ -103,7 +103,7 @@ $sizes: ();
       &.moon-segmented-control-#{$size} {
         border-radius: map.get($prop, "track-radius");
 
-        :where(.moon-segment) {
+        :where(.moon-segmented-control-item) {
           height: map.get($prop, "height");
           min-width: map.get($prop, "width");
           padding: map.get($prop, "padding");
