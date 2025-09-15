@@ -8,7 +8,7 @@
   display: flex;
   align-items: center;
   width: 100%;
-  gap: var(--sizing-gap-400);
+  gap: var(--sizing-gap-8);
 }
 
 $variants: ();
@@ -29,8 +29,8 @@ $variants: ();
   @include common;
 
   text-align: start;
-  min-height: var(--sizing-height-1000);
-  padding: var(--sizing-padding-600);
+  min-height: var(--sizing-height-56);
+  padding: var(--sizing-padding-12);
   border-radius: var(--component-alert-radius-radius);
   font: var(--font-weight-medium) var(--style-text-md-font-size) / var(--style-text-md-line-height) var(--font-default);
   color: map.get($variants, "fill", "color");
