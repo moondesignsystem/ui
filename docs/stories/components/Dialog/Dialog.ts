@@ -33,7 +33,7 @@ const createDialog = (args: Props) => {
     const dismissButton = document.createElement("button");
     dismissButton.className = "moon-dialog-close";
     dismissButton.setAttribute("onclick", "dialog.close()");
-    titleElement.className = "moon-dialog-title";
+    titleElement.className = "moon-dialog-header";
     titleElement.textContent = title;
     dismissButton.appendChild(getChildren({ children: closeIcon }));
     hasDismissButton && titleElement.appendChild(dismissButton);

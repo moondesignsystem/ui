@@ -79,7 +79,7 @@
   overflow-y: auto;
   overscroll-behavior: contain;
 
-  :where(.moon-drawer-title) {
+  :where(.moon-drawer-header) {
     display: grid;
     grid-auto-flow: column;
     align-items: center;

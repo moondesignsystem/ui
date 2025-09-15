@@ -38,14 +38,14 @@ const Alert = ({
           getClasses(context),
         ])}
       >
-        <div className="moon-alert-title-wrapper">
+        <div className="moon-alert-header-wrapper">
           {hasStartIcon && <Icon name="star" />}
-          <span className="moon-alert-title">{title}</span>
+          <span className="moon-alert-header">{title}</span>
           {hasActionButton && (
             <button className="moon-alert-action">{actionLabel}</button>
           )}
           {hasDismissButton && (
-            <button className="moon-alert-dismiss">
+            <button className="moon-alert-close">
               <Icon name="close" />
             </button>
           )}
@@ -64,12 +64,12 @@ const Alert = ({
       ])}
     >
       {hasStartIcon && <Icon name="star" />}
-      <span className="moon-alert-title">{title}</span>
+      <span className="moon-alert-header">{title}</span>
       {hasActionButton && (
         <button className="moon-alert-action">{actionLabel}</button>
       )}
       {hasDismissButton && (
-        <button className="moon-alert-dismiss">
+        <button className="moon-alert-close">
           <Icon name="close" />
         </button>
       )}
