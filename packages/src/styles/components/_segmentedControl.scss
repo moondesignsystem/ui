@@ -30,8 +30,8 @@ $sizes: ();
   justify-content: stretch;
   border-radius: map.get($sizes, "md", "track-radius");
   background-color: var(--component-segmented-control-track-background);
-  padding: var(--sizing-padding-200);
-  gap: var(--sizing-gap-200);
+  padding: var(--sizing-padding-4);
+  gap: var(--sizing-gap-4);
   box-shadow: inset 0 0 0 var(--component-segmented-control-track-stroke)
     var(--component-segmented-control-track-border);
 

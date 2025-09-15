@@ -17,7 +17,7 @@ const LinksBlock = ({ context, moon, github }: Props) => (
       <a
         href={`https://beta.moon.io/docs/components/${moon}`}
         target="_blank"
-        className="overflow-hidden flex items-center border border-primary rounded-200 h-space-48"
+        className="overflow-hidden flex items-center border border-primary rounded-4 h-space-48"
       >
         <div className="flex items-center justify-center h-full aspect-square bg-tertiary">
           <img src="/logo.png" alt="Website" className="w-space-40" />
@@ -30,7 +30,7 @@ const LinksBlock = ({ context, moon, github }: Props) => (
       <a
         href="https://www.npmjs.com/package/@heathmont/moon-ui"
         target="_blank"
-        className="overflow-hidden flex items-center border border-primary rounded-200 h-space-48"
+        className="overflow-hidden flex items-center border border-primary rounded-4 h-space-48"
       >
         <div className="flex items-center justify-center h-full aspect-square bg-tertiary">
           <img src="/npm.png" alt="NPM" className="w-space-40" />
@@ -43,7 +43,7 @@ const LinksBlock = ({ context, moon, github }: Props) => (
       <a
         href={`https://github.com/coingaming/moon-ui/blob/main/src/components/${github}`}
         target="_blank"
-        className="overflow-hidden flex items-center border border-primary rounded-200 h-space-48"
+        className="overflow-hidden flex items-center border border-primary rounded-4 h-space-48"
       >
         <div className="flex items-center justify-center h-full aspect-square bg-tertiary">
           <img src="/github.png" alt="GitHub" className="w-space-40" />

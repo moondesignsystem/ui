@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 3.0.0
+
+### Major Changes
+
+- feat: align component composition
+
 ## 2.9.0
 
 ### Minor Changes
