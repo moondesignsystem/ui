@@ -18,7 +18,7 @@ const Dialog = ({ title, hasTitle, hasDismissButton }: Props) => (
     <dialog className="moon-dialog" id="dialog">
       <div className="moon-dialog-box">
         {hasTitle && (
-          <p className="moon-dialog-title">
+          <p className="moon-dialog-header">
             {title}
             {hasDismissButton && (
               <button
