@@ -52,6 +52,14 @@ const generateCoreFile = async (
       "i"
     );
 
+    const referencesColorVariables = (variable: string): boolean => {
+      const value = variable.split(":")[1]?.trim() || "";
+      return (
+        value.includes(`var(--${colorCollectionName}-`) ||
+        value.includes("var(--context-")
+      );
+    };
+
     let cssContent: string;
 
     if (isTailwind) {
@@ -73,10 +81,7 @@ const generateCoreFile = async (
 
       const themedVariablesWithDefaults = cssVariables
         .filter(
-          (v) =>
-            colorVariablePattern.test(v) ||
-            v.includes(`var(--${colorCollectionName}-`) ||
-            v.includes("var(--context-")
+          (v) => colorVariablePattern.test(v) || referencesColorVariables(v)
         )
         .map((v) => {
           const cleaned = removeThemePrefixesFromVariables(
@@ -129,7 +134,7 @@ const generateCoreFile = async (
     }
 
     const themedVariablePattern = new RegExp(
-      `--(${colorCollectionName}|semantic|component|context)-[a-zA-Z0-9-]+`,
+      `--(${colorCollectionName}|semantic)-[a-zA-Z0-9-]+`,
       "i"
     );
 
@@ -139,8 +144,7 @@ const generateCoreFile = async (
         return (
           themedVariablePattern.test(v) ||
           colorVariablePattern.test(v) ||
-          v.includes(`var(--${colorCollectionName}-`) ||
-          v.includes("var(--context-")
+          referencesColorVariables(v)
         );
       });
     } else {
@@ -160,8 +164,7 @@ const generateCoreFile = async (
           (v) =>
             themePattern.test(v) ||
             !v.startsWith(`--${colorCollectionName}-`) ||
-            v.includes(`var(--${colorCollectionName}-`) ||
-            v.includes("var(--context-")
+            referencesColorVariables(v)
         )
         .map((variable) => {
           if (themePattern.test(variable)) {
