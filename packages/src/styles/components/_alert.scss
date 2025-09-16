@@ -68,10 +68,10 @@ $variants: ();
     @extend .moon-button-sm;
     @extend .moon-button-ghost;
 
-    color: map.get($variants, "neutral", "color");
+    color: map.get($variants, "fill", "color");
 
     :where(svg, .moon-icon) {
-      color: map.get($variants, "neutral", "icon");
+      color: map.get($variants, "fill", "icon");
     }
   }
 
