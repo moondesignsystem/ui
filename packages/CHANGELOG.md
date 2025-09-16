@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 3.1.1
+
+### Patch Changes
+
+- fix: remove button from breadcrumb
+
 ## 3.1.0
 
 ### Minor Changes
