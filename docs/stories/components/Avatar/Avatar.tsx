@@ -15,7 +15,7 @@ export type Props = {
 };
 
 const Avatar = ({ imageUrl, children, size, variant, hasChildren }: Props) => {
-  const avatarContent = hasChildren ? children : <Icon name="star" />;
+  const avatarContent = hasChildren ? children : <Icon name="user" />;
   const style = imageUrl ? { backgroundImage: `url('${imageUrl}')` } : {};
 
   return (
