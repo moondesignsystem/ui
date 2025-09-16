@@ -1,7 +1,22 @@
 @use "sass:map";
-@use "list";
 @use "variants";
 @use "utilities";
+
+@mixin menu-sizes($size, $prop) {
+  gap: map.get($prop, "gap");
+
+  & > .moon-menu-item {
+    height: map.get($prop, "height");
+    font: map.get($prop, "font");
+    gap: map.get($prop, "gap");
+    padding: 0 map.get($prop, "padding");
+
+    :where(svg, .moon-icon) {
+      width: map.get($prop, "icon-size");
+      height: map.get($prop, "icon-size");
+    }
+  }
+}
 
 $sizes: ();
 @each $size in variants.$menu-sizes {
@@ -9,18 +24,34 @@ $sizes: ();
     $sizes,
     $size,
     (
-      "padding": var(--sizing-padding-#{utilities.get-size($size, "padding")}),
-      "radius": var(--component-menu-radius-#{$size})
+      "radius": var(--component-menu-radius-#{$size}),
+      "height": var(--spacing-height-#{utilities.get-size($size, "height")}),
+      "gap": var(--spacing-gap-#{utilities.get-size($size, "gap")}),
+      "padding": var(--spacing-padding-#{utilities.get-size($size, "padding")}),
+      "icon-size": var(--spacing-height-#{utilities.get-size($size, "icon-size")}),
+      "font": var(--font-weight-medium)
+        var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
+        var(--style-text-#{utilities.get-size($size, "font")}-line-height)
+        var(--font-default)
     )
   );
 }
 
 .moon-menu {
-  @extend .moon-list;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: map.get($sizes, "md", "gap");
 
-  & > * {
-    padding: 0 map.get($sizes, "md", "padding");
+  & > .moon-menu-item {
     border-radius: map.get($sizes, "md", "radius");
+    display: flex;
+    align-items: center;
+    gap: map.get($sizes, "md", "gap");
+    padding: 0 map.get($sizes, "md", "padding");
+    height: map.get($sizes, "md", "height");
+    font: map.get($sizes, "md", "font");
+    color: var(--component-list-text-default);
     background-color: var(--color-background-transparent);
     cursor: pointer;
     transition: background-color 150ms ease-in-out;
@@ -29,24 +60,25 @@ $sizes: ();
       background-color: var(--color-background-hover);
     }
 
-    &:not(:last-child)::after {
-      display: none;
+    :where(svg, .moon-icon) {
+      width: map.get($sizes, "md", "icon-size");
+      height: map.get($sizes, "md", "icon-size");
+      color: var(--color-icon-primary);
     }
-  }
 
-  @each $size, $prop in list.$sizes {
-    @if $size != "md" {
-      &.moon-menu-#{$size} {
-        @include list.list-sizes($size, $prop);
-      }
+    :where(.moon-menu-item-meta) {
+      margin-inline-start: auto;
+      display: flex;
+      align-items: center;
+      gap: map.get($sizes, "md", "gap");
+      color: var(--color-text-secondary);
     }
   }
 
   @each $size, $prop in $sizes {
     @if $size != "md" {
-      &.moon-menu-#{$size} > * {
-        padding: map.get($prop, "padding");
-        border-radius: map.get($prop, "radius");
+      &.moon-menu-#{$size} {
+        @include menu-sizes($size, $prop);
       }
     }
   }

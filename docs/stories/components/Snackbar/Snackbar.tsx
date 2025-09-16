@@ -1,8 +1,8 @@
 import { createHTMLComponent } from "../../shared/utils/createHTMLComponent";
 import joinClassnames from "../../shared/utils/joinClassnames";
-import starIcon from "../../shared/icons/starIcon";
 import CONTEXTS from "../../shared/contexts";
 import getClasses from "./utils/getClasses";
+import Icon from "../../shared/Icon";
 
 export const VARIANTS = ["fill", "soft"] as const;
 
@@ -30,10 +30,12 @@ export const Snackbar = ({
       getClasses(context),
     ])}
   >
-    {hasStartIcon && <span dangerouslySetInnerHTML={{ __html: starIcon }} />}
-    <span className="moon-snackbar-title">{title}</span>
+    {hasStartIcon && <Icon name="star" />}
+    {title}
     {hasActionButton && (
-      <button className="moon-snackbar-action">{actionLabel}</button>
+      <div className="moon-snackbar-meta">
+        <button className="moon-snackbar-action">{actionLabel}</button>
+      </div>
     )}
   </div>
 );
