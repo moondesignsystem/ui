@@ -39,6 +39,11 @@ const generateCoreFile = async (coreFileId, projectName, addComponents) => {
             return;
         }
         const colorVariablePattern = new RegExp(`^--${colorCollectionName}-[a-zA-Z0-9-]+:`, "i");
+        const referencesColorVariables = (variable) => {
+            const value = variable.split(":")[1]?.trim() || "";
+            return (value.includes(`var(--${colorCollectionName}-`) ||
+                value.includes("var(--context-"));
+        };
         let cssContent;
         if (isTailwind) {
             const defaultTheme = themes[0];
@@ -48,9 +53,7 @@ const generateCoreFile = async (coreFileId, projectName, addComponents) => {
                 .filter((v) => !colorVariablePattern.test(v))
                 .map((v) => removeThemePrefixesFromVariables(v, themes, colorCollectionName));
             const themedVariablesWithDefaults = cssVariables
-                .filter((v) => colorVariablePattern.test(v) ||
-                v.includes(`var(--${colorCollectionName}-`) ||
-                v.includes("var(--context-"))
+                .filter((v) => colorVariablePattern.test(v) || referencesColorVariables(v))
                 .map((v) => {
                 const cleaned = removeThemePrefixesFromVariables(v, themes, colorCollectionName);
                 const varName = cleaned.split(":")[0];
@@ -83,14 +86,13 @@ const generateCoreFile = async (coreFileId, projectName, addComponents) => {
                 .sort();
             cssContent = ":root {\n" + rootVariables.join("\n") + "\n}\n";
         }
-        const themedVariablePattern = new RegExp(`--(${colorCollectionName}|semantic|component|context)-[a-zA-Z0-9-]+`, "i");
+        const themedVariablePattern = new RegExp(`--(${colorCollectionName}|semantic)-[a-zA-Z0-9-]+`, "i");
         let themedVariables;
         if (isTailwind) {
             themedVariables = cssVariables.filter((v) => {
                 return (themedVariablePattern.test(v) ||
                     colorVariablePattern.test(v) ||
-                    v.includes(`var(--${colorCollectionName}-`) ||
-                    v.includes("var(--context-"));
+                    referencesColorVariables(v));
             });
         }
         else {
@@ -102,8 +104,7 @@ const generateCoreFile = async (coreFileId, projectName, addComponents) => {
             let themeVariables = themedVariables
                 .filter((v) => themePattern.test(v) ||
                 !v.startsWith(`--${colorCollectionName}-`) ||
-                v.includes(`var(--${colorCollectionName}-`) ||
-                v.includes("var(--context-"))
+                referencesColorVariables(v))
                 .map((variable) => {
                 if (themePattern.test(variable)) {
                     const themePrefix = `--${colorCollectionName}-${theme}-`;

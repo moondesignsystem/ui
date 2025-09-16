@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 3.0.2
+
+### Patch Changes
+
+- fix: update width and height variables
+
 ## 3.0.1
 
 ### Patch Changes
