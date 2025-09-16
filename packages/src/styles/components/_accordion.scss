@@ -235,6 +235,8 @@ $variants: ();
         @extend .moon-icon-button-outline;
         @extend .moon-icon-button-neutral;
 
+        pointer-events: none;
+
         :where(svg, .moon-icon) {
           transition: transform 0.2s ease-out;
         }

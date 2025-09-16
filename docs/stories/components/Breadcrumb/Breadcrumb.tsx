@@ -18,7 +18,11 @@ const Breadcrumb = ({ length }: Props) => {
               : "moon-breadcrumb-item"
           }
         >
-          <button>Page {i + 1}</button>
+          {i === items.length - 1 ? (
+            <>Page {i + 1}</>
+          ) : (
+            <a href="#">Page {i + 1}</a>
+          )}
         </li>
       ))}
     </ul>
