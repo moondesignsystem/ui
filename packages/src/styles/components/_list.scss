@@ -1,10 +1,9 @@
 @use "sass:map";
-@use "variables";
 @use "variants";
 @use "utilities";
 
 @mixin list-sizes($size, $prop) {
-  & > * {
+  & > .moon-list-item {
     height: map.get($prop, "height");
     font: map.get($prop, "font");
     gap: map.get($prop, "gap");
@@ -13,6 +12,10 @@
     :where(svg, .moon-icon) {
       width: map.get($prop, "icon-size");
       height: map.get($prop, "icon-size");
+    }
+
+    :where(.moon-list-meta) {
+      gap: map.get($sizes, "md", "gap");
     }
   }
 }
@@ -23,10 +26,10 @@ $sizes: ();
     $sizes,
     $size,
     (
-      "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
-      "gap": var(--sizing-gap-#{utilities.get-size($size, "gap")}),
-      "padding": var(--sizing-padding-#{utilities.get-size($size, "padding")}),
-      "icon-size": var(--sizing-height-#{utilities.get-size($size, "icon-size")}),
+      "height": var(--spacing-height-#{utilities.get-size($size, "height")}),
+      "gap": var(--spacing-gap-#{utilities.get-size($size, "gap")}),
+      "padding": var(--spacing-padding-#{utilities.get-size($size, "padding")}),
+      "icon-size": var(--spacing-height-#{utilities.get-size($size, "icon-size")}),
       "font": var(--font-weight-medium)
         var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
         var(--style-text-#{utilities.get-size($size, "font")}-line-height)
@@ -40,13 +43,10 @@ $sizes: ();
   width: 100%;
   flex-direction: column;
 
-  & > * {
+  & > .moon-list-item {
     position: relative;
-    display: grid;
-    grid-template-columns: auto minmax(auto, 1fr);
-    grid-auto-flow: column;
-    justify-content: start;
-    place-items: center start;
+    display: flex;
+    align-items: center;
     gap: map.get($sizes, "md", "gap");
     padding: map.get($sizes, "md", "padding");
     height: map.get($sizes, "md", "height");
@@ -66,6 +66,14 @@ $sizes: ();
       width: map.get($sizes, "md", "icon-size");
       height: map.get($sizes, "md", "icon-size");
       color: var(--color-icon-primary);
+    }
+
+    :where(.moon-list-item-meta) {
+      margin-inline-start: auto;
+      display: flex;
+      align-items: center;
+      gap: map.get($sizes, "md", "gap");
+      color: var(--color-text-secondary);
     }
 
     :where(:last-child) {

@@ -7,8 +7,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: var(--sizing-width-16);
-  height: var(--sizing-height-16);
+  width: var(--spacing-width-16);
+  height: var(--spacing-height-16);
   box-shadow: inset 0 0 0 var(--component-radio-stroke-default) var(--component-radio-border-default);
   background-color: var(--component-radio-background-default);
   border-radius: var(--radius-9999);
@@ -52,8 +52,8 @@
   }
 
   &:checked::before {
-    width: var(--sizing-width-8);
-    height: var(--sizing-width-8);
+    width: var(--spacing-width-8);
+    height: var(--spacing-width-8);
   }
 
   &:hover::after {

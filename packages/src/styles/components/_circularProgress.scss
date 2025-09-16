@@ -8,7 +8,7 @@ $sizes: ();
     $sizes,
     $size,
     (
-      "size": var(--sizing-height-#{utilities.get-size($size, "height")})
+      "size": var(--spacing-height-#{utilities.get-size($size, "height")})
     )
   );
 }

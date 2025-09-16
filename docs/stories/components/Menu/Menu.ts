@@ -20,9 +20,13 @@ const createMenu = (args: Props) => {
   const menuItems = new Array(items).fill("");
   menuItems.forEach((_, item) => {
     const menuItem = document.createElement("li");
+    menuItem.className = "moon-menu-item";
+    const menuItemMeta = document.createElement("div");
+    menuItemMeta.className = "moon-menu-item-meta";
     hasStartIcon && menuItem.appendChild(getChildren({ children: starIcon }));
     menuItem.appendChild(getChildren({ children: `${label} ${item + 1}` }));
-    hasEndIcon && menuItem.appendChild(getChildren({ children: starIcon }));
+    hasEndIcon && menuItemMeta.appendChild(getChildren({ children: starIcon }));
+    hasEndIcon && menuItem.appendChild(menuItemMeta);
     menu.appendChild(menuItem);
   });
   return menu;
