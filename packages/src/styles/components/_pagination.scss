@@ -3,7 +3,7 @@
 .moon-pagination {
   display: flex;
   align-items: center;
-  gap: var(--sizing-gap-6);
+  gap: var(--spacing-gap-6);
 
   :where(.moon-pagination-item) {
     @extend .moon-icon-button;

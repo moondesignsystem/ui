@@ -7,7 +7,10 @@ type Props = {
 
 const Icon = ({ name, className }: Props) => (
   <div
-    className={joinClassnames(["moon-icon mask-cover bg-[currentColor]", className])}
+    className={joinClassnames([
+      "moon-icon mask-cover bg-[currentColor]",
+      className,
+    ])}
     style={{
       maskImage: `url(https://assets.moon.io/icons/${name}.svg)`,
     }}

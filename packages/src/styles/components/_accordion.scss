@@ -1,5 +1,6 @@
 @use "sass:map";
 @use "variables";
+@use "iconButton";
 @use "variants";
 @use "utilities";
 
@@ -9,11 +10,11 @@ $sizes: ();
     $sizes,
     $size,
     (
-      "gap": var(--sizing-gap-#{utilities.get-size($size, "gap")}),
+      "gap": var(--spacing-gap-#{utilities.get-size($size, "gap")}),
       "radius": var(--component-accordion-radius-#{$size}),
-      "padding": var(--sizing-padding-#{utilities.get-size($size, "padding")}),
-      "padding-end": calc(var(--spacing-space-20) * 2),
-      "height": var(--sizing-height-#{utilities.get-size($size, "height")}),
+      "padding": var(--spacing-padding-#{utilities.get-size($size, "padding")}),
+      "height": var(--spacing-height-#{utilities.get-size($size, "height")}),
+      "icon-size": var(--spacing-height-#{utilities.get-size($size, "icon-size")}),
       "font": var(--font-weight-medium)
         var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
         var(--style-text-#{utilities.get-size($size, "font")}-line-height)
@@ -60,7 +61,6 @@ $variants: ();
     color: map.get($variants, "fill", "color");
     border-radius: map.get($sizes, "md", "radius");
     box-shadow: map.get($variants, "fill", "shadow");
-    padding: 0 map.get($sizes, "md", "padding");
 
     & > input:is([type="checkbox"], [type="radio"]) {
       grid-column-start: 1;
@@ -70,7 +70,7 @@ $variants: ();
       opacity: 0;
       z-index: 1;
       width: 100%;
-      padding: map.get($sizes, "md", "padding") 0;
+      padding: 0 map.get($sizes, "md", "padding");
       padding-inline-end: map.get($sizes, "md", "padding-end");
       min-height: map.get($sizes, "md", "height");
       transition: background-color 0.2s ease-out;
@@ -109,7 +109,7 @@ $variants: ();
     &:not(.moon-accordion-close)
       > :where(input:is([type="checkbox"], [type="radio"]):checked ~ .moon-accordion-item-content) {
       position: relative;
-      padding: map.get($sizes, "md", "padding") 0;
+      padding: map.get($sizes, "md", "padding");
       transition:
         padding 0.2s ease-out,
         background-color 0.2s ease-out;
@@ -130,6 +130,10 @@ $variants: ();
         & > .moon-accordion-item-header::after {
           transform: translateY(-50%) rotate(225deg);
         }
+      }
+      & .moon-accordion-item-toggle > svg,
+      & .moon-accordion-item-toggle > .moon-icon {
+        transform: rotate(180deg);
       }
     }
 
@@ -207,13 +211,40 @@ $variants: ();
     }
 
     .moon-accordion-item-header {
+      display: flex;
+      align-items: center;
+      gap: map.get($sizes, "md", "gap");
       position: relative;
       width: 100%;
-      padding: map.get($sizes, "md", "padding") 0;
-      padding-inline-end: map.get($sizes, "md", "padding-end");
-      min-height: map.get($sizes, "md", "min-height");
+      padding: 0 map.get($sizes, "md", "padding");
+      min-height: map.get($sizes, "md", "height");
       transition: background-color 0.2s ease-out;
       font: map.get($sizes, "md", "font");
+
+      :where(.moon-accordion-item-meta) {
+        margin-inline-start: auto;
+        display: flex;
+        align-items: center;
+        gap: map.get($sizes, "md", "gap");
+        color: var(--color-text-secondary);
+      }
+
+      :where(.moon-accordion-item-toggle) {
+        @extend .moon-icon-button;
+        @extend .moon-icon-button-xs;
+        @extend .moon-icon-button-outline;
+        @extend .moon-icon-button-neutral;
+
+        :where(svg, .moon-icon) {
+          transition: transform 0.2s ease-out;
+        }
+      }
+
+      :where(svg, .moon-icon) {
+        color: var(--color-icon-primary);
+        width: map.get($sizes, "md", "icon-size");
+        height: map.get($sizes, "md", "icon-size");
+      }
     }
 
     .moon-accordion-open {
@@ -223,7 +254,7 @@ $variants: ();
         position: relative;
         visibility: visible;
         min-height: fit-content;
-        padding: map.get($sizes, "md", "padding") 0;
+        padding: 0 map.get($sizes, "md", "padding");
         transition:
           padding 0.2s ease-out,
           background-color 0.2s ease-out;
@@ -248,25 +279,27 @@ $variants: ();
 
         :where(.moon-accordion-item) {
           border-radius: map.get($prop, "radius");
-          padding: 0 map.get($prop, "padding");
 
           & > input:is([type="checkbox"], [type="radio"]) {
-            padding: map.get($prop, "padding") 0;
-            padding-inline-end: map.get($prop, "padding-end");
+            padding: 0 map.get($prop, "padding");
             min-height: map.get($prop, "height");
           }
 
           &:is([open], :focus:not(.moon-accordion-close)) > :where(.moon-accordion-item-content),
           &:not(.moon-accordion-close)
             > :where(input:is([type="checkbox"], [type="radio"]):checked ~ .moon-accordion-item-content) {
-            padding: map.get($prop, "padding") 0;
+            padding: map.get($prop, "padding");
           }
 
           .moon-accordion-item-header {
-            padding: map.get($prop, "padding") 0;
-            padding-inline-end: map.get($prop, "padding-end");
+            gap: 0 map.get($prop, "gap");
+            padding: 0 map.get($prop, "padding");
             min-height: map.get($prop, "height");
             font: map.get($prop, "font");
+          }
+
+          .moon-accordion-item-meta {
+            gap: 0 map.get($prop, "gap");
           }
 
           .moon-accordion-item-content {
@@ -276,7 +309,7 @@ $variants: ();
 
           .moon-accordion-open {
             & > .moon-accordion-item-content {
-              padding: map.get($prop, "padding") 0;
+              padding: map.get($prop, "padding");
             }
           }
         }

@@ -28,53 +28,30 @@ const Alert = ({
   contentLabel,
   variant,
   context,
-}: Props) => {
-  if (hasContent) {
-    return (
-      <div
-        className={joinClassnames([
-          "moon-alert",
-          getClasses(variant),
-          getClasses(context),
-        ])}
-      >
-        <div className="moon-alert-header-wrapper">
-          {hasStartIcon && <Icon name="star" />}
-          <span className="moon-alert-header">{title}</span>
-          {hasActionButton && (
-            <button className="moon-alert-action">{actionLabel}</button>
-          )}
-          {hasDismissButton && (
-            <button className="moon-alert-close">
-              <Icon name="close" />
-            </button>
-          )}
-        </div>
-        <p className="moon-alert-content">{contentLabel}</p>
+}: Props) => (
+  <div
+    className={joinClassnames([
+      "moon-alert",
+      getClasses(variant),
+      getClasses(context),
+    ])}
+  >
+    {hasStartIcon && <Icon name="star" />}
+    {title}
+    {(hasActionButton || hasDismissButton) && (
+      <div className="moon-alert-meta">
+        {hasActionButton && (
+          <button className="moon-alert-action">{actionLabel}</button>
+        )}
+        {hasDismissButton && (
+          <button className="moon-alert-close">
+            <Icon name="close" />
+          </button>
+        )}
       </div>
-    );
-  }
-
-  return (
-    <div
-      className={joinClassnames([
-        "moon-alert",
-        getClasses(variant),
-        getClasses(context),
-      ])}
-    >
-      {hasStartIcon && <Icon name="star" />}
-      <span className="moon-alert-header">{title}</span>
-      {hasActionButton && (
-        <button className="moon-alert-action">{actionLabel}</button>
-      )}
-      {hasDismissButton && (
-        <button className="moon-alert-close">
-          <Icon name="close" />
-        </button>
-      )}
-    </div>
-  );
-};
+    )}
+    {hasContent && <div className="moon-alert-content">{contentLabel}</div>}
+  </div>
+);
 
 export default createHTMLComponent(Alert);

@@ -18,8 +18,8 @@ $variants: ();
 .moon-badge {
   width: fit-content;
   display: inline-block;
-  min-width: var(--sizing-width-8);
-  min-height: var(--sizing-width-8);
+  min-width: var(--spacing-width-8);
+  min-height: var(--spacing-width-8);
   padding: 0 var(--spacing-space-4);
   border-radius: var(--radius-9999);
   background-color: map.get($variants, "fill", "background");
