@@ -7,12 +7,8 @@
 }
 
 .moon-breadcrumb-item {
-  & * {
-    @extend .moon-button;
-    @extend .moon-button-sm;
-    @extend .moon-button-ghost;
-    color: var(--color-text-secondary);
-  }
+  color: var(--color-text-secondary);
+  font: var(--font-weight-medium) var(--style-text-md-font-size) / var(--style-text-md-line-height) var(--font-default);
 
   &:not(:first-child) {
     display: flex;
@@ -30,7 +26,7 @@
     }
   }
 
-  &.moon-breadcrumb-item-active * {
+  &.moon-breadcrumb-item-active {
     color: var(--color-text-primary);
   }
 }
