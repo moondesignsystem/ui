@@ -20,9 +20,13 @@ const createList = (args: Props) => {
   const listItems = new Array(items).fill("");
   listItems.forEach((_, item) => {
     const listItem = document.createElement("li");
+    listItem.className = "moon-list-item";
+    const listItemMeta = document.createElement("div");
+    listItemMeta.className = "moon-list-item-meta";
     hasStartIcon && listItem.appendChild(getChildren({ children: starIcon }));
     listItem.appendChild(getChildren({ children: `${label} ${item + 1}` }));
-    hasEndIcon && listItem.appendChild(getChildren({ children: starIcon }));
+    hasEndIcon && listItemMeta.appendChild(getChildren({ children: starIcon }));
+    hasEndIcon && listItem.appendChild(listItemMeta);
     list.appendChild(listItem);
   });
   return list;

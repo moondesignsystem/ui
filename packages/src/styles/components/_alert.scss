@@ -4,13 +4,6 @@
 @use "button";
 @use "iconButton";
 
-@mixin common {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  gap: var(--sizing-gap-8);
-}
-
 $variants: ();
 @each $variant in variants.$alert-variants {
   $variants: map.set(
@@ -26,26 +19,19 @@ $variants: ();
 }
 
 .moon-alert {
-  @include common;
-
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  gap: var(--spacing-gap-8);
   text-align: start;
-  min-height: var(--sizing-height-56);
-  padding: var(--sizing-padding-12);
+  min-height: var(--spacing-height-56);
+  padding: var(--spacing-padding-12);
   border-radius: var(--component-alert-radius-radius);
   font: var(--font-weight-medium) var(--style-text-md-font-size) / var(--style-text-md-line-height) var(--font-default);
   color: map.get($variants, "fill", "color");
   background-color: map.get($variants, "fill", "background");
   box-shadow: map.get($variants, "fill", "shadow");
-
-  &:has(.moon-alert-header-wrapper) {
-    flex-direction: column;
-  }
-
-  :where(.moon-alert-header-wrapper) {
-    @include common;
-
-    font-weight: var(--font-weight-medium);
-  }
 
   :where(svg, .moon-icon) {
     color: map.get($variants, "fill", "icon");
@@ -53,14 +39,16 @@ $variants: ();
     height: var(--spacing-space-20);
   }
 
-  :where(.moon-alert-header) {
-    flex-grow: 1;
-    font-weight: var(--font-weight-medium);
+  :where(.moon-alert-meta) {
+    margin-inline-start: auto;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-gap-8);
+    color: var(--color-text-secondary);
   }
 
   :where(.moon-alert-content) {
-    width: 100%;
-    text-align: start;
+    flex-basis: 100%;
   }
 
   :where(.moon-alert-action) {
@@ -69,6 +57,7 @@ $variants: ();
     @extend .moon-button-ghost;
 
     color: map.get($variants, "fill", "color");
+    margin-inline-start: auto;
 
     :where(svg, .moon-icon) {
       color: map.get($variants, "fill", "icon");
@@ -80,8 +69,10 @@ $variants: ();
     @extend .moon-icon-button-sm;
     @extend .moon-icon-button-ghost;
 
+    margin-inline-start: auto;
+
     :where(svg, .moon-icon) {
-      color: map.get($variants, "neutral", "icon");
+      color: map.get($variants, "fill", "icon");
     }
   }
 

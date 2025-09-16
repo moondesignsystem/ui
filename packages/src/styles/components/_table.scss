@@ -9,7 +9,7 @@ $sizes: ();
     $sizes,
     $size,
     (
-      "padding": var(--sizing-padding-#{utilities.get-size($size, "padding")}),
+      "padding": var(--spacing-padding-#{utilities.get-size($size, "padding")}),
       "radius": var(--component-forms-radius-#{$size}),
       "font": var(--font-weight-medium)
         var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
