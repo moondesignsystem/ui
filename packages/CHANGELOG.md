@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 3.1.4
+
+### Patch Changes
+
+- fix: Bottom Sheet styling
+
 ## 3.1.3
 
 ### Patch Changes
