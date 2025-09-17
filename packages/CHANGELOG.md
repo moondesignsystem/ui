@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 3.1.3
+
+### Patch Changes
+
+- fix: update readme file
+
 ## 3.1.2
 
 ### Patch Changes
