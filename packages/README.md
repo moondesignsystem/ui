@@ -1,6 +1,12 @@
 # Moon UI
 
-A UI library for generating core and component CSS files from Figma design tokens.
+Moon is a multy-layered, scalable, customizable, and adaptable Design System.
+
+Moon UI represents the first two layers of the Moon Design System and is designed to be a standalone, cross-browser, and framework-agnostic solution.
+
+The first layer consists of cross-referenced primitive, semantic, and component CSS variables. This layer is synchronized with Figma variables, allowing you to fetch the latest design tokens in just a few minutes.
+
+The second layer provides a collection of component CSS classes. It fully describes all components in the Moon Design System, including all available sizes and variations.
 
 ## Usage
 
