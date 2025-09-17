@@ -1,144 +1,144 @@
-# Moon UI Components - Storybook
-Welcome to the Moon UI Components Storybook! This project showcases all the UI components of the Moon design system. Here, you'll find all the details you need to explore, use, and contribute to the components in the Moon UI library.
+# Moon UI
 
-## Table of Contents
-- [Introduction](#introduction)
+Moon is a multy-layered, scalable, customizable, and adaptable Design System.
 
-- [Installation](#installation)
+Moon UI represents the first two layers of the Moon Design System and is designed to be a standalone, cross-browser, and framework-agnostic solution.
 
-- [Running Storybook Locally](#running-storybook-locally)
+The first layer consists of cross-referenced primitive, semantic, and component CSS variables. This layer is synchronized with Figma variables, allowing you to fetch the latest design tokens in just a few minutes.
 
-- [Usage](#usage)
-
-- [Deployment](#deployment)
-
-- [Contributing](#contributing)
-
-- [License](LICENSE.md)
-
-## Introduction
-Moon UI Components is a component library that provides a set of customizable, reusable UI components built to create beautiful, consistent user interfaces. The components are designed to integrate seamlessly with your React project and come with built-in support for accessibility.
-
-This Storybook is the documentation for all components and features in the Moon UI library. You can interact with the components here and see how they behave in different scenarios.
-
-## Installation
-### Prerequisites
-Ensure you have the following installed:
-
-Node.js (v16 or higher)
-
-npm or yarn
-
-### Install Dependencies
-Clone the repository:
-
-```bash
-git clone <repository-url>
-cd moon-ui-components
-```
-
-### Install dependencies:
-
-```bash
-npm install
-```
-
-## Running Storybook Locally
-To view the UI components and interact with them in a local Storybook instance:
-
-### Start Storybook locally:
-
-```bash
-npm run storybook
-```
-
-This command will start the Storybook development server and open the Storybook UI in your default browser at http://localhost:6006.
-
-### Build Storybook (optional):
-
-If you'd like to generate a static build of Storybook (for deployment or static hosting):
-
-```bash
-npm run build-storybook
-```
-The build files will be generated in the storybook-static folder.
+The second layer provides a collection of component CSS classes. It fully describes all components in the Moon Design System, including all available sizes and variations.
 
 ## Usage
-### Available Components
-In this Storybook, you'll find the following components documented:
 
-| Component        | Description                                  |
-| :--------------- | :------------------------------------------- |
-| Accordion        | Expandable sections for content organization |
-| Alert            | Notification messages                        |
-| Authenticator    | Input field for authentication codes         |
-| Avatar           | User profile image display                   |
-| Badge            | Small status indicator                       |
-| BottomSheet      | Slide-up modal panel                         |
-| Breadcrumb       | Navigation path display                      |
-| Button           | Clickable action button                      |
-| Carousel         | Image/content slider                         |
-| Checkbox         | Toggle option selection                      |
-| Chip             | Small tag-like UI elements                   |
-| CircularProgress | Loading indicator                            |
-| Dialog           | Popup dialog box                             |
-| Drawer           | Sidebar navigation or content panel          |
-| Dropdown         | Menu-based selection component               |
-| IconButton       | Button with an icon                          |
-| Input            | Text input field                             |
-| List             | List component                               |
-| Loader           | General loading indicator                    |
-| Menu             | Menu component                               |
-| Pagination       | Page navigation controls                     |
-| Placeholder      | Skeleton for holding place                   |
-| Radio            | Radio button selection                       |
-| Segmented Control| Tab-like component                           |
-| Select           | Dropdown selection                           |
-| Snackbar         | Temporary notification                       |
-| Switch           | Toggle switch                                |
-| TabList          | Tab-based navigation                         |
-| Tag              | Label-style element                          |
-| Textarea         | Multi-line text input                        |
-| Tooltip          | Hover-triggered information display          |
+### Command Line Options
 
+```bash
+# Basic usage - generates core CSS only
+npx @heathmont/moon-ui
 
-Each component includes:
+# Generate both core and component CSS
+npx @heathmont/moon-ui --add-components
 
-* Code examples.
+# Use custom CSS class prefix
+npx @heathmont/moon-ui --customPrefix your-prefix
 
-* Live demos.
+# Customize project name (default: 'moon')
+npx @heathmont/moon-ui --projectName your-project
 
-* Customization options and themes.
+# Specify output directory (default: 'dist')
+npx @heathmont/moon-ui --outputFolder output-folder
 
-To view and test components, simply browse through the sections in the Storybook sidebar.
+# Use custom Figma file IDs
+npx @heathmont/moon-ui --coreFileId CORE_FILE_ID --componentsFileId COMPONENTS_FILE_ID
 
-## Deployment  
-The deployment process starts when a new tag is pushed.  
+# Generate vanilla CSS files instead of Tailwind CSS v4 (default: 'tailwindcss')
+npx @heathmont/moon-ui --target css
 
-### Steps to start the process:  
-- Ensure you are on the `main` branch.  
-- Create a new tag. If you're unfamiliar with the process, refer to this [article](https://git-scm.com/book/en/v2/Git-Basics-Tagging).  
-- Run the following command:  
-  ```sh
-  git push --tags
+# Generate vanilla CSS files with browser CSS reset. Not needed with tailwindcss target
+npx @heathmont/moon-ui --target css --preflight
 ```
-This will trigger the release job.
 
-## Contributing
-We welcome contributions! Here's how you can contribute to the Moon UI Components:
+### Configuration File
 
-Fork the repository.
+If you need to customize default Moon core and components styling, add a `FIGMA_TOKEN` variable to your `.env` file and include this file in `.gitignore`:
 
-Create a branch for your feature (git checkout -b feature-name).
+```bash
+FIGMA_TOKEN=YOUR_FIGMA_PERSONAL_ACCESS_TOKEN
+```
 
-Commit your changes (git commit -am 'Add new feature').
+The Moon UI library automatically creates a `moonconfig.json` file with default values if one doesn't exist. You can also create or modify this file manually:
 
-Push to your branch (git push origin feature-name).
+```json
+{
+  "projectName": "PROJECT_NAME",
+  "coreFileId": "CORE_FILE_ID",
+  "componentsProjectId": "COMPONENTS_PROJECT_ID",
+  "outputFolder": "OUTPUT_FOLDER",
+  "customPrefix": "",
+  "target": "tailwindcss",
+  "preflight": false,
+  "themes": {}
+}
+```
 
-Create a pull request.
+#### Multi-theme Support
 
-Please refer to the contributing guidelines for more information on how to make contributions.
+For additional themes, add theme names and their corresponding Figma file IDs to the `themes` object:
+
+```json
+{
+  "themes": {
+    "theme1": "THEME_1_CORE_FILE_ID",
+    "theme2": "THEME_2_CORE_FILE_ID"
+  }
+}
+```
+
+## CSS Output Targets
+
+Moon UI supports two output formats:
+
+### TailwindCSS v4 (Default)
+
+Generates CSS compatible with TailwindCSS v4 using `@theme inline` directives:
+
+### Vanilla CSS
+
+Generates standard CSS using `:root` selectors for maximum compatibility:
+
+```bash
+npx @heathmont/moon-ui --target css
+```
+
+**Note**: With vanilla CSS output, you'll retain typography and shadow utility classes, but some Tailwind-specific utility classes will not be generated.
+
+## Component Class Prefixes
+
+By default, all component classes use the `moon-` prefix:
+
+```css
+.moon-button {
+  /* styles */
+}
+.moon-tooltip {
+  /* styles */
+}
+```
+
+Enable custom prefixes using `--customPrefix` to use your own prefix:
+
+```bash
+npx @heathmont/moon-ui --add-components --customPrefix your-prefix
+```
+
+This generates:
+
+```css
+.your-prefix-button {
+  /* styles */
+}
+.your-prefix-tooltip {
+  /* styles */
+}
+```
+
+## Generated Files
+
+The following files are created in your specified output directory:
+
+- **`{projectName}-core.css`** - Core CSS variables and utilities
+- **`{projectName}-components.css`** - Component classes (when `--add-components` is used)
+- **`{projectName}-preflight.css`** - CSS reset (when `--preflight` is used)
+- **`{themeName}-core.css`** - Theme-specific CSS files (one per theme in config)
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
 
+MIT
+
+## Versioning
+
+Moon UI follows [Semantic Versioning](https://semver.org/). View available versions in the [repository tags](https://github.com/coingaming/moon-ui/tags).
+
+- **MAJOR**: Incompatible API changes
+- **MINOR**: New backward-compatible functionality
+- **PATCH**: Backward-compatible bug fixes
