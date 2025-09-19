@@ -2,18 +2,13 @@ import Icon from "../../shared/Icon";
 import { createHTMLComponent } from "../../shared/utils/createHTMLComponent";
 
 export type Props = {
-  hasDismissButton: boolean;
+  hasCloseButton: boolean;
   title: string;
   hasTitle: boolean;
   hasHandle: boolean;
 };
 
-const BottomSheet = ({
-  title,
-  hasTitle,
-  hasDismissButton,
-  hasHandle,
-}: Props) => {
+const BottomSheet = ({ title, hasTitle, hasCloseButton, hasHandle }: Props) => {
   const handleOpenClick = () => {
     const dialog = document.getElementById("bottomSheet") as HTMLDialogElement;
     dialog?.showModal();
@@ -34,7 +29,7 @@ const BottomSheet = ({
           {hasTitle && (
             <div className="moon-bottom-sheet-header">
               <span>{title}</span>
-              {hasDismissButton && (
+              {hasCloseButton && (
                 <button
                   className="moon-bottom-sheet-close"
                   onClick={handleCloseClick}

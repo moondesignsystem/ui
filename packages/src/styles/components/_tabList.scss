@@ -55,12 +55,12 @@ $sizes: ();
     }
 
     &.moon-tab-list-item-active {
-      background-color: var(--component-tab-list-tab-background-selected);
-      color: var(--component-tab-list-tab-text-selected);
-      border-bottom: var(--component-tab-list-tab-stroke-selected) solid var(--component-tab-list-tab-border-selected);
+      background-color: var(--component-tab-list-tab-background-active);
+      color: var(--component-tab-list-tab-text-active);
+      border-bottom: var(--component-tab-list-tab-stroke-active) solid var(--component-tab-list-tab-border-active);
 
       :where(svg, .moon-icon) {
-        color: var(--component-tab-list-tab-icon-selected);
+        color: var(--component-tab-list-tab-icon-active);
       }
     }
 

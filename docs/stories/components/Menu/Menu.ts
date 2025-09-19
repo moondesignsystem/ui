@@ -1,6 +1,5 @@
 import getChildren from "../../shared/utils/getChildren";
 import joinClassnames from "../../shared/utils/joinClassnames";
-import starIcon from "../../shared/icons/starIcon";
 import getClasses from "./utils/getClasses";
 
 export const SIZES = ["sm", "md", "lg"] as const;
@@ -23,9 +22,19 @@ const createMenu = (args: Props) => {
     menuItem.className = "moon-menu-item";
     const menuItemMeta = document.createElement("div");
     menuItemMeta.className = "moon-menu-item-meta";
-    hasStartIcon && menuItem.appendChild(getChildren({ children: starIcon }));
+    if (hasStartIcon) {
+      const startIcon = document.createElement("div");
+      startIcon.className = "moon-icon mask-cover bg-[currentColor]";
+      startIcon.style.maskImage = `url(/icons/star.svg)`;
+      menuItem.appendChild(startIcon);
+    }
     menuItem.appendChild(getChildren({ children: `${label} ${item + 1}` }));
-    hasEndIcon && menuItemMeta.appendChild(getChildren({ children: starIcon }));
+    if (hasEndIcon) {
+      const startIcon = document.createElement("div");
+      startIcon.className = "moon-icon mask-cover bg-[currentColor]";
+      startIcon.style.maskImage = `url(/icons/star.svg)`;
+      menuItemMeta.appendChild(startIcon);
+    }
     hasEndIcon && menuItem.appendChild(menuItemMeta);
     menu.appendChild(menuItem);
   });

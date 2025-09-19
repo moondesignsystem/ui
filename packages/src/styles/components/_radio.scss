@@ -35,7 +35,7 @@
     width: var(--spacing-space-0);
     height: var(--spacing-space-0);
     border-radius: var(--radius-9999);
-    background-color: var(--component-radio-icon-selected);
+    background-color: var(--component-radio-icon-checked);
     transition:
       width 150ms ease-in-out,
       height 150ms ease-in-out;
@@ -47,7 +47,7 @@
   }
 
   &:checked {
-    background-color: var(--component-radio-background-selected);
+    background-color: var(--component-radio-background-checked);
     box-shadow: none;
   }
 

@@ -7,8 +7,8 @@ const meta: Meta<Props> = {
   title: "Containers & layout/Bottom Sheet",
   render: createBottomSheet,
   argTypes: {
-    hasDismissButton: {
-      description: "Dismiss button of Bottom Sheet",
+    hasCloseButton: {
+      description: "Close button of Bottom Sheet",
       control: "boolean",
       if: { arg: "hasTitle" },
     },
@@ -45,7 +45,7 @@ export const BottomSheet: StoryObj<Props> = {
   args: {
     hasTitle: false,
     title: "Bottom Sheet",
-    hasDismissButton: false,
+    hasCloseButton: false,
     hasHandle: false,
   },
   play: async ({ canvasElement, userEvent }) => {

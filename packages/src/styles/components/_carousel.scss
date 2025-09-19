@@ -5,7 +5,7 @@
   display: flex;
   width: 100%;
   flex-direction: column;
-  gap: var(--spacing-space-12);
+  gap: var(--spacing-gap-12);
   align-items: center;
 
   :where(.moon-carousel-reel) {
@@ -13,7 +13,7 @@
     overflow-x: scroll;
     display: inline-flex;
     flex-direction: row;
-    gap: var(--spacing-space-12);
+    gap: var(--spacing-gap-12);
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     scrollbar-width: none;
@@ -31,8 +31,10 @@
 
   :where(.moon-carousel-control) {
     @extend .moon-icon-button;
-    @extend .moon-icon-button-soft;
-    @extend .moon-icon-button-lg;
+    @extend .moon-icon-button-outline;
+    @extend .moon-icon-button-neutral;
+    @extend .moon-icon-button-sm;
+    @extend .moon-icon-button-rounded;
 
     position: absolute;
     top: 50%;
@@ -43,11 +45,11 @@
     }
 
     &:first-of-type {
-      inset-inline-start: var(--spacing-space-8);
+      inset-inline-start: calc(var(--spacing-space-16) * -1);
     }
 
     &:last-of-type {
-      inset-inline-end: var(--spacing-space-8);
+      inset-inline-end: calc(var(--spacing-space-16) * -1);
     }
 
     &:dir(rtl) {
