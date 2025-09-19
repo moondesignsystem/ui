@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 3.2.1
+
+### Patch Changes
+
+- fix: components file
+
 ## 3.2.0
 
 ### Minor Changes
