@@ -9,24 +9,24 @@ $variants: ();
     $variants,
     $variant,
     (
-      "unselected-color": var(--component-chip-#{$variant}-unselected-text),
-      "unselected-background": var(--component-chip-#{$variant}-unselected-background),
-      "unselected-icon": var(--component-chip-#{$variant}-unselected-icon),
-      "unselected-shadow": inset
+      "default-color": var(--component-chip-#{$variant}-text-default),
+      "default-background": var(--component-chip-#{$variant}-background-default),
+      "default-icon": var(--component-chip-#{$variant}-icon-default),
+      "default-shadow": inset
         0
         0
         0
-        var(--component-chip-#{$variant}-unselected-stroke)
-        var(--component-chip-#{$variant}-unselected-border),
-      "selected-color": var(--component-chip-#{$variant}-selected-text),
-      "selected-background": var(--component-chip-#{$variant}-selected-background),
-      "selected-icon": var(--component-chip-#{$variant}-selected-icon),
-      "selected-shadow": inset
+        var(--component-chip-#{$variant}-stroke-default)
+        var(--component-chip-#{$variant}-border-default),
+      "active-color": var(--component-chip-#{$variant}-text-active),
+      "active-background": var(--component-chip-#{$variant}-background-active),
+      "active-icon": var(--component-chip-#{$variant}-icon-active),
+      "active-shadow": inset
         0
         0
         0
-        var(--component-chip-#{$variant}-selected-stroke)
-        var(--component-chip-#{$variant}-selected-border)
+        var(--component-chip-#{$variant}-stroke-active)
+        var(--component-chip-#{$variant}-border-active)
     )
   );
 }
@@ -60,11 +60,11 @@ $sizes: ();
   height: map.get($sizes, "md", "height");
   padding: map.get($sizes, "md", "padding");
   column-gap: map.get($sizes, "md", "gap");
-  color: map.get($variants, "fill", "unselected-color");
+  color: map.get($variants, "fill", "default-color");
   font: map.get($sizes, "md", "font");
   border-radius: map.get($sizes, "md", "radius");
-  box-shadow: map.get($variants, "fill", "unselected-shadow");
-  background-color: map.get($variants, "fill", "unselected-background");
+  box-shadow: map.get($variants, "fill", "default-shadow");
+  background-color: map.get($variants, "fill", "default-background");
 
   &::after {
     content: "";
@@ -85,18 +85,18 @@ $sizes: ();
   }
 
   :where(svg, .moon-icon) {
-    color: map.get($variants, "fill", "unselected-icon");
+    color: map.get($variants, "fill", "default-icon");
     width: map.get($sizes, "md", "icon-size");
     height: map.get($sizes, "md", "icon-size");
   }
 
-  &:where(.moon-chip-selected) {
-    color: map.get($variants, "fill", "selected-color");
-    background-color: map.get($variants, "fill", "selected-background");
-    box-shadow: map.get($variants, "fill", "selected-shadow");
+  &:where(.moon-chip-active) {
+    color: map.get($variants, "fill", "active-color");
+    background-color: map.get($variants, "fill", "active-background");
+    box-shadow: map.get($variants, "fill", "active-shadow");
 
     :where(svg, .moon-icon) {
-      color: map.get($variants, "fill", "selected-icon");
+      color: map.get($variants, "fill", "active-icon");
     }
   }
 
@@ -120,21 +120,21 @@ $sizes: ();
   @each $variant, $prop in $variants {
     @if $variant != "fill" {
       &.moon-chip-#{$variant} {
-        color: map.get($prop, "unselected-color");
-        background-color: map.get($prop, "unselected-background");
-        box-shadow: map.get($prop, "unselected-shadow");
+        color: map.get($prop, "default-color");
+        background-color: map.get($prop, "default-background");
+        box-shadow: map.get($prop, "default-shadow");
 
         :where(svg, .moon-icon) {
-          color: map.get($prop, "unselected-icon");
+          color: map.get($prop, "default-icon");
         }
 
-        &:where(.moon-chip-selected) {
-          color: map.get($prop, "selected-color");
-          background-color: map.get($prop, "selected-background");
-          box-shadow: map.get($prop, "selected-shadow");
+        &:where(.moon-chip-active) {
+          color: map.get($prop, "active-color");
+          background-color: map.get($prop, "active-background");
+          box-shadow: map.get($prop, "active-shadow");
 
           :where(svg, .moon-icon) {
-            color: map.get($prop, "selected-icon");
+            color: map.get($prop, "active-icon");
           }
         }
       }

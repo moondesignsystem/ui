@@ -10,7 +10,7 @@ export type Props = {
   label: string;
   size: (typeof SIZES)[number];
   variant: (typeof VARIANTS)[number];
-  selected: boolean;
+  active: boolean;
   hasStartIcon: boolean;
   hasEndIcon: boolean;
 };
@@ -19,7 +19,7 @@ const Chip = ({
   label,
   size,
   variant,
-  selected,
+  active,
   hasStartIcon,
   hasEndIcon,
 }: Props) => (
@@ -28,7 +28,7 @@ const Chip = ({
       "moon-chip",
       getClasses(size),
       getClasses(variant),
-      selected && "moon-chip-selected",
+      active && "moon-chip-active",
     ])}
   >
     {hasStartIcon && <Icon name="star" />}

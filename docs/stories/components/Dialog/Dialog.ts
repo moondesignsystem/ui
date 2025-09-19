@@ -1,14 +1,11 @@
-import closeIcon from "../../shared/icons/closeIcon";
-import getChildren from "../../shared/utils/getChildren";
-
 export type Props = {
-  hasDismissButton: boolean;
+  hasCloseButton: boolean;
   title: string;
   hasTitle: boolean;
 };
 
 const createDialog = (args: Props) => {
-  const { title, hasTitle, hasDismissButton } = args;
+  const { title, hasTitle, hasCloseButton } = args;
   const dialogWrapper = document.createElement("div");
   const dialog = document.createElement("dialog");
   const dialogBox = document.createElement("div");
@@ -30,13 +27,16 @@ const createDialog = (args: Props) => {
   openButton.setAttribute("onclick", "dialog.showModal()");
   if (hasTitle) {
     const titleElement = document.createElement("p");
-    const dismissButton = document.createElement("button");
-    dismissButton.className = "moon-dialog-close";
-    dismissButton.setAttribute("onclick", "dialog.close()");
+    const closeButton = document.createElement("button");
+    closeButton.className = "moon-dialog-close";
+    closeButton.setAttribute("onclick", "dialog.close()");
     titleElement.className = "moon-dialog-header";
     titleElement.textContent = title;
-    dismissButton.appendChild(getChildren({ children: closeIcon }));
-    hasDismissButton && titleElement.appendChild(dismissButton);
+    const icon = document.createElement("div");
+    icon.className = "moon-icon mask-cover bg-[currentColor]";
+    icon.style.maskImage = `url(/icons/close.svg)`;
+    closeButton.appendChild(icon);
+    hasCloseButton && titleElement.appendChild(closeButton);
     dialogBox.appendChild(titleElement);
   }
   dialogBox.appendChild(content);

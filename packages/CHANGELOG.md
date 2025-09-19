@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 3.2.0
+
+### Minor Changes
+
+- feat: align active and checked states, improve Button, Carousel, IconButton
+
 ## 3.1.4
 
 ### Patch Changes

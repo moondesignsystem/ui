@@ -34,7 +34,7 @@
     width: 0;
     height: 0;
     mask-size: contain;
-    background-color: var(--component-checkbox-icon-selected);
+    background-color: var(--component-checkbox-icon-checked);
   }
 
   &:disabled {
@@ -44,7 +44,7 @@
 
   &:checked,
   &:indeterminate {
-    background-color: var(--component-checkbox-background-selected);
+    background-color: var(--component-checkbox-background-checked);
     box-shadow: none;
   }
 

@@ -17,6 +17,10 @@ const meta: Meta<Props> = {
       description: "Disabled state of Button",
       control: "boolean",
     },
+    fullWidth: {
+      description: "Full width Button",
+      control: "boolean",
+    },
     hasStartIcon: {
       description: "Start icon of Button",
       control: "boolean",
@@ -56,6 +60,7 @@ export const Button: StoryObj<Props> = {
     size: "md",
     variant: "fill",
     context: "brand",
+    fullWidth: false,
     disabled: false,
     hasStartIcon: false,
     hasEndIcon: false,

@@ -7,8 +7,8 @@ const meta: Meta<Props> = {
   title: "Containers & layout/Drawer",
   render: createDrawer,
   argTypes: {
-    hasDismissButton: {
-      description: "Dismiss button of Drawer",
+    hasCloseButton: {
+      description: "Close button of Drawer",
       control: "boolean",
       if: { arg: "hasTitle" },
     },
@@ -47,7 +47,7 @@ export const Drawer: StoryObj<Props> = {
     position: "end",
     hasTitle: false,
     title: "Drawer",
-    hasDismissButton: false,
+    hasCloseButton: false,
   },
   play: async ({ canvasElement, userEvent }) => {
     const button = canvasElement.querySelector("button");

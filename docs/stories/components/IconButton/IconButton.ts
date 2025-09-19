@@ -1,6 +1,4 @@
-import getChildren from "../../shared/utils/getChildren";
 import joinClassnames from "../../shared/utils/joinClassnames";
-import starIcon from "../../shared/icons/starIcon";
 import CONTEXTS from "../../shared/contexts";
 import getClasses from "./utils/getClasses";
 
@@ -10,19 +8,24 @@ export const VARIANTS = ["fill", "soft", "outline", "ghost"] as const;
 export type Props = {
   size: (typeof SIZES)[number];
   disabled: boolean;
+  rounded: boolean;
   variant: (typeof VARIANTS)[number];
   context: (typeof CONTEXTS)[number];
 };
 
 const createIconButton = (args: Props) => {
-  const { size, disabled, variant, context } = args;
+  const { size, disabled, rounded, variant, context } = args;
   const iconButton = document.createElement("button");
-  iconButton.appendChild(getChildren({ children: starIcon }));
+  const icon = document.createElement("div");
+  icon.className = "moon-icon mask-cover bg-[currentColor]";
+  icon.style.maskImage = `url(/icons/star.svg)`;
+  iconButton.appendChild(icon);
   iconButton.className = joinClassnames([
     "moon-icon-button",
     getClasses(size),
     getClasses(variant),
     getClasses(context),
+    rounded && "moon-icon-button-rounded",
   ]);
   if (disabled) {
     iconButton.setAttribute("disabled", "true");

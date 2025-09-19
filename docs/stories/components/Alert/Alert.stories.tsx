@@ -16,8 +16,8 @@ const meta: Meta<Props> = {
       description: "Start icon of Alert",
       control: "boolean",
     },
-    hasDismissButton: {
-      description: "Dismiss button of Alert",
+    hasCloseButton: {
+      description: "Close button of Alert",
       control: "boolean",
     },
     hasActionButton: {
@@ -69,7 +69,7 @@ export const Alert: StoryObj<Props> = {
     variant: "fill",
     context: "brand",
     hasStartIcon: false,
-    hasDismissButton: false,
+    hasCloseButton: false,
     hasActionButton: false,
     actionLabel: "Action",
     hasContent: false,
