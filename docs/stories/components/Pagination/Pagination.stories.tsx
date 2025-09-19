@@ -11,8 +11,8 @@ const meta: Meta<Props> = {
       description: "Amount of Pagination items",
       control: { type: "range", min: 3, max: 7, step: 1 },
     },
-    hasNavigation: {
-      description: "Naviagation buttons for Pagination",
+    hasControls: {
+      description: "Controls for Pagination",
       type: "boolean",
     },
   },
@@ -34,6 +34,6 @@ export default meta;
 export const Pagination: StoryObj<Props> = {
   args: {
     length: 5,
-    hasNavigation: false,
+    hasControls: false,
   },
 };

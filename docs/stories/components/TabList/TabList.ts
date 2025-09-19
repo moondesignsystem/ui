@@ -1,6 +1,5 @@
 import joinClassnames from "../../shared/utils/joinClassnames";
 import getChildren from "../../shared/utils/getChildren";
-import starIcon from "../../shared/icons/starIcon";
 import getClasses from "./utils/getClasses";
 
 export const SIZES = ["sm", "md"] as const;
@@ -25,9 +24,19 @@ const createTabs = (args: Props) => {
     segment.className = `moon-tab-list-item${
       item === 1 ? " moon-tab-list-item-active" : ""
     }`;
-    hasStartIcon && segment.appendChild(getChildren({ children: starIcon }));
+    if (hasStartIcon) {
+      const startIcon = document.createElement("div");
+      startIcon.className = "moon-icon mask-cover bg-[currentColor]";
+      startIcon.style.maskImage = `url(/icons/star.svg)`;
+      segment.appendChild(startIcon);
+    }
     segment.appendChild(getChildren({ children: `${label} ${item + 1}` }));
-    hasEndIcon && segment.appendChild(getChildren({ children: starIcon }));
+    if (hasEndIcon) {
+      const endIcon = document.createElement("div");
+      endIcon.className = "moon-icon mask-cover bg-[currentColor]";
+      endIcon.style.maskImage = `url(/icons/star.svg)`;
+      segment.appendChild(endIcon);
+    }
     tabs.appendChild(segment);
   });
   return tabs;

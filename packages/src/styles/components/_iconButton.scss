@@ -106,6 +106,10 @@ $sizes: ();
       }
     }
   }
+
+  &-rounded {
+    border-radius: var(--radius-9999);
+  }
 }
 
 @each $context in variants.$contexts {

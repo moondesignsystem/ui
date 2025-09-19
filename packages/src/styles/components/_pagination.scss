@@ -13,12 +13,16 @@
       var(--font-default);
     background-color: var(--component-pagination-background-default);
     color: var(--component-pagination-text-default);
-    box-shadow: inset 0 0 0 var(--component-pagination-stroke-default) var(--component-pagination-border-default);
 
     &.moon-pagination-item-active {
-      background-color: var(--component-pagination-background-selected);
-      color: var(--component-pagination-text-selected);
-      box-shadow: inset 0 0 0 var(--component-pagination-stroke-selected) var(--component-pagination-border-selected);
+      background-color: var(--component-pagination-background-active);
+      color: var(--component-pagination-text-active);
     }
+  }
+
+  :where(.moon-pagination-control) {
+    @extend .moon-icon-button;
+    @extend .moon-icon-button-sm;
+    @extend .moon-icon-button-soft;
   }
 }

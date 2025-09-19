@@ -12,7 +12,7 @@ const Icon = ({ name, className }: Props) => (
       className,
     ])}
     style={{
-      maskImage: `url(https://assets.moon.io/icons/${name}.svg)`,
+      maskImage: `url(/icons/${name}.svg)`,
     }}
   />
 );

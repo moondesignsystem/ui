@@ -1,6 +1,5 @@
 import getChildren from "../../shared/utils/getChildren";
 import joinClassnames from "../../shared/utils/joinClassnames";
-import starIcon from "../../shared/icons/starIcon";
 import getClasses from "./utils/getClasses";
 
 export const SIZES = ["sm", "md", "lg"] as const;
@@ -18,15 +17,26 @@ const createList = (args: Props) => {
   const list = document.createElement("ul");
   list.className = joinClassnames(["moon-list", getClasses(size)]);
   const listItems = new Array(items).fill("");
+
   listItems.forEach((_, item) => {
     const listItem = document.createElement("li");
     listItem.className = "moon-list-item";
     const listItemMeta = document.createElement("div");
     listItemMeta.className = "moon-list-item-meta";
-    hasStartIcon && listItem.appendChild(getChildren({ children: starIcon }));
+    if (hasStartIcon) {
+      const startIcon = document.createElement("div");
+      startIcon.className = "moon-icon mask-cover bg-[currentColor]";
+      startIcon.style.maskImage = `url(/icons/star.svg)`;
+      listItem.appendChild(startIcon);
+    }
     listItem.appendChild(getChildren({ children: `${label} ${item + 1}` }));
-    hasEndIcon && listItemMeta.appendChild(getChildren({ children: starIcon }));
-    hasEndIcon && listItem.appendChild(listItemMeta);
+    if (hasEndIcon) {
+      const endIcon = document.createElement("div");
+      endIcon.className = "moon-icon mask-cover bg-[currentColor]";
+      endIcon.style.maskImage = `url(/icons/star.svg)`;
+      listItemMeta.appendChild(endIcon);
+      listItem.appendChild(listItemMeta);
+    }
     list.appendChild(listItem);
   });
   return list;

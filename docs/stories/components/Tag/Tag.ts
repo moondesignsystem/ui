@@ -1,8 +1,7 @@
+import CONTEXTS from "../../shared/contexts";
 import getChildren from "../../shared/utils/getChildren";
 import joinClassnames from "../../shared/utils/joinClassnames";
-import starIcon from "../../shared/icons/starIcon";
 import getClasses from "./utils/getClasses";
-import { CONTEXTS } from "../Button/tokens.generated";
 
 export const SIZES = ["2xs", "xs"] as const;
 export const VARIANTS = ["fill", "ghost", "outline", "soft"] as const;
@@ -20,9 +19,19 @@ const createTag = (args: Props) => {
   const { label, size, hasStartIcon, hasEndIcon, variant, context } = args;
   const tag = document.createElement("div");
   const tagChildren = getChildren({ children: label });
-  hasStartIcon && tag.appendChild(getChildren({ children: starIcon }));
+  if (hasStartIcon) {
+    const startIcon = document.createElement("div");
+    startIcon.className = "moon-icon mask-cover bg-[currentColor]";
+    startIcon.style.maskImage = `url(/icons/star.svg)`;
+    tag.appendChild(startIcon);
+  }
   tag.appendChild(tagChildren);
-  hasEndIcon && tag.appendChild(getChildren({ children: starIcon }));
+  if (hasEndIcon) {
+    const startIcon = document.createElement("div");
+    startIcon.className = "moon-icon mask-cover bg-[currentColor]";
+    startIcon.style.maskImage = `url(/icons/star.svg)`;
+    tag.appendChild(startIcon);
+  }
   tag.className = joinClassnames([
     "moon-tag",
     getClasses(size),

@@ -1,25 +1,25 @@
-import getChildren from "../../shared/utils/getChildren";
-import chevronLeft from "../../shared/icons/chevronLeft";
-import chevronRight from "../../shared/icons/chevronRight";
-
 export type Props = {
   length: number;
-  hasNavigation: boolean;
+  hasControls: boolean;
 };
 
 const createPagination = (args: Props) => {
-  const { length, hasNavigation } = args;
+  const { length, hasControls } = args;
   const pagination = document.createElement("div");
   const items = new Array(length).fill("");
   const startButton = document.createElement("button");
   const endButton = document.createElement("button");
-  startButton.className =
-    "moon-icon-button moon-icon-button-sm moon-icon-button-soft";
-  startButton.appendChild(getChildren({ children: chevronLeft }));
-  endButton.appendChild(getChildren({ children: chevronRight }));
-  endButton.className =
-    "moon-icon-button moon-icon-button-sm moon-icon-button-soft";
-  hasNavigation && pagination.appendChild(startButton);
+  startButton.className = "moon-pagination-control";
+  const startIcon = document.createElement("div");
+  startIcon.className = "moon-icon mask-cover bg-[currentColor]";
+  startIcon.style.maskImage = `url(/icons/chevron-left.svg)`;
+  startButton.appendChild(startIcon);
+  const endIcon = document.createElement("div");
+  endIcon.className = "moon-icon mask-cover bg-[currentColor]";
+  endIcon.style.maskImage = `url(/icons/chevron-right.svg)`;
+  endButton.appendChild(endIcon);
+  endButton.className = "moon-pagination-control";
+  hasControls && pagination.appendChild(startButton);
   items.forEach((_, i) => {
     const button = document.createElement("button");
     button.className = "moon-pagination-item";
@@ -29,7 +29,7 @@ const createPagination = (args: Props) => {
     button.textContent = (i + 1).toString();
     pagination.appendChild(button);
   });
-  hasNavigation && pagination.appendChild(endButton);
+  hasControls && pagination.appendChild(endButton);
   pagination.className = "moon-pagination";
   return pagination;
 };

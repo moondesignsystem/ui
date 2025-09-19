@@ -7,8 +7,8 @@ const meta: Meta<Props> = {
   title: "Containers & layout/Dialog",
   render: createDialog,
   argTypes: {
-    hasDismissButton: {
-      description: "Dismiss button of Dialog",
+    hasCloseButton: {
+      description: "Close button of Dialog",
       control: "boolean",
       if: { arg: "hasTitle" },
     },
@@ -41,7 +41,7 @@ export const Dialog: StoryObj<Props> = {
   args: {
     hasTitle: false,
     title: "Dialog",
-    hasDismissButton: false,
+    hasCloseButton: false,
   },
   play: async ({ canvasElement, userEvent }) => {
     const button = canvasElement.querySelector("button");
