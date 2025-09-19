@@ -1,19 +1,17 @@
-import closeIcon from "../../shared/icons/closeIcon";
-import getChildren from "../../shared/utils/getChildren";
 import joinClassnames from "../../shared/utils/joinClassnames";
 import getClasses from "./utils/getClasses";
 
 export const POSITIONS = ["start", "end"] as const;
 
 export type Props = {
-  hasDismissButton: boolean;
+  hasCloseButton: boolean;
   title: string;
   hasTitle: boolean;
   position: (typeof POSITIONS)[number];
 };
 
 const createDrawer = (args: Props) => {
-  const { title, hasTitle, hasDismissButton, position } = args;
+  const { title, hasTitle, hasCloseButton, position } = args;
   const drawerWrapper = document.createElement("div");
   const drawer = document.createElement("dialog");
   const drawerBox = document.createElement("div");
@@ -35,13 +33,16 @@ const createDrawer = (args: Props) => {
   openButton.setAttribute("onclick", "drawer.showModal()");
   if (hasTitle) {
     const titleElement = document.createElement("p");
-    const dismissButton = document.createElement("button");
-    dismissButton.className = "moon-drawer-close";
-    dismissButton.setAttribute("onclick", "drawer.close()");
+    const closeButton = document.createElement("button");
+    closeButton.className = "moon-drawer-close";
+    closeButton.setAttribute("onclick", "drawer.close()");
     titleElement.className = "moon-drawer-header";
     titleElement.textContent = title;
-    dismissButton.appendChild(getChildren({ children: closeIcon }));
-    hasDismissButton && titleElement.appendChild(dismissButton);
+    const icon = document.createElement("div");
+    icon.className = "moon-icon mask-cover bg-[currentColor]";
+    icon.style.maskImage = `url(/icons/close.svg)`;
+    closeButton.appendChild(icon);
+    hasCloseButton && titleElement.appendChild(closeButton);
     drawerBox.appendChild(titleElement);
   }
   drawerBox.appendChild(content);

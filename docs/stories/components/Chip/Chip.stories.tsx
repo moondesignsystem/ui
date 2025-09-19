@@ -17,8 +17,8 @@ const meta: Meta<Props> = {
       control: "select",
       options: SIZES,
     },
-    selected: {
-      description: "Selected state of Chip",
+    active: {
+      description: "Active state of Chip",
       control: "boolean",
     },
     variant: {
@@ -54,7 +54,7 @@ export const Chip: StoryObj<Props> = {
   args: {
     size: "md",
     variant: "fill",
-    selected: false,
+    active: false,
     hasStartIcon: false,
     hasEndIcon: false,
     label: "Chip",

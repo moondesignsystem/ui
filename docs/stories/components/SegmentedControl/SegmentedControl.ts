@@ -1,9 +1,8 @@
 import joinClassnames from "../../shared/utils/joinClassnames";
 import getChildren from "../../shared/utils/getChildren";
-import starIcon from "../../shared/icons/starIcon";
 import getClasses from "./utils/getClasses";
 
-export const SIZES = ["sm", "md"] as const;
+export const SIZES = ["sm", "md", "lg"] as const;
 
 export type Props = {
   size: (typeof SIZES)[number];
@@ -28,9 +27,19 @@ const createSegmentedControl = (args: Props) => {
     segment.className = `moon-segmented-control-item${
       item === 1 ? " moon-segmented-control-item-active" : ""
     }`;
-    hasStartIcon && segment.appendChild(getChildren({ children: starIcon }));
+    if (hasStartIcon) {
+      const startIcon = document.createElement("div");
+      startIcon.className = "moon-icon mask-cover bg-[currentColor]";
+      startIcon.style.maskImage = `url(/icons/star.svg)`;
+      segment.appendChild(startIcon);
+    }
     segment.appendChild(getChildren({ children: `${label} ${item + 1}` }));
-    hasEndIcon && segment.appendChild(getChildren({ children: starIcon }));
+    if (hasEndIcon) {
+      const startIcon = document.createElement("div");
+      startIcon.className = "moon-icon mask-cover bg-[currentColor]";
+      startIcon.style.maskImage = `url(/icons/star.svg)`;
+      segment.appendChild(startIcon);
+    }
     segmentedControl.appendChild(segment);
   });
   return segmentedControl;

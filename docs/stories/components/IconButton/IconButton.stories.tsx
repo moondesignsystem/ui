@@ -17,6 +17,10 @@ const meta: Meta<Props> = {
       description: "Disabled state of Icon Button",
       control: "boolean",
     },
+    rounded: {
+      description: "Rounded Icon Button",
+      control: "boolean",
+    },
     variant: {
       description: "Variant of Icon Button",
       control: "select",
@@ -48,6 +52,7 @@ export const IconButton: StoryObj<Props> = {
     size: "md",
     variant: "fill",
     context: "brand",
+    rounded: false,
     disabled: false,
   },
 };

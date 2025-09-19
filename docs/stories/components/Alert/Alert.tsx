@@ -9,7 +9,7 @@ export const VARIANTS = ["fill", "soft", "outline"] as const;
 export type Props = {
   title: string;
   hasStartIcon: boolean;
-  hasDismissButton: boolean;
+  hasCloseButton: boolean;
   hasActionButton: boolean;
   actionLabel: string;
   hasContent: boolean;
@@ -21,7 +21,7 @@ export type Props = {
 const Alert = ({
   title,
   hasStartIcon,
-  hasDismissButton,
+  hasCloseButton,
   hasActionButton,
   actionLabel,
   hasContent,
@@ -38,12 +38,12 @@ const Alert = ({
   >
     {hasStartIcon && <Icon name="star" />}
     {title}
-    {(hasActionButton || hasDismissButton) && (
+    {(hasActionButton || hasCloseButton) && (
       <div className="moon-alert-meta">
         {hasActionButton && (
           <button className="moon-alert-action">{actionLabel}</button>
         )}
-        {hasDismissButton && (
+        {hasCloseButton && (
           <button className="moon-alert-close">
             <Icon name="close" />
           </button>

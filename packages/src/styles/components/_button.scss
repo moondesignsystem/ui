@@ -116,6 +116,10 @@ $sizes: ();
       }
     }
   }
+
+  &-full-width {
+    width: 100%;
+  }
 }
 
 @each $context in variants.$contexts {

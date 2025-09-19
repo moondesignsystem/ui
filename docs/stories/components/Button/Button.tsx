@@ -11,6 +11,7 @@ export type Props = {
   label: string;
   size: (typeof SIZES)[number];
   disabled: boolean;
+  fullWidth: boolean;
   variant: (typeof VARIANTS)[number];
   context: (typeof CONTEXTS)[number];
   hasStartIcon: boolean;
@@ -21,6 +22,7 @@ const Button = ({
   label,
   size,
   disabled,
+  fullWidth,
   variant,
   context,
   hasStartIcon,
@@ -32,6 +34,7 @@ const Button = ({
       getClasses(size),
       getClasses(variant),
       getClasses(context),
+      fullWidth && "moon-button-full-width",
     ])}
     disabled={disabled}
   >

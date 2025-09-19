@@ -2,12 +2,12 @@ import { createHTMLComponent } from "../../shared/utils/createHTMLComponent";
 import Icon from "../../shared/Icon";
 
 export type Props = {
-  hasDismissButton: boolean;
+  hasCloseButton: boolean;
   title: string;
   hasTitle: boolean;
 };
 
-const Dialog = ({ title, hasTitle, hasDismissButton }: Props) => (
+const Dialog = ({ title, hasTitle, hasCloseButton }: Props) => (
   <div>
     <button
       className="moon-button"
@@ -20,7 +20,7 @@ const Dialog = ({ title, hasTitle, hasDismissButton }: Props) => (
         {hasTitle && (
           <p className="moon-dialog-header">
             {title}
-            {hasDismissButton && (
+            {hasCloseButton && (
               <button
                 className="moon-dialog-close"
                 {...({

@@ -14,6 +14,7 @@
     "dev": "npm run sass:watch --workspace packages & npm run dev --workspace docs",
     "build": "npm run build --workspace packages",
     "build-storybook": "npm run build-storybook --workspace docs",
+    "check-css-vars": "node check-css-variables.js",
     "changeset": "changeset",
     "version": "changeset version && npm install && npm update && npm run build && node packages/dist/install.js --add-components",
     "release": "changeset publish"

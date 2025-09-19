@@ -11,11 +11,7 @@ const meta: Meta<Props> = {
       description: "Amount of Carousel items",
       control: { type: "range", min: 2, max: 10, step: 1 },
     },
-    hasPagination: {
-      description: "Has pagination controls",
-      control: "boolean",
-    },
-    hasArrows: {
+    hasControls: {
       description: "Has arrow controls",
       control: "boolean",
     },
@@ -38,7 +34,6 @@ export default meta;
 export const Carousel: StoryObj<Props> = {
   args: {
     length: 5,
-    hasArrows: false,
-    hasPagination: false,
+    hasControls: false,
   },
 };
