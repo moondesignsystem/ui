@@ -4,11 +4,10 @@ import fs from "fs";
 interface Config {
   coreFileId: string;
   componentsFileId?: string; // Keep for backward compatibility
-  componentsProjectId?: string; // New field for project-based approach
+  componentsProjectId?: string;
   projectName: string;
   outputFolder: string;
   themes?: Record<string, string>;
-  customPrefix: string;
   target: "tailwindcss" | "css";
   preflight: boolean;
 }
