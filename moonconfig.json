@@ -3,7 +3,6 @@
   "coreFileId": "tvIuWlowgVG4gzXjDuVIEw",
   "componentsProjectId": "408714341",
   "outputFolder": "packages/dist/styles",
-  "customPrefix": "",
   "target": "tailwindcss",
   "preflight": false,
   "themes": {}
