@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-dotenv.config();
+dotenv.config({ quiet: true });
 // STEP 3. Fetch Figma data
 const fetchFigmaData = async (fileId) => {
     const figmaToken = process.env.FIGMA_TOKEN;

@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-dotenv.config();
+dotenv.config({ quiet: true });
 // STEP 2.5. Fetch list of component files from Figma project
 const fetchProjectFiles = async (projectId) => {
     const figmaToken = process.env.FIGMA_TOKEN;
