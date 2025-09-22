@@ -6,7 +6,6 @@ import postcss from "postcss";
 import autoprefixer from "autoprefixer";
 import getConfig from "./utils/getConfig.js";
 import getPackageVersion from "./utils/getPackageVersion.js";
-import replaceClassPrefix from "./utils/replaceClassPrefix.js";
 import generateComponentVariants from "./utils/generateComponentVariants.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -33,11 +32,7 @@ const generateComponentsFile = async () => {
         });
         const version = getPackageVersion();
         const versionComment = `/* Moon UI v${version} */\n`;
-        const cssWithPrefixReplaced = replaceClassPrefix(postCssResult.css);
-        const cssWithVersionComment = versionComment +
-            `@layer components {\n` +
-            cssWithPrefixReplaced +
-            `\n}\n`;
+        const cssWithVersionComment = versionComment + `@layer components {\n` + postCssResult.css + `\n}\n`;
         fs.writeFileSync(outputComponentsFile, cssWithVersionComment);
     }
     catch (error) {

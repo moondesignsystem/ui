@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 3.3.0
+
+### Minor Changes
+
+- feat: remove customPrefix featute
+
 ## 3.2.1
 
 ### Patch Changes
