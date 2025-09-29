@@ -23,10 +23,10 @@ $variants: ();
   flex-wrap: wrap;
   align-items: center;
   width: 100%;
-  gap: var(--spacing-gap-8);
+  gap: var(--spacing-space-8);
   text-align: start;
-  min-height: var(--spacing-height-56);
-  padding: var(--spacing-padding-12);
+  min-height: var(--spacing-space-56);
+  padding: var(--spacing-space-12);
   border-radius: var(--component-alert-radius-radius);
   font: var(--font-weight-medium) var(--style-text-md-font-size) / var(--style-text-md-line-height) var(--font-default);
   color: map.get($variants, "fill", "color");
@@ -43,7 +43,7 @@ $variants: ();
     margin-inline-start: auto;
     display: flex;
     align-items: center;
-    gap: var(--spacing-gap-8);
+    gap: var(--spacing-space-8);
     color: var(--color-text-secondary);
   }
 

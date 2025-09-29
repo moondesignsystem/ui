@@ -9,7 +9,7 @@ $sizes: ();
     $sizes,
     $size,
     (
-      "height": var(--spacing-height-#{utilities.get-size($size, "height")})
+      "height": var(--spacing-space-#{utilities.get-size($size, "height")})
     )
   );
 }

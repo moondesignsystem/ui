@@ -18,14 +18,19 @@ $variants: ();
 .moon-badge {
   width: fit-content;
   display: inline-block;
-  min-width: var(--spacing-width-8);
-  min-height: var(--spacing-width-8);
+  min-width: var(--spacing-space-8);
+  min-height: var(--spacing-space-8);
   padding: 0 var(--spacing-space-4);
   border-radius: var(--radius-9999);
   background-color: map.get($variants, "fill", "background");
   color: map.get($variants, "fill", "color");
   box-shadow: map.get($variants, "fill", "shadow");
   font: var(--font-weight-medium) var(--style-text-sm-font-size) / var(--style-text-sm-line-height) var(--font-default);
+  text-align: center;
+
+  &:not(:empty) {
+    min-width: var(--spacing-space-16);
+  }
 
   @each $variant, $prop in $variants {
     @if $variant != "fill" {

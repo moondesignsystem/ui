@@ -8,7 +8,7 @@ const Dropdown = ({}: Props) => (
       Open Dropdown
     </div>
     <div tabIndex={0} className="moon-dropdown-content">
-      <div className="w-full flex items-center justify-center h-space-80 bg-brand-subtle text-brand">
+      <div className="w-full flex items-center justify-center h-20 bg-brand-subtle text-brand">
         Content
       </div>
     </div>

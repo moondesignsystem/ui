@@ -7,7 +7,9 @@ const formatHtml = (html: string): string => {
   let indent = 0;
   const indentStr = "  ";
   // Split by tags and preserve text content
-  const tokens = cleanedHtml.split(/(<[^>]*>)/g).filter(token => token.length > 0);
+  const tokens = cleanedHtml
+    .split(/(<[^>]*>)/g)
+    .filter((token) => token.length > 0);
 
   for (let i = 0; i < tokens.length; i++) {
     const token = tokens[i];
@@ -24,8 +26,11 @@ const formatHtml = (html: string): string => {
       formatted += "\n" + indentStr.repeat(indent) + trimmedToken;
 
       // Check if it's a self-closing tag or void element
-      const isSelfClosing = trimmedToken.endsWith("/>") ||
-        /^<(area|base|br|col|embed|hr|img|input|link|meta|param|source|track|wbr)/.test(trimmedToken);
+      const isSelfClosing =
+        trimmedToken.endsWith("/>") ||
+        /^<(area|base|br|col|embed|hr|img|input|link|meta|param|source|track|wbr)/.test(
+          trimmedToken
+        );
 
       if (!isSelfClosing) {
         indent++;
@@ -63,20 +68,50 @@ export const createHTMLComponent = <T extends Record<string, any>>(
         configurable: true,
       });
       setTimeout(() => {
-        const openButton = element.querySelector(
+        // Handle BottomSheet
+        const openBottomSheetButton = element.querySelector(
           '[data-action="open-bottom-sheet"], .moon-button'
         );
-        const closeButton = element.querySelector(
+        const closeBottomSheetButton = element.querySelector(
           '[data-action="close-bottom-sheet"], .moon-bottom-sheet-close'
         );
-        const dialog = element.querySelector(
+        const bottomSheetDialog = element.querySelector(
           "#bottomSheet"
         ) as HTMLDialogElement;
-        if (openButton && dialog) {
-          openButton.addEventListener("click", () => dialog.showModal());
+
+        if (openBottomSheetButton && bottomSheetDialog) {
+          openBottomSheetButton.addEventListener("click", () =>
+            bottomSheetDialog.showModal()
+          );
         }
-        if (closeButton && dialog) {
-          closeButton.addEventListener("click", () => dialog.close());
+        if (closeBottomSheetButton && bottomSheetDialog) {
+          closeBottomSheetButton.addEventListener("click", () =>
+            bottomSheetDialog.close()
+          );
+        }
+
+        // Handle Dialog
+        const openDialogButton = element.querySelector(".moon-button");
+        const closeDialogButton = element.querySelector(".moon-dialog-close");
+        const dialog = element.querySelector("#dialog") as HTMLDialogElement;
+
+        if (openDialogButton && dialog && !bottomSheetDialog) {
+          openDialogButton.addEventListener("click", () => dialog.showModal());
+        }
+        if (closeDialogButton && dialog) {
+          closeDialogButton.addEventListener("click", () => dialog.close());
+        }
+
+        // Handle Drawer
+        const openDrawerButton = element.querySelector(".moon-button");
+        const closeDrawerButton = element.querySelector(".moon-drawer-close");
+        const drawer = element.querySelector("#drawer") as HTMLDialogElement;
+
+        if (openDrawerButton && drawer && !bottomSheetDialog && !dialog) {
+          openDrawerButton.addEventListener("click", () => drawer.showModal());
+        }
+        if (closeDrawerButton && drawer) {
+          closeDrawerButton.addEventListener("click", () => drawer.close());
         }
       }, 0);
     }
