@@ -25,7 +25,7 @@
     flex-direction: column;
     display: flex;
     overflow: auto;
-    top: calc(100% + var(--spacing-gap-8));
+    top: calc(100% + var(--spacing-space-8));
   }
   &:not(details, .moon-dropdown-open, .moon-dropdown-hover:hover, :focus-within) {
     .moon-dropdown-content {

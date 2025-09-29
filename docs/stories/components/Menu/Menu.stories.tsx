@@ -31,7 +31,7 @@ const meta: Meta<Props> = {
   },
   parameters: {
     docs: {
-      container: ({ context }) => (
+      container: ({ context }: { context: any }) => (
         <LinksBlock
           context={context}
           moon="navigation/menu"
