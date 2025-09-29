@@ -9,7 +9,7 @@ $sizes: ();
     $sizes,
     $size,
     (
-      "padding": var(--spacing-padding-#{utilities.get-size($size, "padding")}),
+      "padding": var(--spacing-space-#{utilities.get-size($size, "padding")}),
       "radius": var(--component-forms-radius-#{$size}),
       "font": var(--font-weight-medium)
         var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
@@ -60,24 +60,24 @@ $variants: ();
   }
 
   &:disabled {
-    opacity: var(--style-opacity-disabled);
+    opacity: 0.6;
   }
 
   &:not(:read-only, :disabled):hover {
-    box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-primary);
+    box-shadow: inset 0 0 0 var(--spacing-stroke-1) var(--color-border-primary);
     background-color: var(--color-background-hover);
   }
 
   &:not(:read-only, :disabled):focus {
-    box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-info);
+    box-shadow: inset 0 0 0 var(--spacing-stroke-1) var(--color-border-info);
   }
 
   &.moon-textarea-error {
-    box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-negative);
+    box-shadow: inset 0 0 0 var(--spacing-stroke-1) var(--color-border-negative);
 
     &:hover,
     &:focus {
-      box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-negative);
+      box-shadow: inset 0 0 0 var(--spacing-stroke-1) var(--color-border-negative);
     }
   }
 

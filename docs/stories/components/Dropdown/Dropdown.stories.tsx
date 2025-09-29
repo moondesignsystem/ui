@@ -26,7 +26,9 @@ export default meta;
 export const Dropdown: StoryObj<Props> = {
   args: {},
   play: async ({ canvasElement, userEvent }) => {
-    const button = canvasElement.querySelector("button");
-    await userEvent.click(button);
+    const button = canvasElement.querySelector(".moon-button");
+    if (button) {
+      await userEvent.click(button);
+    }
   },
 };
