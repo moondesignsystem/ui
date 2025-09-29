@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 3.4.0
+
+### Minor Changes
+
+- feat: update components tokents
+
 ## 3.3.0
 
 ### Minor Changes
