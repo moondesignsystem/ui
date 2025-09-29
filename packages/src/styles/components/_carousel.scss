@@ -5,7 +5,7 @@
   display: flex;
   width: 100%;
   flex-direction: column;
-  gap: var(--spacing-gap-12);
+  gap: var(--spacing-space-12);
   align-items: center;
 
   :where(.moon-carousel-reel) {
@@ -13,7 +13,7 @@
     overflow-x: scroll;
     display: inline-flex;
     flex-direction: row;
-    gap: var(--spacing-gap-12);
+    gap: var(--spacing-space-12);
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     scrollbar-width: none;

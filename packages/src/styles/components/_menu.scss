@@ -25,10 +25,10 @@ $sizes: ();
     $size,
     (
       "radius": var(--component-menu-radius-#{$size}),
-      "height": var(--spacing-height-#{utilities.get-size($size, "height")}),
-      "gap": var(--spacing-gap-#{utilities.get-size($size, "gap")}),
-      "padding": var(--spacing-padding-#{utilities.get-size($size, "padding")}),
-      "icon-size": var(--spacing-height-#{utilities.get-size($size, "icon-size")}),
+      "height": var(--spacing-space-#{utilities.get-size($size, "height")}),
+      "gap": var(--spacing-space-#{utilities.get-size($size, "gap")}),
+      "padding": var(--spacing-space-#{utilities.get-size($size, "padding")}),
+      "icon-size": var(--spacing-space-#{utilities.get-size($size, "icon-size")}),
       "font": var(--font-weight-medium)
         var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
         var(--style-text-#{utilities.get-size($size, "font")}-line-height)

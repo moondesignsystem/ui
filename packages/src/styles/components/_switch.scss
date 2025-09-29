@@ -9,8 +9,8 @@ $sizes: ();
     $sizes,
     $size,
     (
-      "height": var(--spacing-height-#{utilities.get-size($size, "height")}),
-      "width": calc(var(--spacing-width-#{utilities.get-size($size, "width")}) * 2)
+      "height": var(--spacing-space-#{utilities.get-size($size, "height")}),
+      "width": calc(var(--spacing-space-#{utilities.get-size($size, "width")}) * 2)
     )
   );
 }
@@ -21,7 +21,7 @@ $sizes: ();
   cursor: pointer;
   appearance: none;
   border-radius: var(--radius-9999);
-  border-width: var(--spacing-space-1);
+  border-width: var(--spacing-stroke-1);
   border-color: var(--component-switch-border-default);
   background-color: currentcolor;
   color: var(--component-switch-icon-unselected);
@@ -30,9 +30,9 @@ $sizes: ();
     box-shadow 150ms ease-in-out,
     border-color 150ms ease-in-out;
   box-shadow:
-    calc(map.get($sizes, "sm", "height") * -1) 0 0 var(--spacing-space-1) var(--component-switch-background-default)
+    calc(map.get($sizes, "sm", "height") * -1) 0 0 var(--spacing-stroke-1) var(--component-switch-background-default)
       inset,
-    0 0 0 var(--spacing-space-1) var(--component-switch-background-default) inset,
+    0 0 0 var(--spacing-stroke-1) var(--component-switch-background-default) inset,
     0 0;
 
   &:checked {
@@ -40,13 +40,13 @@ $sizes: ();
     color: var(--component-switch-icon-checked);
     border-color: var(--component-switch-background-checked);
     box-shadow:
-      map.get($sizes, "sm", "height") 0 0 var(--spacing-space-1) var(--component-switch-background-checked) inset,
-      0 0 0 var(--spacing-space-1) var(--component-switch-background-checked) inset,
+      map.get($sizes, "sm", "height") 0 0 var(--spacing-stroke-1) var(--component-switch-background-checked) inset,
+      0 0 0 var(--spacing-stroke-1) var(--component-switch-background-checked) inset,
       0 0;
   }
 
   &:disabled {
-    opacity: var(--style-opacity-disabled);
+    opacity: 0.6;
     cursor: not-allowed;
   }
 
@@ -59,16 +59,16 @@ $sizes: ();
           calc(map.get($prop, "height") * -1)
             0
             0
-            var(--spacing-space-1)
+            var(--spacing-stroke-1)
             var(--component-switch-background-default)
             inset,
-          0 0 0 var(--spacing-space-1) var(--component-switch-background-default) inset,
+          0 0 0 var(--spacing-stroke-1) var(--component-switch-background-default) inset,
           0 0;
 
         &:checked {
           box-shadow:
-            map.get($prop, "height") 0 0 var(--spacing-space-1) var(--component-switch-background-checked) inset,
-            0 0 0 var(--spacing-space-1) var(--component-switch-background-checked) inset,
+            map.get($prop, "height") 0 0 var(--spacing-stroke-1) var(--component-switch-background-checked) inset,
+            0 0 0 var(--spacing-stroke-1) var(--component-switch-background-checked) inset,
             0 0;
         }
       }
@@ -77,15 +77,15 @@ $sizes: ();
 
   &:dir(rtl) {
     box-shadow:
-      map.get($sizes, "sm", "height") 0 0 var(--spacing-space-1) var(--component-switch-background-default) inset,
-      0 0 0 var(--spacing-space-1) var(--component-switch-background-default) inset,
+      map.get($sizes, "sm", "height") 0 0 var(--spacing-stroke-1) var(--component-switch-background-default) inset,
+      0 0 0 var(--spacing-stroke-1) var(--component-switch-background-default) inset,
       0 0;
 
     &:checked {
       box-shadow:
-        calc(map.get($sizes, "sm", "height") * -1) 0 0 var(--spacing-space-1) var(--component-switch-background-checked)
-          inset,
-        0 0 0 var(--spacing-space-1) var(--component-switch-background-checked) inset,
+        calc(map.get($sizes, "sm", "height") * -1) 0 0 var(--spacing-stroke-1)
+          var(--component-switch-background-checked) inset,
+        0 0 0 var(--spacing-stroke-1) var(--component-switch-background-checked) inset,
         0 0;
     }
 
@@ -93,8 +93,8 @@ $sizes: ();
       @if $size != "sm" {
         &.moon-switch-#{$size} {
           box-shadow:
-            map.get($prop, "height") 0 0 var(--spacing-space-1) var(--component-switch-background-default) inset,
-            0 0 0 var(--spacing-space-1) var(--component-switch-background-default) inset,
+            map.get($prop, "height") 0 0 var(--spacing-stroke-1) var(--component-switch-background-default) inset,
+            0 0 0 var(--spacing-stroke-1) var(--component-switch-background-default) inset,
             0 0;
 
           &:checked {
@@ -102,10 +102,10 @@ $sizes: ();
               calc(map.get($prop, "height") * -1)
                 0
                 0
-                var(--spacing-space-1)
+                var(--spacing-stroke-1)
                 var(--component-switch-background-checked)
                 inset,
-              0 0 0 var(--spacing-space-1) var(--component-switch-background-checked) inset,
+              0 0 0 var(--spacing-stroke-1) var(--component-switch-background-checked) inset,
               0 0;
           }
         }

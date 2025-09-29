@@ -41,7 +41,7 @@ const LinksBlock = ({ context, moon, github }: Props) => (
         </div>
       </a>
       <a
-        href={`https://github.com/coingaming/moon-ui/blob/main/src/components/${github}`}
+        href={`https://github.com/coingaming/moon-ui/blob/main/packages/src/styles/components/${github}`}
         target="_blank"
         className="overflow-hidden flex items-center border border-primary rounded-4 h-space-48"
       >

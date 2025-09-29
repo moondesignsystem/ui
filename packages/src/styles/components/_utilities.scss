@@ -12,11 +12,11 @@
   }
 
   :where(input, textarea, select) {
-    box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-negative);
+    box-shadow: inset 0 0 0 var(--spacing-stroke-1) var(--color-border-negative);
 
     &:hover,
     &:focus {
-      box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-negative);
+      box-shadow: inset 0 0 0 var(--spacing-stroke-1) var(--color-border-negative);
     }
   }
 }
@@ -40,7 +40,7 @@
 
   &:has(:disabled) label,
   &:has(:disabled) .moon-form-hint {
-    opacity: var(--style-opacity-disabled);
+    opacity: 0.6;
   }
 }
 

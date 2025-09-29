@@ -77,7 +77,7 @@
     display: grid;
     grid-auto-flow: column;
     align-items: center;
-    padding: var(--spacing-padding-16) var(--spacing-padding-24);
+    padding: var(--spacing-space-16) var(--spacing-space-24);
     font: var(--font-weight-medium) var(--style-text-3xl-font-size) / var(--style-text-3xl-line-height)
       var(--font-default);
   }
@@ -96,8 +96,8 @@
     top: var(--spacing-space-8);
     left: 50%;
     transform: translateX(-50%);
-    width: var(--spacing-width-40);
-    height: var(--spacing-height-4);
+    width: var(--spacing-space-40);
+    height: var(--spacing-space-4);
     border-radius: var(--radius-9999);
     background-color: var(--color-border-primary);
   }

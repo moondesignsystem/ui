@@ -9,9 +9,9 @@ $sizes: ();
     $sizes,
     $size,
     (
-      "gap": var(--spacing-gap-#{utilities.get-size($size, "gap")}),
-      "width": var(--spacing-width-#{utilities.get-size($size, "width")}),
-      "height": var(--spacing-height-#{utilities.get-size($size, "height")}),
+      "gap": var(--spacing-space-#{utilities.get-size($size, "gap")}),
+      "width": var(--spacing-space-#{utilities.get-size($size, "width")}),
+      "height": var(--spacing-space-#{utilities.get-size($size, "height")}),
       "radius": var(--component-forms-radius-#{$size}),
       "font": var(--font-weight-medium)
         var(--style-text-#{utilities.get-size($size, "font")}-font-size) /
@@ -73,7 +73,7 @@ $variants: ();
     }
 
     &:disabled {
-      opacity: var(--style-opacity-disabled);
+      opacity: 0.6;
     }
 
     &:not(:read-only, :disabled):hover {
@@ -83,17 +83,17 @@ $variants: ();
     }
 
     &:not(:read-only, :disabled):focus {
-      box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-info);
+      box-shadow: inset 0 0 0 var(--spacing-stroke-1) var(--color-border-info);
     }
   }
 
   &.moon-authenticator-error {
     :where(input) {
-      box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-negative);
+      box-shadow: inset 0 0 0 var(--spacing-stroke-1) var(--color-border-negative);
 
       &:hover,
       &:focus {
-        box-shadow: inset 0 0 0 var(--spacing-space-2) var(--color-border-negative);
+        box-shadow: inset 0 0 0 var(--spacing-stroke-1) var(--color-border-negative);
       }
     }
   }
