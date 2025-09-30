@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 3.4.1
+
+### Patch Changes
+
+- fix: rename space variables to primitives
+
 ## 3.4.0
 
 ### Minor Changes
