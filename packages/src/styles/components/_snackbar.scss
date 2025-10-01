@@ -19,10 +19,22 @@ $variants: ();
   );
 }
 
+.moon-snackbar-group {
+  position: fixed;
+  z-index: 300;
+  top: var(--spacing-space-16);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  width: min(100%, map.get($variants, "fill", "width"));
+  flex-direction: column;
+  gap: var(--spacing-space-8);
+}
+
 .moon-snackbar {
   @extend .moon-alert;
 
-  max-width: map.get($variants, "fill", "width");
+  width: 100%;
   font-weight: var(--font-weight-medium);
   color: map.get($variants, "fill", "color");
   background-color: map.get($variants, "fill", "background");
@@ -51,7 +63,7 @@ $variants: ();
   @each $variant, $prop in $variants {
     @if $variant != "fill" {
       &.moon-snackbar-#{$variant} {
-        max-width: map.get($prop, "width");
+        width: max(100%, map.get($prop, "width"));
         color: map.get($prop, "color");
         background-color: map.get($prop, "background");
         box-shadow: variables.$shadow-500, map.get($prop, "shadow");
