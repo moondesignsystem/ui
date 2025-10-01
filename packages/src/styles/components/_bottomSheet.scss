@@ -25,7 +25,7 @@
     opacity 0.1s ease-out;
   overflow-y: hidden;
   overscroll-behavior: contain;
-  z-index: 999;
+  z-index: 3000;
   &::backdrop {
     display: none;
   }

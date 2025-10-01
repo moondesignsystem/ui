@@ -38,7 +38,7 @@
 
   &[popover],
   .moon-dropdown-content {
-    z-index: 999;
+    z-index: 100;
     @media (prefers-reduced-motion: no-preference) {
       transition-property: opacity, scale, display;
       transition-behavior: allow-discrete;

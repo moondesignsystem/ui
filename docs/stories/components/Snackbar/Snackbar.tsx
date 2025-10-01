@@ -23,20 +23,22 @@ export const Snackbar = ({
   variant,
   context,
 }: Props) => (
-  <div
-    className={joinClassnames([
-      "moon-snackbar",
-      getClasses(variant),
-      getClasses(context),
-    ])}
-  >
-    {hasStartIcon && <Icon name="star" />}
-    {title}
-    {hasActionButton && (
-      <div className="moon-snackbar-meta">
-        <button className="moon-snackbar-action">{actionLabel}</button>
-      </div>
-    )}
+  <div className="moon-snackbar-group">
+    <div
+      className={joinClassnames([
+        "moon-snackbar",
+        getClasses(variant),
+        getClasses(context),
+      ])}
+    >
+      {hasStartIcon && <Icon name="star" />}
+      {title}
+      {hasActionButton && (
+        <div className="moon-snackbar-meta">
+          <button className="moon-snackbar-action">{actionLabel}</button>
+        </div>
+      )}
+    </div>
   </div>
 );
 
