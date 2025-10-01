@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 3.5.0
+
+### Minor Changes
+
+- feat: adjust z-indexes and Snackbar
+
 ## 3.4.1
 
 ### Patch Changes
