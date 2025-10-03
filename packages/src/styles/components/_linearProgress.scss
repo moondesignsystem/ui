@@ -47,16 +47,11 @@ $sizes: ();
   }
 }
 
-.moon-linear-progress-wrapper {
+label:has(.moon-linear-progress) {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-space-2);
-
-  :where(label) {
-    font: var(--font-weight-medium) var(--style-text-md-font-size) / var(--style-text-md-line-height)
-      var(--font-default);
-    color: var(--color-text-primary);
-    font-weight: var(--font-weight-medium);
-    text-align: center;
-  }
+  font: var(--font-weight-medium) var(--style-text-md-font-size) / var(--style-text-md-line-height) var(--font-default);
+  color: var(--color-text-primary);
+  text-align: center;
 }

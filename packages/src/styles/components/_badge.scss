@@ -52,13 +52,3 @@ $variants: ();
     }
   }
 }
-
-.moon-badge-wrapper {
-  position: relative;
-
-  :where(.moon-badge) {
-    position: absolute;
-    bottom: calc(100% - var(--spacing-space-2));
-    inset-inline-start: calc(100% - var(--spacing-space-2));
-  }
-}
