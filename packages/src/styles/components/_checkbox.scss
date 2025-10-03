@@ -39,7 +39,7 @@
 
   &:disabled {
     cursor: not-allowed;
-    opacity: 0.6;
+    opacity: var(--style-opacity-disabled);
   }
 
   &:checked,
@@ -62,23 +62,5 @@
 
   &:hover::after {
     background-color: var(--color-background-hover);
-  }
-}
-
-.moon-checkbox-wrapper {
-  display: flex;
-  gap: var(--spacing-space-8);
-  align-items: center;
-
-  :where(label) {
-    font: var(--font-weight-medium) var(--style-text-md-font-size) / var(--style-text-md-line-height)
-      var(--font-default);
-    color: var(--color-text-primary);
-    cursor: pointer;
-  }
-
-  &:has(:disabled) label {
-    cursor: not-allowed;
-    opacity: 0.6;
   }
 }

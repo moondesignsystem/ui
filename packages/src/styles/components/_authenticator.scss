@@ -73,7 +73,7 @@ $variants: ();
     }
 
     &:disabled {
-      opacity: 0.6;
+      opacity: var(--style-opacity-disabled);
     }
 
     &:not(:read-only, :disabled):hover {

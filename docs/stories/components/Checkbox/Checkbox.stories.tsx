@@ -1,5 +1,5 @@
 import LinksBlock from "../../shared/LinksBlock";
-import createCheckbox, { LABEL_POSITIONS } from "./Checkbox";
+import createCheckbox from "./Checkbox";
 import type { Meta, StoryObj } from "@storybook/html-vite";
 import type { Props } from "./Checkbox";
 
@@ -23,12 +23,6 @@ const meta: Meta<Props> = {
       description: "Label of Checkbox",
       control: "text",
     },
-    labelPosition: {
-      description: "Position of label of Checkbox",
-      control: "select",
-      options: LABEL_POSITIONS,
-      if: { arg: "label" },
-    },
   },
   parameters: {
     docs: {
@@ -51,6 +45,5 @@ export const Checkbox: StoryObj<Props> = {
     checked: false,
     indeterminate: false,
     label: "",
-    labelPosition: "start",
   },
 };

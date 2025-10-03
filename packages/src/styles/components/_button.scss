@@ -74,7 +74,7 @@ $sizes: ();
   &:disabled,
   &[aria-disabled="true"] {
     cursor: not-allowed;
-    opacity: 0.6;
+    opacity: var(--style-opacity-disabled);
   }
 
   &:active {

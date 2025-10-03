@@ -40,7 +40,7 @@
 
   &:has(:disabled) label,
   &:has(:disabled) .moon-form-hint {
-    opacity: 0.6;
+    opacity: var(--style-opacity-disabled);
   }
 }
 
@@ -55,6 +55,23 @@
 
   button {
     cursor: pointer;
+  }
+}
+
+label:has(.moon-checkbox),
+label:has(.moon-radio) {
+  display: flex;
+  width: fit-content;
+  gap: var(--spacing-space-8);
+  align-items: center;
+  font: var(--font-weight-medium) var(--style-text-md-font-size) / var(--style-text-md-line-height) var(--font-default);
+  color: var(--color-text-primary);
+  cursor: pointer;
+
+  &:has(.moon-checkbox:disabled),
+  &:has(.moon-radio:disabled) {
+    cursor: not-allowed;
+    opacity: var(--style-opacity-disabled);
   }
 }
 
