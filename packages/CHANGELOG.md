@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 3.6.0
+
+### Minor Changes
+
+- feat: improve Radio and Checkbox
+
 ## 3.5.0
 
 ### Minor Changes
