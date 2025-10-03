@@ -1,5 +1,6 @@
+import React from "react";
 import LinksBlock from "../../shared/LinksBlock";
-import { createLinearProgress, SIZES } from "./LinearProgress";
+import createLinearProgress, { SIZES } from "./LinearProgress";
 import type { Meta, StoryObj } from "@storybook/html-vite";
 import type { Props } from "./LinearProgress";
 
@@ -7,14 +8,9 @@ const meta: Meta<Props> = {
   title: "Indicators & status/Linear Progress",
   render: createLinearProgress,
   argTypes: {
-    hasLabel: {
-      description: "Shows a label for Linear Progress",
-      control: "boolean",
-    },
     label: {
       description: "Label for Linear Progress",
       control: "text",
-      if: { arg: "hasLabel" },
     },
     value: {
       description: "Value of Linear Progress",
@@ -45,7 +41,6 @@ export const LinearProgress: StoryObj<Props> = {
   args: {
     size: "2xs",
     value: 25,
-    hasLabel: false,
-    label: "Progress",
+    label: "",
   },
 };

@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 3.7.0
+
+### Minor Changes
+
+- feat: improve LinearProgress
+
 ## 3.6.0
 
 ### Minor Changes
