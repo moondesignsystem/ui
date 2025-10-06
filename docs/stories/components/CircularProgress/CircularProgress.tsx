@@ -12,7 +12,7 @@ export type Props = {
 const CircularProgress = ({ size, value }: Props) => (
   <div
     className={joinClassnames(["moon-circular-progress", getClasses(size)])}
-    data-value={value.toString()}
+    style={{ "--value": value } as React.CSSProperties}
   />
 );
 
