@@ -5,7 +5,6 @@ on:
     tags: [v*]
 
 env:
-  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   IMAGE: ""
   ROBOT_NAME: ${{ github.actor }}
   ROBOT_EMAIL: ${{ github.actor }}@heathmont.net
@@ -50,8 +49,6 @@ jobs:
           tags: heathmont/${{github.event.repository.name}}-docs:${{ steps.get_version.outputs.TAG_VERSION }}
           build-args: |
             FIGMA_TOKEN=${{ secrets.FIGMA_PAT }}
-            HEX_API_KEY=${{ secrets.HEX_ORGANIZATION_COINGAMING_KEY }}
-            SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }}
 
   deployment:
     name: Update Docker Compose, Create Manifest, and Deploy
@@ -62,7 +59,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: coingaming/stacks
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.MOON_GH_TOKEN }}
           ref: sportsbet-t2
           path: stacks
 
