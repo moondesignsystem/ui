@@ -1,4 +1,6 @@
 name: Release new docs
+permissions:
+  contents: read
 
 on:
   push:
