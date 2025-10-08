@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 3.7.1
+
+### Patch Changes
+
+- fix: remove coverage folder from packages
+
 ## 3.7.0
 
 ### Minor Changes
