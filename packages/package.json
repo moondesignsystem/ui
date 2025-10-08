@@ -1,6 +1,6 @@
 {
   "name": "@heathmont/moon-ui",
-  "version": "3.7.0",
+  "version": "3.7.1",
   "description": "Moon UI library for generating core and components CSS files",
   "main": "dist/install.js",
   "type": "module",
@@ -11,8 +11,7 @@
     "sass:watch": "sass --watch src/styles/components/main.scss dist/styles/moon-components.css --no-source-map",
     "typecheck": "tsc --noEmit",
     "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:watch": "jest --watch"
   },
   "files": [
     "dist/**/*",
