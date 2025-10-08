@@ -8,6 +8,8 @@ on:
 jobs:
   chromatic:
     name: Run Chromatic
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
