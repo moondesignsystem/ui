@@ -1,5 +1,11 @@
 # @heathmont/moon-ui
 
+## 3.7.2
+
+### Patch Changes
+
+- fix: make private: false in all package.json files
+
 ## 3.7.1
 
 ### Patch Changes
