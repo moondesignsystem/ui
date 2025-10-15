@@ -1,5 +1,5 @@
 {
-  "name": "@heathmont/moon-ui",
+  "name": "@moondesignsystem/ui",
   "version": "3.7.2",
   "private": false,
   "description": "Moon UI library for generating core and components CSS files",
@@ -20,14 +20,17 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/coingaming/moon-ui.git"
+    "url": "git+https://github.com/moondesignsystem/ui.git"
   },
-  "author": "Yolo Group",
+  "author": "Moon Design System",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/coingaming/moon-ui/issues"
+    "url": "https://github.com/moondesignsystem/ui/issues"
   },
-  "homepage": "https://ui.moon.io",
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://ui.moondesignsystem.com",
   "dependencies": {
     "autoprefixer": "^10.4.21",
     "dotenv": "^17.2.2",

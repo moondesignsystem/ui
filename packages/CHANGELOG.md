@@ -1,4 +1,4 @@
-# @heathmont/moon-ui
+# @moondesignsystem/ui
 
 ## 3.7.2
 
