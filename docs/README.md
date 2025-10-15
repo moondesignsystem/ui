@@ -14,25 +14,25 @@ The second layer provides a collection of component CSS classes. It fully descri
 
 ```bash
 # Basic usage - generates core CSS only
-npx @heathmont/moon-ui
+npx @moondesignsystem/ui
 
 # Generate both core and component CSS
-npx @heathmont/moon-ui --add-components
+npx @moondesignsystem/ui --add-components
 
 # Customize project name (default: 'moon')
-npx @heathmont/moon-ui --projectName your-project
+npx @moondesignsystem/ui --projectName your-project
 
 # Specify output directory (default: 'dist')
-npx @heathmont/moon-ui --outputFolder output-folder
+npx @moondesignsystem/ui --outputFolder output-folder
 
 # Use custom Figma file IDs
-npx @heathmont/moon-ui --coreFileId CORE_FILE_ID --componentsFileId COMPONENTS_FILE_ID
+npx @moondesignsystem/ui --coreFileId CORE_FILE_ID --componentsFileId COMPONENTS_FILE_ID
 
 # Generate vanilla CSS files instead of Tailwind CSS v4 (default: 'tailwindcss')
-npx @heathmont/moon-ui --target css
+npx @moondesignsystem/ui --target css
 
 # Generate vanilla CSS files with browser CSS reset. Not needed with tailwindcss target
-npx @heathmont/moon-ui --target css --preflight
+npx @moondesignsystem/ui --target css --preflight
 ```
 
 ### Configuration File
@@ -83,7 +83,7 @@ Generates CSS compatible with TailwindCSS v4 using `@theme inline` directives:
 Generates standard CSS using `:root` selectors for maximum compatibility:
 
 ```bash
-npx @heathmont/moon-ui --target css
+npx @moondesignsystem/ui --target css
 ```
 
 **Note**: With vanilla CSS output, you'll retain typography and shadow utility classes, but some Tailwind-specific utility classes will not be generated.
@@ -103,7 +103,7 @@ MIT
 
 ## Versioning
 
-Moon UI follows [Semantic Versioning](https://semver.org/). View available versions in the [repository tags](https://github.com/coingaming/moon-ui/tags).
+Moon UI follows [Semantic Versioning](https://semver.org/). View available versions in the [repository tags](https://github.com/moondesignsystem/ui/tags).
 
 - **MAJOR**: Incompatible API changes
 - **MINOR**: New backward-compatible functionality

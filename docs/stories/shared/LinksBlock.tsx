@@ -15,7 +15,7 @@ const LinksBlock = ({ context, moon, github }: Props) => (
   <DocsContainer context={context}>
     <div className="sb-unstyled flex flex-col sm:flex-row gap-space-12 mb-space-40">
       <a
-        href={`https://beta.moon.io/docs/components/${moon}`}
+        href={`https://moondesignsystem.com/docs/components/${moon}`}
         target="_blank"
         className="overflow-hidden flex items-center border border-primary rounded-4 h-space-48"
       >
@@ -28,7 +28,7 @@ const LinksBlock = ({ context, moon, github }: Props) => (
         </div>
       </a>
       <a
-        href="https://www.npmjs.com/package/@heathmont/moon-ui"
+        href="https://www.npmjs.com/package/@moondesignsystem/ui"
         target="_blank"
         className="overflow-hidden flex items-center border border-primary rounded-4 h-space-48"
       >
@@ -41,7 +41,7 @@ const LinksBlock = ({ context, moon, github }: Props) => (
         </div>
       </a>
       <a
-        href={`https://github.com/coingaming/moon-ui/blob/main/packages/src/styles/components/${github}`}
+        href={`https://github.com/moondesignsystem/ui/blob/main/packages/src/styles/components/${github}`}
         target="_blank"
         className="overflow-hidden flex items-center border border-primary rounded-4 h-space-48"
       >

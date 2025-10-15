@@ -9,10 +9,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "VITE_MOON_UI_VERSION=$(node scripts/get-version.js) storybook dev -p 6006",
     "build-storybook": "VITE_MOON_UI_VERSION=$(node scripts/get-version.js) storybook build",
-    "moon-ui": "npx @heathmont/moon-ui --add-components"
+    "moon-ui": "npx @moondesignsystem/ui --add-components"
   },
   "keywords": [],
-  "author": "Yolo Group",
+  "author": "Moon Design System",
   "license": "MIT",
   "devDependencies": {
     "@chromatic-com/storybook": "^4.1.1",
