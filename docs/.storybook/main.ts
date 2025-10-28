@@ -28,7 +28,7 @@ const config: StorybookConfig = {
    <!-- Google tag (gtag.js) -->
   <script
     async
-    src="https://www.googletagmanager.com/gtag/js?id=G-4PPRHN5E8L"
+    src="https://www.googletagmanager.com/gtag/js?id=G-YC4KMKFCMF"
   ></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -37,7 +37,7 @@ const config: StorybookConfig = {
     }
     gtag("js", new Date());
 
-    gtag("config", "G-4PPRHN5E8L");
+    gtag("config", "G-YC4KMKFCMF");
   </script>
   <link rel="icon" href="https://assets.moon.io/symbols/product/moon.png" type="image/png">
     ${head}
